@@ -64,7 +64,7 @@ class BDTransifexTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Tests the magic __get method - Non-existing method
+	 * Tests the magic __get method - Non-existing object
 	 *
 	 * @return  void
 	 *
@@ -76,6 +76,22 @@ class BDTransifexTest extends PHPUnit_Framework_TestCase
 		$this->assertThat(
 			$this->object->fake,
 			$this->isNull()
+		);
+	}
+
+	/**
+	 * Tests the magic __get method - Formats object
+	 *
+	 * @return  void
+	 *
+	 * @covers  BDTransifex::__get
+	 * @since   1.0
+	 */
+	public function test__GetFormats()
+	{
+		$this->assertThat(
+			$this->object->formats,
+			$this->isInstanceOf('BDTransifexFormats')
 		);
 	}
 

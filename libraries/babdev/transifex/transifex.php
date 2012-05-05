@@ -12,6 +12,8 @@ defined('JPATH_PLATFORM') or die;
 /**
  * Base class for interacting with the Transifex API.
  *
+ * @property-read  BDTransifexFormats  $formats  Transifex API object for the supported formats.
+ *
  * @package     BabDev.Library
  * @subpackage  Transifex
  * @since       1.0
@@ -29,6 +31,12 @@ class BDTransifex
 	 * @since  1.0
 	 */
 	protected $client;
+
+	/**
+	 * @var    BDTransifexFormats  Transifex API object for the supported formats.
+	 * @since  1.0
+	 */
+	protected $formats;
 
 	/**
 	 * Constructor.
@@ -58,6 +66,14 @@ class BDTransifex
 	 */
 	public function __get($name)
 	{
+		if ($name == 'formats')
+		{
+			if ($this->formats == null)
+			{
+				$this->formats = new BDTransifexFormats($this->options, $this->client);
+			}
+			return $this->formats;
+		}
 	}
 
 	/**
