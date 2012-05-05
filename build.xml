@@ -15,10 +15,12 @@
 	<target name="clean" description="Clean up and create artifact directories">
 		<echo msg="Removing report directories" />
 		<delete dir="${repo.dir}/build/coverage" />
+		<delete dir="${repo.dir}/build/docs" />
 		<delete dir="${repo.dir}/build/logs" />
 
 		<echo msg="Creating report directories" />
 		<mkdir dir="${repo.dir}/build/coverage" />
+		<mkdir dir="${repo.dir}/build/docs" />
 		<mkdir dir="${repo.dir}/build/logs" />
 	</target>
 
@@ -47,5 +49,16 @@
 	<target name="phpunit" description="Runs the unit tests">
 		<echo msg="Beginning unit testing" />
 		<exec executable="phpunit" />
+	</target>
+
+	<!-- Create API documentation -->
+	<target name="phpdoc" description="Generate API documentation using PHPDocumentor">
+		<echo msg="Running PHPDocumentor" />
+		<exec executable="phpdoc">
+			<arg value="-d" />
+			<arg path="${repo.dir}/libraries/babdev" />
+			<arg value="-t" />
+			<arg path="${repo.dir}/build/docs" />
+		</exec>
 	</target>
 </project>
