@@ -106,7 +106,7 @@ class BDTransifexTest extends PHPUnit_Framework_TestCase
 	public function test__GetStatistics()
 	{
 		$this->assertThat(
-			$this->object->formats,
+			$this->object->statistics,
 			$this->isInstanceOf('BDTransifexStatistics')
 		);
 	}
