@@ -67,6 +67,9 @@ class BDTransifex
 
 		// Setup the default API url if not already set.
 		$this->options->def('api.url', 'http://www.transifex.com/api/2');
+
+		// Set the authentication type if not already set.
+		$this->options->def('api.authentication', 'HTTP');
 	}
 
 	/**

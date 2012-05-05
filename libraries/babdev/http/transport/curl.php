@@ -118,14 +118,21 @@ class BDHttpTransportCurl implements BDHttpTransport
 			$headers[CURLOPT_USERAGENT] = $userAgent;
 		}
 
-		// Check if we have authentication credentials; we're making a couple of assumptions about the user's credentials
-		if (strlen($this->options->get('api.username')) >= 2 && strlen($this->options->get('api.password')) >= 4)
+		/*
+		 * Check if we're using HTTP Authentication
+		 * If so, check if we have authentication credentials
+		 * We're also making a couple of assumptions about the length of user's credentials
+		 */
+		if ($this->options->get('api.authentication') == 'HTTP')
 		{
-			$options[CURLOPT_HTTPAUTH] = CURLAUTH_ANY;
-			$options[CURLOPT_USERPWD] = $this->options->get('api.username') . ':' . $this->options->get('api.password');
+			if (strlen($this->options->get('api.username')) >= 2 && strlen($this->options->get('api.password')) >= 4)
+			{
+				$options[CURLOPT_HTTPAUTH] = CURLAUTH_ANY;
+				$options[CURLOPT_USERPWD] = $this->options->get('api.username') . ':' . $this->options->get('api.password');
 
-			// We need to set this so we can forward the authentication on redirects
-			$options[CURLOPT_UNRESTRICTED_AUTH] = true;
+				// We need to set this so we can forward the authentication on redirects
+				$options[CURLOPT_UNRESTRICTED_AUTH] = true;
+			}
 		}
 
 		// Set the request URL.
