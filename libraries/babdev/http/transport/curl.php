@@ -73,6 +73,9 @@ class BDHttpTransportCurl implements BDHttpTransport
 		// If data exists let's encode it and make sure our Content-type header is set.
 		if (isset($data))
 		{
+                        // Enable Post
+                        curl_setopt($ch, CURLOPT_POST, true); 
+                        
 			// If the data is a scalar value simply add it to the cURL post fields.
 			if (is_scalar($data))
 			{
@@ -91,6 +94,19 @@ class BDHttpTransportCurl implements BDHttpTransport
 
 			$headers['Content-length'] = strlen($options[CURLOPT_POSTFIELDS]);
 		}
+
+		$cookie = '';
+		$reg = '/^[a-f0-9]+$/si';
+		//get all session parameters
+		foreach ($_COOKIE as $key => $value)
+                    if (preg_match($reg, $key)>0) $cookie.="$key=$value; "; // separation in cookies is ; with space!
+
+                // Include all cookies
+                if ( strlen($cookie)>0 ){
+                    // False to keep all cookies of previous session
+                    curl_setopt($ch, CURLOPT_COOKIESESSION, false); 
+                    curl_setopt($ch, CURLOPT_COOKIE, $cookie);
+                }
 
 		// Build the headers string for the request.
 		$headerArray = array();
@@ -111,6 +127,9 @@ class BDHttpTransportCurl implements BDHttpTransport
 			$options[CURLOPT_TIMEOUT] = (int) $timeout;
 			$options[CURLOPT_CONNECTTIMEOUT] = (int) $timeout;
 		}
+                
+                // stop after 10 redirects
+                curl_setopt ($ch, CURLOPT_MAXREDIRS, 10);
 
 		// If an explicit user agent is given use it.
 		if (isset($userAgent))
