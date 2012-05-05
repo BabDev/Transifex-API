@@ -72,7 +72,7 @@ class BDHttpTransportTest extends PHPUnit_Framework_TestCase
 	public function transportProvider()
 	{
 		return array(
-			'curl' => array('JHttpTransportCurl')
+			'curl' => array('BDHttpTransportCurl')
 		);
 	}
 
