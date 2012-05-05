@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="babdev-library" default="phpcs" basedir=".">
+<project name="babdev-library" default="build" basedir=".">
 	<!-- Project properties -->
 	<property file="./build.properties" />
 	<property name="repo.dir" value="." />
@@ -7,6 +7,20 @@
 	<tstamp>
 		<format property="build.date" pattern="%Y-%m-%d" />
 	</tstamp>
+
+	<!-- Run all tasks using build target -->
+	<target name="build" depends="clean,phpcs,phpunit" />
+
+	<!-- Clean the build directory -->
+	<target name="clean" description="Clean up and create artifact directories">
+		<echo msg="Removing report directories" />
+		<delete dir="${repo.dir}/build/coverage" />
+		<delete dir="${repo.dir}/build/logs" />
+
+		<echo msg="Creating report directories" />
+		<mkdir dir="${repo.dir}/build/coverage" />
+		<mkdir dir="${repo.dir}/build/logs" />
+	</target>
 
 	<!-- Check code style based on Joomla Platform -->
 	<!-- Note: Must have platform.dir property set in build.properties file -->
@@ -27,5 +41,11 @@
 			<formatter type="full" outfile="${repo.dir}/build/logs/codesniff.txt" />
 			<formatter type="checkstyle" outfile="${repo.dir}/build/logs/checkstyle.xml" />
 		</phpcodesniffer>
+	</target>
+
+	<!-- Run the PHPUnit suite -->
+	<target name="phpunit" description="Runs the unit tests">
+		<echo msg="Beginning unit testing" />
+		<exec executable="phpunit" />
 	</target>
 </project>
