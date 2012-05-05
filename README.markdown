@@ -26,5 +26,5 @@ Installation
 
 Get the source code from GIT:
 
-    git clone git://github.com/mbabker/BabDev-Library.git
+    git clone git://github.com/mbabker/BabDev-Libraries.git
 
