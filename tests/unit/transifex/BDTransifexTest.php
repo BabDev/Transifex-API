@@ -112,6 +112,22 @@ class BDTransifexTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * Tests the magic __get method - Translations object
+	 *
+	 * @return  void
+	 *
+	 * @covers  BDTransifex::__get
+	 * @since   1.0
+	 */
+	public function test__GetTranslations()
+	{
+		$this->assertThat(
+			$this->object->translations,
+			$this->isInstanceOf('BDTransifexTranslations')
+		);
+	}
+
+	/**
 	 * Tests the setOption method
 	 *
 	 * @return  void

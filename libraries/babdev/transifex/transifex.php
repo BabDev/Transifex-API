@@ -12,8 +12,9 @@ defined('JPATH_PLATFORM') or die;
 /**
  * Base class for interacting with the Transifex API.
  *
- * @property-read  BDTransifexFormats     $formats     Transifex API object for the supported formats.
- * @property-read  BDTransifexStatistics  $statistics  Transifex API object for a resource's statistics.
+ * @property-read  BDTransifexFormats       $formats       Transifex API object for the supported formats.
+ * @property-read  BDTransifexStatistics    $statistics    Transifex API object for a resource's statistics.
+ * @property-read  BDTransifexTranslations  $translations  Transifex API object for a resource's translations.
  *
  * @package     BabDev.Library
  * @subpackage  Transifex
@@ -40,10 +41,16 @@ class BDTransifex
 	protected $formats;
 
 	/**
-	 * @var    BDTransifexStatistics  Transifex API object for the supported formats.
+	 * @var    BDTransifexStatistics  Transifex API object for a resource's statistics.
 	 * @since  1.0
 	 */
 	protected $statistics;
+
+	/**
+	 * @var    BDTransifexTranslations  Transifex API object for a resource's translations.
+	 * @since  1.0
+	 */
+	protected $translations;
 
 	/**
 	 * Constructor.
@@ -89,6 +96,15 @@ class BDTransifex
 				$this->statistics = new BDTransifexStatistics($this->options, $this->client);
 			}
 			return $this->statistics;
+		}
+
+		if ($name == 'translations')
+		{
+			if ($this->translations == null)
+			{
+				$this->translations = new BDTransifexTranslations($this->options, $this->client);
+			}
+			return $this->translations;
 		}
 	}
 
