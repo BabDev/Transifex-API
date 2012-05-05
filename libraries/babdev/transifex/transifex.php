@@ -24,37 +24,49 @@ defined('JPATH_PLATFORM') or die;
 class BDTransifex
 {
 	/**
-	 * @var    JRegistry  Options for the Transifex object.
+	 * Options for the Transifex object.
+	 *
+	 * @var    JRegistry
 	 * @since  1.0
 	 */
 	protected $options;
 
 	/**
-	 * @var    BDTransifexHttp  The HTTP client object to use in sending HTTP requests.
+	 * The HTTP client object to use in sending HTTP requests.
+	 *
+	 * @var    BDTransifexHttp
 	 * @since  1.0
 	 */
 	protected $client;
 
 	/**
-	 * @var    BDTransifexFormats  Transifex API object for the supported formats.
+	 * Transifex API object for the supported formats.
+	 *
+	 * @var    BDTransifexFormats
 	 * @since  1.0
 	 */
 	protected $formats;
 
 	/**
-	 * @var    BDTransifexProjects  Transifex API object for interacting with projects.
+	 * Transifex API object for interacting with projects.
+	 *
+	 * @var    BDTransifexProjects
 	 * @since  1.0
 	 */
 	protected $projects;
 
 	/**
-	 * @var    BDTransifexStatistics  Transifex API object for a resource's statistics.
+	 * Transifex API object for a resource's statistics.
+	 *
+	 * @var    BDTransifexStatistics
 	 * @since  1.0
 	 */
 	protected $statistics;
 
 	/**
-	 * @var    BDTransifexTranslations  Transifex API object for a resource's translations.
+	 * Transifex API object for a resource's translations.
+	 *
+	 * @var    BDTransifexTranslations
 	 * @since  1.0
 	 */
 	protected $translations;

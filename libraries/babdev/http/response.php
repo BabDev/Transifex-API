@@ -19,19 +19,25 @@ defined('JPATH_PLATFORM') or die;
 class BDHttpResponse
 {
 	/**
-	 * @var    integer  The server response code.
+	 * The server response code.
+	 *
+	 * @var    integer
 	 * @since  1.0
 	 */
 	public $code;
 
 	/**
-	 * @var    array  Response headers.
+	 * Response headers.
+	 *
+	 * @var    array
 	 * @since  1.0
 	 */
 	public $headers = array();
 
 	/**
-	 * @var    string  Server response body.
+	 * Server response body.
+	 *
+	 * @var    string
 	 * @since  1.0
 	 */
 	public $body;

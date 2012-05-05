@@ -19,7 +19,9 @@ defined('JPATH_PLATFORM') or die;
 class BDHttpTransportCurl implements BDHttpTransport
 {
 	/**
-	 * @var    JRegistry  The client options.
+	 * The client options.
+	 *
+	 * @var    JRegistry
 	 * @since  1.0
 	 */
 	protected $options;

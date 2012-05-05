@@ -21,13 +21,17 @@ jimport('joomla.environment.uri');
 class BDHttp
 {
 	/**
-	 * @var    JRegistry  Options for the HTTP client.
+	 * Options for the HTTP client.
+	 *
+	 * @var    JRegistry
 	 * @since  1.0
 	 */
 	protected $options;
 
 	/**
-	 * @var    BDHttpTransport  The HTTP transport object to use in sending HTTP requests.
+	 * The HTTP transport object to use in sending HTTP requests.
+	 *
+	 * @var    BDHttpTransport
 	 * @since  1.0
 	 */
 	protected $transport;

@@ -19,13 +19,17 @@ defined('JPATH_PLATFORM') or die;
 abstract class BDTransifexObject
 {
 	/**
-	 * @var    JRegistry  Options for the Transifex object.
+	 * Options for the Transifex object.
+	 *
+	 * @var    JRegistry
 	 * @since  1.0
 	 */
 	protected $options;
 
 	/**
-	 * @var    BDTransifexHttp  The HTTP client object to use in sending HTTP requests.
+	 * The HTTP client object to use in sending HTTP requests.
+	 *
+	 * @var    BDTransifexHttp
 	 * @since  1.0
 	 */
 	protected $client;
