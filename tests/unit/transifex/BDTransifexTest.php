@@ -96,6 +96,22 @@ class BDTransifexTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * Tests the magic __get method - Projects object
+	 *
+	 * @return  void
+	 *
+	 * @covers  BDTransifex::__get
+	 * @since   1.0
+	 */
+	public function test__GetProjects()
+	{
+		$this->assertThat(
+			$this->object->projects,
+			$this->isInstanceOf('BDTransifexProjects')
+		);
+	}
+
+	/**
 	 * Tests the magic __get method - Statistics object
 	 *
 	 * @return  void
