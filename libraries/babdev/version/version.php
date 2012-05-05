@@ -12,8 +12,9 @@ defined('JPATH_PLATFORM') or die;
 /**
  * Version information class for the BabDev Libraries.
  *
- * @package  BabDev.Libraries
- * @since    1.0
+ * @package     BabDev.Libraries
+ * @subpackage  Version
+ * @since       1.0
  */
 final class BDVersion
 {
