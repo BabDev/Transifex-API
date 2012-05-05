@@ -1,0 +1,8 @@
+# IDE based files #
+.buildpath
+.idea
+.project
+.settings
+
+# OS based files #
+.DS_Store
