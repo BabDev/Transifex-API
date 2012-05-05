@@ -20,6 +20,10 @@ class BDHttpFactoryTest extends PHPUnit_Framework_TestCase
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
 	 * This method is called before a test is executed.
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0
 	 */
 	protected function setUp()
 	{
@@ -28,44 +32,57 @@ class BDHttpFactoryTest extends PHPUnit_Framework_TestCase
 	/**
 	 * Tears down the fixture, for example, closes a network connection.
 	 * This method is called after a test is executed.
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0
 	 */
 	protected function tearDown()
 	{
 	}
 
 	/**
-	 * @covers BDHttpFactory::getHttp
-	 * @todo Implement testGetHttp().
+	 * Tests the getHttp method.
+	 *
+	 * @return  void
+	 *
+	 * @covers  BDHttpFactory::getHttp
+	 * @since   1.0
+	 * @todo    Implement testGetHttp().
 	 */
 	public function testGetHttp()
 	{
 		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-		  'This test has not been implemented yet.'
-		);
+		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	/**
-	 * @covers BDHttpFactory::getAvailableDriver
-	 * @todo Implement testGetAvailableDriver().
+	 * Tests the getAvailableDriver method.
+	 *
+	 * @return  void
+	 *
+	 * @covers  BDHttpFactory::getAvailableDriver
+	 * @since   1.0
+	 * @todo    Implement testGetAvailableDriver().
 	 */
 	public function testGetAvailableDriver()
 	{
 		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-		  'This test has not been implemented yet.'
-		);
+		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 
 	/**
-	 * @covers BDHttpFactory::getHttpTransports
-	 * @todo Implement testGetHttpTransports().
+	 * Tests the getHttpTransports method.
+	 *
+	 * @return  void
+	 *
+	 * @covers  BDHttpFactory::getHttpTransports
+	 * @since   1.0
+	 * @todo    Implement testGetHttpTransports().
 	 */
 	public function testGetHttpTransports()
 	{
 		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-		  'This test has not been implemented yet.'
-		);
+		$this->markTestIncomplete('This test has not been implemented yet.');
 	}
 }
