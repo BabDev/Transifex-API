@@ -17,11 +17,13 @@
 		<delete dir="${repo.dir}/build/coverage" />
 		<delete dir="${repo.dir}/build/docs" />
 		<delete dir="${repo.dir}/build/logs" />
+		<delete dir="${repo.dir}/build/pulltests" />
 
 		<echo msg="Creating report directories" />
 		<mkdir dir="${repo.dir}/build/coverage" />
 		<mkdir dir="${repo.dir}/build/docs" />
 		<mkdir dir="${repo.dir}/build/logs" />
+		<mkdir dir="${repo.dir}/build/pulltests" />
 	</target>
 
 	<!-- Check code style based on Joomla Platform -->
