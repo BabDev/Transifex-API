@@ -24,7 +24,7 @@ class BDVersionTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @since   1.0
 	 */
-	function casesCompatibility()
+	public function casesCompatibility()
 	{
 		return array(
 			'Version 0.3' => array(
@@ -42,11 +42,11 @@ class BDVersionTest extends PHPUnit_Framework_TestCase
 				false,
 				'Should not be compatible with null',
 			),
- 			'Self' => array(
- 				BDVersion::MAJOR . '.' . BDVersion::MINOR . '.' . BDVersion::MAINTENANCE,
+			'Self' => array(
+				BDVersion::MAJOR . '.' . BDVersion::MINOR . '.' . BDVersion::MAINTENANCE,
 				true,
- 				'Should be compatible with itself',
- 			),
+				'Should be compatible with itself',
+			),
 			'Version 12.1.0' => array(
 				'12.1.0',
 				false,
@@ -69,7 +69,7 @@ class BDVersionTest extends PHPUnit_Framework_TestCase
 	 * @dataProvider  casesCompatibility
 	 * @since   1.0
 	 */
-	public function testIsCompatible( $input, $expect, $message )
+	public function testIsCompatible($input, $expect, $message)
 	{
 		$this->assertThat(
 			$expect,

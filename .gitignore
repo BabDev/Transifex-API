@@ -6,3 +6,6 @@
 
 # OS based files #
 .DS_Store
+
+# Local config files #
+build.properties

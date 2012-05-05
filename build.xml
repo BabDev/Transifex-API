@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="babdev-library" default="phpcs" basedir=".">
+	<!-- Project properties -->
+	<property file="./build.properties" />
+	<property name="repo.dir" value="." />
+	<resolvepath propertyName="repo.dir.resolved" file="${repo.dir}" />
+	<tstamp>
+		<format property="build.date" pattern="%Y-%m-%d" />
+	</tstamp>
+
+	<!-- Check code style based on Joomla Platform -->
+	<!-- Note: Must have platform.dir property set in build.properties file -->
+	<target name="phpcs" description="Generate codestyle report using PHP_CodeSniffer">
+		<echo msg="Remove previous codestyle report" />
+		<delete quiet="yes" includeemptydirs="true">
+			<fileset dir=".">
+				<include name="build/logs/codesniff.txt" />
+				<include name="build/logs/checkstyle.xml" />
+			</fileset>
+		</delete>
+		<echo msg="Running phpcs with Joomla! Platform standards" />
+		<phpcodesniffer
+			standard="${platform.dir}/build/phpcs/Joomla"
+			format="full"
+			file="${repo.dir}"
+			allowedFileExtensions="php">
+			<formatter type="full" outfile="${repo.dir}/build/logs/codesniff.txt" />
+			<formatter type="checkstyle" outfile="${repo.dir}/build/logs/checkstyle.xml" />
+		</phpcodesniffer>
+	</target>
+</project>
