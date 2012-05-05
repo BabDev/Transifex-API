@@ -16,7 +16,7 @@ defined('JPATH_PLATFORM') or die;
  * @subpackage  Transifex
  * @since       1.0
  */
-class BDTransifexHttp extends JHttp
+class BDTransifexHttp extends BDHttp
 {
 	/**
 	 * @const  integer  Use no authentication for HTTP connections.
@@ -39,12 +39,12 @@ class BDTransifexHttp extends JHttp
 	/**
 	 * Constructor.
 	 *
-	 * @param   JRegistry       $options    Client options object.
-	 * @param   JHttpTransport  $transport  The HTTP transport object.
+	 * @param   JRegistry        $options    Client options object.
+	 * @param   BDHttpTransport  $transport  The HTTP transport object.
 	 *
 	 * @since   1.0
 	 */
-	public function __construct(JRegistry $options = null, JHttpTransport $transport = null)
+	public function __construct(JRegistry $options = null, BDHttpTransport $transport = null)
 	{
 		// Call the JHttp constructor to setup the object.
 		parent::__construct($options, $transport);

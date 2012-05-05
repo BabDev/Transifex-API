@@ -39,7 +39,18 @@ class BDTransifexFormats extends BDTransifexObject
 		{
 			// Decode the error response and throw an exception.
 			$error = json_decode($response->body);
-			throw new DomainException($error->message, $response->code);
+
+			// Check if the error message is set; send a generic one if not
+			if (isset($error->message))
+			{
+				$message = $error->message;
+			}
+			else
+			{
+				$message = 'No error message was returned from the server.';
+			}
+
+			throw new DomainException($message, $response->code);
 		}
 
 		return json_decode($response->body);

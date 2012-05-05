@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit bootstrap="tests/bootstrap.php" colors="false">
+	<!-- These constants help setup environment configurations for running optional tests.
+	<php>
+		<const name="BDTEST_HTTP_STUB" value="http://localhost/joomla-platform/tests/suites/unit/stubs/jhttp_stub.php" />
+	</php>
+	-->
+
 	<testsuites>
 		<testsuite name="Unit">
 			<directory>tests/unit</directory>

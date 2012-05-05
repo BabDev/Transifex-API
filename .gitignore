@@ -9,3 +9,4 @@
 
 # Local config files #
 build.properties
+phpunit.xml
