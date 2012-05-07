@@ -189,11 +189,10 @@ class BDHttpTransportCurl implements BDHttpTransport
 		// Get the response code from the first offset of the response headers.
 		preg_match('/[0-9]{3}/', array_shift($headers), $matches);
 
-		$code = $matches[0];
-
-		if (is_numeric($code))
+		// Check if the $matches array has a 0 element (won't be present if the connection timed out, for example
+		if (isset($matches[0]) && is_numeric($matches[0]))
 		{
-			$return->code = (int) $code;
+			$return->code = (int) $matches[0];
 		}
 		// No valid response code was detected.
 		else
