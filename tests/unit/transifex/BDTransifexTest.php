@@ -112,6 +112,22 @@ class BDTransifexTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * Tests the magic __get method - Resources object
+	 *
+	 * @return  void
+	 *
+	 * @covers  BDTransifex::__get
+	 * @since   1.0
+	 */
+	public function test__GetResources()
+	{
+		$this->assertThat(
+			$this->object->resources,
+			$this->isInstanceOf('BDTransifexResources')
+		);
+	}
+
+	/**
 	 * Tests the magic __get method - Statistics object
 	 *
 	 * @return  void
