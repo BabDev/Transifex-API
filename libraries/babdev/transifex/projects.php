@@ -19,6 +19,46 @@ defined('JPATH_PLATFORM') or die;
 class BDTransifexProjects extends BDTransifexObject
 {
 	/**
+	 * Method to delete a project.
+	 *
+	 * @param   string   $slug  The slug for the resource.
+	 *
+	 * @return  array  The project details from the API.
+	 *
+	 * @since   1.0
+	 * @throws  DomainException
+	 */
+	public function deleteProject($slug)
+	{
+		// Build the request path.
+		$path = '/project/' . $slug;
+
+		// Send the request.
+		$response = $this->client->delete($this->fetchUrl($path));
+
+		// Validate the response code.
+		if ($response->code != 204)
+		{
+			// Decode the error response and throw an exception.
+			$error = json_decode($response->body);
+
+			// Check if the error message is set; send a generic one if not
+			if (isset($error->message))
+			{
+				$message = $error->message;
+			}
+			else
+			{
+				$message = 'No error message was returned from the server.';
+			}
+
+			throw new DomainException($message, $response->code);
+		}
+
+		return json_decode($response->body);
+	}
+
+	/**
 	 * Method to get information about a project.
 	 *
 	 * @param   string   $project  The project to retrieve details for

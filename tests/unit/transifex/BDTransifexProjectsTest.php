@@ -64,6 +64,55 @@ class BDTransifexProjectsTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * Tests the deleteProject method
+	 *
+	 * @return  void
+	 *
+	 * @covers  BDTransifexProjects::deleteProject
+	 * @since   1.0
+	 */
+	public function testDeleteProject()
+	{
+		$returnData = new stdClass;
+		$returnData->code = 204;
+		$returnData->body = $this->sampleString;
+
+		$this->client->expects($this->once())
+			->method('delete')
+			->with('/project/joomla-platform')
+			->will($this->returnValue($returnData));
+
+		$this->assertThat(
+			$this->object->deleteProject('joomla-platform'),
+			$this->equalTo(json_decode($this->sampleString))
+		);
+	}
+
+	/**
+	 * Tests the deleteProject method - failure
+	 *
+	 * @return  void
+	 *
+	 * @covers  BDTransifexProjects::deleteProject
+	 * @since   1.0
+	 *
+	 * @expectedException  DomainException
+	 */
+	public function testDeleteProjectFailure()
+	{
+		$returnData = new stdClass;
+		$returnData->code = 500;
+		$returnData->body = $this->errorString;
+
+		$this->client->expects($this->once())
+			->method('delete')
+			->with('/project/joomla-platform')
+			->will($this->returnValue($returnData));
+
+		$this->object->deleteProject('joomla-platform');
+	}
+
+	/**
 	 * Tests the getProject method
 	 *
 	 * @return  void
