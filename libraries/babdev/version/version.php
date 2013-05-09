@@ -3,7 +3,7 @@
  * @package     BabDev.Library
  * @subpackage  Version
  *
- * @copyright   Copyright (C) 2012 Michael Babker. All rights reserved.
+ * @copyright   Copyright (C) 2012-2013 Michael Babker. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
@@ -43,7 +43,7 @@ final class BDVersion
 	const RELEASE_TIME_ZONE = 'GMT';
 
 	// Copyright Notice.
-	const COPYRIGHT = 'Copyright (C) 2012 Michael Babker. All rights reserved.';
+	const COPYRIGHT = 'Copyright (C) 2012-2013 Michael Babker. All rights reserved.';
 
 	/**
 	 * Compares a PHP standard version number against the current library version.
