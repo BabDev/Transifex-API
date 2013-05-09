@@ -21,7 +21,7 @@ class BDTransifexProjects extends BDTransifexObject
 	/**
 	 * Method to delete a project.
 	 *
-	 * @param   string   $slug  The slug for the resource.
+	 * @param   string  $slug  The slug for the resource.
 	 *
 	 * @return  array  The project details from the API.
 	 *

@@ -1,4 +1,4 @@
-BabDev Library
+BabDev Library [![Build Status](https://travis-ci.org/mbabker/BabDev-Libraries.png?branch=master)](https://travis-ci.org/mbabker/BabDev-Libraries)
 ===============
 
 The *BabDev Library* is an extension of the Joomla Platform.  Together with the Joomla Platform, the BabDev Library can be used to develop applications

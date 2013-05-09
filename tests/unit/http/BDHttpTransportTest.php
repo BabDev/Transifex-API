@@ -109,7 +109,7 @@ class BDHttpTransportTest extends PHPUnit_Framework_TestCase
 	public function testBadDomainRequestGet($transportClass)
 	{
 		$transport = new $transportClass($this->options);
-		$response = $transport->request('get', new JUri('http://xommunity.joomla.org'));
+		$response = $transport->request('get', new JUri('http://joomla.babdev.com'));
 	}
 
 	/**
