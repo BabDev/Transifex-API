@@ -3,7 +3,7 @@
  * @package     BabDev.UnitTest
  * @subpackage  HTTP
  *
- * @copyright   Copyright (C) 2012 Michael Babker. All rights reserved.
+ * @copyright   Copyright (C) 2012-2013 Michael Babker. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
@@ -51,18 +51,6 @@ class BDHttpTransportTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
-	 */
-	protected function tearDown()
-	{
-	}
-
-	/**
 	 * Data provider for the request test methods.
 	 *
 	 * @return  void
@@ -72,7 +60,9 @@ class BDHttpTransportTest extends PHPUnit_Framework_TestCase
 	public function transportProvider()
 	{
 		return array(
-			'curl' => array('BDHttpTransportCurl')
+			'stream' => array('BDHttpTransportStream'),
+			'curl'   => array('BDHttpTransportCurl'),
+			'socket' => array('BDHttpTransportSocket')
 		);
 	}
 
@@ -83,9 +73,8 @@ class BDHttpTransportTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @return  void
 	 *
-	 * @since   1.0
-	 *
 	 * @dataProvider  transportProvider
+	 * @since         1.0
 	 */
 	public function testRequestGet($transportClass)
 	{
@@ -107,15 +96,47 @@ class BDHttpTransportTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * Tests the request method with a get request with a bad domain
+	 *
+	 * @param   string  $transportClass  The transport class to test
+	 *
+	 * @return  void
+	 *
+	 * @dataProvider       transportProvider
+	 * @expectedException  RuntimeException
+	 * @since              1.0
+	 */
+	public function testBadDomainRequestGet($transportClass)
+	{
+		$transport = new $transportClass($this->options);
+		$response = $transport->request('get', new JUri('http://xommunity.joomla.org'));
+	}
+
+	/**
+	 * Tests the request method with a get request for non existant url
+	 *
+	 * @param   array  $transportClass  The class to test
+	 *
+	 * @return  void
+	 *
+	 * @dataProvider  transportProvider
+	 * @since         1.0
+	 */
+	public function testRequestGet404($transportClass)
+	{
+		$transport = new $transportClass($this->options);
+		$response = $transport->request('get', new JUri($this->stubUrl . ':80'));
+	}
+
+	/**
 	 * Tests the request method with a put request
 	 *
 	 * @param   array  $transportClass  The class to test
 	 *
 	 * @return  void
 	 *
-	 * @since   1.0
-	 *
 	 * @dataProvider  transportProvider
+	 * @since         1.0
 	 */
 	public function testRequestPut($transportClass)
 	{
@@ -143,9 +164,8 @@ class BDHttpTransportTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @return  void
 	 *
-	 * @since   1.0
-	 *
 	 * @dataProvider  transportProvider
+	 * @since         1.0
 	 */
 	public function testRequestPost($transportClass)
 	{
@@ -178,9 +198,8 @@ class BDHttpTransportTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @return  void
 	 *
-	 * @since   1.0
-	 *
 	 * @dataProvider  transportProvider
+	 * @since         1.0
 	 */
 	public function testRequestPostScalar($transportClass)
 	{

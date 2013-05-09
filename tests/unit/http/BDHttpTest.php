@@ -3,7 +3,7 @@
  * @package     BabDev.UnitTest
  * @subpackage  HTTP
  *
- * @copyright   Copyright (C) 2012 Michael Babker. All rights reserved.
+ * @copyright   Copyright (C) 2012-2013 Michael Babker. All rights reserved.
  * @license     GNU General Public License version 2 or later; see LICENSE
  */
 
@@ -44,27 +44,11 @@ class BDHttpTest extends PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		jimport('joomla.environment.uri');
-
 		static $classNumber = 1;
 		$this->options = $this->getMock('JRegistry', array('get', 'set'));
-		$this->transport = $this->getMock(
-			'BDHttpTransportCurl', array('request'), array($this->options, new JUri('http://example.com')), 'CustomTransport' . $classNumber++, false
-		);
+		$this->transport = $this->getMock('BDHttpTransportCurl', array('request'), array($this->options), 'CustomTransport' . $classNumber ++, false);
 
 		$this->object = new BDHttp($this->options, $this->transport);
-	}
-
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
-	 */
-	protected function tearDown()
-	{
 	}
 
 	/**
@@ -242,6 +226,26 @@ class BDHttpTest extends PHPUnit_Framework_TestCase
 
 		$this->assertThat(
 			$this->object->trace('http://example.com', array('testHeader')),
+			$this->equalTo('ReturnString')
+		);
+	}
+
+	/**
+	 * Tests the patch method
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0
+	 */
+	public function testPatch()
+	{
+		$this->transport->expects($this->once())
+			->method('request')
+			->with('PATCH', new JUri('http://example.com'), array('key' => 'value'), array('testHeader'))
+			->will($this->returnValue('ReturnString'));
+
+		$this->assertThat(
+			$this->object->patch('http://example.com', array('key' => 'value'), array('testHeader')),
 			$this->equalTo('ReturnString')
 		);
 	}
