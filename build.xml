@@ -27,20 +27,19 @@
 	</target>
 
 	<!-- Check code style based on Joomla Platform -->
-	<!-- Note: Must have platform.dir property set in build.properties file -->
 	<target name="phpcs" description="Generate codestyle report using PHP_CodeSniffer">
 		<echo msg="Remove previous codestyle report" />
 		<delete quiet="yes" includeemptydirs="true">
-			<fileset dir=".">
-				<include name="build/logs/codesniff.txt" />
-				<include name="build/logs/checkstyle.xml" />
+			<fileset dir="${repo.dir}/logs/">
+				<include name="codesniff.txt" />
+				<include name="checkstyle.xml" />
 			</fileset>
 		</delete>
 		<echo msg="Running phpcs with Joomla! Platform standards" />
 		<phpcodesniffer
-			standard="${platform.dir}/build/phpcs/Joomla"
+			standard="${repo.dir}/build/phpcs/Joomla"
 			format="full"
-			file="${repo.dir}"
+			file="${repo.dir}/libraries"
 			allowedFileExtensions="php">
 			<formatter type="full" outfile="${repo.dir}/build/logs/codesniff.txt" />
 			<formatter type="checkstyle" outfile="${repo.dir}/build/logs/checkstyle.xml" />
