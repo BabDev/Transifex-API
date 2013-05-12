@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="babdev-library" default="build" basedir=".">
 	<!-- Project properties -->
-	<property file="./build.properties" />
 	<property name="repo.dir" value="." />
 	<resolvepath propertyName="repo.dir.resolved" file="${repo.dir}" />
 	<tstamp>
