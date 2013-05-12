@@ -56,11 +56,10 @@
 	<!-- Create API documentation -->
 	<target name="phpdoc" description="Generate API documentation using PHPDocumentor">
 		<echo msg="Running PHPDocumentor" />
-		<exec executable="phpdoc">
-			<arg value="-d" />
-			<arg path="${repo.dir}/libraries/babdev" />
-			<arg value="-t" />
-			<arg path="${repo.dir}/build/docs" />
-		</exec>
+		<phpdoc2 title="BabDev Libraries Documentation" destdir="${repo.dir}/build/docs" template="responsive">
+			<fileset dir="${repo.dir}/libraries/babdev">
+				<include name="**/*.php" />
+			</fileset>
+		</phpdoc2>
 	</target>
 </project>
