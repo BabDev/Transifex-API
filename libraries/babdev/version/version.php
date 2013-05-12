@@ -1,5 +1,7 @@
 <?php
 /**
+ * BabDev Version Package
+
  * @package     BabDev.Library
  * @subpackage  Version
  *

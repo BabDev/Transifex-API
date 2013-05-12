@@ -1,5 +1,7 @@
 <?php
 /**
+ * BabDev Transifex Package
+
  * @package     BabDev.Library
  * @subpackage  Transifex
  *
