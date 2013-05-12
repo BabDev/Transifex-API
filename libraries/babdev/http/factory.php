@@ -76,9 +76,12 @@ class BDHttpFactory
 			$class = 'BDHttpTransport' . ucfirst($adapter);
 
 			/* @type BDHttpTransport $class */
-			if ($class::isSupported())
+			if (class_exists($class))
 			{
-				return new $class($options);
+				if ($class::isSupported())
+				{
+					return new $class($options);
+				}
 			}
 		}
 
