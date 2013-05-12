@@ -52,31 +52,17 @@ class BDTransifexTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
-	 */
-	protected function tearDown()
-	{
-	}
-
-	/**
 	 * Tests the magic __get method - Non-existing object
 	 *
 	 * @return  void
 	 *
-	 * @covers  BDTransifex::__get
-	 * @since   1.0
+	 * @covers             BDTransifex::__get
+	 * @expectedException  InvalidArgumentException
+	 * @since              1.0
 	 */
 	public function test__GetFake()
 	{
-		$this->assertThat(
-			$this->object->fake,
-			$this->isNull()
-		);
+		$object = $this->object->fake;
 	}
 
 	/**

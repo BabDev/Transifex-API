@@ -110,58 +110,23 @@ class BDTransifex
 	 * @return  BDTransifexObject  Transifex API object.
 	 *
 	 * @since   1.0
+	 * @throws  InvalidArgumentException
 	 */
 	public function __get($name)
 	{
-		if ($name == 'formats')
+		$class = 'BDTransifex' . ucfirst($name);
+
+		if (class_exists($class))
 		{
-			if ($this->formats == null)
+			if (isset($this->$name) == false)
 			{
-				$this->formats = new BDTransifexFormats($this->options, $this->client);
+				$this->$name = new $class($this->options, $this->client);
 			}
 
-			return $this->formats;
+			return $this->$name;
 		}
 
-		if ($name == 'projects')
-		{
-			if ($this->projects == null)
-			{
-				$this->projects = new BDTransifexProjects($this->options, $this->client);
-			}
-
-			return $this->projects;
-		}
-
-		if ($name == 'resources')
-		{
-			if ($this->resources == null)
-			{
-				$this->resources = new BDTransifexResources($this->options, $this->client);
-			}
-
-			return $this->resources;
-		}
-
-		if ($name == 'statistics')
-		{
-			if ($this->statistics == null)
-			{
-				$this->statistics = new BDTransifexStatistics($this->options, $this->client);
-			}
-
-			return $this->statistics;
-		}
-
-		if ($name == 'translations')
-		{
-			if ($this->translations == null)
-			{
-				$this->translations = new BDTransifexTranslations($this->options, $this->client);
-			}
-
-			return $this->translations;
-		}
+		throw new InvalidArgumentException(sprintf('Argument %s produced an invalid class name: %s', $name, $class));
 	}
 
 	/**
