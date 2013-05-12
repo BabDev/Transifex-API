@@ -128,11 +128,10 @@ class BDHelperTest extends PHPUnit_Framework_TestCase
 	 *                             2) A nested array with each element containing a 'start_range' and 'end_range'
 	 * @param   string  $type      The type of addresses submitted, must be 'range' or 'cidr'
 	 *
-	 * @dataProvider  dataTestIpInRange
-	 *
 	 * @return  void
 	 *
-	 * @since   1.0
+	 * @dataProvider  dataTestIpInRange
+	 * @since         1.0
 	 */
 	public function testIpInRange($result, $testIp, $validIps, $type = 'range')
 	{
@@ -147,8 +146,8 @@ class BDHelperTest extends PHPUnit_Framework_TestCase
 	 *
 	 * @return  void
 	 *
-	 * @since              1.0
 	 * @expectedException  InvalidArgumentException
+	 * @since              1.0
 	 */
 	public function testIpInRangeException()
 	{
