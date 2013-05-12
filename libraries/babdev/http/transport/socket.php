@@ -288,6 +288,7 @@ class BDHttpTransportSocket implements BDHttpTransport
 
 			throw new RuntimeException($php_errormsg);
 		}
+
 		// Restore error tracking to what it was before.
 		ini_set('track_errors', $track_errors);
 

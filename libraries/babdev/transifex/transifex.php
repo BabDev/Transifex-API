@@ -119,6 +119,7 @@ class BDTransifex
 			{
 				$this->formats = new BDTransifexFormats($this->options, $this->client);
 			}
+
 			return $this->formats;
 		}
 
@@ -128,6 +129,7 @@ class BDTransifex
 			{
 				$this->projects = new BDTransifexProjects($this->options, $this->client);
 			}
+
 			return $this->projects;
 		}
 
@@ -137,6 +139,7 @@ class BDTransifex
 			{
 				$this->resources = new BDTransifexResources($this->options, $this->client);
 			}
+
 			return $this->resources;
 		}
 
@@ -146,6 +149,7 @@ class BDTransifex
 			{
 				$this->statistics = new BDTransifexStatistics($this->options, $this->client);
 			}
+
 			return $this->statistics;
 		}
 
@@ -155,6 +159,7 @@ class BDTransifex
 			{
 				$this->translations = new BDTransifexTranslations($this->options, $this->client);
 			}
+
 			return $this->translations;
 		}
 	}
