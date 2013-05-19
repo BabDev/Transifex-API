@@ -12,7 +12,11 @@ before_install:
 before_script:
   - pyrus channel-discover pear.phpunit.de
   - pyrus install --force phpunit/DbUnit
+  - pyrus install -f pear/PHP_CodeSniffer
+  - phpenv rehash
   - cd ../ && git clone git://github.com/joomla/joomla-platform.git && cd BabDev-Libraries
 
 script:
+  - ant clean
   - phpunit --configuration phpunit.travis.xml
+  - ant travis-phpcs

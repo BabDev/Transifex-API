@@ -2,23 +2,17 @@
 <project name="babdev-library" default="build" basedir=".">
 	<!-- Project properties -->
 	<property name="repo.dir" value="." />
-	<resolvepath propertyName="repo.dir.resolved" file="${repo.dir}" />
-	<tstamp>
-		<format property="build.date" pattern="%Y-%m-%d" />
-	</tstamp>
 
 	<!-- Run all tasks using build target -->
 	<target name="build" depends="clean,phpcs,phpunit" />
 
 	<!-- Clean the build directory -->
 	<target name="clean" description="Clean up and create artifact directories">
-		<echo msg="Removing report directories" />
 		<delete dir="${repo.dir}/build/coverage" />
 		<delete dir="${repo.dir}/build/docs" />
 		<delete dir="${repo.dir}/build/logs" />
 		<delete dir="${repo.dir}/build/pulltests" />
 
-		<echo msg="Creating report directories" />
 		<mkdir dir="${repo.dir}/build/coverage" />
 		<mkdir dir="${repo.dir}/build/docs" />
 		<mkdir dir="${repo.dir}/build/logs" />
@@ -43,6 +37,19 @@
 			<formatter type="full" outfile="${repo.dir}/build/logs/codesniff.txt" />
 			<formatter type="checkstyle" outfile="${repo.dir}/build/logs/checkstyle.xml" />
 		</phpcodesniffer>
+	</target>
+
+	<!-- Check code style on Travis-CI based on Joomla Platform -->
+	<target name="travis-phpcs" description="Generate codestyle report using PHP_CodeSniffer for output on Travis-CI">
+		<exec executable="phpcs">
+			<arg line="-p" />
+			<arg line="-w" />
+			<arg line="-v" />
+			<arg line="--extensions=php" />
+			<arg line="--report=full" />
+			<arg line="--standard=${basedir}/build/phpcs/Joomla/ruleset.xml" />
+			<arg line="${repo.dir}/libraries" />
+		</exec>
 	</target>
 
 	<!-- Run the PHPUnit suite -->
