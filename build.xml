@@ -44,7 +44,6 @@
 		<exec executable="phpcs">
 			<arg line="-p" />
 			<arg line="-w" />
-			<arg line="-v" />
 			<arg line="--extensions=php" />
 			<arg line="--report=full" />
 			<arg line="--standard=${basedir}/build/phpcs/Joomla/ruleset.xml" />
