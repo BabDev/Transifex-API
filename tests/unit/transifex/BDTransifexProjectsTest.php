@@ -215,7 +215,7 @@ class BDTransifexProjectsTest extends PHPUnit_Framework_TestCase
 
 		$this->client->expects($this->once())
 			->method('get')
-			->with('/projects')
+			->with('/projects/')
 			->will($this->returnValue($this->response));
 
 		$this->assertThat(
@@ -239,7 +239,7 @@ class BDTransifexProjectsTest extends PHPUnit_Framework_TestCase
 
 		$this->client->expects($this->once())
 			->method('get')
-			->with('/projects')
+			->with('/projects/')
 			->will($this->returnValue($this->response));
 
 		$this->object->getProjects();

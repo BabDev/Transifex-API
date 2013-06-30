@@ -107,7 +107,7 @@ class BDTransifexProjects extends BDTransifexObject
 	public function getProjects()
 	{
 		// Build the request path.
-		$path = '/projects';
+		$path = '/projects/';
 
 		// Send the request.
 		return $this->processResponse($this->client->get($this->fetchUrl($path)));
