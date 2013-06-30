@@ -29,6 +29,12 @@ class BDTransifexFormatsTest extends PHPUnit_Framework_TestCase
 	protected $client;
 
 	/**
+	 * @var    BDHttpResponse  Mock response object.
+	 * @since  1.0
+	 */
+	protected $response;
+
+	/**
 	 * @var    BDTransifexFormats  Object under test.
 	 * @since  1.0
 	 */
@@ -57,7 +63,8 @@ class BDTransifexFormatsTest extends PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->options = new JRegistry;
-		$this->client = $this->getMock('BDTransifexHttp', array('get', 'post', 'delete', 'put'));
+		$this->client = $this->getMock('BDTransifexHttp', array('get', 'post', 'delete', 'put', 'patch'));
+		$this->response = $this->getMock('BDHttpResponse');
 
 		$this->object = new BDTransifexFormats($this->options, $this->client);
 	}
@@ -71,14 +78,13 @@ class BDTransifexFormatsTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testGetFormats()
 	{
-		$returnData = new stdClass;
-		$returnData->code = 200;
-		$returnData->body = $this->sampleString;
+		$this->response->code = 200;
+		$this->response->body = $this->sampleString;
 
 		$this->client->expects($this->once())
 			->method('get')
 			->with('/formats')
-			->will($this->returnValue($returnData));
+			->will($this->returnValue($this->response));
 
 		$this->assertThat(
 			$this->object->getFormats(),
@@ -96,14 +102,13 @@ class BDTransifexFormatsTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testGetFormatsFailure()
 	{
-		$returnData = new stdClass;
-		$returnData->code = 500;
-		$returnData->body = $this->errorString;
+		$this->response->code = 500;
+		$this->response->body = $this->errorString;
 
 		$this->client->expects($this->once())
 			->method('get')
 			->with('/formats')
-			->will($this->returnValue($returnData));
+			->will($this->returnValue($this->response));
 
 		$this->object->getFormats();
 	}

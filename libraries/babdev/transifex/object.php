@@ -68,4 +68,39 @@ abstract class BDTransifexObject
 
 		return (string) $uri;
 	}
+
+	/**
+	 * Process the response and decode it.
+	 *
+	 * @param   BDHttpResponse  $response      The response.
+	 * @param   integer         $expectedCode  The expected "good" code.
+	 *
+	 * @return  mixed
+	 *
+	 * @since   1.0
+	 * @throws  DomainException
+	 */
+	protected function processResponse(BDHttpResponse $response, $expectedCode = 200)
+	{
+		// Validate the response code.
+		if ($response->code != $expectedCode)
+		{
+			// Decode the error response and throw an exception.
+			$error = json_decode($response->body);
+
+			// Check if the error message is set; send a generic one if not
+			if (isset($error->message))
+			{
+				$message = $error->message;
+			}
+			else
+			{
+				$message = 'No error message was returned from the server.';
+			}
+
+			throw new DomainException($message, $response->code);
+		}
+
+		return json_decode($response->body);
+	}
 }

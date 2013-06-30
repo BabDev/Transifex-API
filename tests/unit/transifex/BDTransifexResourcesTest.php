@@ -29,6 +29,12 @@ class BDTransifexResourcesTest extends PHPUnit_Framework_TestCase
 	protected $client;
 
 	/**
+	 * @var    BDHttpResponse  Mock response object.
+	 * @since  1.0
+	 */
+	protected $response;
+
+	/**
 	 * @var    BDTransifexResources  Object under test.
 	 * @since  1.0
 	 */
@@ -57,7 +63,8 @@ class BDTransifexResourcesTest extends PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->options = new JRegistry;
-		$this->client = $this->getMock('BDTransifexHttp', array('get', 'post', 'delete', 'put'));
+		$this->client = $this->getMock('BDTransifexHttp', array('get', 'post', 'delete', 'put', 'patch'));
+		$this->response = $this->getMock('BDHttpResponse');
 
 		$this->object = new BDTransifexResources($this->options, $this->client);
 	}
@@ -71,14 +78,13 @@ class BDTransifexResourcesTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testDeleteResource()
 	{
-		$returnData = new stdClass;
-		$returnData->code = 204;
-		$returnData->body = $this->sampleString;
+		$this->response->code = 204;
+		$this->response->body = $this->sampleString;
 
 		$this->client->expects($this->once())
 			->method('delete')
 			->with('/project/joomla/resource/joomla-platform')
-			->will($this->returnValue($returnData));
+			->will($this->returnValue($this->response));
 
 		$this->assertThat(
 			$this->object->deleteResource('joomla', 'joomla-platform'),
@@ -96,14 +102,13 @@ class BDTransifexResourcesTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testDeleteResourceFailure()
 	{
-		$returnData = new stdClass;
-		$returnData->code = 500;
-		$returnData->body = $this->errorString;
+		$this->response->code = 500;
+		$this->response->body = $this->errorString;
 
 		$this->client->expects($this->once())
 			->method('delete')
 			->with('/project/joomla/resource/joomla-platform')
-			->will($this->returnValue($returnData));
+			->will($this->returnValue($this->response));
 
 		$this->object->deleteResource('joomla', 'joomla-platform');
 	}
@@ -117,14 +122,13 @@ class BDTransifexResourcesTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testGetResource()
 	{
-		$returnData = new stdClass;
-		$returnData->code = 200;
-		$returnData->body = $this->sampleString;
+		$this->response->code = 200;
+		$this->response->body = $this->sampleString;
 
 		$this->client->expects($this->once())
 			->method('get')
 			->with('/project/joomla/resource/joomla-platform/?details')
-			->will($this->returnValue($returnData));
+			->will($this->returnValue($this->response));
 
 		$this->assertThat(
 			$this->object->getResource('joomla', 'joomla-platform', true),
@@ -142,14 +146,13 @@ class BDTransifexResourcesTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testGetResourceFailure()
 	{
-		$returnData = new stdClass;
-		$returnData->code = 500;
-		$returnData->body = $this->errorString;
+		$this->response->code = 500;
+		$this->response->body = $this->errorString;
 
 		$this->client->expects($this->once())
 			->method('get')
 			->with('/project/joomla/resource/joomla-platform/?details')
-			->will($this->returnValue($returnData));
+			->will($this->returnValue($this->response));
 
 		$this->object->getResource('joomla', 'joomla-platform', true);
 	}
@@ -163,14 +166,13 @@ class BDTransifexResourcesTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testGetResources()
 	{
-		$returnData = new stdClass;
-		$returnData->code = 200;
-		$returnData->body = $this->sampleString;
+		$this->response->code = 200;
+		$this->response->body = $this->sampleString;
 
 		$this->client->expects($this->once())
 			->method('get')
 			->with('/project/joomla/resources')
-			->will($this->returnValue($returnData));
+			->will($this->returnValue($this->response));
 
 		$this->assertThat(
 			$this->object->getResources('joomla'),
@@ -188,14 +190,13 @@ class BDTransifexResourcesTest extends PHPUnit_Framework_TestCase
 	 */
 	public function testGetResourcesFailure()
 	{
-		$returnData = new stdClass;
-		$returnData->code = 500;
-		$returnData->body = $this->errorString;
+		$this->response->code = 500;
+		$this->response->body = $this->errorString;
 
 		$this->client->expects($this->once())
 			->method('get')
 			->with('/project/joomla/resources')
-			->will($this->returnValue($returnData));
+			->will($this->returnValue($this->response));
 
 		$this->object->getResources('joomla');
 	}

@@ -34,27 +34,6 @@ class BDTransifexFormats extends BDTransifexObject
 		$path = '/formats';
 
 		// Send the request.
-		$response = $this->client->get($this->fetchUrl($path));
-
-		// Validate the response code.
-		if ($response->code != 200)
-		{
-			// Decode the error response and throw an exception.
-			$error = json_decode($response->body);
-
-			// Check if the error message is set; send a generic one if not
-			if (isset($error->message))
-			{
-				$message = $error->message;
-			}
-			else
-			{
-				$message = 'No error message was returned from the server.';
-			}
-
-			throw new DomainException($message, $response->code);
-		}
-
-		return json_decode($response->body);
+		return $this->processResponse($this->client->get($this->fetchUrl($path)));
 	}
 }
