@@ -95,11 +95,16 @@ class BDTransifex
 		$this->options = isset($options) ? $options : new JRegistry;
 		$this->client  = isset($client) ? $client : new BDTransifexHttp($this->options);
 
-		// Setup the default API url if not already set.
-		$this->options->def('api.url', 'http://www.transifex.com/api/2');
-
 		// Set the authentication type if not already set.
 		$this->options->def('api.authentication', 'HTTP');
+
+		// Set the transport object for BDHttp
+		$transport = BDHttpFactory::getAvailableDriver($this->options, array('curl'));
+
+		$this->client = isset($client) ? $client : new BDTransifexHttp($this->options, $transport);
+
+		// Setup the default API url if not already set.
+		$this->options->def('api.url', 'https://www.transifex.com/api/2');
 	}
 
 	/**

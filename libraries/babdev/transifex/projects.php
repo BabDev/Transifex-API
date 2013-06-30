@@ -21,11 +21,43 @@ defined('JPATH_PLATFORM') or die;
 class BDTransifexProjects extends BDTransifexObject
 {
 	/**
+	 * Method to create a project.
+	 *
+	 * @param   string  $name            The name of the project
+	 * @param   string  $slug            The slug for the project
+	 * @param   string  $description     A description of the project
+	 * @param   string  $sourceLanguage  The source language code for the project
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0
+	 * @throws  DomainException
+	 */
+	public function createProject($name, $slug, $description, $sourceLanguage)
+	{
+		// Build the request path.
+		$path = '/projects/';
+
+		// Build the request data.
+		$data = json_encode(
+			array(
+				'name' => $name,
+				'slug' => $slug,
+				'description' => $description,
+				'source_language_code' => $sourceLanguage
+			)
+		);
+
+		// Send the request.
+		return $this->processResponse($this->client->post($this->fetchUrl($path), $data, array('Content-Type' => 'application/json')), 201);
+	}
+
+	/**
 	 * Method to delete a project.
 	 *
 	 * @param   string  $slug  The slug for the resource.
 	 *
-	 * @return  array  The project details from the API.
+	 * @return  void
 	 *
 	 * @since   1.0
 	 * @throws  DomainException

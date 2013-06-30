@@ -70,6 +70,50 @@ class BDTransifexProjectsTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * Tests the createProject method
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0
+	 */
+	public function testCreateeProject()
+	{
+		$this->response->code = 201;
+		$this->response->body = $this->sampleString;
+
+		$this->client->expects($this->once())
+			->method('post')
+			->with('/projects/')
+			->will($this->returnValue($this->response));
+
+		$this->assertThat(
+			$this->object->createProject('Joomla Platform', 'joomla-platform', 'Project for the Joomla Platform', 'en_GB'),
+			$this->equalTo(json_decode($this->sampleString))
+		);
+	}
+
+	/**
+	 * Tests the createProject method - failure
+	 *
+	 * @return  void
+	 *
+	 * @expectedException  DomainException
+	 * @since              1.0
+	 */
+	public function testCreateProjectFailure()
+	{
+		$this->response->code = 500;
+		$this->response->body = $this->errorString;
+
+		$this->client->expects($this->once())
+			->method('post')
+			->with('/projects/')
+			->will($this->returnValue($this->response));
+
+		$this->object->createProject('Joomla Platform', 'joomla-platform', 'Project for the Joomla Platform', 'en_GB');
+	}
+
+	/**
 	 * Tests the deleteProject method
 	 *
 	 * @return  void

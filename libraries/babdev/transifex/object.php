@@ -47,7 +47,11 @@ abstract class BDTransifexObject
 	public function __construct(JRegistry $options = null, BDTransifexHttp $client = null)
 	{
 		$this->options = isset($options) ? $options : new JRegistry;
-		$this->client = isset($client) ? $client : new BDTransifexHttp($this->options);
+
+		// Set the transport object for BDHttp
+		$transport = BDHttpFactory::getAvailableDriver($this->options, array('curl'));
+
+		$this->client = isset($client) ? $client : new BDTransifexHttp($this->options, $transport);
 	}
 
 	/**
