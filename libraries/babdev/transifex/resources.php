@@ -67,6 +67,26 @@ class BDTransifexResources extends BDTransifexObject
 	}
 
 	/**
+	 * Method to get the content of a resource within a project.
+	 *
+	 * @param   string   $project   The project the resource is part of
+	 * @param   string   $resource  The resource slug within the project
+	 *
+	 * @return  array  The project details from the API.
+	 *
+	 * @since   1.0
+	 * @throws  DomainException
+	 */
+	public function getResourceContent($project, $resource)
+	{
+		// Build the request path.
+		$path = '/project/' . $project . '/resource/' . $resource . '/content/';
+
+		// Send the request.
+		return $this->processResponse($this->client->get($this->fetchUrl($path)));
+	}
+
+	/**
 	 * Method to get information about a project's resources.
 	 *
 	 * @param   string  $project  The project to retrieve details for

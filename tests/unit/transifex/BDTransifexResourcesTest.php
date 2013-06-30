@@ -158,6 +158,50 @@ class BDTransifexResourcesTest extends PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * Tests the getResourceContent method
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0
+	 */
+	public function testGetResourceContent()
+	{
+		$this->response->code = 200;
+		$this->response->body = $this->sampleString;
+
+		$this->client->expects($this->once())
+			->method('get')
+			->with('/project/joomla/resource/joomla-platform/content/')
+			->will($this->returnValue($this->response));
+
+		$this->assertThat(
+			$this->object->getResourceContent('joomla', 'joomla-platform'),
+			$this->equalTo(json_decode($this->sampleString))
+		);
+	}
+
+	/**
+	 * Tests the getResourceContent method - failure
+	 *
+	 * @return  void
+	 *
+	 * @expectedException  DomainException
+	 * @since              1.0
+	 */
+	public function testGetResourceContentFailure()
+	{
+		$this->response->code = 500;
+		$this->response->body = $this->errorString;
+
+		$this->client->expects($this->once())
+			->method('get')
+			->with('/project/joomla/resource/joomla-platform/content/')
+			->will($this->returnValue($this->response));
+
+		$this->object->getResourceContent('joomla', 'joomla-platform');
+	}
+
+	/**
 	 * Tests the getResources method
 	 *
 	 * @return  void
