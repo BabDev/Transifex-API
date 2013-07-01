@@ -16,6 +16,7 @@ defined('JPATH_PLATFORM') or die;
  *
  * @property-read  BDTransifexFormats       $formats       Transifex API object for the supported formats.
  * @property-read  BDTransifexProjects      $projects      Transifex API object for interacting with projects.
+ * @property-read  BDTransifexReleases      $releases      Transifex API object for interacting with project's releases.
  * @property-read  BDTransifexResources     $resources     Transifex API object for interacting with project's resources.
  * @property-read  BDTransifexStatistics    $statistics    Transifex API object for a resource's statistics.
  * @property-read  BDTransifexTranslations  $translations  Transifex API object for a resource's translations.
@@ -57,6 +58,14 @@ class BDTransifex
 	 * @since  1.0
 	 */
 	protected $projects;
+
+	/**
+	 * Transifex API object for interacting with project's releases.
+	 *
+	 * @var    BDTransifexReleases
+	 * @since  1.0
+	 */
+	protected $releases;
 
 	/**
 	 * Transifex API object for interacting with project's resources.
