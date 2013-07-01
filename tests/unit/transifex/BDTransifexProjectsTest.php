@@ -244,4 +244,74 @@ class BDTransifexProjectsTest extends PHPUnit_Framework_TestCase
 
 		$this->object->getProjects();
 	}
+
+	/**
+	 * Tests the updateProject method
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0
+	 */
+	public function testUpdateProject()
+	{
+		$this->response->code = 200;
+		$this->response->body = $this->sampleString;
+
+		$this->client->expects($this->once())
+			->method('put')
+			->with('/project/joomla-platform/')
+			->will($this->returnValue($this->response));
+
+		$this->assertThat(
+			$this->object->updateProject('joomla-platform', array('name' => 'Joomla Platform')),
+			$this->equalTo(json_decode($this->sampleString))
+		);
+	}
+
+	/**
+	 * Tests the updateProject method - failure
+	 *
+	 * @return  void
+	 *
+	 * @expectedException  DomainException
+	 * @since              1.0
+	 */
+	public function testUpdateProjectsFailure()
+	{
+		$this->response->code = 500;
+		$this->response->body = $this->errorString;
+
+		$this->client->expects($this->once())
+			->method('put')
+			->with('/project/joomla-platform/')
+			->will($this->returnValue($this->response));
+
+		$this->object->updateProject('joomla-platform', array('name' => 'Joomla Platform'));
+	}
+
+	/**
+	 * Tests the updateProject method - failure
+	 *
+	 * @return  void
+	 *
+	 * @expectedException  RuntimeException
+	 * @since              1.0
+	 */
+	public function testUpdateProjectsRuntimeException()
+	{
+		$this->object->updateProject('joomla-platform');
+	}
+
+	/**
+	 * Tests the updateProject method - failure
+	 *
+	 * @return  void
+	 *
+	 * @expectedException  InvalidArgumentException
+	 * @since              1.0
+	 */
+	public function testUpdateProjectsBadLicense()
+	{
+		$this->object->updateProject('joomla-platform', array('license' => 'failure'));
+	}
 }
