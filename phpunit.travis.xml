@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit bootstrap="tests/bootstrap.php" colors="true">
+<phpunit bootstrap="src/BabDev/Tests/bootstrap.php" colors="true">
 	<php>
-		<const name="BDTEST_HTTP_STUB" value="http://virtualhost.local/tests/unit/http/stubs/http_stub.php" />
+		<const name="BDTEST_HTTP_STUB" value="http://virtualhost.local/src/BabDev/Tests/Http/stubs/http_stub.php" />
 	</php>
 
 	<testsuites>
 		<testsuite name="Unit">
-			<directory>tests/unit</directory>
+			<directory>src/BabDev/Tests</directory>
 		</testsuite>
 	</testsuites>
 
@@ -15,7 +15,10 @@
 	</logging>
 	<filter>
 		<whitelist addUncoveredFilesFromWhitelist="true">
-			<directory suffix=".php">libraries/babdev</directory>
+			<directory suffix=".php">src/BabDev</directory>
+			<exclude>
+				<directory suffix=".php">src/BabDev/Tests</directory>
+			</exclude>
 		</whitelist>
 	</filter>
 </phpunit>

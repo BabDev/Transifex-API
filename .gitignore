@@ -9,3 +9,7 @@
 
 # Local config files #
 phpunit.xml
+
+# COMPOSER Files #
+vendor/*
+composer.phar

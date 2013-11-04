@@ -19,7 +19,7 @@
 		<mkdir dir="${repo.dir}/build/pulltests" />
 	</target>
 
-	<!-- Check code style based on Joomla Platform -->
+	<!-- Check code style based on Joomla Coding Standards -->
 	<target name="phpcs" description="Generate codestyle report using PHP_CodeSniffer">
 		<echo msg="Remove previous codestyle report" />
 		<delete quiet="yes" includeemptydirs="true">
@@ -28,18 +28,19 @@
 				<include name="checkstyle.xml" />
 			</fileset>
 		</delete>
-		<echo msg="Running phpcs with Joomla! Platform standards" />
+		<echo msg="Running phpcs with Joomla! Coding Standards" />
 		<phpcodesniffer
-			standard="${repo.dir}/build/phpcs/Joomla"
+			standard="${repo.dir}/build/phpcs/Joomla/ruleset.xml"
 			format="full"
-			file="${repo.dir}/libraries"
+			ignorePatterns="${repo.dir}/src/BabDev/Tests"
+			file="${repo.dir}/src/BabDev"
 			allowedFileExtensions="php">
 			<formatter type="full" outfile="${repo.dir}/build/logs/codesniff.txt" />
 			<formatter type="checkstyle" outfile="${repo.dir}/build/logs/checkstyle.xml" />
 		</phpcodesniffer>
 	</target>
 
-	<!-- Check code style on Travis-CI based on Joomla Platform -->
+	<!-- Check code style on Travis-CI based on Joomla Coding Standards -->
 	<target name="travis-phpcs" description="Generate codestyle report using PHP_CodeSniffer for output on Travis-CI">
 		<exec executable="phpcs">
 			<arg line="-p" />
@@ -47,7 +48,8 @@
 			<arg line="--extensions=php" />
 			<arg line="--report=full" />
 			<arg line="--standard=${basedir}/build/phpcs/Joomla/ruleset.xml" />
-			<arg line="${repo.dir}/libraries" />
+			<arg line="--ignore=${basedir}/src/BabDev/Tests" />
+			<arg line="${repo.dir}/src/BabDev" />
 		</exec>
 	</target>
 
@@ -61,9 +63,23 @@
 	<target name="phpdoc" description="Generate API documentation using PHPDocumentor">
 		<echo msg="Running PHPDocumentor" />
 		<phpdoc2 title="BabDev Libraries Documentation" destdir="${repo.dir}/build/docs" template="responsive-twig">
-			<fileset dir="${repo.dir}/libraries/babdev">
+			<fileset dir="${repo.dir}/src/BabDev">
 				<include name="**/*.php" />
+				<exclude name="Tests/" />
 			</fileset>
 		</phpdoc2>
+	</target>
+
+	<target name="composerupdate" description="Composer self-update">
+		<exec executable="composer">
+			<arg value="self-update" />
+		</exec>
+	</target>
+
+	<target name="installdep" description="Install build dependencies using composer">
+		<exec executable="composer">
+			<arg value="update" />
+			<arg value="--dev" />
+		</exec>
 	</target>
 </project>
