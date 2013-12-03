@@ -73,6 +73,50 @@ class ResourcesTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * Tests the createResource method
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0
+	 */
+	public function testCreateResource()
+	{
+		$this->response->code = 201;
+		$this->response->body = $this->sampleString;
+
+		$this->client->expects($this->once())
+			->method('post')
+			->with('/project/joomla-platform/resources/')
+			->will($this->returnValue($this->response));
+
+		$this->assertThat(
+			$this->object->createResource('joomla-platform', 'joomla-platform', 'INI', array('content' => 'Test="Test"')),
+			$this->equalTo(json_decode($this->sampleString))
+		);
+	}
+
+	/**
+	 * Tests the createResource method - failure
+	 *
+	 * @return  void
+	 *
+	 * @expectedException  \DomainException
+	 * @since              1.0
+	 */
+	public function testCreateResourceFailure()
+	{
+		$this->response->code = 500;
+		$this->response->body = $this->errorString;
+
+		$this->client->expects($this->once())
+			->method('post')
+			->with('/project/joomla-platform/resources/')
+			->will($this->returnValue($this->response));
+
+		$this->object->createResource('joomla-platform', 'joomla-platform', 'INI', array('content' => 'Test="Test"'));
+	}
+
+	/**
 	 * Tests the deleteResource method
 	 *
 	 * @return  void
