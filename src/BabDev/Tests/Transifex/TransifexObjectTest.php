@@ -48,7 +48,7 @@ class TransifexObjectTest extends \PHPUnit_Framework_TestCase
 		$this->options = new Registry;
 		$this->client = $this->getMock('\\BabDev\\Transifex\\Http', array('get', 'post', 'delete', 'put', 'patch'));
 
-		$this->object = new ObjectMock($this->options, $this->client);
+		$this->object = $this->getMockForAbstractClass('\\BabDev\\Transifex\\TransifexObject', array($this->options, $this->client));
 	}
 
 	/**
@@ -65,8 +65,14 @@ class TransifexObjectTest extends \PHPUnit_Framework_TestCase
 		$this->options->set('api.username', 'MyTestUser');
 		$this->options->set('api.password', 'MyTestPass');
 
+		// Use Reflection to trigger fetchUrl()
+		$method = new \ReflectionMethod($this->object, 'fetchUrl');
+		$method->setAccessible(true);
+
+		$result = $method->invokeArgs($this->object, array('/formats'));
+
 		$this->assertThat(
-			$this->object->fetchUrl('/formats'),
+			$result,
 			$this->equalTo('http://www.transifex.com/api/2/formats')
 		);
 	}
