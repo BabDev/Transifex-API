@@ -5,15 +5,15 @@
     "keywords": ["php", "library"],
     "homepage": "https://github.com/mbabker/BabDev-Libraries",
     "license": "GPL-2.0+",
-	"version": "1.0.0.alpha",
+    "version": "1.0.0.alpha",
     "require": {
         "php": ">=5.3.10",
-	    "joomla/registry": "1.*@stable",
-	    "joomla/uri": "1.*@stable"
+        "joomla/registry": "1.*@stable",
+        "joomla/uri": "1.*@stable"
     },
     "autoload": {
-    	"psr-0": {
-    		"BabDev": "src/"
-    	}
+        "psr-0": {
+            "BabDev": "src/"
+        }
     }
 }
