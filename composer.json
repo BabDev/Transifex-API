@@ -8,13 +8,12 @@
 	"version": "1.0.0.alpha",
     "require": {
         "php": ">=5.3.10",
-	    "joomla/registry": "~1.0",
-	    "joomla/uri": "~1.0"
+	    "joomla/registry": "1.*@stable",
+	    "joomla/uri": "1.*@stable"
     },
     "autoload": {
     	"psr-0": {
     		"BabDev": "src/"
     	}
-    },
-    "minimum-stability": "beta"
+    }
 }

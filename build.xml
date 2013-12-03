@@ -62,7 +62,7 @@
 	<!-- Create API documentation -->
 	<target name="phpdoc" description="Generate API documentation using PHPDocumentor">
 		<echo msg="Running PHPDocumentor" />
-		<phpdoc2 title="BabDev Libraries Documentation" destdir="${repo.dir}/build/docs" template="responsive-twig">
+		<phpdoc2 title="BabDev Libraries Documentation" destdir="${repo.dir}/build/docs" template="clean">
 			<fileset dir="${repo.dir}/src/BabDev">
 				<include name="**/*.php" />
 				<exclude name="Tests/" />

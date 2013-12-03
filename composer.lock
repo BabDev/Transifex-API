@@ -3,11 +3,11 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "001fd6ae7e5f92a9d4319461d9d36787",
+    "hash": "ba212626d24d921250485f8573e111fb",
     "packages": [
         {
             "name": "joomla/compat",
-            "version": "1.0-beta3",
+            "version": "1.0",
             "target-dir": "Joomla/Compat",
             "source": {
                 "type": "git",
@@ -44,26 +44,26 @@
         },
         {
             "name": "joomla/registry",
-            "version": "1.0-beta3",
+            "version": "1.0",
             "target-dir": "Joomla/Registry",
             "source": {
                 "type": "git",
                 "url": "https://github.com/joomla/joomla-framework-registry.git",
-                "reference": "fd589290b77e5bf98049b3738cb2258e063a796c"
+                "reference": "ab7033dc000a8326bfa38ca31deaf20441eb8b7d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/joomla/joomla-framework-registry/zipball/fd589290b77e5bf98049b3738cb2258e063a796c",
-                "reference": "fd589290b77e5bf98049b3738cb2258e063a796c",
+                "url": "https://api.github.com/repos/joomla/joomla-framework-registry/zipball/ab7033dc000a8326bfa38ca31deaf20441eb8b7d",
+                "reference": "ab7033dc000a8326bfa38ca31deaf20441eb8b7d",
                 "shasum": ""
             },
             "require": {
-                "joomla/compat": "1.0-beta3",
-                "joomla/utilities": "1.0-beta3",
+                "joomla/compat": "~1.0",
+                "joomla/utilities": "~1.0",
                 "php": ">=5.3.10"
             },
             "require-dev": {
-                "joomla/test": "1.0-beta3",
+                "joomla/test": "~1.0",
                 "symfony/yaml": "~2.0"
             },
             "suggest": {
@@ -86,21 +86,21 @@
                 "joomla",
                 "registry"
             ],
-            "time": "2013-10-22 15:24:58"
+            "time": "2013-11-28 18:06:46"
         },
         {
             "name": "joomla/string",
-            "version": "1.0-beta3",
+            "version": "1.0",
             "target-dir": "Joomla/String",
             "source": {
                 "type": "git",
                 "url": "https://github.com/joomla/joomla-framework-string.git",
-                "reference": "fb14ea9c578bd4111a2d8caae85c6604da1532a2"
+                "reference": "bdd72a46e68ba18f892f6fb119d5bd7aeb2abc02"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/joomla/joomla-framework-string/zipball/fb14ea9c578bd4111a2d8caae85c6604da1532a2",
-                "reference": "fb14ea9c578bd4111a2d8caae85c6604da1532a2",
+                "url": "https://api.github.com/repos/joomla/joomla-framework-string/zipball/bdd72a46e68ba18f892f6fb119d5bd7aeb2abc02",
+                "reference": "bdd72a46e68ba18f892f6fb119d5bd7aeb2abc02",
                 "shasum": ""
             },
             "require": {
@@ -123,21 +123,21 @@
                 "joomla",
                 "string"
             ],
-            "time": "2013-10-21 04:17:03"
+            "time": "2013-11-18 19:05:47"
         },
         {
             "name": "joomla/uri",
-            "version": "1.0-beta3",
+            "version": "1.0",
             "target-dir": "Joomla/Uri",
             "source": {
                 "type": "git",
                 "url": "https://github.com/joomla/joomla-framework-uri.git",
-                "reference": "9e77c6faf7b94e7299e7c4d95bec81dcc258a952"
+                "reference": "14df710f733c2a1d3ca9048f389cc84da89434b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/joomla/joomla-framework-uri/zipball/9e77c6faf7b94e7299e7c4d95bec81dcc258a952",
-                "reference": "9e77c6faf7b94e7299e7c4d95bec81dcc258a952",
+                "url": "https://api.github.com/repos/joomla/joomla-framework-uri/zipball/14df710f733c2a1d3ca9048f389cc84da89434b9",
+                "reference": "14df710f733c2a1d3ca9048f389cc84da89434b9",
                 "shasum": ""
             },
             "require": {
@@ -160,25 +160,25 @@
                 "joomla",
                 "uri"
             ],
-            "time": "2013-10-22 01:45:33"
+            "time": "2013-10-23 14:00:52"
         },
         {
             "name": "joomla/utilities",
-            "version": "1.0-beta3",
+            "version": "1.0",
             "target-dir": "Joomla/Utilities",
             "source": {
                 "type": "git",
                 "url": "https://github.com/joomla/joomla-framework-utilities.git",
-                "reference": "176b24aa04a13deb269ccb77388b84a88fce603e"
+                "reference": "86400d419dc4368c15edcec5825f2dfa063ec528"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/joomla/joomla-framework-utilities/zipball/176b24aa04a13deb269ccb77388b84a88fce603e",
-                "reference": "176b24aa04a13deb269ccb77388b84a88fce603e",
+                "url": "https://api.github.com/repos/joomla/joomla-framework-utilities/zipball/86400d419dc4368c15edcec5825f2dfa063ec528",
+                "reference": "86400d419dc4368c15edcec5825f2dfa063ec528",
                 "shasum": ""
             },
             "require": {
-                "joomla/string": "1.0-beta3",
+                "joomla/string": "~1.0",
                 "php": ">=5.3.10"
             },
             "type": "joomla-package",
@@ -198,7 +198,7 @@
                 "joomla",
                 "utilities"
             ],
-            "time": "2013-10-22 15:24:58"
+            "time": "2013-10-23 14:00:52"
         }
     ],
     "packages-dev": [
@@ -207,10 +207,11 @@
     "aliases": [
 
     ],
-    "minimum-stability": "beta",
-    "stability-flags": [
-
-    ],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "joomla/registry": 0,
+        "joomla/uri": 0
+    },
     "platform": {
         "php": ">=5.3.10"
     },
