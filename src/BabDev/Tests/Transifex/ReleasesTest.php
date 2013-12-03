@@ -73,46 +73,46 @@ class ReleasesTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Tests the getReleases method
+	 * Tests the getRelease method
 	 *
 	 * @return  void
 	 *
 	 * @since   1.0
 	 */
-	public function testGetReleases()
+	public function testGetRelease()
 	{
 		$this->response->code = 200;
 		$this->response->body = $this->sampleString;
 
 		$this->client->expects($this->once())
 			->method('get')
-			->with('/project/release/joomla-platform/')
+			->with('/project/joomla-platform/release/12.1/')
 			->will($this->returnValue($this->response));
 
 		$this->assertThat(
-			$this->object->getReleases('joomla-platform'),
+			$this->object->getRelease('joomla-platform', '12.1'),
 			$this->equalTo(json_decode($this->sampleString))
 		);
 	}
 
 	/**
-	 * Tests the getReleases method - failure
+	 * Tests the getRelease method - failure
 	 *
 	 * @return  void
 	 *
 	 * @expectedException  \DomainException
 	 * @since              1.0
 	 */
-	public function testGetReleasesFailure()
+	public function testGetReleaseFailure()
 	{
 		$this->response->code = 500;
 		$this->response->body = $this->errorString;
 
 		$this->client->expects($this->once())
 			->method('get')
-			->with('/project/release/joomla-platform/')
+			->with('/project/joomla-platform/release/12.1/')
 			->will($this->returnValue($this->response));
 
-		$this->object->getReleases('joomla-platform');
+		$this->object->getRelease('joomla-platform', '12.1');
 	}
 }
