@@ -11,6 +11,7 @@ namespace BabDev\Transifex;
 /**
  * Transifex API Projects class.
  *
+ * @link   http://support.transifex.com/customer/portal/articles/1009473-project-api
  * @since  1.0
  */
 class Projects extends TransifexObject

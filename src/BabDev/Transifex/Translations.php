@@ -11,6 +11,7 @@ namespace BabDev\Transifex;
 /**
  * Transifex API Translations class.
  *
+ * @link   http://support.transifex.com/customer/portal/articles/1026102-translations-api
  * @since  1.0
  */
 class Translations extends TransifexObject

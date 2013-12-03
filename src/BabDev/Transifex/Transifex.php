@@ -15,12 +15,13 @@ use Joomla\Registry\Registry;
 /**
  * Base class for interacting with the Transifex API.
  *
- * @property-read  Formats       $formats       Transifex API object for the supported formats.
- * @property-read  Projects      $projects      Transifex API object for interacting with projects.
- * @property-read  Releases      $releases      Transifex API object for interacting with project's releases.
- * @property-read  Resources     $resources     Transifex API object for interacting with project's resources.
- * @property-read  Statistics    $statistics    Transifex API object for a resource's statistics.
- * @property-read  Translations  $translations  Transifex API object for a resource's translations.
+ * @property-read  Formats       $formats       Transifex API object for interacting with the Format API.
+ * @property-read  Languages     $languages     Transifex API object for interacting with the Language API.
+ * @property-read  Projects      $projects      Transifex API object for interacting with the Project API.
+ * @property-read  Releases      $releases      Transifex API object for interacting with the Release API.
+ * @property-read  Resources     $resources     Transifex API object for interacting with the Resource API.
+ * @property-read  Statistics    $statistics    Transifex API object for interacting with the Statistics API.
+ * @property-read  Translations  $translations  Transifex API object for interacting with the Translations API.
  *
  * @since  1.0
  */
@@ -43,7 +44,7 @@ class Transifex
 	protected $client;
 
 	/**
-	 * Transifex API object for the supported formats.
+	 * Transifex API object for interacting with the Format API.
 	 *
 	 * @var    Formats
 	 * @since  1.0
@@ -51,7 +52,15 @@ class Transifex
 	protected $formats;
 
 	/**
-	 * Transifex API object for interacting with projects.
+	 * Transifex API object for interacting with the Language API.
+	 *
+	 * @var    Languages
+	 * @since  1.0
+	 */
+	protected $languages;
+
+	/**
+	 * Transifex API object for interacting with the Project API.
 	 *
 	 * @var    Projects
 	 * @since  1.0
@@ -59,7 +68,7 @@ class Transifex
 	protected $projects;
 
 	/**
-	 * Transifex API object for interacting with project's releases.
+	 * Transifex API object for interacting with the Release API.
 	 *
 	 * @var    Releases
 	 * @since  1.0
@@ -67,7 +76,7 @@ class Transifex
 	protected $releases;
 
 	/**
-	 * Transifex API object for interacting with project's resources.
+	 * Transifex API object for interacting with the Resource API.
 	 *
 	 * @var    Resources
 	 * @since  1.0
@@ -75,7 +84,7 @@ class Transifex
 	protected $resources;
 
 	/**
-	 * Transifex API object for a resource's statistics.
+	 * Transifex API object for interacting with the Statistics API.
 	 *
 	 * @var    Statistics
 	 * @since  1.0
@@ -83,7 +92,7 @@ class Transifex
 	protected $statistics;
 
 	/**
-	 * Transifex API object for a resource's translations.
+	 * Transifex API object for interacting with the Translations API.
 	 *
 	 * @var    Translations
 	 * @since  1.0

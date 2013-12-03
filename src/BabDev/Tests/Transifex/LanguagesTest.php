@@ -495,6 +495,19 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * Tests the updateLanguage method - failure
+	 *
+	 * @return  void
+	 *
+	 * @expectedException  \InvalidArgumentException
+	 * @since              1.0
+	 */
+	public function testUpdateLanguageNoUsers()
+	{
+		$this->object->updateLanguage('joomla-platform', 'en_US', array());
+	}
+
+	/**
 	 * Tests the updateReviewers method
 	 *
 	 * @return  void
