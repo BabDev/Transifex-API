@@ -90,7 +90,7 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 	public function test__GetLanguages()
 	{
 		$this->assertThat(
-			$this->object->formats,
+			$this->object->languages,
 			$this->isInstanceOf('\\BabDev\\Transifex\\Languages')
 		);
 	}
