@@ -71,9 +71,9 @@ class TransifexObjectTest extends \PHPUnit_Framework_TestCase
 
 		$result = $method->invokeArgs($this->object, array('/formats'));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$result,
-			$this->equalTo('http://www.transifex.com/api/2/formats')
+			'http://www.transifex.com/api/2/formats'
 		);
 	}
 }

@@ -74,9 +74,9 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function test__GetFormats()
 	{
-		$this->assertThat(
-			$this->object->formats,
-			$this->isInstanceOf('\\BabDev\\Transifex\\Formats')
+		$this->assertInstanceOf(
+		     '\\BabDev\\Transifex\\Formats',
+			$this->object->formats
 		);
 	}
 
@@ -89,9 +89,9 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function test__GetLanguageinfo()
 	{
-		$this->assertThat(
-			$this->object->languageinfo,
-			$this->isInstanceOf('\\BabDev\\Transifex\\Languageinfo')
+		$this->assertInstanceOf(
+		     '\\BabDev\\Transifex\\Languageinfo',
+			$this->object->languageinfo
 		);
 	}
 
@@ -104,9 +104,9 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function test__GetLanguages()
 	{
-		$this->assertThat(
-			$this->object->languages,
-			$this->isInstanceOf('\\BabDev\\Transifex\\Languages')
+		$this->assertInstanceOf(
+		     '\\BabDev\\Transifex\\Languages',
+			$this->object->languages
 		);
 	}
 
@@ -119,9 +119,9 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function test__GetProjects()
 	{
-		$this->assertThat(
-			$this->object->projects,
-			$this->isInstanceOf('\\BabDev\\Transifex\\Projects')
+		$this->assertInstanceOf(
+		     '\\BabDev\\Transifex\\Projects',
+			$this->object->projects
 		);
 	}
 
@@ -134,9 +134,9 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function test__GetReleases()
 	{
-		$this->assertThat(
-			$this->object->releases,
-			$this->isInstanceOf('\\BabDev\\Transifex\\Releases')
+		$this->assertInstanceOf(
+		     '\\BabDev\\Transifex\\Releases',
+			$this->object->releases
 		);
 	}
 
@@ -149,9 +149,9 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function test__GetResources()
 	{
-		$this->assertThat(
-			$this->object->resources,
-			$this->isInstanceOf('\\BabDev\\Transifex\\Resources')
+		$this->assertInstanceOf(
+		     '\\BabDev\\Transifex\\Resources',
+			$this->object->resources
 		);
 	}
 
@@ -164,9 +164,9 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function test__GetStatistics()
 	{
-		$this->assertThat(
-			$this->object->statistics,
-			$this->isInstanceOf('\\BabDev\\Transifex\\Statistics')
+		$this->assertInstanceOf(
+		     '\\BabDev\\Transifex\\Statistics',
+			$this->object->statistics
 		);
 	}
 
@@ -179,9 +179,9 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function test__GetTranslations()
 	{
-		$this->assertThat(
-			$this->object->translations,
-			$this->isInstanceOf('\\BabDev\\Transifex\\Translations')
+		$this->assertInstanceOf(
+		     '\\BabDev\\Transifex\\Translations',
+			$this->object->translations
 		);
 	}
 
@@ -194,9 +194,9 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function test__GetTranslationstrings()
 	{
-		$this->assertThat(
-			$this->object->translationstrings,
-			$this->isInstanceOf('\\BabDev\\Transifex\\Translationstrings')
+		$this->assertInstanceOf(
+		     '\\BabDev\\Transifex\\Translationstrings',
+			$this->object->translationstrings
 		);
 	}
 
@@ -211,9 +211,9 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->object->setOption('api.url', 'https://example.com/settest');
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->options->get('api.url'),
-			$this->equalTo('https://example.com/settest')
+			'https://example.com/settest'
 		);
 	}
 
@@ -228,9 +228,9 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->options->set('api.url', 'https://example.com/gettest');
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->getOption('api.url', 'https://example.com/gettest'),
-			$this->equalTo('https://example.com/gettest')
+			'https://example.com/gettest'
 		);
 	}
 }

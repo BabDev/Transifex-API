@@ -89,9 +89,9 @@ class TranslationsTest extends \PHPUnit_Framework_TestCase
 			->with('/project/joomla/resource/joomla-platform/translation/en_GB')
 			->will($this->returnValue($this->response));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->getTranslation('joomla', 'joomla-platform', 'en_GB'),
-			$this->equalTo(json_decode($this->sampleString))
+			json_decode($this->sampleString)
 		);
 	}
 
@@ -133,9 +133,9 @@ class TranslationsTest extends \PHPUnit_Framework_TestCase
 			->with('/project/joomla/resource/joomla-platform/translation/en_GB')
 			->will($this->returnValue($this->response));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->updateTranslation('joomla', 'joomla-platform', 'en_GB', __DIR__ . '/stubs/source.ini', 'file'),
-			$this->equalTo(json_decode($this->sampleString))
+			json_decode($this->sampleString)
 		);
 	}
 
@@ -157,9 +157,9 @@ class TranslationsTest extends \PHPUnit_Framework_TestCase
 			->with('/project/joomla/resource/joomla-platform/translation/en_GB')
 			->will($this->returnValue($this->response));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->updateTranslation('joomla', 'joomla-platform', 'en_GB', 'TEST="Test"'),
-			$this->equalTo(json_decode($this->sampleString))
+			json_decode($this->sampleString)
 		);
 	}
 

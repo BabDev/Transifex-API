@@ -89,9 +89,9 @@ class ReleasesTest extends \PHPUnit_Framework_TestCase
 			->with('/project/joomla-platform/release/12.1/')
 			->will($this->returnValue($this->response));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->getRelease('joomla-platform', '12.1'),
-			$this->equalTo(json_decode($this->sampleString))
+			json_decode($this->sampleString)
 		);
 	}
 

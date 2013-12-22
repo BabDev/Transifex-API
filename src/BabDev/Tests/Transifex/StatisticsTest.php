@@ -89,9 +89,9 @@ class StatisticsTest extends \PHPUnit_Framework_TestCase
 			->with('/project/joomla/resource/joomla-platform/stats/')
 			->will($this->returnValue($this->response));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->getStatistics('joomla', 'joomla-platform'),
-			$this->equalTo(json_decode($this->sampleString))
+			json_decode($this->sampleString)
 		);
 	}
 

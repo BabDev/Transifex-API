@@ -134,9 +134,9 @@ class HelperTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testIpInRange($result, $testIp, $validIps, $type = 'range')
 	{
-		$this->assertThat(
+		$this->assertEquals(
 			Helper::ipInRange($testIp, $validIps, $type),
-			$this->equalTo($result)
+			$result
 		);
 	}
 

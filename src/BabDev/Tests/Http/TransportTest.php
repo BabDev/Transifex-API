@@ -85,14 +85,14 @@ class TransportTest extends \PHPUnit_Framework_TestCase
 
 		$body = json_decode($response->body);
 
-		$this->assertThat(
+		$this->assertEquals(
 			$response->code,
-			$this->equalTo(200)
+			200
 		);
 
-		$this->assertThat(
+		$this->assertEquals(
 			$body->method,
-			$this->equalTo('GET')
+			'GET'
 		);
 	}
 
@@ -150,14 +150,14 @@ class TransportTest extends \PHPUnit_Framework_TestCase
 
 		$body = json_decode($response->body);
 
-		$this->assertThat(
+		$this->assertEquals(
 			$response->code,
-			$this->equalTo(200)
+			200
 		);
 
-		$this->assertThat(
+		$this->assertEquals(
 			$body->method,
-			$this->equalTo('PUT')
+			'PUT'
 		);
 	}
 
@@ -180,19 +180,19 @@ class TransportTest extends \PHPUnit_Framework_TestCase
 
 		$body = json_decode($response->body);
 
-		$this->assertThat(
+		$this->assertEquals(
 			$response->code,
-			$this->equalTo(200)
+			200
 		);
 
-		$this->assertThat(
+		$this->assertEquals(
 			$body->method,
-			$this->equalTo('POST')
+			'POST'
 		);
 
-		$this->assertThat(
+		$this->assertEquals(
 			$body->post->key,
-			$this->equalTo('value')
+			'value'
 		);
 	}
 
@@ -215,19 +215,19 @@ class TransportTest extends \PHPUnit_Framework_TestCase
 
 		$body = json_decode($response->body);
 
-		$this->assertThat(
+		$this->assertEquals(
 			$response->code,
-			$this->equalTo(200)
+			200
 		);
 
-		$this->assertThat(
+		$this->assertEquals(
 			$body->method,
-			$this->equalTo('POST')
+			'POST'
 		);
 
-		$this->assertThat(
+		$this->assertEquals(
 			$body->post->key,
-			$this->equalTo('value')
+			'value'
 		);
 	}
 }

@@ -89,9 +89,9 @@ class FormatsTest extends \PHPUnit_Framework_TestCase
 			->with('/formats')
 			->will($this->returnValue($this->response));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->getFormats(),
-			$this->equalTo(json_decode($this->sampleString))
+			json_decode($this->sampleString)
 		);
 	}
 

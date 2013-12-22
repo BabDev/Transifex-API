@@ -89,9 +89,9 @@ class LanguageinfoTest extends \PHPUnit_Framework_TestCase
 			->with('/language/en_GB/')
 			->will($this->returnValue($this->response));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->getLanguage('en_GB'),
-			$this->equalTo(json_decode($this->sampleString))
+			json_decode($this->sampleString)
 		);
 	}
 
@@ -133,9 +133,9 @@ class LanguageinfoTest extends \PHPUnit_Framework_TestCase
 			->with('/languages/')
 			->will($this->returnValue($this->response));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->getLanguages(),
-			$this->equalTo(json_decode($this->sampleString))
+			json_decode($this->sampleString)
 		);
 	}
 

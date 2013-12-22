@@ -26,9 +26,9 @@ class HttpFactoryTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testGetHttp()
 	{
-		$this->assertThat(
-			HttpFactory::getHttp(),
-			$this->isInstanceOf('\\BabDev\\Http\\Http')
+		$this->assertInstanceOf(
+			'\\BabDev\\Http\\Http',
+			HttpFactory::getHttp()
 		);
 	}
 
@@ -41,15 +41,13 @@ class HttpFactoryTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testGetAvailableDriver()
 	{
-		$this->assertThat(
+		$this->assertFalse(
 			HttpFactory::getAvailableDriver(new Registry, array()),
-			$this->isFalse(),
 			'Passing an empty array should return false due to there being no adapters to test'
 		);
 
-		$this->assertThat(
+		$this->assertFalse(
 			HttpFactory::getAvailableDriver(new Registry, array('fopen')),
-			$this->isFalse(),
 			'A false should be returned if a class is not present or supported'
 		);
 	}

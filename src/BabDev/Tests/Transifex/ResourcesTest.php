@@ -98,9 +98,9 @@ class ResourcesTest extends \PHPUnit_Framework_TestCase
 		    'content'             => 'Test="Test"'
 		);
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->createResource('joomla-platform', 'Joomla Platform Data', 'joomla-platform', 'INI', $options),
-			$this->equalTo(json_decode($this->sampleString))
+			json_decode($this->sampleString)
 		);
 	}
 
@@ -129,9 +129,9 @@ class ResourcesTest extends \PHPUnit_Framework_TestCase
 		    'file'                => __DIR__ . '/stubs/source.ini'
 		);
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->createResource('joomla-platform', 'Joomla Platform Data', 'joomla-platform', 'INI', $options),
-			$this->equalTo(json_decode($this->sampleString))
+			json_decode($this->sampleString)
 		);
 	}
 
@@ -173,9 +173,9 @@ class ResourcesTest extends \PHPUnit_Framework_TestCase
 			->with('/project/joomla/resource/joomla-platform')
 			->will($this->returnValue($this->response));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->deleteResource('joomla', 'joomla-platform'),
-			$this->equalTo(json_decode($this->sampleString))
+			json_decode($this->sampleString)
 		);
 	}
 
@@ -217,9 +217,9 @@ class ResourcesTest extends \PHPUnit_Framework_TestCase
 			->with('/project/joomla/resource/joomla-platform/?details')
 			->will($this->returnValue($this->response));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->getResource('joomla', 'joomla-platform', true),
-			$this->equalTo(json_decode($this->sampleString))
+			json_decode($this->sampleString)
 		);
 	}
 
@@ -261,9 +261,9 @@ class ResourcesTest extends \PHPUnit_Framework_TestCase
 			->with('/project/joomla/resource/joomla-platform/content/')
 			->will($this->returnValue($this->response));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->getResourceContent('joomla', 'joomla-platform'),
-			$this->equalTo(json_decode($this->sampleString))
+			json_decode($this->sampleString)
 		);
 	}
 
@@ -305,9 +305,9 @@ class ResourcesTest extends \PHPUnit_Framework_TestCase
 			->with('/project/joomla/resources')
 			->will($this->returnValue($this->response));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->getResources('joomla'),
-			$this->equalTo(json_decode($this->sampleString))
+			json_decode($this->sampleString)
 		);
 	}
 
@@ -349,9 +349,9 @@ class ResourcesTest extends \PHPUnit_Framework_TestCase
 			->with('/project/joomla/resource/joomla-platform/content/')
 			->will($this->returnValue($this->response));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->updateResourceContent('joomla', 'joomla-platform', __DIR__ . '/stubs/source.ini', 'file'),
-			$this->equalTo(json_decode($this->sampleString))
+			json_decode($this->sampleString)
 		);
 	}
 
@@ -373,9 +373,9 @@ class ResourcesTest extends \PHPUnit_Framework_TestCase
 			->with('/project/joomla/resource/joomla-platform/content/')
 			->will($this->returnValue($this->response));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->updateResourceContent('joomla', 'joomla-platform', 'TEST="Test"'),
-			$this->equalTo(json_decode($this->sampleString))
+			json_decode($this->sampleString)
 		);
 	}
 

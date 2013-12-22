@@ -107,9 +107,9 @@ class ProjectsTest extends \PHPUnit_Framework_TestCase
 		    'fill_up_resources'  => false
 		);
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->createProject('Joomla Platform', 'joomla-platform', 'Project for the Joomla Platform', 'en_GB', $options),
-			$this->equalTo(json_decode($this->sampleString))
+			json_decode($this->sampleString)
 		);
 	}
 
@@ -164,9 +164,9 @@ class ProjectsTest extends \PHPUnit_Framework_TestCase
 			->with('/project/joomla-platform')
 			->will($this->returnValue($this->response));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->deleteProject('joomla-platform'),
-			$this->equalTo(json_decode($this->sampleString))
+			json_decode($this->sampleString)
 		);
 	}
 
@@ -208,9 +208,9 @@ class ProjectsTest extends \PHPUnit_Framework_TestCase
 			->with('/project/joomla-platform/?details')
 			->will($this->returnValue($this->response));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->getProject('joomla-platform', true),
-			$this->equalTo(json_decode($this->sampleString))
+			json_decode($this->sampleString)
 		);
 	}
 
@@ -252,9 +252,9 @@ class ProjectsTest extends \PHPUnit_Framework_TestCase
 			->with('/projects/')
 			->will($this->returnValue($this->response));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->getProjects(),
-			$this->equalTo(json_decode($this->sampleString))
+			json_decode($this->sampleString)
 		);
 	}
 
@@ -316,9 +316,9 @@ class ProjectsTest extends \PHPUnit_Framework_TestCase
 		    'fill_up_resources'  => false
 		);
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->updateProject('joomla-platform', $options),
-			$this->equalTo(json_decode($this->sampleString))
+			json_decode($this->sampleString)
 		);
 	}
 

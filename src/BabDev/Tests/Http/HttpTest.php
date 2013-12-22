@@ -68,9 +68,9 @@ class HttpTest extends \PHPUnit_Framework_TestCase
 			->with('testkey')
 			->will($this->returnValue('testResult'));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->getOption('testkey'),
-			$this->equalTo('testResult')
+			'testResult'
 		);
 	}
 
@@ -87,9 +87,9 @@ class HttpTest extends \PHPUnit_Framework_TestCase
 			->method('set')
 			->with('testkey', 'testvalue');
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->setOption('testkey', 'testvalue'),
-			$this->equalTo($this->object)
+			$this->object
 		);
 	}
 
@@ -107,9 +107,9 @@ class HttpTest extends \PHPUnit_Framework_TestCase
 			->with('OPTIONS', new Uri('http://example.com'), null, array('testHeader'))
 			->will($this->returnValue('ReturnString'));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->options('http://example.com', array('testHeader')),
-			$this->equalTo('ReturnString')
+			'ReturnString'
 		);
 	}
 
@@ -127,9 +127,9 @@ class HttpTest extends \PHPUnit_Framework_TestCase
 			->with('HEAD', new Uri('http://example.com'), null, array('testHeader'))
 			->will($this->returnValue('ReturnString'));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->head('http://example.com', array('testHeader')),
-			$this->equalTo('ReturnString')
+			'ReturnString'
 		);
 	}
 
@@ -147,9 +147,9 @@ class HttpTest extends \PHPUnit_Framework_TestCase
 			->with('GET', new Uri('http://example.com'), null, array('testHeader'))
 			->will($this->returnValue('ReturnString'));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->get('http://example.com', array('testHeader')),
-			$this->equalTo('ReturnString')
+			'ReturnString'
 		);
 	}
 
@@ -167,9 +167,9 @@ class HttpTest extends \PHPUnit_Framework_TestCase
 			->with('POST', new Uri('http://example.com'), array('key' => 'value'), array('testHeader'))
 			->will($this->returnValue('ReturnString'));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->post('http://example.com', array('key' => 'value'), array('testHeader')),
-			$this->equalTo('ReturnString')
+			'ReturnString'
 		);
 	}
 
@@ -187,9 +187,9 @@ class HttpTest extends \PHPUnit_Framework_TestCase
 			->with('PUT', new Uri('http://example.com'), array('key' => 'value'), array('testHeader'))
 			->will($this->returnValue('ReturnString'));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->put('http://example.com', array('key' => 'value'), array('testHeader')),
-			$this->equalTo('ReturnString')
+			'ReturnString'
 		);
 	}
 
@@ -207,9 +207,9 @@ class HttpTest extends \PHPUnit_Framework_TestCase
 			->with('DELETE', new Uri('http://example.com'), null, array('testHeader'))
 			->will($this->returnValue('ReturnString'));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->delete('http://example.com', array('testHeader')),
-			$this->equalTo('ReturnString')
+			'ReturnString'
 		);
 	}
 
@@ -227,9 +227,9 @@ class HttpTest extends \PHPUnit_Framework_TestCase
 			->with('TRACE', new Uri('http://example.com'), null, array('testHeader'))
 			->will($this->returnValue('ReturnString'));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->trace('http://example.com', array('testHeader')),
-			$this->equalTo('ReturnString')
+			'ReturnString'
 		);
 	}
 
@@ -247,9 +247,9 @@ class HttpTest extends \PHPUnit_Framework_TestCase
 			->with('PATCH', new Uri('http://example.com'), array('key' => 'value'), array('testHeader'))
 			->will($this->returnValue('ReturnString'));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->patch('http://example.com', array('key' => 'value'), array('testHeader')),
-			$this->equalTo('ReturnString')
+			'ReturnString'
 		);
 	}
 }

@@ -96,9 +96,9 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 		    'list'        => 'test@example.com'
 		);
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->createLanguage('joomla-platform', 'en_GB', array('mbabker'), $options),
-			$this->equalTo(json_decode($this->sampleString))
+			json_decode($this->sampleString)
 		);
 	}
 
@@ -153,9 +153,9 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 			->with('/project/joomla-platform/language/en_US/')
 			->will($this->returnValue($this->response));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->deleteLanguage('joomla-platform', 'en_US'),
-			$this->equalTo(json_decode($this->sampleString))
+			json_decode($this->sampleString)
 		);
 	}
 
@@ -197,9 +197,9 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 			->with('/project/joomla-platform/language/en_US/coordinators/')
 			->will($this->returnValue($this->response));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->getCoordinators('joomla-platform', 'en_US'),
-			$this->equalTo(json_decode($this->sampleString))
+			json_decode($this->sampleString)
 		);
 	}
 
@@ -241,9 +241,9 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 			->with('/project/joomla-platform/language/en_US/')
 			->will($this->returnValue($this->response));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->getLanguage('joomla-platform', 'en_US'),
-			$this->equalTo(json_decode($this->sampleString))
+			json_decode($this->sampleString)
 		);
 	}
 
@@ -285,9 +285,9 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 			->with('/project/joomla-platform/languages/')
 			->will($this->returnValue($this->response));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->getLanguages('joomla-platform'),
-			$this->equalTo(json_decode($this->sampleString))
+			json_decode($this->sampleString)
 		);
 	}
 
@@ -329,9 +329,9 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 			->with('/project/joomla-platform/language/en_US/reviewers/')
 			->will($this->returnValue($this->response));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->getReviewers('joomla-platform', 'en_US'),
-			$this->equalTo(json_decode($this->sampleString))
+			json_decode($this->sampleString)
 		);
 	}
 
@@ -373,9 +373,9 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 			->with('/project/joomla-platform/language/en_US/translators/')
 			->will($this->returnValue($this->response));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->getTranslators('joomla-platform', 'en_US'),
-			$this->equalTo(json_decode($this->sampleString))
+			json_decode($this->sampleString)
 		);
 	}
 
@@ -417,9 +417,9 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 			->with('/project/joomla-platform/language/en_US/coordinators/')
 			->will($this->returnValue($this->response));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->updateCoordinators('joomla-platform', 'en_US', array('mbabker')),
-			$this->equalTo(json_decode($this->sampleString))
+			json_decode($this->sampleString)
 		);
 	}
 
@@ -481,9 +481,9 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 		    'list'        => 'test@example.com'
 		);
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->updateLanguage('joomla-platform', 'en_US', array('mbabker'), $options),
-			$this->equalTo(json_decode($this->sampleString))
+			json_decode($this->sampleString)
 		);
 	}
 
@@ -538,9 +538,9 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 			->with('/project/joomla-platform/language/en_US/reviewers/')
 			->will($this->returnValue($this->response));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->updateReviewers('joomla-platform', 'en_US', array('mbabker')),
-			$this->equalTo(json_decode($this->sampleString))
+			json_decode($this->sampleString)
 		);
 	}
 
@@ -595,9 +595,9 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 			->with('/project/joomla-platform/language/en_US/translators/')
 			->will($this->returnValue($this->response));
 
-		$this->assertThat(
+		$this->assertEquals(
 			$this->object->updateTranslators('joomla-platform', 'en_US', array('mbabker')),
-			$this->equalTo(json_decode($this->sampleString))
+			json_decode($this->sampleString)
 		);
 	}
 
