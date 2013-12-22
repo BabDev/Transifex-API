@@ -8,16 +8,16 @@ namespace BabDev\Tests\Transifex;
 
 use BabDev\Http\Response;
 use BabDev\Transifex\Http;
-use BabDev\Transifex\LanguageInfo;
+use BabDev\Transifex\Languageinfo;
 
 use Joomla\Registry\Registry;
 
 /**
- * Test class for \BabDev\Transifex\LanguageInfo.
+ * Test class for \BabDev\Transifex\Languageinfo.
  *
  * @since  1.0
  */
-class LanguageInfoTest extends \PHPUnit_Framework_TestCase
+class LanguageinfoTest extends \PHPUnit_Framework_TestCase
 {
 	/**
 	 * @var    Registry  Options for the GitHub object.
@@ -69,7 +69,7 @@ class LanguageInfoTest extends \PHPUnit_Framework_TestCase
 		$this->client = $this->getMock('\\BabDev\\Transifex\\Http', array('get', 'post', 'delete', 'put', 'patch'));
 		$this->response = $this->getMock('\\BabDev\\Http\\Response');
 
-		$this->object = new LanguageInfo($this->options, $this->client);
+		$this->object = new Languageinfo($this->options, $this->client);
 	}
 
 	/**
