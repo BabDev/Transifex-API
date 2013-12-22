@@ -73,13 +73,13 @@ class ResourcesTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Tests the createResource method
+	 * Tests the createResource method with inline content
 	 *
 	 * @return  void
 	 *
 	 * @since   1.0
 	 */
-	public function testCreateResource()
+	public function testCreateResourceContent()
 	{
 		$this->response->code = 201;
 		$this->response->body = $this->sampleString;
@@ -91,6 +91,29 @@ class ResourcesTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertThat(
 			$this->object->createResource('joomla-platform', 'joomla-platform', 'INI', array('content' => 'Test="Test"')),
+			$this->equalTo(json_decode($this->sampleString))
+		);
+	}
+
+	/**
+	 * Tests the createResource method with an attached file
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0
+	 */
+	public function testCreateResourceFile()
+	{
+		$this->response->code = 201;
+		$this->response->body = $this->sampleString;
+
+		$this->client->expects($this->once())
+			->method('post')
+			->with('/project/joomla-platform/resources/')
+			->will($this->returnValue($this->response));
+
+		$this->assertThat(
+			$this->object->createResource('joomla-platform', 'joomla-platform', 'INI', array('file' => __DIR__ . '/stubs/source.ini')),
 			$this->equalTo(json_decode($this->sampleString))
 		);
 	}
@@ -290,5 +313,86 @@ class ResourcesTest extends \PHPUnit_Framework_TestCase
 			->will($this->returnValue($this->response));
 
 		$this->object->getResources('joomla');
+	}
+
+	/**
+	 * Tests the updateResourceContent method with the content sent as a file
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0
+	 */
+	public function testUpdateResourceContentFile()
+	{
+		$this->response->code = 200;
+		$this->response->body = $this->sampleString;
+
+		$this->client->expects($this->once())
+			->method('put')
+			->with('/project/joomla/resource/joomla-platform/content/')
+			->will($this->returnValue($this->response));
+
+		$this->assertThat(
+			$this->object->updateResourceContent('joomla', 'joomla-platform', __DIR__ . '/stubs/source.ini', 'file'),
+			$this->equalTo(json_decode($this->sampleString))
+		);
+	}
+
+
+	/**
+	 * Tests the updateResourceContent method with the content sent as a string
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0
+	 */
+	public function testUpdateResourceContentString()
+	{
+		$this->response->code = 200;
+		$this->response->body = $this->sampleString;
+
+		$this->client->expects($this->once())
+			->method('put')
+			->with('/project/joomla/resource/joomla-platform/content/')
+			->will($this->returnValue($this->response));
+
+		$this->assertThat(
+			$this->object->updateResourceContent('joomla', 'joomla-platform', 'TEST="Test"'),
+			$this->equalTo(json_decode($this->sampleString))
+		);
+	}
+
+	/**
+	 * Tests the updateResourceContent method - failure
+	 *
+	 * @return  void
+	 *
+	 * @expectedException  \DomainException
+	 * @since              1.0
+	 */
+	public function testUpdateResourceContentFailure()
+	{
+		$this->response->code = 500;
+		$this->response->body = $this->errorString;
+
+		$this->client->expects($this->once())
+			->method('put')
+			->with('/project/joomla/resource/joomla-platform/content/')
+			->will($this->returnValue($this->response));
+
+		$this->object->updateResourceContent('joomla', 'joomla-platform', 'TEST="Test"');
+	}
+
+	/**
+	 * Tests the updateResourceContent method - failure
+	 *
+	 * @return  void
+	 *
+	 * @expectedException  \InvalidArgumentException
+	 * @since              1.0
+	 */
+	public function testUpdateResourceContentBadType()
+	{
+		$this->object->updateResourceContent('joomla', 'joomla-platform', 'TEST="Test"', 'stuff');
 	}
 }
