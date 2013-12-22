@@ -16,6 +16,7 @@ use Joomla\Registry\Registry;
  * Base class for interacting with the Transifex API.
  *
  * @property-read  Formats       $formats       Transifex API object for interacting with the Format API.
+ * @property-read  LanguageInfo  $languageinfo  Transifex API object for interacting with the Language Info API.
  * @property-read  Languages     $languages     Transifex API object for interacting with the Language API.
  * @property-read  Projects      $projects      Transifex API object for interacting with the Project API.
  * @property-read  Releases      $releases      Transifex API object for interacting with the Release API.
@@ -50,6 +51,14 @@ class Transifex
 	 * @since  1.0
 	 */
 	protected $formats;
+
+	/**
+	 * Transifex API object for interacting with the Language Info API.
+	 *
+	 * @var    LanguageInfo
+	 * @since  1.0
+	 */
+	protected $languageinfo;
 
 	/**
 	 * Transifex API object for interacting with the Language API.

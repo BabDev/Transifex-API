@@ -81,6 +81,21 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * Tests the magic __get method - LanguageInfo object
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0
+	 */
+	public function test__GetLanguageInfo()
+	{
+		$this->assertThat(
+			$this->object->languageinfo,
+			$this->isInstanceOf('\\BabDev\\Transifex\\LanguageInfo')
+		);
+	}
+
+	/**
 	 * Tests the magic __get method - Languages object
 	 *
 	 * @return  void
