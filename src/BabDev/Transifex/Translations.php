@@ -36,4 +36,48 @@ class Translations extends TransifexObject
 		// Send the request.
 		return $this->processResponse($this->client->get($this->fetchUrl($path)));
 	}
+
+	/**
+	 * Method to update the content of a resource within a project.
+	 *
+	 * @param   string  $project   The project the resource is part of
+	 * @param   string  $resource  The resource slug within the project
+	 * @param   string  $lang      The language to return the translation for.
+	 * @param   string  $content   The content of the resource.  This can either be a string of data or a file path.
+	 * @param   string  $type      The type of content in the $content variable.  This should be either string or file.
+	 *
+	 * @return  array  The project details from the API.
+	 *
+	 * @since   1.0
+	 * @throws  \DomainException
+	 * @throws  \InvalidArgumentException
+	 */
+	public function updateTranslation($project, $resource, $lang, $content, $type = 'string')
+	{
+		// Verify the content type is allowed
+		if (!in_array($type, array('string', 'file')))
+		{
+			throw new \InvalidArgumentException('The content type must be specified as file or string.');
+		}
+
+		// Build the request path.
+		$path = '/project/' . $project . '/resource/' . $resource . '/translation/' . $lang;
+
+		$data = array();
+
+		if ($type == 'string')
+		{
+			$data['content'] = $content;
+		}
+		else
+		{
+			$data['content'] = file_get_contents($content);
+		}
+
+		// Send the request.
+		return $this->processResponse(
+			$this->client->put($this->fetchUrl($path), json_encode($data), array('Content-Type' => 'application/json')),
+			200
+		);
+	}
 }

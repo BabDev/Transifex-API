@@ -79,7 +79,7 @@ class TranslationsTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @since   1.0
 	 */
-	public function testGetStatistics()
+	public function testGetTranslation()
 	{
 		$this->response->code = 200;
 		$this->response->body = $this->sampleString;
@@ -103,7 +103,7 @@ class TranslationsTest extends \PHPUnit_Framework_TestCase
 	 * @expectedException  \DomainException
 	 * @since              1.0
 	 */
-	public function testGetStatisticsFailure()
+	public function testGetTranslationFailure()
 	{
 		$this->response->code = 500;
 		$this->response->body = $this->errorString;
@@ -114,5 +114,86 @@ class TranslationsTest extends \PHPUnit_Framework_TestCase
 			->will($this->returnValue($this->response));
 
 		$this->object->getTranslation('joomla', 'joomla-platform', 'en_GB');
+	}
+
+	/**
+	 * Tests the updateTranslation method with the content sent as a file
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0
+	 */
+	public function testUpdateTranslationFile()
+	{
+		$this->response->code = 200;
+		$this->response->body = $this->sampleString;
+
+		$this->client->expects($this->once())
+			->method('put')
+			->with('/project/joomla/resource/joomla-platform/translation/en_GB')
+			->will($this->returnValue($this->response));
+
+		$this->assertThat(
+			$this->object->updateTranslation('joomla', 'joomla-platform', 'en_GB', __DIR__ . '/stubs/source.ini', 'file'),
+			$this->equalTo(json_decode($this->sampleString))
+		);
+	}
+
+
+	/**
+	 * Tests the updateTranslation method with the content sent as a string
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0
+	 */
+	public function testUpdateTranslationString()
+	{
+		$this->response->code = 200;
+		$this->response->body = $this->sampleString;
+
+		$this->client->expects($this->once())
+			->method('put')
+			->with('/project/joomla/resource/joomla-platform/translation/en_GB')
+			->will($this->returnValue($this->response));
+
+		$this->assertThat(
+			$this->object->updateTranslation('joomla', 'joomla-platform', 'en_GB', 'TEST="Test"'),
+			$this->equalTo(json_decode($this->sampleString))
+		);
+	}
+
+	/**
+	 * Tests the updateTranslation method - failure
+	 *
+	 * @return  void
+	 *
+	 * @expectedException  \DomainException
+	 * @since              1.0
+	 */
+	public function testUpdateTranslationFailure()
+	{
+		$this->response->code = 500;
+		$this->response->body = $this->errorString;
+
+		$this->client->expects($this->once())
+			->method('put')
+			->with('/project/joomla/resource/joomla-platform/translation/en_GB')
+			->will($this->returnValue($this->response));
+
+		$this->object->updateTranslation('joomla', 'joomla-platform', 'en_GB', 'TEST="Test"');
+	}
+
+	/**
+	 * Tests the updateTranslation method - failure
+	 *
+	 * @return  void
+	 *
+	 * @expectedException  \InvalidArgumentException
+	 * @since              1.0
+	 */
+	public function testUpdateTranslationBadType()
+	{
+		$this->object->updateTranslation('joomla', 'joomla-platform', 'en_GB', 'TEST="Test"', 'stuff');
 	}
 }
