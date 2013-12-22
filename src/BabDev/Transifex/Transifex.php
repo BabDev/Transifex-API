@@ -15,14 +15,15 @@ use Joomla\Registry\Registry;
 /**
  * Base class for interacting with the Transifex API.
  *
- * @property-read  Formats       $formats       Transifex API object for interacting with the Format API.
- * @property-read  LanguageInfo  $languageinfo  Transifex API object for interacting with the Language Info API.
- * @property-read  Languages     $languages     Transifex API object for interacting with the Language API.
- * @property-read  Projects      $projects      Transifex API object for interacting with the Project API.
- * @property-read  Releases      $releases      Transifex API object for interacting with the Release API.
- * @property-read  Resources     $resources     Transifex API object for interacting with the Resource API.
- * @property-read  Statistics    $statistics    Transifex API object for interacting with the Statistics API.
- * @property-read  Translations  $translations  Transifex API object for interacting with the Translations API.
+ * @property-read  Formats             $formats             Transifex API object for interacting with the Format API.
+ * @property-read  LanguageInfo        $languageinfo        Transifex API object for interacting with the Language Info API.
+ * @property-read  Languages           $languages           Transifex API object for interacting with the Language API.
+ * @property-read  Projects            $projects            Transifex API object for interacting with the Project API.
+ * @property-read  Releases            $releases            Transifex API object for interacting with the Release API.
+ * @property-read  Resources           $resources           Transifex API object for interacting with the Resource API.
+ * @property-read  Statistics          $statistics          Transifex API object for interacting with the Statistics API.
+ * @property-read  Translations        $translations        Transifex API object for interacting with the Translations API.
+ * @property-read  Translationstrings  $translationstrings  Transifex API object for interacting with the Translation Strings API.
  *
  * @since  1.0
  */
@@ -107,6 +108,14 @@ class Transifex
 	 * @since  1.0
 	 */
 	protected $translations;
+
+	/**
+	 * Transifex API object for interacting with the Translation Strings API.
+	 *
+	 * @var    Translationstrings
+	 * @since  1.0
+	 */
+	protected $translationstrings;
 
 	/**
 	 * Constructor.

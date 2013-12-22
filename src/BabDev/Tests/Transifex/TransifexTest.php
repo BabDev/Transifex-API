@@ -186,6 +186,21 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * Tests the magic __get method - Translationstrings object
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0
+	 */
+	public function test__GetTranslationstrings()
+	{
+		$this->assertThat(
+			$this->object->translationstrings,
+			$this->isInstanceOf('\\BabDev\\Transifex\\Translationstrings')
+		);
+	}
+
+	/**
 	 * Tests the setOption method
 	 *
 	 * @return  void
