@@ -2,7 +2,7 @@
 /**
  * BabDev Helper Class
  *
- * The BabDev Helper class provides miscellaneous support methods.
+ * The BabDev Helper class provides miscellaneous utility methods.
  *
  * @copyright  Copyright (C) 2012-2013 Michael Babker. All rights reserved.
  * @license    GNU General Public License version 2 or later; see LICENSE
@@ -11,7 +11,7 @@
 namespace BabDev;
 
 /**
- * Helper class containing miscellaneous support methods
+ * Helper class containing miscellaneous utility methods
  *
  * @since  1.0
  */
@@ -24,6 +24,22 @@ abstract class Helper
 	 * @since  1.0
 	 */
 	protected static $cidrRanges = array(
+		0 => 4294967296,
+		1 => 2147483648,
+		2 => 1073741824,
+		3 => 536870912,
+		4 => 268435456,
+		5 => 134217728,
+		6 => 67108864,
+		7 => 33554432,
+		8 => 16777216,
+		9 => 8388608,
+		10 => 4194304,
+		11 => 2097152,
+		12 => 1048576,
+		13 => 524288,
+		14 => 262144,
+		15 => 131072,
 		16 => 65536,
 		17 => 32768,
 		18 => 16382,
