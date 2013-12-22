@@ -15,6 +15,7 @@ use Joomla\Registry\Registry;
 /**
  * Test class for \BabDev\Transifex\Resources.
  *
+ * @note   Do not set the error object message here to test TransifexObject handling
  * @since  1.0
  */
 class ResourcesTest extends \PHPUnit_Framework_TestCase
@@ -53,7 +54,7 @@ class ResourcesTest extends \PHPUnit_Framework_TestCase
 	 * @var    string  Sample JSON error message.
 	 * @since  1.0
 	 */
-	protected $errorString = '{"message": "Generic Error"}';
+	protected $errorString = '{}';
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
@@ -89,8 +90,16 @@ class ResourcesTest extends \PHPUnit_Framework_TestCase
 			->with('/project/joomla-platform/resources/')
 			->will($this->returnValue($this->response));
 
+		// Additional options
+		$options = array(
+		    'accept_translations' => true,
+		    'category'            => 'whatever',
+		    'priority'            => 3,
+		    'content'             => 'Test="Test"'
+		);
+
 		$this->assertThat(
-			$this->object->createResource('joomla-platform', 'joomla-platform', 'INI', array('content' => 'Test="Test"')),
+			$this->object->createResource('joomla-platform', 'Joomla Platform Data', 'joomla-platform', 'INI', $options),
 			$this->equalTo(json_decode($this->sampleString))
 		);
 	}
@@ -112,8 +121,16 @@ class ResourcesTest extends \PHPUnit_Framework_TestCase
 			->with('/project/joomla-platform/resources/')
 			->will($this->returnValue($this->response));
 
+		// Additional options
+		$options = array(
+		    'accept_translations' => true,
+		    'category'            => 'whatever',
+		    'priority'            => 3,
+		    'file'                => __DIR__ . '/stubs/source.ini'
+		);
+
 		$this->assertThat(
-			$this->object->createResource('joomla-platform', 'joomla-platform', 'INI', array('file' => __DIR__ . '/stubs/source.ini')),
+			$this->object->createResource('joomla-platform', 'Joomla Platform Data', 'joomla-platform', 'INI', $options),
 			$this->equalTo(json_decode($this->sampleString))
 		);
 	}
@@ -136,7 +153,7 @@ class ResourcesTest extends \PHPUnit_Framework_TestCase
 			->with('/project/joomla-platform/resources/')
 			->will($this->returnValue($this->response));
 
-		$this->object->createResource('joomla-platform', 'joomla-platform', 'INI', array('content' => 'Test="Test"'));
+		$this->object->createResource('joomla-platform', 'Joomla Platform Data', 'joomla-platform', 'INI', array('content' => 'Test="Test"'));
 	}
 
 	/**

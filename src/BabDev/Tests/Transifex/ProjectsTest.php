@@ -89,8 +89,26 @@ class ProjectsTest extends \PHPUnit_Framework_TestCase
 			->with('/projects/')
 			->will($this->returnValue($this->response));
 
+		// Additional options
+		$options = array(
+			'long_description'   => 'My test project',
+		    'private'            => true,
+		    'homepage'           => 'http://www.example.com',
+		    'feed'               => 'http://www.example.com/feed.xml',
+		    'anyone_submit'      => true,
+		    'hidden'             => false,
+		    'bug_tracker'        => 'http://www.example.com/tracker',
+		    'trans_instructions' => 'http://www.example.com/instructions.html',
+		    'tags'               => 'joomla, babdev',
+		    'maintainers'        => 'joomla',
+		    'outsource'          => 'thirdparty',
+		    'auto_join'          => true,
+		    'license'            => 'other_open_source',
+		    'fill_up_resources'  => false
+		);
+
 		$this->assertThat(
-			$this->object->createProject('Joomla Platform', 'joomla-platform', 'Project for the Joomla Platform', 'en_GB'),
+			$this->object->createProject('Joomla Platform', 'joomla-platform', 'Project for the Joomla Platform', 'en_GB', $options),
 			$this->equalTo(json_decode($this->sampleString))
 		);
 	}
@@ -114,6 +132,19 @@ class ProjectsTest extends \PHPUnit_Framework_TestCase
 			->will($this->returnValue($this->response));
 
 		$this->object->createProject('Joomla Platform', 'joomla-platform', 'Project for the Joomla Platform', 'en_GB');
+	}
+
+	/**
+	 * Tests the createProject method - failure
+	 *
+	 * @return  void
+	 *
+	 * @expectedException  \InvalidArgumentException
+	 * @since              1.0
+	 */
+	public function testCreateProjectsBadLicense()
+	{
+		$this->object->createProject('Joomla Platform', 'joomla-platform', 'Project for the Joomla Platform', 'en_GB', array('license' => 'failure'));
 	}
 
 	/**
@@ -265,8 +296,28 @@ class ProjectsTest extends \PHPUnit_Framework_TestCase
 			->with('/project/joomla-platform/')
 			->will($this->returnValue($this->response));
 
+		// Additional options
+		$options = array(
+			'name'               => 'Joomla Platform',
+			'description'        => 'Project for the Joomla Platform',
+			'long_description'   => 'My test project',
+		    'private'            => true,
+		    'homepage'           => 'http://www.example.com',
+		    'feed'               => 'http://www.example.com/feed.xml',
+		    'anyone_submit'      => true,
+		    'hidden'             => false,
+		    'bug_tracker'        => 'http://www.example.com/tracker',
+		    'trans_instructions' => 'http://www.example.com/instructions.html',
+		    'tags'               => 'joomla, babdev',
+		    'maintainers'        => 'joomla',
+		    'outsource'          => 'thirdparty',
+		    'auto_join'          => true,
+		    'license'            => 'other_open_source',
+		    'fill_up_resources'  => false
+		);
+
 		$this->assertThat(
-			$this->object->updateProject('joomla-platform', array('name' => 'Joomla Platform')),
+			$this->object->updateProject('joomla-platform', $options),
 			$this->equalTo(json_decode($this->sampleString))
 		);
 	}

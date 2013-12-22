@@ -89,8 +89,15 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 			->with('/project/joomla-platform/languages/')
 			->will($this->returnValue($this->response));
 
+		// Additional options
+		$options = array(
+			'translators' => array('mbabker'),
+		    'reviewers'   => array('mbabker'),
+		    'list'        => 'test@example.com'
+		);
+
 		$this->assertThat(
-			$this->object->createLanguage('joomla-platform', 'en_GB', array('mbabker')),
+			$this->object->createLanguage('joomla-platform', 'en_GB', array('mbabker'), $options),
 			$this->equalTo(json_decode($this->sampleString))
 		);
 	}
@@ -467,8 +474,15 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 			->with('/project/joomla-platform/language/en_US/')
 			->will($this->returnValue($this->response));
 
+		// Additional options
+		$options = array(
+			'translators' => array('mbabker'),
+		    'reviewers'   => array('mbabker'),
+		    'list'        => 'test@example.com'
+		);
+
 		$this->assertThat(
-			$this->object->updateLanguage('joomla-platform', 'en_US', array('mbabker')),
+			$this->object->updateLanguage('joomla-platform', 'en_US', array('mbabker'), $options),
 			$this->equalTo(json_decode($this->sampleString))
 		);
 	}
