@@ -7,7 +7,7 @@
  * This file must be placed on a webserver in a location that can be accessed
  * by the system that the test is running.
  *
- * @copyright  Copyright (C) 2012-2013 Michael Babker. All rights reserved.
+ * @copyright  Copyright (C) 2012-2014 Michael Babker. All rights reserved.
  * @license    http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License Version 2 or Later
  */
 
