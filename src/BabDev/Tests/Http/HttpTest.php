@@ -1,7 +1,7 @@
 <?php
 /**
  * @copyright  Copyright (C) 2012-2013 Michael Babker. All rights reserved.
- * @license    GNU General Public License version 2 or later; see LICENSE
+ * @license    http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License Version 2 or Later
  */
 
 namespace BabDev\Tests\Http;
