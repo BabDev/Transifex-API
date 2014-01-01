@@ -82,4 +82,10 @@
 			<arg value="--dev" />
 		</exec>
 	</target>
+
+	<target name="composervalidate" description="Perform validation of composer.json files.">
+		<exec executable="composer" failonerror="true">
+			<arg value="validate" />
+		</exec>
+	</target>
 </project>

@@ -1,11 +1,16 @@
 {
     "name": "babdev/library",
-    "type": "php-library",
     "description": "BabDev's PHP libraries",
     "keywords": ["php", "library"],
     "homepage": "https://github.com/mbabker/BabDev-Libraries",
     "license": "GPL-2.0+",
     "version": "1.0.0.alpha",
+    "authors": [
+        {
+            "name": "Michael Babker",
+            "homepage": "http://www.babdev.com"
+        }
+    ],
     "require": {
         "php": ">=5.3.10",
         "joomla/registry": "1.*@stable",
