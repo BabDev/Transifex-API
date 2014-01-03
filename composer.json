@@ -2,7 +2,7 @@
     "name": "babdev/library",
     "description": "BabDev's PHP libraries",
     "keywords": ["php", "library"],
-    "homepage": "https://github.com/mbabker/BabDev-Libraries",
+    "homepage": "https://github.com/BabDev/BabDev-Library",
     "license": "GPL-2.0+",
     "version": "1.0.0.alpha",
     "authors": [

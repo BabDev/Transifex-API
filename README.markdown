@@ -1,4 +1,4 @@
-BabDev Library [![Build Status](https://travis-ci.org/mbabker/BabDev-Libraries.png?branch=master)](https://travis-ci.org/mbabker/BabDev-Libraries) [![Analytics](https://ga-beacon.appspot.com/UA-42602973-2/babdev-library/readme)](https://github.com/igrigorik/ga-beacon)
+BabDev Library [![Build Status](https://travis-ci.org/BabDev/BabDev-Library.png?branch=master)](https://travis-ci.org/BabDev/BabDev-Library) [![Analytics](https://ga-beacon.appspot.com/UA-42602973-2/babdev-library/readme)](https://github.com/igrigorik/ga-beacon)
 ===============
 
 The *BabDev Library* is an collection of classes for general use in PHP based applications.  Originally inspired as libraries extending the Joomla! Platform, the library has evolved to be more suited for general use in PHP applications while still aiming to support Joomla developers.
