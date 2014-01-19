@@ -104,8 +104,9 @@ class ProjectsTest extends \PHPUnit_Framework_TestCase
 		    'outsource'          => 'thirdparty',
 		    'auto_join'          => true,
 		    'license'            => 'other_open_source',
-		    'fill_up_resources'  => false
-		);
+		    'fill_up_resources'  => false,
+			'repository_url'     => 'http://www.example.com'
+	);
 
 		$this->assertEquals(
 			$this->object->createProject('Joomla Platform', 'joomla-platform', 'Project for the Joomla Platform', 'en_GB', $options),
@@ -131,6 +132,36 @@ class ProjectsTest extends \PHPUnit_Framework_TestCase
 			->with('/projects/')
 			->will($this->returnValue($this->response));
 
+		$this->object->createProject('Joomla Platform', 'joomla-platform', 'Project for the Joomla Platform', 'en_GB', array('repository_url' => 'http://www.joomla.org'));
+	}
+
+	/**
+	 * Tests the createProject method - failure
+	 *
+	 * @return  void
+	 *
+	 * @expectedException  \InvalidArgumentException
+	 * @since              1.0
+	 */
+	public function testCreateProjectFailure2()
+	{
+		$options = array(
+			'license' => 'INVALID'
+		);
+
+		$this->object->createProject('Joomla Platform', 'joomla-platform', 'Project for the Joomla Platform', 'en_GB', $options);
+	}
+
+	/**
+	 * Tests the createProject method - failure
+	 *
+	 * @return  void
+	 *
+	 * @expectedException  \InvalidArgumentException
+	 * @since              1.0
+	 */
+	public function testCreateProjectFailure3()
+	{
 		$this->object->createProject('Joomla Platform', 'joomla-platform', 'Project for the Joomla Platform', 'en_GB');
 	}
 
