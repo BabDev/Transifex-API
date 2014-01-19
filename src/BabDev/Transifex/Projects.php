@@ -28,7 +28,7 @@ class Projects extends TransifexObject
 	 * @return  void
 	 *
 	 * @since   1.0
-	 * @throws  \DomainException
+	 * @throws  \UnexpectedValueException
 	 * @throws  \InvalidArgumentException
 	 */
 	public function createProject($name, $slug, $description, $sourceLanguage, array $options = array())
@@ -44,79 +44,21 @@ class Projects extends TransifexObject
 			'source_language_code' => $sourceLanguage
 		);
 
-		// Set the long description if present
-		if (isset($options['long_description']))
+		$customOptions = array(
+			'long_description', 'private', 'homepage', 'feed', 'anyone_submit', 'hidden', 'bug_tracker',
+			'trans_instructions', 'tags', 'maintainers', 'outsource', 'auto_join', 'license', 'fill_up_resources',
+			'repository_url', 'organization'
+		);
+
+		foreach ($customOptions as $option)
 		{
-			$data['long_description'] = $options['long_description'];
+			if (isset($options[$option]))
+			{
+				$data[$option] = $options[$option];
+			}
 		}
 
-		// Flag the repo as private if set
-		if (isset($options['private']))
-		{
-			$data['private'] = $options['private'];
-		}
-
-		// Set the project homepage if set
-		if (isset($options['homepage']))
-		{
-			$data['homepage'] = $options['homepage'];
-		}
-
-		// Set a project feed if present
-		if (isset($options['feed']))
-		{
-			$data['feed'] = $options['feed'];
-		}
-
-		// Flag the repo for open contributions if set
-		if (isset($options['anyone_submit']))
-		{
-			$data['anyone_submit'] = $options['anyone_submit'];
-		}
-
-		// Flag the repo as hidden if set
-		if (isset($options['hidden']))
-		{
-			$data['hidden'] = $options['hidden'];
-		}
-
-		// Set the project's bug tracker if present
-		if (isset($options['bug_tracker']))
-		{
-			$data['bug_tracker'] = $options['bug_tracker'];
-		}
-
-		// Set the project's translation instructions if present
-		if (isset($options['trans_instructions']))
-		{
-			$data['trans_instructions'] = $options['trans_instructions'];
-		}
-
-		// Set the project tags if present
-		if (isset($options['tags']))
-		{
-			$data['tags'] = $options['tags'];
-		}
-
-		// Set the project maintainers if present
-		if (isset($options['maintainers']))
-		{
-			$data['maintainers'] = $options['maintainers'];
-		}
-
-		// Set the outsourced project if present
-		if (isset($options['outsource']))
-		{
-			$data['outsource'] = $options['outsource'];
-		}
-
-		// auto_join flag (TODO: Document)
-		if (isset($options['auto_join']))
-		{
-			$data['auto_join'] = $options['auto_join'];
-		}
-
-		// Set the license if present
+		// Check if the license if "acceptable".
 		if (isset($options['license']))
 		{
 			$accepted = array('proprietary', 'permissive_open_source', 'other_open_source');
@@ -132,18 +74,21 @@ class Projects extends TransifexObject
 					)
 				);
 			}
-
-			$data['license'] = $options['license'];
 		}
 
-		// fill_up_resources (TODO: Document)
-		if (isset($options['fill_up_resources']))
+		// Check mandatory fields.
+		if (false == isset($data['license'])
+			|| in_array($data['license'], array('permissive_open_source', 'other_open_source')))
 		{
-			$data['fill_up_resources'] = $options['fill_up_resources'];
+			throw new \InvalidArgumentException(
+				'If a project is denoted either as permissive_open_source or other_open_source, '
+				. 'the field repository_url is mandatory and should contain a link to the public repository '
+				. 'of the project to be created.'
+			);
 		}
 
 		// Send the request.
-		return $this->processResponse(
+		$this->processResponse(
 			$this->client->post($this->fetchUrl($path), json_encode($data), array('Content-Type' => 'application/json')),
 			201
 		);
