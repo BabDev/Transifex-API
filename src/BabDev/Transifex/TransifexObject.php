@@ -98,6 +98,10 @@ abstract class TransifexObject
 			{
 				$message = $error->message;
 			}
+			elseif ($response->body)
+			{
+				$message = $response->body;
+			}
 			else
 			{
 				$message = 'No error message was returned from the server.';
