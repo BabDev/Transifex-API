@@ -25,7 +25,7 @@ class Projects extends TransifexObject
 	 * @param   string  $sourceLanguage  The source language code for the project
 	 * @param   array   $options         Optional additional params to send with the request
 	 *
-	 * @return  void
+	 * @return  \stdClass
 	 *
 	 * @since   1.0
 	 * @throws  \UnexpectedValueException
@@ -80,15 +80,18 @@ class Projects extends TransifexObject
 		if (false == isset($data['license'])
 			|| in_array($data['license'], array('permissive_open_source', 'other_open_source')))
 		{
-			throw new \InvalidArgumentException(
-				'If a project is denoted either as permissive_open_source or other_open_source, '
-				. 'the field repository_url is mandatory and should contain a link to the public repository '
-				. 'of the project to be created.'
-			);
+			if (false == isset($data['repository_url']))
+			{
+				throw new \InvalidArgumentException(
+					'If a project is denoted either as permissive_open_source or other_open_source, '
+					. 'the field repository_url is mandatory and should contain a link to the public repository '
+					. 'of the project to be created.'
+				);
+			}
 		}
 
 		// Send the request.
-		$this->processResponse(
+		return $this->processResponse(
 			$this->client->post($this->fetchUrl($path), json_encode($data), array('Content-Type' => 'application/json')),
 			201
 		);
