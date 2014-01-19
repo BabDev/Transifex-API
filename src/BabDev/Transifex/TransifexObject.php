@@ -80,7 +80,7 @@ abstract class TransifexObject
 	 * @param   Response  $response      The response.
 	 * @param   integer   $expectedCode  The expected "good" code.
 	 *
-	 * @return  mixed
+	 * @return  \stdClass
 	 *
 	 * @since   1.0
 	 * @throws  \DomainException
