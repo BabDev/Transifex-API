@@ -3,20 +3,20 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "ba212626d24d921250485f8573e111fb",
+    "hash": "6e116ca36d34f68bb6417812485630bf",
     "packages": [
         {
             "name": "joomla/compat",
-            "version": "1.0",
+            "version": "1.1.0",
             "target-dir": "Joomla/Compat",
             "source": {
                 "type": "git",
-                "url": "https://github.com/joomla/joomla-framework-compat.git",
+                "url": "https://github.com/joomla-framework/compat.git",
                 "reference": "c59ff64cb3ee068c22aedfaab8fe4888f63376d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/joomla/joomla-framework-compat/zipball/c59ff64cb3ee068c22aedfaab8fe4888f63376d3",
+                "url": "https://api.github.com/repos/joomla-framework/compat/zipball/c59ff64cb3ee068c22aedfaab8fe4888f63376d3",
                 "reference": "c59ff64cb3ee068c22aedfaab8fe4888f63376d3",
                 "shasum": ""
             },
@@ -44,17 +44,17 @@
         },
         {
             "name": "joomla/registry",
-            "version": "1.0",
+            "version": "1.1.0",
             "target-dir": "Joomla/Registry",
             "source": {
                 "type": "git",
-                "url": "https://github.com/joomla/joomla-framework-registry.git",
-                "reference": "ab7033dc000a8326bfa38ca31deaf20441eb8b7d"
+                "url": "https://github.com/joomla-framework/registry.git",
+                "reference": "16d1daa8630d45716d5843845afd4c3250c128fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/joomla/joomla-framework-registry/zipball/ab7033dc000a8326bfa38ca31deaf20441eb8b7d",
-                "reference": "ab7033dc000a8326bfa38ca31deaf20441eb8b7d",
+                "url": "https://api.github.com/repos/joomla-framework/registry/zipball/16d1daa8630d45716d5843845afd4c3250c128fa",
+                "reference": "16d1daa8630d45716d5843845afd4c3250c128fa",
                 "shasum": ""
             },
             "require": {
@@ -86,20 +86,20 @@
                 "joomla",
                 "registry"
             ],
-            "time": "2013-11-28 18:06:46"
+            "time": "2014-02-08 18:02:55"
         },
         {
             "name": "joomla/string",
-            "version": "1.0",
+            "version": "1.1.0",
             "target-dir": "Joomla/String",
             "source": {
                 "type": "git",
-                "url": "https://github.com/joomla/joomla-framework-string.git",
+                "url": "https://github.com/joomla-framework/string.git",
                 "reference": "bdd72a46e68ba18f892f6fb119d5bd7aeb2abc02"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/joomla/joomla-framework-string/zipball/bdd72a46e68ba18f892f6fb119d5bd7aeb2abc02",
+                "url": "https://api.github.com/repos/joomla-framework/string/zipball/bdd72a46e68ba18f892f6fb119d5bd7aeb2abc02",
                 "reference": "bdd72a46e68ba18f892f6fb119d5bd7aeb2abc02",
                 "shasum": ""
             },
@@ -127,16 +127,16 @@
         },
         {
             "name": "joomla/uri",
-            "version": "1.0",
+            "version": "1.1.0",
             "target-dir": "Joomla/Uri",
             "source": {
                 "type": "git",
-                "url": "https://github.com/joomla/joomla-framework-uri.git",
+                "url": "https://github.com/joomla-framework/uri.git",
                 "reference": "14df710f733c2a1d3ca9048f389cc84da89434b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/joomla/joomla-framework-uri/zipball/14df710f733c2a1d3ca9048f389cc84da89434b9",
+                "url": "https://api.github.com/repos/joomla-framework/uri/zipball/14df710f733c2a1d3ca9048f389cc84da89434b9",
                 "reference": "14df710f733c2a1d3ca9048f389cc84da89434b9",
                 "shasum": ""
             },
@@ -164,17 +164,17 @@
         },
         {
             "name": "joomla/utilities",
-            "version": "1.0",
+            "version": "1.1.0",
             "target-dir": "Joomla/Utilities",
             "source": {
                 "type": "git",
-                "url": "https://github.com/joomla/joomla-framework-utilities.git",
-                "reference": "86400d419dc4368c15edcec5825f2dfa063ec528"
+                "url": "https://github.com/joomla-framework/utilities.git",
+                "reference": "572036c296f179de7b5603f81b176ce49dcfe3e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/joomla/joomla-framework-utilities/zipball/86400d419dc4368c15edcec5825f2dfa063ec528",
-                "reference": "86400d419dc4368c15edcec5825f2dfa063ec528",
+                "url": "https://api.github.com/repos/joomla-framework/utilities/zipball/572036c296f179de7b5603f81b176ce49dcfe3e4",
+                "reference": "572036c296f179de7b5603f81b176ce49dcfe3e4",
                 "shasum": ""
             },
             "require": {
@@ -198,7 +198,7 @@
                 "joomla",
                 "utilities"
             ],
-            "time": "2013-10-23 14:00:52"
+            "time": "2013-11-22 14:41:58"
         }
     ],
     "packages-dev": [
