@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit bootstrap="src/BabDev/Tests/bootstrap.php" colors="true">
+<phpunit bootstrap="vendor/autoload.php" colors="true">
 	<php>
-		<const name="BDTEST_HTTP_STUB" value="http://virtualhost.local/src/BabDev/Tests/Http/stubs/http_stub.php" />
+		<const name="BDTEST_HTTP_STUB" value="http://virtualhost.local/tests/Http/stubs/http_stub.php" />
+		<const name="JPATH_ROOT" value="__DIR__" />
 	</php>
 
 	<testsuites>
 		<testsuite name="Unit">
-			<directory>src/BabDev/Tests</directory>
+			<directory>tests</directory>
 		</testsuite>
 	</testsuites>
 
@@ -16,9 +17,6 @@
 	<filter>
 		<whitelist addUncoveredFilesFromWhitelist="true">
 			<directory suffix=".php">src/BabDev</directory>
-			<exclude>
-				<directory suffix=".php">src/BabDev/Tests</directory>
-			</exclude>
 		</whitelist>
 	</filter>
 </phpunit>

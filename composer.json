@@ -17,8 +17,9 @@
         "joomla/uri": "1.*@stable"
     },
     "autoload": {
-        "psr-0": {
-            "BabDev": "src/"
+        "psr-4": {
+            "BabDev\\": "src/",
+            "BabDev\\Tests\\": "tests/"
         }
     }
 }

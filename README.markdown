@@ -5,7 +5,7 @@ The *BabDev Library* is an collection of classes for general use in PHP based ap
 
 Using the Library
 ------------
-The namespaced version of the library is PSR-0 compliant and can be included in your projects using Composer.  Installation instructions can be [found below](#installation-via-git).
+The namespaced version of the library is PSR-4 compliant and can be included in your projects using Composer.  Installation instructions can be [found below](#installation-via-git).
 
 The library can be autoloaded in the Joomla CMS starting in version 3.2 with the following code:
 

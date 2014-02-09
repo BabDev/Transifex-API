@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit bootstrap="src/BabDev/Tests/bootstrap.php" colors="false">
-	<!-- These constants help setup environment configurations for running optional tests.
+<phpunit bootstrap="vendor/autoload.php" colors="false">
+	<!-- These constants help setup environment configurations for running optional tests. -->
 	<php>
-		<const name="BDTEST_HTTP_STUB" value="http://localhost/BabDev-Libraries/src/BabDev/Tests/Http/stubs/http_stub.php" />
+		<!-- <const name="BDTEST_HTTP_STUB" value="http://localhost/BabDev-Libraries/tests/Http/stubs/http_stub.php" /> -->
+		<const name="JPATH_ROOT" value="__DIR__" />
 	</php>
-	-->
 
 	<testsuites>
 		<testsuite name="Unit">
-			<directory>src/BabDev/Tests</directory>
+			<directory>tests</directory>
 		</testsuite>
 	</testsuites>
 
 	<logging>
-		<log type="coverage-html" target="build/coverage" title="BabDev-Libraries" charset="UTF-8" yui="true" highlight="true"
+		<log type="coverage-html" target="build/coverage" title="BabDev-Library" charset="UTF-8" yui="true" highlight="true"
 			lowUpperBound="35" highLowerBound="70" />
 		<log type="coverage-clover" target="build/logs/clover.xml" />
 		<log type="junit" target="build/logs/junit.xml" logIncompleteSkipped="false" />
@@ -21,9 +21,6 @@
 	<filter>
 		<whitelist addUncoveredFilesFromWhitelist="true">
 			<directory suffix=".php">src/BabDev</directory>
-			<exclude>
-				<directory suffix=".php">src/BabDev/Tests</directory>
-			</exclude>
 		</whitelist>
 	</filter>
 </phpunit>
