@@ -8,5 +8,4 @@ build.xml export-ignore
 phpunit.travis.xml export-ignore
 phpunit.xml export-ignore
 phpunit.xml.dist export-ignore
-src/BabDev/Tests export-ignore
 tests/ export-ignore
