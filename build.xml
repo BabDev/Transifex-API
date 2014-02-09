@@ -32,8 +32,7 @@
 		<phpcodesniffer
 			standard="${repo.dir}/build/phpcs/Joomla/ruleset.xml"
 			format="full"
-			ignorePatterns="${repo.dir}/src/BabDev/Tests"
-			file="${repo.dir}/src/BabDev"
+			file="${repo.dir}/src"
 			allowedFileExtensions="php">
 			<formatter type="full" outfile="${repo.dir}/build/logs/codesniff.txt" />
 			<formatter type="checkstyle" outfile="${repo.dir}/build/logs/checkstyle.xml" />
@@ -48,8 +47,7 @@
 			<arg line="--extensions=php" />
 			<arg line="--report=full" />
 			<arg line="--standard=${basedir}/build/phpcs/Joomla/ruleset.xml" />
-			<arg line="--ignore=${basedir}/src/BabDev/Tests" />
-			<arg line="${repo.dir}/src/BabDev" />
+			<arg line="${repo.dir}/src" />
 		</exec>
 	</target>
 
@@ -63,9 +61,8 @@
 	<target name="phpdoc" description="Generate API documentation using PHPDocumentor">
 		<echo msg="Running PHPDocumentor" />
 		<phpdoc2 title="BabDev Libraries Documentation" destdir="${repo.dir}/build/docs" template="clean">
-			<fileset dir="${repo.dir}/src/BabDev">
+			<fileset dir="${repo.dir}/src">
 				<include name="**/*.php" />
-				<exclude name="Tests/" />
 			</fileset>
 		</phpdoc2>
 	</target>
