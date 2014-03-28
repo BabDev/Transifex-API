@@ -8,8 +8,6 @@ namespace BabDev\Tests\Http;
 
 use BabDev\Http\HttpFactory;
 
-use Joomla\Registry\Registry;
-
 /**
  * Test class for \BabDev\Http\HttpFactory.
  *
@@ -42,12 +40,12 @@ class HttpFactoryTest extends \PHPUnit_Framework_TestCase
 	public function testGetAvailableDriver()
 	{
 		$this->assertFalse(
-			HttpFactory::getAvailableDriver(new Registry, array()),
+			HttpFactory::getAvailableDriver(array(), array()),
 			'Passing an empty array should return false due to there being no adapters to test'
 		);
 
 		$this->assertFalse(
-			HttpFactory::getAvailableDriver(new Registry, array('fopen')),
+			HttpFactory::getAvailableDriver(array(), array('fopen')),
 			'A false should be returned if a class is not present or supported'
 		);
 	}

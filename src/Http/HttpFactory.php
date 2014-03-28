@@ -11,8 +11,6 @@
 
 namespace BabDev\Http;
 
-use Joomla\Registry\Registry;
-
 /**
  * HTTP factory class.
  *
@@ -23,34 +21,29 @@ class HttpFactory
 	/**
 	 * Method to retrieve a Http instance.
 	 *
-	 * @param   Registry  $options   Client options object.
-	 * @param   mixed     $adapters  Adapter (string) or queue of adapters (array) to use for communication.
+	 * @param   array  $options   Client options array.
+	 * @param   mixed  $adapters  Adapter (string) or queue of adapters (array) to use for communication.
 	 *
 	 * @return  Http  Http class
 	 *
 	 * @since   1.0
 	 */
-	public static function getHttp(Registry $options = null, $adapters = null)
+	public static function getHttp($options = array(), $adapters = null)
 	{
-		if (empty($options))
-		{
-			$options = new Registry;
-		}
-
 		return new Http($options, static::getAvailableDriver($options, $adapters));
 	}
 
 	/**
 	 * Finds an available HTTP transport object for communication
 	 *
-	 * @param   Registry  $options  Option for creating http transport object
-	 * @param   mixed     $default  Adapter (string) or queue of adapters (array) to use
+	 * @param   array  $options  Options array to inject into the TransportInterface
+	 * @param   mixed  $default  Adapter (string) or queue of adapters (array) to use
 	 *
 	 * @return  TransportInterface  Transport object
 	 *
 	 * @since   1.0
 	 */
-	public static function getAvailableDriver(Registry $options, $default = null)
+	public static function getAvailableDriver($options, $default = null)
 	{
 		if (is_null($default))
 		{

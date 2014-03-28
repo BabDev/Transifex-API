@@ -10,8 +10,6 @@ namespace BabDev\Transifex;
 
 use BabDev\Http\HttpFactory;
 
-use Joomla\Registry\Registry;
-
 /**
  * Base class for interacting with the Transifex API.
  *
@@ -32,7 +30,7 @@ class Transifex
 	/**
 	 * Options for the Transifex object.
 	 *
-	 * @var    Registry
+	 * @var    array
 	 * @since  1.0
 	 */
 	protected $options;
@@ -120,17 +118,20 @@ class Transifex
 	/**
 	 * Constructor.
 	 *
-	 * @param   Registry  $options  Transifex options object.
-	 * @param   Http      $client   The HTTP client object.
+	 * @param   array  $options  Transifex options array.
+	 * @param   Http   $client   The HTTP client object.
 	 *
 	 * @since   1.0
 	 */
-	public function __construct(Registry $options = null, Http $client = null)
+	public function __construct($options = array(), Http $client = null)
 	{
-		$this->options = isset($options) ? $options : new Registry;
+		$this->options = $options;
 
 		// Set the authentication type if not already set.
-		$this->options->def('api.authentication', 'HTTP');
+		if (!$this->getOption('api.authentication'))
+		{
+			$this->setOption('api.authentication', 'HTTP');
+		}
 
 		// Set the transport object for the HTTP object
 		$transport = HttpFactory::getAvailableDriver($this->options, array('curl'));
@@ -138,7 +139,10 @@ class Transifex
 		$this->client = isset($client) ? $client : new Http($this->options, $transport);
 
 		// Setup the default API url if not already set.
-		$this->options->def('api.url', 'https://www.transifex.com/api/2');
+		if (!$this->getOption('api.url'))
+		{
+			$this->setOption('api.url', 'https://www.transifex.com/api/2');
+		}
 	}
 
 	/**
@@ -179,7 +183,7 @@ class Transifex
 	 */
 	public function getOption($key)
 	{
-		return $this->options->get($key);
+		return isset($this->options[$key]) ? $this->options[$key] : null;
 	}
 
 	/**
@@ -194,7 +198,7 @@ class Transifex
 	 */
 	public function setOption($key, $value)
 	{
-		$this->options->set($key, $value);
+		$this->options[$key] = $value;
 
 		return $this;
 	}

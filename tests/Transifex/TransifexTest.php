@@ -9,7 +9,7 @@ namespace BabDev\Tests\Transifex;
 use BabDev\Transifex\Http;
 use BabDev\Transifex\Transifex;
 
-use Joomla\Registry\Registry;
+use Joomla\Test\TestHelper;
 
 /**
  * Test class for \BabDev\Transifex\Transifex.
@@ -19,7 +19,7 @@ use Joomla\Registry\Registry;
 class TransifexTest extends \PHPUnit_Framework_TestCase
 {
 	/**
-	 * @var    Registry  Options for the Transifex object.
+	 * @var    array  Options for the Transifex object.
 	 * @since  1.0
 	 */
 	protected $options;
@@ -46,7 +46,7 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->options = new Registry;
+		$this->options = array();
 		$this->client = $this->getMock('\\BabDev\\Transifex\\Http', array('get', 'post', 'delete', 'put', 'patch'));
 
 		$this->object = new Transifex($this->options, $this->client);
@@ -211,8 +211,10 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->object->setOption('api.url', 'https://example.com/settest');
 
+		$value = TestHelper::getValue($this->object, 'options');
+
 		$this->assertEquals(
-			$this->options->get('api.url'),
+			$value['api.url'],
 			'https://example.com/settest'
 		);
 	}
@@ -226,10 +228,14 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testGetOption()
 	{
-		$this->options->set('api.url', 'https://example.com/gettest');
+		TestHelper::setValue(
+			$this->object, 'options', array(
+				'api.url' => 'https://example.com/gettest'
+			)
+		);
 
 		$this->assertEquals(
-			$this->object->getOption('api.url', 'https://example.com/gettest'),
+			$this->object->getOption('api.url'),
 			'https://example.com/gettest'
 		);
 	}

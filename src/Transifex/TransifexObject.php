@@ -11,7 +11,6 @@ namespace BabDev\Transifex;
 use BabDev\Http\HttpFactory;
 use BabDev\Http\Response;
 
-use Joomla\Registry\Registry;
 use Joomla\Uri\Uri;
 
 /**
@@ -24,7 +23,7 @@ abstract class TransifexObject
 	/**
 	 * Options for the Transifex object.
 	 *
-	 * @var    Registry
+	 * @var    array
 	 * @since  1.0
 	 */
 	protected $options;
@@ -40,14 +39,14 @@ abstract class TransifexObject
 	/**
 	 * Constructor.
 	 *
-	 * @param   Registry  $options  Transifex options object.
-	 * @param   Http      $client   The HTTP client object.
+	 * @param   array  $options  Transifex options array.
+	 * @param   Http   $client   The HTTP client object.
 	 *
 	 * @since   1.0
 	 */
-	public function __construct(Registry $options = null, Http $client = null)
+	public function __construct($options = array(), Http $client = null)
 	{
-		$this->options = isset($options) ? $options : new Registry;
+		$this->options = $options;
 
 		// Set the transport object for the HTTP object
 		$transport = HttpFactory::getAvailableDriver($this->options, array('curl'));
@@ -68,8 +67,18 @@ abstract class TransifexObject
 	 */
 	protected function fetchUrl($path)
 	{
-		// Get a new Uri object fousing the api url and given path.
-		$uri = new Uri($this->options->get('api.url') . $path);
+		// Ensure the API URL is set before moving on
+		if (!isset($this->options['api.url']))
+		{
+			$base = '';
+		}
+		else
+		{
+			$base = $this->options['api.url'];
+		}
+
+		// Get a new Uri object using the API URL and given path.
+		$uri = new Uri($base . $path);
 
 		return (string) $uri;
 	}

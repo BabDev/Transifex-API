@@ -3,131 +3,8 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "6619b966dde17ecf64f5c1fab6ba7e2c",
+    "hash": "837b200ad45b370ca6ce8ea9ab1b60af",
     "packages": [
-        {
-            "name": "joomla/compat",
-            "version": "1.1.0",
-            "target-dir": "Joomla/Compat",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/joomla-framework/compat.git",
-                "reference": "c59ff64cb3ee068c22aedfaab8fe4888f63376d3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/joomla-framework/compat/zipball/c59ff64cb3ee068c22aedfaab8fe4888f63376d3",
-                "reference": "c59ff64cb3ee068c22aedfaab8fe4888f63376d3",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.10"
-            },
-            "type": "joomla-package",
-            "autoload": {
-                "classmap": [
-                    "JsonSerializable.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "description": "Joomla Compat Package",
-            "homepage": "https://github.com/joomla/joomla-framework-compat",
-            "keywords": [
-                "compat",
-                "framework",
-                "joomla"
-            ],
-            "time": "2013-05-15 03:30:25"
-        },
-        {
-            "name": "joomla/registry",
-            "version": "1.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/joomla-framework/registry.git",
-                "reference": "d4526f2fb6295fbd3c688fa817e72a1821d7c0e4"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/joomla-framework/registry/zipball/d4526f2fb6295fbd3c688fa817e72a1821d7c0e4",
-                "reference": "d4526f2fb6295fbd3c688fa817e72a1821d7c0e4",
-                "shasum": ""
-            },
-            "require": {
-                "joomla/compat": "~1.0",
-                "joomla/utilities": "~1.0",
-                "php": ">=5.3.10"
-            },
-            "require-dev": {
-                "joomla/test": "~1.0",
-                "symfony/yaml": "~2.0"
-            },
-            "suggest": {
-                "symfony/yaml": "Install 2.* if you require YAML support."
-            },
-            "type": "joomla-package",
-            "autoload": {
-                "psr-4": {
-                    "Joomla\\Registry\\": "src/",
-                    "Joomla\\Registry\\Tests\\": "Tests/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "description": "Joomla Registry Package",
-            "homepage": "https://github.com/joomla-framework/registry",
-            "keywords": [
-                "framework",
-                "joomla",
-                "registry"
-            ],
-            "time": "2014-02-09 07:19:55"
-        },
-        {
-            "name": "joomla/string",
-            "version": "1.1.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/joomla-framework/string.git",
-                "reference": "bd2b2c9bbb6846680cbeb955c90288587d56df2a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/joomla-framework/string/zipball/bd2b2c9bbb6846680cbeb955c90288587d56df2a",
-                "reference": "bd2b2c9bbb6846680cbeb955c90288587d56df2a",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.10"
-            },
-            "require-dev": {
-                "joomla/test": "~1.0"
-            },
-            "type": "joomla-package",
-            "autoload": {
-                "psr-4": {
-                    "Joomla\\String\\": "src/",
-                    "Joomla\\String\\Tests\\": "Tests/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-2.0+"
-            ],
-            "description": "Joomla String Package",
-            "homepage": "https://github.com/joomla-framework/string",
-            "keywords": [
-                "framework",
-                "joomla",
-                "string"
-            ],
-            "time": "2014-02-09 02:48:39"
-        },
         {
             "name": "joomla/uri",
             "version": "1.1.1",
@@ -164,57 +41,135 @@
                 "uri"
             ],
             "time": "2014-02-09 02:57:17"
-        },
+        }
+    ],
+    "packages-dev": [
         {
-            "name": "joomla/utilities",
+            "name": "joomla/database",
             "version": "1.1.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/joomla-framework/utilities.git",
-                "reference": "de31259372d049f2a3fabe7b1c412cece134ca31"
+                "url": "https://github.com/joomla-framework/database.git",
+                "reference": "83dab527294179617bedb37f6b7ee7a4bf99cf96"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/joomla-framework/utilities/zipball/de31259372d049f2a3fabe7b1c412cece134ca31",
-                "reference": "de31259372d049f2a3fabe7b1c412cece134ca31",
+                "url": "https://api.github.com/repos/joomla-framework/database/zipball/83dab527294179617bedb37f6b7ee7a4bf99cf96",
+                "reference": "83dab527294179617bedb37f6b7ee7a4bf99cf96",
                 "shasum": ""
             },
             "require": {
-                "joomla/string": "~1.0",
-                "php": ">=5.3.10"
+                "php": ">=5.3.10",
+                "psr/log": "~1.0"
+            },
+            "require-dev": {
+                "joomla/test": "~1.0"
             },
             "type": "joomla-package",
             "autoload": {
                 "psr-4": {
-                    "Joomla\\Utilities\\": "src/",
-                    "Joomla\\Utilities\\Tests\\": "Tests/"
+                    "Joomla\\Database\\": "src/",
+                    "Joomla\\Database\\Tests\\": "Tests/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "GPL-2.0+"
             ],
-            "description": "Joomla Utilities Package",
-            "homepage": "https://github.com/joomla-framework/utilities",
+            "description": "Joomla Database Package",
+            "homepage": "https://github.com/joomla-framework/database",
+            "keywords": [
+                "database",
+                "framework",
+                "joomla"
+            ],
+            "time": "2014-02-09 01:18:10"
+        },
+        {
+            "name": "joomla/test",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/joomla-framework/test.git",
+                "reference": "cb8f3966c1cbaf85483ceabcce45259a2c72555a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/joomla-framework/test/zipball/cb8f3966c1cbaf85483ceabcce45259a2c72555a",
+                "reference": "cb8f3966c1cbaf85483ceabcce45259a2c72555a",
+                "shasum": ""
+            },
+            "require": {
+                "joomla/database": "~1.0",
+                "php": ">=5.3.10"
+            },
+            "type": "joomla-package",
+            "autoload": {
+                "psr-4": {
+                    "Joomla\\Test\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "description": "Joomla Test Helper Package",
+            "homepage": "https://github.com/joomla-framework/test",
             "keywords": [
                 "framework",
                 "joomla",
-                "utilities"
+                "phpunit",
+                "reflection",
+                "unit test"
             ],
-            "time": "2014-02-09 02:57:39"
+            "time": "2014-02-09 20:16:51"
+        },
+        {
+            "name": "psr/log",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/log.git",
+                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/fe0936ee26643249e916849d48e3a51d5f5e278b",
+                "reference": "fe0936ee26643249e916849d48e3a51d5f5e278b",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Psr\\Log\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for logging libraries",
+            "keywords": [
+                "log",
+                "psr",
+                "psr-3"
+            ],
+            "time": "2012-12-21 11:40:51"
         }
-    ],
-    "packages-dev": [
-
     ],
     "aliases": [
 
     ],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "joomla/registry": 0,
-        "joomla/uri": 0
-    },
+    "stability-flags": [
+
+    ],
     "platform": {
         "php": ">=5.3.10"
     },

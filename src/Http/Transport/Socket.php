@@ -14,7 +14,6 @@ namespace BabDev\Http\Transport;
 use BabDev\Http\Response;
 use BabDev\Http\TransportInterface;
 
-use Joomla\Registry\Registry;
 use Joomla\Uri\UriInterface;
 
 /**
@@ -35,7 +34,7 @@ class Socket implements TransportInterface
 	/**
 	 * The client options.
 	 *
-	 * @var    Registry
+	 * @var    array
 	 * @since  1.0
 	 */
 	protected $options;
@@ -43,12 +42,12 @@ class Socket implements TransportInterface
 	/**
 	 * Constructor.
 	 *
-	 * @param   Registry  $options  Client options object.
+	 * @param   array  $options  Client options array.
 	 *
 	 * @since   1.0
 	 * @throws  \RuntimeException
 	 */
-	public function __construct(Registry $options)
+	public function __construct($options)
 	{
 		if (!static::isSupported())
 		{

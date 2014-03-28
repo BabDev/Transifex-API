@@ -6,7 +6,6 @@
 
 namespace BabDev\Tests\Http;
 
-use Joomla\Registry\Registry;
 use Joomla\Uri\Uri;
 
 /**
@@ -17,7 +16,7 @@ use Joomla\Uri\Uri;
 class TransportTest extends \PHPUnit_Framework_TestCase
 {
 	/**
-	 * @var    Registry  Options for the BDHttpTransport object.
+	 * @var    array  Options for the BDHttpTransport object.
 	 * @since  1.0
 	 */
 	protected $options;
@@ -38,7 +37,7 @@ class TransportTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->options = $this->getMock('\\Joomla\\Registry\\Registry', array('get', 'set'));
+		$this->options = array();
 
 		if (!defined('BDTEST_HTTP_STUB') && getenv('BDTEST_HTTP_STUB') == '')
 		{

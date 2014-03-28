@@ -10,8 +10,6 @@ use BabDev\Http\Response;
 use BabDev\Transifex\Http;
 use BabDev\Transifex\Translations;
 
-use Joomla\Registry\Registry;
-
 /**
  * Test class for \BabDev\Transifex\Translations.
  *
@@ -20,7 +18,7 @@ use Joomla\Registry\Registry;
 class TranslationsTest extends \PHPUnit_Framework_TestCase
 {
 	/**
-	 * @var    Registry  Options for the GitHub object.
+	 * @var    array  Options for the GitHub object.
 	 * @since  1.0
 	 */
 	protected $options;
@@ -65,7 +63,7 @@ class TranslationsTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->options = new Registry;
+		$this->options = array();
 		$this->client = $this->getMock('\\BabDev\\Transifex\\Http', array('get', 'post', 'delete', 'put', 'patch'));
 		$this->response = $this->getMock('\\BabDev\\Http\\Response');
 

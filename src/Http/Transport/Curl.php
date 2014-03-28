@@ -14,7 +14,6 @@ namespace BabDev\Http\Transport;
 use BabDev\Http\Response;
 use BabDev\Http\TransportInterface;
 
-use Joomla\Registry\Registry;
 use Joomla\Uri\UriInterface;
 
 /**
@@ -27,7 +26,7 @@ class Curl implements TransportInterface
 	/**
 	 * The client options.
 	 *
-	 * @var    Registry
+	 * @var    array
 	 * @since  1.0
 	 */
 	protected $options;
@@ -35,13 +34,13 @@ class Curl implements TransportInterface
 	/**
 	 * Constructor. CURLOPT_FOLLOWLOCATION must be disabled when open_basedir or safe_mode are enabled.
 	 *
-	 * @param   Registry  $options  Client options object.
+	 * @param   array  $options  Client options array.
 	 *
 	 * @see     http://www.php.net/manual/en/function.curl-setopt.php
 	 * @since   1.0
 	 * @throws  \RuntimeException
 	 */
-	public function __construct(Registry $options)
+	public function __construct($options)
 	{
 		if (!static::isSupported())
 		{
@@ -78,7 +77,7 @@ class Curl implements TransportInterface
 		$options[CURLOPT_NOBODY] = ($method === 'HEAD');
 
 		// Initialize the certificate store
-		$options[CURLOPT_CAINFO] = $this->options->get('curl.certpath', __DIR__ . '/cacert.pem');
+		$options[CURLOPT_CAINFO] = isset($this->options['curl.certpath']) ? $this->options['curl.certpath'] : __DIR__ . '/cacert.pem';
 
 		// If data exists let's encode it and make sure our Content-type header is set.
 		if (isset($data))
@@ -134,12 +133,12 @@ class Curl implements TransportInterface
 		}
 
 		// Check if we're using HTTP Authentication.  If so, check if we have authentication credentials
-		if ($this->options->get('api.authentication') == 'HTTP')
+		if (isset($this->options['api.authentication']) && $this->options['api.authentication'] == 'HTTP')
 		{
-			if ($this->options->get('api.username', false) && $this->options->get('api.password', false))
+			if (isset($this->options['api.username']) && isset($this->options['api.password']))
 			{
 				$options[CURLOPT_HTTPAUTH] = CURLAUTH_ANY;
-				$options[CURLOPT_USERPWD] = $this->options->get('api.username') . ':' . $this->options->get('api.password');
+				$options[CURLOPT_USERPWD] = $this->options['api.username'] . ':' . $this->options['api.password'];
 
 				// We need to set this so we can forward the authentication on redirects
 				$options[CURLOPT_UNRESTRICTED_AUTH] = true;
@@ -165,7 +164,7 @@ class Curl implements TransportInterface
 		 */
 		if (!ini_get('safe_mode') && !ini_get('open_basedir'))
 		{
-			$options[CURLOPT_FOLLOWLOCATION] = (bool) $this->options->get('follow_location', true);
+			$options[CURLOPT_FOLLOWLOCATION] = (bool) (isset($this->options['follow_location']) ? $this->options['follow_location'] : true);
 		}
 
 		// Set the cURL options.

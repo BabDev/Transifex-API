@@ -11,7 +11,6 @@
 
 namespace BabDev\Http;
 
-use Joomla\Registry\Registry;
 use Joomla\Uri\Uri;
 
 /**
@@ -24,7 +23,7 @@ class Http
 	/**
 	 * Options for the HTTP client.
 	 *
-	 * @var    Registry
+	 * @var    array
 	 * @since  1.0
 	 */
 	protected $options;
@@ -40,15 +39,15 @@ class Http
 	/**
 	 * Constructor.
 	 *
-	 * @param   Registry            $options    Client options object. If the registry contains any headers.* elements,
+	 * @param   array               $options    Client options object. If the array contains any headers.* elements,
 	 *                                          these will be added to the request headers.
 	 * @param   TransportInterface  $transport  The HTTP transport object.
 	 *
 	 * @since   1.0
 	 */
-	public function __construct(Registry $options = null, TransportInterface $transport = null)
+	public function __construct($options = array(), TransportInterface $transport = null)
 	{
-		$this->options   = isset($options) ? $options : new Registry;
+		$this->options   = $options;
 		$this->transport = isset($transport) ? $transport : HttpFactory::getAvailableDriver($this->options);
 	}
 
@@ -63,7 +62,7 @@ class Http
 	 */
 	public function getOption($key)
 	{
-		return $this->options->get($key);
+		return isset($this->options[$key]) ? $this->options[$key] : null;
 	}
 
 	/**
@@ -78,7 +77,7 @@ class Http
 	 */
 	public function setOption($key, $value)
 	{
-		$this->options->set($key, $value);
+		$this->options[$key] = $value;
 
 		return $this;
 	}

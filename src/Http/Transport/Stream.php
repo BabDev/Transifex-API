@@ -14,7 +14,6 @@ namespace BabDev\Http\Transport;
 use BabDev\Http\Response;
 use BabDev\Http\TransportInterface;
 
-use Joomla\Registry\Registry;
 use Joomla\Uri\UriInterface;
 
 /**
@@ -25,9 +24,9 @@ use Joomla\Uri\UriInterface;
 class Stream implements TransportInterface
 {
 	/**
-	 * The client options.
+	 * The client array.
 	 *
-	 * @var    Registry
+	 * @var    array
 	 * @since  1.0
 	 */
 	protected $options;
@@ -35,12 +34,12 @@ class Stream implements TransportInterface
 	/**
 	 * Constructor.
 	 *
-	 * @param   Registry  $options  Client options object.
+	 * @param   array  $options  Client options object.
 	 *
 	 * @since   1.0
 	 * @throws  \RuntimeException
 	 */
-	public function __construct(Registry $options)
+	public function __construct($options)
 	{
 		// Verify that fopen() is available.
 		if (!static::isSupported())
@@ -130,7 +129,7 @@ class Stream implements TransportInterface
 		$options['ignore_errors'] = 1;
 
 		// Follow redirects.
-		$options['follow_location'] = (int) $this->options->get('follow_location', 1);
+		$options['follow_location'] = isset($this->options['follow_location']) ? (int) $this->options['follow_location'] : 1;
 
 		// Create the stream context for the request.
 		$context = stream_context_create(array('http' => $options));

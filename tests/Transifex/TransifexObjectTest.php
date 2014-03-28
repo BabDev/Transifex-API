@@ -8,7 +8,7 @@ namespace BabDev\Tests\Transifex;
 
 use BabDev\Transifex\Http;
 
-use Joomla\Registry\Registry;
+use Joomla\Test\TestHelper;
 
 /**
  * Test class for BDTransifex.
@@ -18,7 +18,7 @@ use Joomla\Registry\Registry;
 class TransifexObjectTest extends \PHPUnit_Framework_TestCase
 {
 	/**
-	 * @var    Registry  Options for the Transifex object.
+	 * @var    array  Options for the Transifex object.
 	 * @since  1.0
 	 */
 	protected $options;
@@ -45,7 +45,7 @@ class TransifexObjectTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->options = new Registry;
+		$this->options = array();
 		$this->client = $this->getMock('\\BabDev\\Transifex\\Http', array('get', 'post', 'delete', 'put', 'patch'));
 
 		$this->object = $this->getMockForAbstractClass('\\BabDev\\Transifex\\TransifexObject', array($this->options, $this->client));
@@ -60,16 +60,15 @@ class TransifexObjectTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testFetchUrlBasicAuth()
 	{
-		$this->options->set('api.url', 'http://www.transifex.com/api/2');
+		$this->options['api.url'] = 'http://www.transifex.com/api/2';
+		$this->options['api.username'] = 'MyTestUser';
+		$this->options['api.password'] = 'MyTestPass';
 
-		$this->options->set('api.username', 'MyTestUser');
-		$this->options->set('api.password', 'MyTestPass');
+		// Set the options array to the object
+		TestHelper::setValue($this->object, 'options', $this->options);
 
 		// Use Reflection to trigger fetchUrl()
-		$method = new \ReflectionMethod($this->object, 'fetchUrl');
-		$method->setAccessible(true);
-
-		$result = $method->invokeArgs($this->object, array('/formats'));
+		$result = TestHelper::invoke($this->object, 'fetchUrl', '/formats');
 
 		$this->assertEquals(
 			$result,

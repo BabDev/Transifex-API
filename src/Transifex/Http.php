@@ -11,8 +11,6 @@ namespace BabDev\Transifex;
 use BabDev\Http\Http as BaseHttp;
 use BabDev\Http\TransportInterface;
 
-use Joomla\Registry\Registry;
-
 /**
  * HTTP client class for connecting to the Transifex API.
  *
@@ -23,20 +21,26 @@ class Http extends BaseHttp
 	/**
 	 * Constructor.
 	 *
-	 * @param   Registry            $options    Client options object.
+	 * @param   array               $options    Client options array.
 	 * @param   TransportInterface  $transport  The HTTP transport object.
 	 *
 	 * @since   1.0
 	 */
-	public function __construct(Registry $options = null, TransportInterface $transport = null)
+	public function __construct($options = array(), TransportInterface $transport = null)
 	{
 		// Call the BaseHttp constructor to setup the object.
 		parent::__construct($options, $transport);
 
 		// Make sure the user agent string is defined.
-		$this->options->def('userAgent', 'BDTransifex/2.0');
+		if (!$this->getOption('userAgent'))
+		{
+			$this->setOption('userAgent', 'BDTransifex/2.0');
+		}
 
 		// Set the default timeout to 120 seconds.
-		$this->options->def('timeout', 120);
+		if (!$this->getOption('timeout'))
+		{
+			$this->setOption('timeout', 120);
+		}
 	}
 }

@@ -9,7 +9,7 @@ namespace BabDev\Tests\Http;
 use BabDev\Http\Http;
 use BabDev\Http\Transport\Curl;
 
-use Joomla\Registry\Registry;
+use Joomla\Test\TestHelper;
 use Joomla\Uri\Uri;
 
 /**
@@ -20,7 +20,7 @@ use Joomla\Uri\Uri;
 class HttpTest extends \PHPUnit_Framework_TestCase
 {
 	/**
-	 * @var    Registry  Options for the BDHttp object.
+	 * @var    array  Options for the BDHttp object.
 	 * @since  1.0
 	 */
 	protected $options;
@@ -48,7 +48,7 @@ class HttpTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		static $classNumber = 1;
-		$this->options = $this->getMock('\\Joomla\\Registry\\Registry', array('get', 'set'));
+		$this->options = array();
 		$this->transport = $this->getMock('\\BabDev\\Http\\Transport\\Curl', array('request'), array($this->options), 'CustomTransport' . $classNumber ++, false);
 
 		$this->object = new Http($this->options, $this->transport);
@@ -63,14 +63,15 @@ class HttpTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testGetOption()
 	{
-		$this->options->expects($this->once())
-			->method('get')
-			->with('testkey')
-			->will($this->returnValue('testResult'));
+		TestHelper::setValue(
+			$this->object, 'options', array(
+				'testKey' => 'testValue'
+			)
+		);
 
-		$this->assertEquals(
-			$this->object->getOption('testkey'),
-			'testResult'
+		$this->assertThat(
+			$this->object->getOption('testKey'),
+			$this->equalTo('testValue')
 		);
 	}
 
@@ -83,13 +84,13 @@ class HttpTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testSetOption()
 	{
-		$this->options->expects($this->once())
-			->method('set')
-			->with('testkey', 'testvalue');
+		$this->object->setOption('testKey', 'testValue');
 
-		$this->assertEquals(
-			$this->object->setOption('testkey', 'testvalue'),
-			$this->object
+		$value = TestHelper::getValue($this->object, 'options');
+
+		$this->assertThat(
+			$value['testKey'],
+			$this->equalTo('testValue')
 		);
 	}
 
