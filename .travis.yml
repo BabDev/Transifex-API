@@ -12,12 +12,8 @@ before_install:
 
 before_script:
   - composer update --dev
-  - pyrus channel-discover pear.phpunit.de
-  - pyrus install --force phpunit/DbUnit
-  - pyrus install -f pear/PHP_CodeSniffer
-  - phpenv rehash
 
 script:
   - ant clean
-  - phpunit --configuration phpunit.travis.xml
+  - ./vendor/phpunit/phpunit/phpunit --configuration phpunit.travis.xml
   - ant travis-phpcs

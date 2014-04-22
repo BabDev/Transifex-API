@@ -41,7 +41,7 @@
 
 	<!-- Check code style on Travis-CI based on Joomla Coding Standards -->
 	<target name="travis-phpcs" description="Generate codestyle report using PHP_CodeSniffer for output on Travis-CI">
-		<exec executable="phpcs">
+		<exec executable="${repo.dir}/vendor/squizlabs/php_codesniffer/scripts/phpcs">
 			<arg line="-p" />
 			<arg line="-w" />
 			<arg line="--extensions=php" />
@@ -54,7 +54,7 @@
 	<!-- Run the PHPUnit suite -->
 	<target name="phpunit" description="Runs the unit tests">
 		<echo msg="Beginning unit testing" />
-		<exec executable="phpunit" />
+		<exec executable="${repo.dir}/vendor/phpunit/phpunit/phpunit" />
 	</target>
 
 	<!-- Create API documentation -->
