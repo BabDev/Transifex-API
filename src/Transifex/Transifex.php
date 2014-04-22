@@ -134,7 +134,7 @@ class Transifex
 		}
 
 		// Set the transport object for the HTTP object
-		$transport = HttpFactory::getAvailableDriver($this->options, array('curl'));
+		$transport = HttpFactory::getAvailableDriver($this->options, array('curl', 'stream'));
 
 		$this->client = isset($client) ? $client : new Http($this->options, $transport);
 

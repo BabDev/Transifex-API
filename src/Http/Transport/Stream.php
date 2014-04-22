@@ -99,6 +99,15 @@ class Stream implements TransportInterface
 			$headers['Content-Length'] = strlen($options['content']);
 		}
 
+		// Check if we're using HTTP Authentication.  If so, check if we have authentication credentials
+		if (isset($this->options['api.authentication']) && $this->options['api.authentication'] == 'HTTP')
+		{
+			if (isset($this->options['api.username']) && isset($this->options['api.password']))
+			{
+				$headers['Authorization'] = 'Basic ' . base64_encode($this->options['api.username'] . ':' . $this->options['api.password']);
+			}
+		}
+
 		// Build the headers string for the request.
 		$headerString = null;
 
