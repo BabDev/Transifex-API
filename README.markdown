@@ -18,14 +18,19 @@ Library Contents
 The *BabDev Library* is composed of the following classes and packages:
 
 - [\BabDev\Helper](/src/BabDev/Helper.php) - A basic helper class providing support methods I've found useful in projects
-- [\BabDev\Http](/src/BabDev/Http) - The `HTTP` package is a fork of the Joomla Platform's HTTP classes and expanded with support as needed to enable the `\BabDev\Transifex` package to work properly
+- [\BabDev\Http](/src/BabDev/Http) - The `HTTP` package is a fork of the Joomla Framework's HTTP classes and expanded with support as needed to enable the `\BabDev\Transifex` package to work properly
 - [\BabDev\Transifex](/src/BabDev/Transifex) - The `Transifex` package is a PHP wrapper implementing the [Transifex API](http://support.transifex.com/customer/portal/topics/440186-api/articles)
 
 Requirements
 ------------
 
-* Joomla Framework [Registry](https://github.com/joomla/joomla-framework-registry) and [URI](https://github.com/joomla/joomla-framework-uri) packages
-* PHP 5.3.10 or later
+* Production
+    * Joomla Framework [URI](https://github.com/joomla-framework/uri) package
+    * PHP 5.3.10 or later
+* Development
+    * Joomla Framework [Test](https://github.com/joomla-framework-test) package
+    * [PHPUnit](http://phpunit.de/)
+    * [PHP_CodeSniffer](http://www.squizlabs.com/php-codesniffer)
 
 
 Installation
@@ -36,7 +41,7 @@ Installation
 Get the source code from GIT:
 
 ```sh
-git clone git://github.com/mbabker/BabDev-Libraries.git
+git clone git://github.com/BabDev/BabDev-Library.git
 ```
 
 ## Installation via Composer
