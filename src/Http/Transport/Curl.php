@@ -70,6 +70,9 @@ class Curl implements TransportInterface
 		// Setup the cURL handle.
 		$ch = curl_init();
 
+		// Initialize our options array
+		$options = array();
+
 		// Set the request method.
 		$options[CURLOPT_CUSTOMREQUEST] = strtoupper($method);
 
@@ -90,6 +93,12 @@ class Curl implements TransportInterface
 			// Otherwise we need to encode the value first.
 			else
 			{
+				// The http_build_query method requests an array or object; make an array if we have a string
+				if (is_string($data))
+				{
+					$data = array($data);
+				}
+
 				$options[CURLOPT_POSTFIELDS] = http_build_query($data);
 			}
 

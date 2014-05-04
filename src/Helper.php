@@ -78,12 +78,6 @@ abstract class Helper
 		// The authorised value types
 		$authorisedTypes = array('cidr', 'range');
 
-		// Ensure the user has submitted an authorised type
-		if (!in_array($type, $authorisedTypes))
-		{
-			throw new \InvalidArgumentException('You have supplied an invalid argument for the type parameter.  It must be "cidr" or "range".');
-		}
-
 		// Loop through each element of the array
 		foreach ($validIps as $valid)
 		{
@@ -105,6 +99,15 @@ abstract class Helper
 					$end   = ip2long($valid['end_range']);
 
 					break;
+
+				default:
+					// Not supported
+					throw new \InvalidArgumentException(
+						sprintf(
+							'You have supplied an invalid argument for the type parameter.  It must be one of the following: ',
+							implode(', ', $authorisedTypes)
+						)
+					);
 			}
 
 			// Convert the requestor IP into number format

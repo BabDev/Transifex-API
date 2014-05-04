@@ -87,6 +87,12 @@ class Stream implements TransportInterface
 			// Otherwise we need to encode the value first.
 			else
 			{
+				// The http_build_query method requests an array or object; make an array if we have a string
+				if (is_string($data))
+				{
+					$data = array($data);
+				}
+
 				$options['content'] = http_build_query($data);
 			}
 
@@ -146,7 +152,7 @@ class Stream implements TransportInterface
 		// Capture PHP errors
 		$php_errormsg = '';
 		$track_errors = ini_get('track_errors');
-		ini_set('track_errors', true);
+		ini_set('track_errors', 'true');
 
 		// Open the stream for reading.
 		$stream = @fopen((string) $uri, 'r', false, $context);

@@ -24,7 +24,7 @@ class HttpFactory
 	 * @param   array  $options   Client options array.
 	 * @param   mixed  $adapters  Adapter (string) or queue of adapters (array) to use for communication.
 	 *
-	 * @return  Http  Http class
+	 * @return  Http
 	 *
 	 * @since   1.0
 	 */
@@ -39,7 +39,7 @@ class HttpFactory
 	 * @param   array  $options  Options array to inject into the TransportInterface
 	 * @param   mixed  $default  Adapter (string) or queue of adapters (array) to use
 	 *
-	 * @return  TransportInterface  Transport object
+	 * @return  TransportInterface|boolean  TransportInterface object or false if there is no available adapter
 	 *
 	 * @since   1.0
 	 */

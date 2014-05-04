@@ -268,7 +268,7 @@ class Socket implements TransportInterface
 		// Capture PHP errors
 		$php_errormsg = '';
 		$track_errors = ini_get('track_errors');
-		ini_set('track_errors', true);
+		ini_set('track_errors', 'true');
 
 		// PHP sends a warning if the uri does not exists; we silence it and throw an exception instead.
 		// Attempt to connect to the server
