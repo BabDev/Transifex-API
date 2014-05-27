@@ -15,7 +15,7 @@ before_script:
 
 script:
   - ant clean
-  - ./vendor/phpunit/phpunit/phpunit --configuration phpunit.travis.xml --coverage-clover=coverage.clover
+  - ./vendor/bin/phpunit --configuration phpunit.travis.xml --coverage-clover=coverage.clover
   - wget https://scrutinizer-ci.com/ocular.phar
   - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
   - ant travis-phpcs
