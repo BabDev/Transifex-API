@@ -154,10 +154,14 @@ class TransportTest extends \PHPUnit_Framework_TestCase
 			200
 		);
 
-		$this->assertEquals(
-			$body->method,
-			'PUT'
-		);
+		// Skip this assertion on HHVM, it's asserting $body->method is GET, see https://github.com/facebook/hhvm/issues/1876
+		if (!defined('HHVM_VERSION'))
+		{
+			$this->assertEquals(
+				$body->method,
+				'PUT'
+			);
+		}
 	}
 
 	/**
