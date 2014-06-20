@@ -19,7 +19,6 @@ before_script:
   - sudo cp -f .travis/apache2/virtualhost.local-dist /etc/apache2/sites-available/default
   - sudo sed -e "s?%TRAVIS_BUILD_DIR%?$(pwd)?g" --in-place /etc/apache2/sites-available/default
   - sudo service apache2 restart
-  - ls -al /etc/apache2/sites-available
   - composer update --dev
 
 script:
