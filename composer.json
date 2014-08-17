@@ -4,7 +4,6 @@
     "keywords": ["php", "library"],
     "homepage": "https://github.com/BabDev/BabDev-Library",
     "license": "GPL-2.0+",
-    "version": "1.0.0.alpha",
     "authors": [
         {
             "name": "Michael Babker",
@@ -22,8 +21,17 @@
     },
     "autoload": {
         "psr-4": {
-            "BabDev\\": "src/",
+            "BabDev\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
             "BabDev\\Tests\\": "tests/"
         }
-    }
+    },
+	"extra": {
+		"branch-alias": {
+			"dev-master": "1.0-dev"
+		}
+	}
 }
