@@ -10,6 +10,7 @@ namespace BabDev\Transifex;
 
 use BabDev\Http\HttpFactory;
 use BabDev\Http\Response;
+use BabDev\Http\TransportInterface;
 
 use Joomla\Uri\Uri;
 
@@ -43,15 +44,35 @@ abstract class TransifexObject
 	 * @param   Http   $client   The HTTP client object.
 	 *
 	 * @since   1.0
+	 * @throws  \InvalidArgumentException
+	 * @throws  \RuntimeException
 	 */
 	public function __construct($options = array(), Http $client = null)
 	{
 		$this->options = $options;
 
 		// Set the transport object for the HTTP object
-		$transport = HttpFactory::getAvailableDriver($this->options, array('curl'));
+		$transport = HttpFactory::getAvailableDriver($this->options, array('curl', 'stream'));
 
-		$this->client = isset($client) ? $client : new Http($this->options, $transport);
+		// Ensure the transport is a TransportInterface instance or bail out
+		if (!($transport instanceof TransportInterface))
+		{
+			throw new \RuntimeException('A valid TransportInterface object could not be created for the Http client.');
+		}
+
+		if (!isset($client))
+		{
+			try
+			{
+				$client = new Http($this->options, $transport);
+			}
+			catch (\InvalidArgumentException $e)
+			{
+				throw new \InvalidArgumentException('A valid Http object was not set.');
+			}
+		}
+
+		$this->client = $client;
 	}
 
 	/**

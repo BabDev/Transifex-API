@@ -9,6 +9,7 @@
 namespace BabDev\Transifex;
 
 use BabDev\Http\HttpFactory;
+use BabDev\Http\TransportInterface;
 
 /**
  * Base class for interacting with the Transifex API.
@@ -122,6 +123,8 @@ class Transifex
 	 * @param   Http   $client   The HTTP client object.
 	 *
 	 * @since   1.0
+	 * @throws  \InvalidArgumentException
+	 * @throws  \RuntimeException
 	 */
 	public function __construct($options = array(), Http $client = null)
 	{
@@ -136,7 +139,25 @@ class Transifex
 		// Set the transport object for the HTTP object
 		$transport = HttpFactory::getAvailableDriver($this->options, array('curl', 'stream'));
 
-		$this->client = isset($client) ? $client : new Http($this->options, $transport);
+		// Ensure the transport is a TransportInterface instance or bail out
+		if (!($transport instanceof TransportInterface))
+		{
+			throw new \RuntimeException('A valid TransportInterface object could not be created for the Http client.');
+		}
+
+		if (!isset($client))
+		{
+			try
+			{
+				$client = new Http($this->options, $transport);
+			}
+			catch (\InvalidArgumentException $e)
+			{
+				throw new \InvalidArgumentException('A valid Http object was not set.');
+			}
+		}
+
+		$this->client = $client;
 
 		// Setup the default API url if not already set.
 		if (!$this->getOption('api.url'))
