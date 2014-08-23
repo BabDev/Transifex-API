@@ -21,23 +21,29 @@ class HttpFactory
 	/**
 	 * Method to retrieve a Http instance.
 	 *
-	 * @param   array  $options   Client options array.
-	 * @param   mixed  $adapters  Adapter (string) or queue of adapters (array) to use for communication.
+	 * @param   array         $options   Client options array.
+	 * @param   array|string  $adapters  Adapter (string) or queue of adapters (array) to use for communication.
 	 *
 	 * @return  Http
 	 *
 	 * @since   1.0
+	 * @throws  \RuntimeException
 	 */
 	public static function getHttp($options = array(), $adapters = null)
 	{
-		return new Http($options, static::getAvailableDriver($options, $adapters));
+		if (!$driver = self::getAvailableDriver($options, $adapters))
+		{
+			throw new \RuntimeException('No transport driver available.');
+		}
+
+		return new Http($options, $driver);
 	}
 
 	/**
 	 * Finds an available HTTP transport object for communication
 	 *
-	 * @param   array  $options  Options array to inject into the TransportInterface
-	 * @param   mixed  $default  Adapter (string) or queue of adapters (array) to use
+	 * @param   array         $options  Options array to inject into the TransportInterface
+	 * @param   array|string  $default  Adapter (string) or queue of adapters (array) to use
 	 *
 	 * @return  TransportInterface|boolean  TransportInterface object or false if there is no available adapter
 	 *

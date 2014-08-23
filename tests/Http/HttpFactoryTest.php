@@ -31,6 +31,19 @@ class HttpFactoryTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * Tests the getHttp method for an exception.
+	 *
+	 * @return  void
+	 *
+	 * @since              1.0
+	 * @expectedException  \RuntimeException
+	 */
+	public function testGetHttpException()
+	{
+		HttpFactory::getHttp(array(), array('fopen'));
+	}
+
+	/**
 	 * Tests the getAvailableDriver method.
 	 *
 	 * @return  void
@@ -47,6 +60,24 @@ class HttpFactoryTest extends \PHPUnit_Framework_TestCase
 		$this->assertFalse(
 			HttpFactory::getAvailableDriver(array(), array('fopen')),
 			'A false should be returned if a class is not present or supported'
+		);
+	}
+
+	/**
+	 * Tests the getHttpTransports method.
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0
+	 */
+	public function testGetHttpTransports()
+	{
+		$transports = array('Stream', 'Socket', 'Curl');
+		sort($transports);
+
+		$this->assertEquals(
+			$transports,
+			HttpFactory::getHttpTransports()
 		);
 	}
 }
