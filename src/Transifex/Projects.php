@@ -259,7 +259,7 @@ class Projects extends TransifexObject
 			$data['outsource'] = $options['outsource'];
 		}
 
-		// auto_join flag (TODO: Document)
+		// Set the auto_join flag
 		if (isset($options['auto_join']))
 		{
 			$data['auto_join'] = $options['auto_join'];
