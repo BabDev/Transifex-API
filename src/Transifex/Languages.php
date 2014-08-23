@@ -122,7 +122,7 @@ class Languages extends TransifexObject
 	 * @param   string  $project   The project to retrieve details for
 	 * @param   string  $langCode  The language code to retrieve details for
 	 *
-	 * @return  \stdClasse  The language details for the specified project from the API.
+	 * @return  \stdClass  The language details for the specified project from the API.
 	 *
 	 * @since   1.0
 	 * @throws  \DomainException
