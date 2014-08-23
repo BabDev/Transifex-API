@@ -161,7 +161,7 @@ class Transifex
 
 		if (class_exists($class))
 		{
-			if (isset($this->$name) == false)
+			if (!isset($this->$name))
 			{
 				$this->$name = new $class($this->options, $this->client);
 			}

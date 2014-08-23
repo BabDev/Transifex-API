@@ -77,19 +77,17 @@ class Socket implements TransportInterface
 		$connection = $this->connect($uri, $timeout);
 
 		// Make sure the connection is alive and valid.
-		if (is_resource($connection))
-		{
-			// Make sure the connection has not timed out.
-			$meta = stream_get_meta_data($connection);
-
-			if ($meta['timed_out'])
-			{
-				throw new \RuntimeException('Server connection timed out.');
-			}
-		}
-		else
+		if (!is_resource($connection))
 		{
 			throw new \RuntimeException('Not connected to server.');
+		}
+
+		// Make sure the connection has not timed out.
+		$meta = stream_get_meta_data($connection);
+
+		if ($meta['timed_out'])
+		{
+			throw new \RuntimeException('Server connection timed out.');
 		}
 
 		// Get the request path from the URI object.
@@ -187,15 +185,12 @@ class Socket implements TransportInterface
 		preg_match('/[0-9]{3}/', array_shift($headers), $matches);
 		$code = $matches[0];
 
-		if (is_numeric($code))
-		{
-			$return->code = (int) $code;
-		}
-		// No valid response code was detected.
-		else
+		if (!is_numeric($code))
 		{
 			throw new \UnexpectedValueException('No HTTP response code found.');
 		}
+
+		$return->code = (int) $code;
 
 		// Add the response headers to the response object.
 		foreach ($headers as $header)

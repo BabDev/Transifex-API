@@ -222,15 +222,12 @@ class Stream implements TransportInterface
 		preg_match('/[0-9]{3}/', array_shift($headers), $matches);
 		$code = $matches[0];
 
-		if (is_numeric($code))
-		{
-			$return->code = (int) $code;
-		}
-		// No valid response code was detected.
-		else
+		if (!is_numeric($code))
 		{
 			throw new \UnexpectedValueException('No HTTP response code found.');
 		}
+
+		$return->code = (int) $code;
 
 		// Add the response headers to the response object.
 		foreach ($headers as $header)

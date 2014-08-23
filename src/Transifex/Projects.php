@@ -38,16 +38,15 @@ class Projects extends TransifexObject
 
 		// Build the request data.
 		$data = array(
-			'name' => $name,
-			'slug' => $slug,
-			'description' => $description,
+			'name'                 => $name,
+			'slug'                 => $slug,
+			'description'          => $description,
 			'source_language_code' => $sourceLanguage
 		);
 
 		$customOptions = array(
-			'long_description', 'private', 'homepage', 'feed', 'anyone_submit', 'hidden', 'bug_tracker',
-			'trans_instructions', 'tags', 'maintainers', 'outsource', 'auto_join', 'license', 'fill_up_resources',
-			'repository_url', 'organization'
+			'long_description', 'private', 'homepage', 'feed', 'anyone_submit', 'hidden', 'bug_tracker', 'trans_instructions', 'tags', 'maintainers',
+			'outsource', 'auto_join', 'license', 'fill_up_resources', 'repository_url', 'organization'
 		);
 
 		foreach ($customOptions as $option)
@@ -58,7 +57,7 @@ class Projects extends TransifexObject
 			}
 		}
 
-		// Check if the license if "acceptable".
+		// Check if the license is acceptable.
 		if (isset($options['license']))
 		{
 			$accepted = array('proprietary', 'permissive_open_source', 'other_open_source');
@@ -77,10 +76,9 @@ class Projects extends TransifexObject
 		}
 
 		// Check mandatory fields.
-		if (false == isset($data['license'])
-			|| in_array($data['license'], array('permissive_open_source', 'other_open_source')))
+		if (!isset($data['license']) || in_array($data['license'], array('permissive_open_source', 'other_open_source')))
 		{
-			if (false == isset($data['repository_url']))
+			if (!isset($data['repository_url']))
 			{
 				throw new \InvalidArgumentException(
 					'If a project is denoted either as permissive_open_source or other_open_source, '
@@ -92,7 +90,11 @@ class Projects extends TransifexObject
 
 		// Send the request.
 		return $this->processResponse(
-			$this->client->post($this->fetchUrl($path), json_encode($data), array('Content-Type' => 'application/json')),
+			$this->client->post(
+				$this->fetchUrl($path),
+				json_encode($data),
+				array('Content-Type' => 'application/json')
+			),
 			201
 		);
 	}
@@ -283,7 +285,7 @@ class Projects extends TransifexObject
 			$data['license'] = $options['license'];
 		}
 
-		// fill_up_resources (TODO: Document)
+		// Flag if the system should fill up resources automatically with 100% similar matches from the Translation Memory
 		if (isset($options['fill_up_resources']))
 		{
 			$data['fill_up_resources'] = $options['fill_up_resources'];
@@ -297,7 +299,11 @@ class Projects extends TransifexObject
 
 		// Send the request.
 		return $this->processResponse(
-			$this->client->put($this->fetchUrl($path), json_encode($data), array('Content-Type' => 'application/json')),
+			$this->client->put(
+				$this->fetchUrl($path),
+				json_encode($data),
+				array('Content-Type' => 'application/json')
+			),
 			200
 		);
 	}

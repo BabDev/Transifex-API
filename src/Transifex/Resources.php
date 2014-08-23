@@ -38,8 +38,8 @@ class Resources extends TransifexObject
 
 		// Build the required request data.
 		$data = array(
-			'name' => $name,
-			'slug' => $slug,
+			'name'      => $name,
+			'slug'      => $slug,
 			'i18n_type' => $fileType
 		);
 
@@ -73,7 +73,11 @@ class Resources extends TransifexObject
 
 		// Send the request.
 		return $this->processResponse(
-			$this->client->post($this->fetchUrl($path), json_encode($data), array('Content-Type' => 'application/json')),
+			$this->client->post(
+				$this->fetchUrl($path),
+				json_encode($data),
+				array('Content-Type' => 'application/json')
+			),
 			201
 		);
 	}
@@ -190,18 +194,15 @@ class Resources extends TransifexObject
 
 		$data = array();
 
-		if ($type == 'string')
-		{
-			$data['content'] = $content;
-		}
-		else
-		{
-			$data['content'] = file_get_contents($content);
-		}
+		$data['content'] = ($type == 'string') ? $content : file_get_contents($content);
 
 		// Send the request.
 		return $this->processResponse(
-			$this->client->put($this->fetchUrl($path), json_encode($data), array('Content-Type' => 'application/json')),
+			$this->client->put(
+				$this->fetchUrl($path),
+				json_encode($data),
+				array('Content-Type' => 'application/json')
+			),
 			200
 		);
 	}

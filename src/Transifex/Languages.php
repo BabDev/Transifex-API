@@ -67,7 +67,11 @@ class Languages extends TransifexObject
 
 		// Send the request.
 		return $this->processResponse(
-			$this->client->post($this->fetchUrl($path), json_encode($data), array('Content-Type' => 'application/json')),
+			$this->client->post(
+				$this->fetchUrl($path),
+				json_encode($data),
+				array('Content-Type' => 'application/json')
+			),
 			201
 		);
 	}
@@ -217,7 +221,11 @@ class Languages extends TransifexObject
 
 		// Send the request.
 		return $this->processResponse(
-			$this->client->put($this->fetchUrl($path), json_encode($coordinators), array('Content-Type' => 'application/json')),
+			$this->client->put(
+				$this->fetchUrl($path),
+				json_encode($coordinators),
+				array('Content-Type' => 'application/json')
+			),
 			200
 		);
 	}
@@ -264,7 +272,11 @@ class Languages extends TransifexObject
 
 		// Send the request.
 		return $this->processResponse(
-			$this->client->put($this->fetchUrl($path), json_encode($data), array('Content-Type' => 'application/json')),
+			$this->client->put(
+				$this->fetchUrl($path),
+				json_encode($data),
+				array('Content-Type' => 'application/json')
+			),
 			200
 		);
 	}
@@ -295,7 +307,11 @@ class Languages extends TransifexObject
 
 		// Send the request.
 		return $this->processResponse(
-			$this->client->put($this->fetchUrl($path), json_encode($reviewers), array('Content-Type' => 'application/json')),
+			$this->client->put(
+				$this->fetchUrl($path),
+				json_encode($reviewers),
+				array('Content-Type' => 'application/json')
+			),
 			200
 		);
 	}
@@ -326,7 +342,11 @@ class Languages extends TransifexObject
 
 		// Send the request.
 		return $this->processResponse(
-			$this->client->put($this->fetchUrl($path), json_encode($translators), array('Content-Type' => 'application/json')),
+			$this->client->put(
+				$this->fetchUrl($path),
+				json_encode($translators),
+				array('Content-Type' => 'application/json')
+			),
 			200
 		);
 	}

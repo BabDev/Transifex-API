@@ -142,16 +142,14 @@ class Curl implements TransportInterface
 		}
 
 		// Check if we're using HTTP Authentication.  If so, check if we have authentication credentials
-		if (isset($this->options['api.authentication']) && $this->options['api.authentication'] == 'HTTP')
+		if (isset($this->options['api.authentication']) && $this->options['api.authentication'] == 'HTTP'
+			&& isset($this->options['api.username']) && isset($this->options['api.password']))
 		{
-			if (isset($this->options['api.username']) && isset($this->options['api.password']))
-			{
-				$options[CURLOPT_HTTPAUTH] = CURLAUTH_ANY;
-				$options[CURLOPT_USERPWD] = $this->options['api.username'] . ':' . $this->options['api.password'];
+			$options[CURLOPT_HTTPAUTH] = CURLAUTH_ANY;
+			$options[CURLOPT_USERPWD] = $this->options['api.username'] . ':' . $this->options['api.password'];
 
-				// We need to set this so we can forward the authentication on redirects
-				$options[CURLOPT_UNRESTRICTED_AUTH] = true;
-			}
+			// We need to set this so we can forward the authentication on redirects
+			$options[CURLOPT_UNRESTRICTED_AUTH] = true;
 		}
 
 		// Set the request URL.
@@ -242,15 +240,12 @@ class Curl implements TransportInterface
 
 		$code = count($matches) ? $matches[0] : null;
 
-		if (is_numeric($code))
-		{
-			$return->code = (int) $code;
-		}
-		// No valid response code was detected.
-		else
+		if (!is_numeric($code))
 		{
 			throw new \UnexpectedValueException('No HTTP response code found.');
 		}
+
+		$return->code = (int) $code;
 
 		// Add the response headers to the response object.
 		foreach ($headers as $header)

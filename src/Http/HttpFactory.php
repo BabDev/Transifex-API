@@ -87,7 +87,7 @@ class HttpFactory
 	 */
 	public static function getHttpTransports()
 	{
-		$names = array();
+		$names    = array();
 		$iterator = new \DirectoryIterator(__DIR__ . '/Transport');
 
 		/* @type  \DirectoryIterator  $file */
@@ -101,6 +101,8 @@ class HttpFactory
 				$names[] = substr($fileName, 0, strrpos($fileName, '.'));
 			}
 		}
+
+		sort($names);
 
 		return $names;
 	}

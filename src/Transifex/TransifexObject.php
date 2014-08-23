@@ -68,14 +68,7 @@ abstract class TransifexObject
 	protected function fetchUrl($path)
 	{
 		// Ensure the API URL is set before moving on
-		if (!isset($this->options['api.url']))
-		{
-			$base = '';
-		}
-		else
-		{
-			$base = $this->options['api.url'];
-		}
+		$base = isset($this->options['api.url']) ? $this->options['api.url'] : '';
 
 		// Get a new Uri object using the API URL and given path.
 		$uri = new Uri($base . $path);
