@@ -21,7 +21,7 @@ class Languageinfo extends TransifexObject
 	 *
 	 * @param   string  $lang  The language code to retrieve
 	 *
-	 * @return  array  The language data.
+	 * @return  \stdClass  The language data.
 	 *
 	 * @since   1.0
 	 * @throws  \DomainException
@@ -38,7 +38,7 @@ class Languageinfo extends TransifexObject
 	/**
 	 * Method to get data on all supported API languages.
 	 *
-	 * @return  array  The language data.
+	 * @return  \stdClass  The language data.
 	 *
 	 * @since   1.0
 	 * @throws  \DomainException

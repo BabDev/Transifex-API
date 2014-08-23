@@ -18,7 +18,7 @@ class Formats extends TransifexObject
 	/**
 	 * Method to get the supported formats.
 	 *
-	 * @return  array  The supported formats from the API.
+	 * @return  \stdClass  The supported formats from the API.
 	 *
 	 * @since   1.0
 	 * @throws  \DomainException

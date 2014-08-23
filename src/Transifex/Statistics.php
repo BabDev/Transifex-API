@@ -23,7 +23,7 @@ class Statistics extends TransifexObject
 	 * @param   string  $resource  The slug for the resource to pull from.
 	 * @param   string  $lang      An optional language code to return data only for a specified language.
 	 *
-	 * @return  array  The resource's statistics.
+	 * @return  \stdClass  The resource's statistics.
 	 *
 	 * @since   1.0
 	 * @throws  \DomainException

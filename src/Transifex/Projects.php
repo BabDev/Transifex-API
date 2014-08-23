@@ -104,7 +104,7 @@ class Projects extends TransifexObject
 	 *
 	 * @param   string  $slug  The slug for the resource.
 	 *
-	 * @return  void
+	 * @return  \stdClass
 	 *
 	 * @since   1.0
 	 * @throws  \DomainException
@@ -124,7 +124,7 @@ class Projects extends TransifexObject
 	 * @param   string   $project  The project to retrieve details for
 	 * @param   boolean  $details  True to retrieve additional project details
 	 *
-	 * @return  array  The project details from the API.
+	 * @return  \stdClass  The project details from the API.
 	 *
 	 * @since   1.0
 	 * @throws  \DomainException
@@ -146,7 +146,7 @@ class Projects extends TransifexObject
 	/**
 	 * Method to get a list of projects the user is part of.
 	 *
-	 * @return  array  The list of projects from the API.
+	 * @return  \stdClass  The list of projects from the API.
 	 *
 	 * @since   1.0
 	 * @throws  \DomainException
@@ -166,7 +166,7 @@ class Projects extends TransifexObject
 	 * @param   string  $slug     The slug for the project
 	 * @param   array   $options  Optional additional params to send with the request
 	 *
-	 * @return  void
+	 * @return  \stdClass
 	 *
 	 * @since   1.0
 	 * @throws  \DomainException

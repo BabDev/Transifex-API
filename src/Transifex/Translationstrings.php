@@ -25,7 +25,7 @@ class Translationstrings extends TransifexObject
 	 * @param   boolean  $details   Flag to retrieve additional details on the strings
 	 * @param   array    $options   An array of additional options for the request
 	 *
-	 * @return  array  The resource's translation in the specified language.
+	 * @return  \stdClass  The resource's translation in the specified language.
 	 *
 	 * @since   1.0
 	 * @throws  \DomainException

@@ -133,10 +133,10 @@ class Http
 	/**
 	 * Method to send the POST command to the server.
 	 *
-	 * @param   string   $url      Path to the resource.
-	 * @param   mixed    $data     Either an associative array or a string to be sent with the request.
-	 * @param   array    $headers  An array of name-value pairs to include in the header of the request
-	 * @param   integer  $timeout  Read timeout in seconds.
+	 * @param   string        $url      Path to the resource.
+	 * @param   array|string  $data     Either an associative array or a string to be sent with the request.
+	 * @param   array         $headers  An array of name-value pairs to include in the header of the request
+	 * @param   integer       $timeout  Read timeout in seconds.
 	 *
 	 * @return  Response
 	 *
@@ -150,10 +150,10 @@ class Http
 	/**
 	 * Method to send the PUT command to the server.
 	 *
-	 * @param   string   $url      Path to the resource.
-	 * @param   mixed    $data     Either an associative array or a string to be sent with the request.
-	 * @param   array    $headers  An array of name-value pairs to include in the header of the request.
-	 * @param   integer  $timeout  Read timeout in seconds.
+	 * @param   string        $url      Path to the resource.
+	 * @param   array|string  $data     Either an associative array or a string to be sent with the request.
+	 * @param   array         $headers  An array of name-value pairs to include in the header of the request
+	 * @param   integer       $timeout  Read timeout in seconds.
 	 *
 	 * @return  Response
 	 *
@@ -199,10 +199,10 @@ class Http
 	/**
 	 * Method to send the PATCH command to the server.
 	 *
-	 * @param   string   $url      Path to the resource.
-	 * @param   mixed    $data     Either an associative array or a string to be sent with the request.
-	 * @param   array    $headers  An array of name-value pairs to include in the header of the request.
-	 * @param   integer  $timeout  Read timeout in seconds.
+	 * @param   string        $url      Path to the resource.
+	 * @param   array|string  $data     Either an associative array or a string to be sent with the request.
+	 * @param   array         $headers  An array of name-value pairs to include in the header of the request
+	 * @param   integer       $timeout  Read timeout in seconds.
 	 *
 	 * @return  Response
 	 *
@@ -216,11 +216,11 @@ class Http
 	/**
 	 * Send a request to the server and return a Response object with the response.
 	 *
-	 * @param   string   $method   The HTTP method for sending the request.
-	 * @param   string   $url      The URI to the resource to request.
-	 * @param   mixed    $data     Either an associative array or a string to be sent with the request.
-	 * @param   array    $headers  An array of request headers to send with the request.
-	 * @param   integer  $timeout  Read timeout in seconds.
+	 * @param   string        $method   The HTTP method for sending the request.
+	 * @param   string        $url      Path to the resource.
+	 * @param   array|string  $data     Either an associative array or a string to be sent with the request.
+	 * @param   array         $headers  An array of name-value pairs to include in the header of the request
+	 * @param   integer       $timeout  Read timeout in seconds.
 	 *
 	 * @return  Response
 	 *

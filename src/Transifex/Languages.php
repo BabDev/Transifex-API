@@ -24,7 +24,7 @@ class Languages extends TransifexObject
 	 * @param   array   $coordinators  An array of coordinators for the language
 	 * @param   array   $options       Optional additional params to send with the request
 	 *
-	 * @return  void
+	 * @return  \stdClass
 	 *
 	 * @since   1.0
 	 * @throws  \DomainException
@@ -82,7 +82,7 @@ class Languages extends TransifexObject
 	 * @param   string  $project   The project to retrieve details for
 	 * @param   string  $langCode  The language code to retrieve details for
 	 *
-	 * @return  void
+	 * @return  \stdClass
 	 *
 	 * @since   1.0
 	 * @throws  \DomainException
@@ -102,7 +102,7 @@ class Languages extends TransifexObject
 	 * @param   string  $project   The project to retrieve details for
 	 * @param   string  $langCode  The language code to retrieve details for
 	 *
-	 * @return  array  The coordinator information from the API.
+	 * @return  \stdClass  The coordinator information from the API.
 	 *
 	 * @since   1.0
 	 * @throws  \DomainException
@@ -122,7 +122,7 @@ class Languages extends TransifexObject
 	 * @param   string  $project   The project to retrieve details for
 	 * @param   string  $langCode  The language code to retrieve details for
 	 *
-	 * @return  array  The language details for the specified project from the API.
+	 * @return  \stdClasse  The language details for the specified project from the API.
 	 *
 	 * @since   1.0
 	 * @throws  \DomainException
@@ -141,7 +141,7 @@ class Languages extends TransifexObject
 	 *
 	 * @param   string  $project  The project to retrieve details for
 	 *
-	 * @return  array  The language data for the project.
+	 * @return  \stdClass  The language data for the project.
 	 *
 	 * @since   1.0
 	 * @throws  \DomainException
@@ -161,7 +161,7 @@ class Languages extends TransifexObject
 	 * @param   string  $project   The project to retrieve details for
 	 * @param   string  $langCode  The language code to retrieve details for
 	 *
-	 * @return  array  The reviewer information from the API.
+	 * @return  \stdClass  The reviewer information from the API.
 	 *
 	 * @since   1.0
 	 * @throws  \DomainException
@@ -181,7 +181,7 @@ class Languages extends TransifexObject
 	 * @param   string  $project   The project to retrieve details for
 	 * @param   string  $langCode  The language code to retrieve details for
 	 *
-	 * @return  array  The translators information from the API.
+	 * @return  \stdClass  The translators information from the API.
 	 *
 	 * @since   1.0
 	 * @throws  \DomainException
@@ -202,7 +202,7 @@ class Languages extends TransifexObject
 	 * @param   string  $langCode      The language code to retrieve details for
 	 * @param   array   $coordinators  An array of coordinators for the language
 	 *
-	 * @return  void
+	 * @return  \stdClass
 	 *
 	 * @since   1.0
 	 * @throws  \DomainException
@@ -238,7 +238,7 @@ class Languages extends TransifexObject
 	 * @param   array   $coordinators  An array of coordinators for the language
 	 * @param   array   $options       Optional additional params to send with the request
 	 *
-	 * @return  void
+	 * @return  \stdClass
 	 *
 	 * @since   1.0
 	 * @throws  \DomainException
@@ -288,7 +288,7 @@ class Languages extends TransifexObject
 	 * @param   string  $langCode   The language code to retrieve details for
 	 * @param   array   $reviewers  An array of reviewers for the language
 	 *
-	 * @return  void
+	 * @return  \stdClass
 	 *
 	 * @since   1.0
 	 * @throws  \DomainException
@@ -323,7 +323,7 @@ class Languages extends TransifexObject
 	 * @param   string  $langCode     The language code to retrieve details for
 	 * @param   array   $translators  An array of translators for the language
 	 *
-	 * @return  void
+	 * @return  \stdClass
 	 *
 	 * @since   1.0
 	 * @throws  \DomainException

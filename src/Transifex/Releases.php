@@ -22,7 +22,7 @@ class Releases extends TransifexObject
 	 * @param   string  $project  The project slug
 	 * @param   string  $release  The release slug
 	 *
-	 * @return  array  The release data from the API.
+	 * @return  \stdClass  The release data from the API.
 	 *
 	 * @since   1.0
 	 * @throws  \DomainException

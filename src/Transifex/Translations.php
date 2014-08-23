@@ -23,7 +23,7 @@ class Translations extends TransifexObject
 	 * @param   string  $resource  The slug for the resource to pull from.
 	 * @param   string  $lang      The language to return the translation for.
 	 *
-	 * @return  array  The resource's translation in the specified language.
+	 * @return  \stdClass  The resource's translation in the specified language.
 	 *
 	 * @since   1.0
 	 * @throws  \DomainException
@@ -46,7 +46,7 @@ class Translations extends TransifexObject
 	 * @param   string  $content   The content of the resource.  This can either be a string of data or a file path.
 	 * @param   string  $type      The type of content in the $content variable.  This should be either string or file.
 	 *
-	 * @return  array  The project details from the API.
+	 * @return  \stdClass  The project details from the API.
 	 *
 	 * @since   1.0
 	 * @throws  \DomainException

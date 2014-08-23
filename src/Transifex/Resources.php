@@ -25,7 +25,7 @@ class Resources extends TransifexObject
 	 * @param   string  $fileType  The file type of the resource
 	 * @param   array   $options   Optional additional params to send with the request
 	 *
-	 * @return  void
+	 * @return  \stdClass
 	 *
 	 * @since   1.0
 	 * @throws  \DomainException
@@ -88,7 +88,7 @@ class Resources extends TransifexObject
 	 * @param   string  $project   The project the resource is part of
 	 * @param   string  $resource  The resource slug within the project
 	 *
-	 * @return  array  The project details from the API.
+	 * @return  \stdClass  The project details from the API.
 	 *
 	 * @since   1.0
 	 * @throws  \DomainException
@@ -109,7 +109,7 @@ class Resources extends TransifexObject
 	 * @param   string   $resource  The resource slug within the project
 	 * @param   boolean  $details   True to retrieve additional project details
 	 *
-	 * @return  array  The project details from the API.
+	 * @return  \stdClass  The project details from the API.
 	 *
 	 * @since   1.0
 	 * @throws  \DomainException
@@ -134,7 +134,7 @@ class Resources extends TransifexObject
 	 * @param   string  $project   The project the resource is part of
 	 * @param   string  $resource  The resource slug within the project
 	 *
-	 * @return  array  The project details from the API.
+	 * @return  \stdClass  The project details from the API.
 	 *
 	 * @since   1.0
 	 * @throws  \DomainException
@@ -153,7 +153,7 @@ class Resources extends TransifexObject
 	 *
 	 * @param   string  $project  The project to retrieve details for
 	 *
-	 * @return  array  The project details from the API.
+	 * @return  \stdClass  The project details from the API.
 	 *
 	 * @since   1.0
 	 * @throws  \DomainException
@@ -175,7 +175,7 @@ class Resources extends TransifexObject
 	 * @param   string  $content   The content of the resource.  This can either be a string of data or a file path.
 	 * @param   string  $type      The type of content in the $content variable.  This should be either string or file.
 	 *
-	 * @return  array  The project details from the API.
+	 * @return  \stdClass  The project details from the API.
 	 *
 	 * @since   1.0
 	 * @throws  \DomainException
