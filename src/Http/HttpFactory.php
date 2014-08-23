@@ -31,7 +31,7 @@ class HttpFactory
 	 */
 	public static function getHttp($options = array(), $adapters = null)
 	{
-		if (!$driver = self::getAvailableDriver($options, $adapters))
+		if (!$driver = static::getAvailableDriver($options, $adapters))
 		{
 			throw new \RuntimeException('No transport driver available.');
 		}
