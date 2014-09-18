@@ -37,7 +37,11 @@ class TransportTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->options = array();
+		$this->options = array(
+			'api.username'       => 'testUser',
+		    'api.password'       => 'testPassword',
+		    'api.authentication' => 'HTTP'
+		);
 
 		if (!defined('BDTEST_HTTP_STUB') && getenv('BDTEST_HTTP_STUB') == '')
 		{
@@ -80,7 +84,7 @@ class TransportTest extends \PHPUnit_Framework_TestCase
 		/* @type  $transport  \BabDev\Http\TransportInterface */
 		$transport = new $transportClass($this->options);
 
-		$response = $transport->request('get', new Uri($this->stubUrl));
+		$response = $transport->request('get', new Uri($this->stubUrl), null, null, 60, 'BabDevTest/1.0');
 
 		$body = json_decode($response->body);
 

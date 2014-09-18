@@ -52,6 +52,11 @@ class HttpFactoryTest extends \PHPUnit_Framework_TestCase
 	 */
 	public function testGetAvailableDriver()
 	{
+		$this->assertInstanceOf(
+			'\\BabDev\\Http\\TransportInterface',
+			HttpFactory::getAvailableDriver(array(), null)
+		);
+
 		$this->assertFalse(
 			HttpFactory::getAvailableDriver(array(), array()),
 			'Passing an empty array should return false due to there being no adapters to test'
