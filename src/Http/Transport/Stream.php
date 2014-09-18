@@ -192,6 +192,8 @@ class Stream extends AbstractTransport
 		// Close the stream.
 		fclose($stream);
 
+		$headers = array();
+
 		if (isset($metadata['wrapper_data']['headers']))
 		{
 			$headers = $metadata['wrapper_data']['headers'];
@@ -199,10 +201,6 @@ class Stream extends AbstractTransport
 		elseif (isset($metadata['wrapper_data']))
 		{
 			$headers = $metadata['wrapper_data'];
-		}
-		else
-		{
-			$headers = array();
 		}
 
 		return $this->getResponse($headers, $content);

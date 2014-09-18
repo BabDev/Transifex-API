@@ -117,18 +117,7 @@ abstract class TransifexObject
 			$error = json_decode($response->body);
 
 			// Check if the error message is set; send a generic one if not
-			if (isset($error->message))
-			{
-				$message = $error->message;
-			}
-			elseif ($response->body)
-			{
-				$message = $response->body;
-			}
-			else
-			{
-				$message = 'No error message was returned from the server.';
-			}
+			$message = isset($error->message) ? $error->message : $response->body;
 
 			throw new \DomainException($message, $response->code);
 		}

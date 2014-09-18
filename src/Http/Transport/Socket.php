@@ -218,15 +218,7 @@ class Socket extends AbstractTransport
 		$host = ($uri->isSSL()) ? 'ssl://' . $uri->getHost() : $uri->getHost();
 
 		// If the port is not explicitly set in the URI detect it.
-		if (!$uri->getPort())
-		{
-			$port = ($uri->getScheme() == 'https') ? 443 : 80;
-		}
-		// Use the set port.
-		else
-		{
-			$port = $uri->getPort();
-		}
+		$port = $uri->getPort() ? $uri->getPort() : ($uri->getScheme() == 'https') ? 443 : 80;
 
 		// Build the connection key for resource memory caching.
 		$key = md5($host . $port);
