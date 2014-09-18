@@ -147,7 +147,14 @@ class Stream implements TransportInterface
 		$options['follow_location'] = isset($this->options['follow_location']) ? (int) $this->options['follow_location'] : 1;
 
 		// Create the stream context for the request.
-		$context = stream_context_create(array('http' => $options));
+		$context = stream_context_create(array(
+			'http' => $options,
+			'ssl' => array(
+				'verify_peer'   => true,
+				'cafile'        => __DIR__ . '/cacert.pem',
+				'verify_depth'  => 5,
+			)
+		));
 
 		// Capture PHP errors
 		$php_errormsg = '';
