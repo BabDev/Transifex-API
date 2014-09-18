@@ -17,6 +17,33 @@ namespace BabDev\Transifex;
 class Projects extends TransifexObject
 {
 	/**
+	 * Checks that a license is an accepted value
+	 *
+	 * @param   string  $license  The license to check
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0
+	 * @throws  \InvalidArgumentException
+	 */
+	private function checkLicense($license)
+	{
+		$accepted = array('proprietary', 'permissive_open_source', 'other_open_source');
+
+		// Ensure the license option is an allowed value
+		if (!in_array($license, $accepted))
+		{
+			throw new \InvalidArgumentException(
+				sprintf(
+					'The license %s is not valid, accepted license values are %s',
+					$license,
+					implode(', ', $accepted)
+				)
+			);
+		}
+	}
+
+	/**
 	 * Method to create a project.
 	 *
 	 * @param   string  $name            The name of the project
@@ -60,19 +87,8 @@ class Projects extends TransifexObject
 		// Check if the license is acceptable.
 		if (isset($options['license']))
 		{
-			$accepted = array('proprietary', 'permissive_open_source', 'other_open_source');
-
-			// Ensure the license option is an allowed value
-			if (!in_array($options['license'], $accepted))
-			{
-				throw new \InvalidArgumentException(
-					sprintf(
-						'The license %s is not valid, accepted license values are %s',
-						$options['license'],
-						implode(', ', $accepted)
-					)
-				);
-			}
+			$this->checkLicense($options['license']);
+			$data['license'] = $options['license'];
 		}
 
 		// Check mandatory fields.
@@ -268,20 +284,7 @@ class Projects extends TransifexObject
 		// Set the license if present
 		if (isset($options['license']))
 		{
-			$accepted = array('proprietary', 'permissive_open_source', 'other_open_source');
-
-			// Ensure the license option is an allowed value
-			if (!in_array($options['license'], $accepted))
-			{
-				throw new \InvalidArgumentException(
-					sprintf(
-						'The license %s is not valid, accepted license values are %s',
-						$options['license'],
-						implode(', ', $accepted)
-					)
-				);
-			}
-
+			$this->checkLicense($options['license']);
 			$data['license'] = $options['license'];
 		}
 

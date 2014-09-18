@@ -11,8 +11,8 @@
 
 namespace BabDev\Http\Transport;
 
+use BabDev\Http\AbstractTransport;
 use BabDev\Http\Response;
-use BabDev\Http\TransportInterface;
 
 use Joomla\Uri\UriInterface;
 
@@ -21,7 +21,7 @@ use Joomla\Uri\UriInterface;
  *
  * @since  1.0
  */
-class Stream implements TransportInterface
+class Stream extends AbstractTransport
 {
 	/**
 	 * The client array.
@@ -239,11 +239,7 @@ class Stream implements TransportInterface
 		$return->code = (int) $code;
 
 		// Add the response headers to the response object.
-		foreach ($headers as $header)
-		{
-			$pos = strpos($header, ':');
-			$return->headers[trim(substr($header, 0, $pos))] = trim(substr($header, ($pos + 1)));
-		}
+		$return->headers = $this->processReturnHeaders($headers);
 
 		return $return;
 	}
