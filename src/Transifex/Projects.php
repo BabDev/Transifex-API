@@ -197,88 +197,19 @@ class Projects extends TransifexObject
 		// Build the request data.
 		$data = array();
 
-		// Set the project name if present
-		if (isset($options['name']))
-		{
-			$data['name'] = $options['name'];
-		}
+		// Valid options to check
+		$validOptions = array(
+			'name', 'description', 'long_description', 'private', 'homepage', 'feed', 'anyone_submit', 'hidden', 'bug_tracker', 'trans_instructions',
+		    'tags', 'maintainers', 'outsource', 'auto_join', 'fill_up_resources'
+		);
 
-		// Set the description if present
-		if (isset($options['description']))
+		// Loop through the valid options and if we have them, add them to the request data
+		foreach ($validOptions as $option)
 		{
-			$data['description'] = $options['description'];
-		}
-
-		// Set the long description if present
-		if (isset($options['long_description']))
-		{
-			$data['long_description'] = $options['long_description'];
-		}
-
-		// Flag the repo as private if set
-		if (isset($options['private']))
-		{
-			$data['private'] = $options['private'];
-		}
-
-		// Set the project homepage if set
-		if (isset($options['homepage']))
-		{
-			$data['homepage'] = $options['homepage'];
-		}
-
-		// Set a project feed if present
-		if (isset($options['feed']))
-		{
-			$data['feed'] = $options['feed'];
-		}
-
-		// Flag the repo for open contributions if set
-		if (isset($options['anyone_submit']))
-		{
-			$data['anyone_submit'] = $options['anyone_submit'];
-		}
-
-		// Flag the repo as hidden if set
-		if (isset($options['hidden']))
-		{
-			$data['hidden'] = $options['hidden'];
-		}
-
-		// Set the project's bug tracker if present
-		if (isset($options['bug_tracker']))
-		{
-			$data['bug_tracker'] = $options['bug_tracker'];
-		}
-
-		// Set the project's translation instructions if present
-		if (isset($options['trans_instructions']))
-		{
-			$data['trans_instructions'] = $options['trans_instructions'];
-		}
-
-		// Set the project tags if present
-		if (isset($options['tags']))
-		{
-			$data['tags'] = $options['tags'];
-		}
-
-		// Set the project maintainers if present
-		if (isset($options['maintainers']))
-		{
-			$data['maintainers'] = $options['maintainers'];
-		}
-
-		// Set the outsourced project if present
-		if (isset($options['outsource']))
-		{
-			$data['outsource'] = $options['outsource'];
-		}
-
-		// Set the auto_join flag
-		if (isset($options['auto_join']))
-		{
-			$data['auto_join'] = $options['auto_join'];
+			if (isset($options[$option]))
+			{
+				$data[$option] = $options[$option];
+			}
 		}
 
 		// Set the license if present
@@ -286,12 +217,6 @@ class Projects extends TransifexObject
 		{
 			$this->checkLicense($options['license']);
 			$data['license'] = $options['license'];
-		}
-
-		// Flag if the system should fill up resources automatically with 100% similar matches from the Translation Memory
-		if (isset($options['fill_up_resources']))
-		{
-			$data['fill_up_resources'] = $options['fill_up_resources'];
 		}
 
 		// Make sure we actually have data to send

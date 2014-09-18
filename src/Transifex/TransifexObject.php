@@ -98,6 +98,42 @@ abstract class TransifexObject
 	}
 
 	/**
+	 * Method to update an API endpoint with resource content
+	 *
+	 * @param   string  $path     API path
+	 * @param   string  $content  The content of the resource.  This can either be a string of data or a file path.
+	 * @param   string  $type     The type of content in the $content variable.  This should be either string or file.
+	 *
+	 * @return  \stdClass
+	 *
+	 * @since   1.0
+	 * @throws  \DomainException
+	 * @throws  \InvalidArgumentException
+	 */
+	protected function updateResource($path, $content, $type)
+	{
+		// Verify the content type is allowed
+		if (!in_array($type, array('string', 'file')))
+		{
+			throw new \InvalidArgumentException('The content type must be specified as file or string.');
+		}
+
+		$data = array(
+			'content' => ($type == 'string') ? $content : file_get_contents($content)
+		);
+
+		// Send the request.
+		return $this->processResponse(
+			$this->client->put(
+				$this->fetchUrl($path),
+				json_encode($data),
+				array('Content-Type' => 'application/json')
+			),
+			200
+		);
+	}
+
+	/**
 	 * Process the response and decode it.
 	 *
 	 * @param   Response  $response      The response.

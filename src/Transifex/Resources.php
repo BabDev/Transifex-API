@@ -183,27 +183,9 @@ class Resources extends TransifexObject
 	 */
 	public function updateResourceContent($project, $resource, $content, $type = 'string')
 	{
-		// Verify the content type is allowed
-		if (!in_array($type, array('string', 'file')))
-		{
-			throw new \InvalidArgumentException('The content type must be specified as file or string.');
-		}
-
 		// Build the request path.
 		$path = '/project/' . $project . '/resource/' . $resource . '/content/';
 
-		$data = array();
-
-		$data['content'] = ($type == 'string') ? $content : file_get_contents($content);
-
-		// Send the request.
-		return $this->processResponse(
-			$this->client->put(
-				$this->fetchUrl($path),
-				json_encode($data),
-				array('Content-Type' => 'application/json')
-			),
-			200
-		);
+		return $this->updateResource($path, $content, $type);
 	}
 }

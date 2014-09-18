@@ -47,22 +47,16 @@ class Languages extends TransifexObject
 			'coordinators' => $coordinators
 		);
 
-		// Set the translators if present
-		if (isset($options['translators']))
-		{
-			$data['translators'] = $options['translators'];
-		}
+		// Valid options to check
+		$validOptions = array('translators', 'reviewers', 'list');
 
-		// Set the reviewers if present
-		if (isset($options['reviewers']))
+		// Loop through the valid options and if we have them, add them to the request data
+		foreach ($validOptions as $option)
 		{
-			$data['reviewers'] = $options['reviewers'];
-		}
-
-		// Set a mailing list e-mail address if present
-		if (isset($options['list']))
-		{
-			$data['list'] = $options['list'];
+			if (isset($options[$option]))
+			{
+				$data[$option] = $options[$option];
+			}
 		}
 
 		// Send the request.
@@ -210,24 +204,7 @@ class Languages extends TransifexObject
 	 */
 	public function updateCoordinators($project, $langCode, array $coordinators)
 	{
-		// Make sure the $coordinators array is not empty
-		if (count($coordinators) < 1)
-		{
-			throw new \InvalidArgumentException('The coordinators array must contain at least one username.');
-		}
-
-		// Build the request path.
-		$path = '/project/' . $project . '/language/' . $langCode . '/coordinators/';
-
-		// Send the request.
-		return $this->processResponse(
-			$this->client->put(
-				$this->fetchUrl($path),
-				json_encode($coordinators),
-				array('Content-Type' => 'application/json')
-			),
-			200
-		);
+		return $this->updateTeam($project, $langCode, $coordinators, 'coordinators');
 	}
 
 	/**
@@ -296,20 +273,39 @@ class Languages extends TransifexObject
 	 */
 	public function updateReviewers($project, $langCode, array $reviewers)
 	{
-		// Make sure the $reviewers array is not empty
-		if (count($reviewers) < 1)
+		return $this->updateTeam($project, $langCode, $reviewers, 'reviewers');
+	}
+
+	/**
+	 * Base method to update a given language team in a project
+	 *
+	 * @param   string  $project   The project to retrieve details for
+	 * @param   string  $langCode  The language code to retrieve details for
+	 * @param   array   $members   An array of the team members for the language
+	 * @param   string  $team      The team to update
+	 *
+	 * @return  \stdClass
+	 *
+	 * @since   1.0
+	 * @throws  \DomainException
+	 * @throws  \InvalidArgumentException
+	 */
+	protected function updateTeam($project, $langCode, array $members, $team)
+	{
+		// Make sure the $members array is not empty
+		if (count($members) < 1)
 		{
-			throw new \InvalidArgumentException('The reviewers array must contain at least one username.');
+			throw new \InvalidArgumentException('The ' . $team . ' array must contain at least one username.');
 		}
 
 		// Build the request path.
-		$path = '/project/' . $project . '/language/' . $langCode . '/reviewers/';
+		$path = '/project/' . $project . '/language/' . $langCode . '/' . $team . '/';
 
 		// Send the request.
 		return $this->processResponse(
 			$this->client->put(
 				$this->fetchUrl($path),
-				json_encode($reviewers),
+				json_encode($members),
 				array('Content-Type' => 'application/json')
 			),
 			200
@@ -331,23 +327,6 @@ class Languages extends TransifexObject
 	 */
 	public function updateTranslators($project, $langCode, array $translators)
 	{
-		// Make sure the $translators array is not empty
-		if (count($translators) < 1)
-		{
-			throw new \InvalidArgumentException('The translators array must contain at least one username.');
-		}
-
-		// Build the request path.
-		$path = '/project/' . $project . '/language/' . $langCode . '/translators/';
-
-		// Send the request.
-		return $this->processResponse(
-			$this->client->put(
-				$this->fetchUrl($path),
-				json_encode($translators),
-				array('Content-Type' => 'application/json')
-			),
-			200
-		);
+		return $this->updateTeam($project, $langCode, $translators, 'translators');
 	}
 }
