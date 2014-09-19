@@ -200,7 +200,7 @@ class Projects extends TransifexObject
 		// Valid options to check
 		$validOptions = array(
 			'name', 'description', 'long_description', 'private', 'homepage', 'feed', 'anyone_submit', 'hidden', 'bug_tracker', 'trans_instructions',
-		    'tags', 'maintainers', 'outsource', 'auto_join', 'fill_up_resources'
+			'tags', 'maintainers', 'outsource', 'auto_join', 'fill_up_resources'
 		);
 
 		// Loop through the valid options and if we have them, add them to the request data
