@@ -1,86 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="babdev-library" default="build" basedir=".">
-	<!-- Project properties -->
-	<property name="repo.dir" value="." />
-
 	<!-- Run all tasks using build target -->
 	<target name="build" depends="clean,phpcs,phpunit" />
 
 	<!-- Clean the build directory -->
 	<target name="clean" description="Clean up and create artifact directories">
-		<delete dir="${repo.dir}/build/coverage" />
-		<delete dir="${repo.dir}/build/docs" />
-		<delete dir="${repo.dir}/build/logs" />
+		<delete dir="${basedir}/build/coverage" />
+		<delete dir="${basedir}/build/docs" />
+		<delete dir="${basedir}/build/logs" />
 
-		<mkdir dir="${repo.dir}/build/coverage" />
-		<mkdir dir="${repo.dir}/build/docs" />
-		<mkdir dir="${repo.dir}/build/logs" />
+		<mkdir dir="${basedir}/build/coverage" />
+		<mkdir dir="${basedir}/build/docs" />
+		<mkdir dir="${basedir}/build/logs" />
 	</target>
 
 	<!-- Check code style based on Joomla Coding Standards -->
-	<target name="phpcs" description="Generate codestyle report using PHP_CodeSniffer">
-		<echo msg="Remove previous codestyle report" />
-		<delete quiet="yes" includeemptydirs="true">
-			<fileset dir="${repo.dir}/logs/">
-				<include name="codesniff.txt" />
-				<include name="checkstyle.xml" />
-			</fileset>
-		</delete>
-		<echo msg="Running phpcs with Joomla! Coding Standards" />
-		<phpcodesniffer
-			standard="${repo.dir}/build/phpcs/Joomla/ruleset.xml"
-			format="full"
-			file="${repo.dir}/src"
-			allowedFileExtensions="php">
-			<formatter type="full" outfile="${repo.dir}/build/logs/codesniff.txt" />
-			<formatter type="checkstyle" outfile="${repo.dir}/build/logs/checkstyle.xml" />
-		</phpcodesniffer>
-	</target>
-
-	<!-- Check code style on Travis-CI based on Joomla Coding Standards -->
-	<target name="travis-phpcs" description="Generate codestyle report using PHP_CodeSniffer for output on Travis-CI">
-		<exec executable="${repo.dir}/vendor/bin/phpcs">
+	<target name="phpcs" description="Generate codestyle report using PHP_CodeSniffer for output on Travis-CI">
+		<exec executable="${basedir}/vendor/bin/phpcs">
 			<arg line="-p" />
 			<arg line="-w" />
 			<arg line="--extensions=php" />
 			<arg line="--report=full" />
 			<arg line="--standard=${basedir}/build/phpcs/Joomla/ruleset.xml" />
-			<arg line="${repo.dir}/src" />
+			<arg line="${basedir}/src" />
 		</exec>
 	</target>
 
 	<!-- Run the PHPUnit suite -->
 	<target name="phpunit" description="Runs the unit tests">
 		<echo msg="Beginning unit testing" />
-		<exec executable="${repo.dir}/vendor/bin/phpunit" />
+		<exec executable="${basedir}/vendor/bin/phpunit" />
 	</target>
 
 	<!-- Create API documentation -->
-	<target name="phpdoc" description="Generate API documentation using PHPDocumentor">
-		<echo msg="Running PHPDocumentor" />
-		<phpdoc2 title="BabDev Libraries Documentation" destdir="${repo.dir}/build/docs" template="clean">
-			<fileset dir="${repo.dir}/src">
-				<include name="**/*.php" />
-			</fileset>
-		</phpdoc2>
-	</target>
-
-	<target name="composerupdate" description="Composer self-update">
-		<exec executable="composer">
-			<arg value="self-update" />
-		</exec>
-	</target>
-
-	<target name="installdep" description="Install build dependencies using composer">
-		<exec executable="composer">
-			<arg value="update" />
-			<arg value="--dev" />
-		</exec>
-	</target>
-
-	<target name="composervalidate" description="Perform validation of composer.json files.">
-		<exec executable="composer" failonerror="true">
-			<arg value="validate" />
+	<target name="phpdoc" description="Generate API documentation using phpDocumentor">
+		<exec executable="phpdoc">
+			<arg value="-d" />
+			<arg path="${basedir}/src" />
+			<arg value="-t" />
+			<arg path="${basedir}/build/docs/" />
+			<arg value="--template" />
+			<arg value="clean" />
+			<arg value="--title" />
+			<arg value="BabDev Library Documentation" />
 		</exec>
 	</target>
 </project>
