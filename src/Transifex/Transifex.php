@@ -139,7 +139,7 @@ class Transifex
 		if (!isset($client))
 		{
 			// Set the transport object for the HTTP object
-			$transport = HttpFactory::getAvailableDriver($this->options, array('curl', 'stream'));
+			$transport = HttpFactory::getAvailableDriver($this->options);
 
 			// Ensure the transport is a TransportInterface instance or bail out
 			if (!($transport instanceof TransportInterface))
