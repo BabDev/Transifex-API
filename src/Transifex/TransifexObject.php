@@ -55,7 +55,7 @@ abstract class TransifexObject
 		{
 			// Set the transport object for the HTTP object
 			$transport = HttpFactory::getAvailableDriver($this->options, array('curl', 'stream'));
-	
+
 			// Ensure the transport is a TransportInterface instance or bail out
 			if (!($transport instanceof TransportInterface))
 			{
