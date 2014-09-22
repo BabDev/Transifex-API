@@ -51,17 +51,17 @@ abstract class TransifexObject
 	{
 		$this->options = $options;
 
-		// Set the transport object for the HTTP object
-		$transport = HttpFactory::getAvailableDriver($this->options, array('curl', 'stream'));
-
-		// Ensure the transport is a TransportInterface instance or bail out
-		if (!($transport instanceof TransportInterface))
-		{
-			throw new \RuntimeException('A valid TransportInterface object could not be created for the Http client.');
-		}
-
 		if (!isset($client))
 		{
+			// Set the transport object for the HTTP object
+			$transport = HttpFactory::getAvailableDriver($this->options, array('curl', 'stream'));
+
+			// Ensure the transport is a TransportInterface instance or bail out
+			if (!($transport instanceof TransportInterface))
+			{
+				throw new \RuntimeException('A valid TransportInterface object could not be created for the Http client.');
+			}
+
 			try
 			{
 				$client = new Http($this->options, $transport);
