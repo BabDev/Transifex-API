@@ -128,7 +128,7 @@ class Stream extends AbstractTransport
 			$options['header'] = trim($headerString, "\r\n");
 		}
 
-		// If an explicit timeout is given user it.
+		// If an explicit timeout is given use it.
 		if (isset($timeout))
 		{
 			$options['timeout'] = (int) $timeout;
