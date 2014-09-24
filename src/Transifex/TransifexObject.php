@@ -8,7 +8,6 @@
 
 namespace BabDev\Transifex;
 
-use Joomla\Http\HttpFactory;
 use Joomla\Http\Response;
 use Joomla\Uri\Uri;
 
@@ -48,23 +47,7 @@ abstract class TransifexObject
 	public function __construct($options = array(), Http $client = null)
 	{
 		$this->options = $options;
-
-		if (!isset($client))
-		{
-			try
-			{
-				$client = HttpFactory::getHttp($this->options);
-			}
-			catch (\InvalidArgumentException $e)
-			{
-				// @codeCoverageIgnoreStart
-				throw new \InvalidArgumentException('A valid Http object was not set.');
-
-				// @codeCoverageIgnoreEnd
-			}
-		}
-
-		$this->client = $client;
+		$this->client  = isset($client) ? $client : new Http($this->options);
 	}
 
 	/**

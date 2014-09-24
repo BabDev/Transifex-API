@@ -8,8 +8,6 @@
 
 namespace BabDev\Transifex;
 
-use Joomla\Http\HttpFactory;
-
 /**
  * Base class for interacting with the Transifex API.
  *
@@ -139,22 +137,7 @@ class Transifex
 			$this->setOption('headers', $headers);
 		}
 
-		if (!isset($client))
-		{
-			try
-			{
-				$client = HttpFactory::getHttp($this->options);
-			}
-			catch (\InvalidArgumentException $e)
-			{
-				// @codeCoverageIgnoreStart
-				throw new \InvalidArgumentException('A valid Http object was not set.');
-
-				// @codeCoverageIgnoreEnd
-			}
-		}
-
-		$this->client = $client;
+		$this->client = isset($client) ? $client : new Http($this->options);
 
 		// Setup the default API url if not already set.
 		if (!$this->getOption('api.url'))
