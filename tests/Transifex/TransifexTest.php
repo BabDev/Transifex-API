@@ -46,10 +46,34 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->options = array();
+		$this->options = array('api.username' => 'test', 'api.password' => 'test');
 		$this->client = $this->getMock('\\BabDev\\Transifex\\Http', array('get', 'post', 'delete', 'put', 'patch'));
 
 		$this->object = new Transifex($this->options, $this->client);
+	}
+
+	/**
+	 * Tests the constructor for building a proper Transifex instance without the client injected
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0
+	 */
+	public function test__constructWithNoInjectedClient()
+	{
+		$object = new Transifex($this->options);
+
+		$this->assertInstanceOf(
+			'\\BabDev\\Transifex\\Transifex',
+			$object,
+			'The object successfully is created without a client injected.'
+		);
+
+		$this->assertInstanceOf(
+			'\\Joomla\\Http\\Http',
+			TestHelper::getValue($object, 'client'),
+			'Ensure the Transifex object has a HTTP client instance.'
+		);
 	}
 
 	/**

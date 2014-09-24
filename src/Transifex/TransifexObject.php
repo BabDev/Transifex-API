@@ -58,7 +58,10 @@ abstract class TransifexObject
 			// Ensure the transport is a TransportInterface instance or bail out
 			if (!($transport instanceof TransportInterface))
 			{
+				// @codeCoverageIgnoreStart
 				throw new \RuntimeException('A valid TransportInterface object could not be created for the Http client.');
+
+				// @codeCoverageIgnoreEnd
 			}
 
 			try
@@ -67,7 +70,10 @@ abstract class TransifexObject
 			}
 			catch (\InvalidArgumentException $e)
 			{
+				// @codeCoverageIgnoreStart
 				throw new \InvalidArgumentException('A valid Http object was not set.');
+
+				// @codeCoverageIgnoreEnd
 			}
 		}
 

@@ -11,7 +11,7 @@ use BabDev\Transifex\Http;
 use Joomla\Test\TestHelper;
 
 /**
- * Test class for BDTransifex.
+ * Test class for \BabDev\Transifex\TransifexObject.
  *
  * @since  1.0
  */
@@ -30,7 +30,7 @@ class TransifexObjectTest extends \PHPUnit_Framework_TestCase
 	protected $client;
 
 	/**
-	 * @var    ObjectMock  Object being tested
+	 * @var    \BabDev\Transifex\TransifexObject  Object being tested
 	 * @since  1.0
 	 */
 	protected $object;
@@ -49,6 +49,30 @@ class TransifexObjectTest extends \PHPUnit_Framework_TestCase
 		$this->client = $this->getMock('\\BabDev\\Transifex\\Http', array('get', 'post', 'delete', 'put', 'patch'));
 
 		$this->object = $this->getMockForAbstractClass('\\BabDev\\Transifex\\TransifexObject', array($this->options, $this->client));
+	}
+
+	/**
+	 * Tests the constructor for building a proper TransifexObject instance without the client injected
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0
+	 */
+	public function test__constructWithNoInjectedClient()
+	{
+		$object = $this->getMockForAbstractClass('\\BabDev\\Transifex\\TransifexObject', array($this->options));
+
+		$this->assertInstanceOf(
+			'\\BabDev\\Transifex\\TransifexObject',
+			$object,
+			'The object successfully is created without a client injected.'
+		);
+
+		$this->assertInstanceOf(
+			'\\Joomla\\Http\\Http',
+			TestHelper::getValue($object, 'client'),
+			'Ensure the TransifexObject has a HTTP client instance.'
+		);
 	}
 
 	/**
