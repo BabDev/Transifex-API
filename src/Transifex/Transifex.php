@@ -9,7 +9,6 @@
 namespace BabDev\Transifex;
 
 use Joomla\Http\HttpFactory;
-use Joomla\Http\TransportInterface;
 
 /**
  * Base class for interacting with the Transifex API.
@@ -142,21 +141,9 @@ class Transifex
 
 		if (!isset($client))
 		{
-			// Set the transport object for the HTTP object
-			$transport = HttpFactory::getAvailableDriver($this->options);
-
-			// Ensure the transport is a TransportInterface instance or bail out
-			if (!($transport instanceof TransportInterface))
-			{
-				// @codeCoverageIgnoreStart
-				throw new \RuntimeException('A valid TransportInterface object could not be created for the Http client.');
-
-				// @codeCoverageIgnoreEnd
-			}
-
 			try
 			{
-				$client = new Http($this->options, $transport);
+				$client = HttpFactory::getHttp($this->options);
 			}
 			catch (\InvalidArgumentException $e)
 			{
