@@ -6,7 +6,7 @@
 
 namespace BabDev\Tests\Transifex;
 
-use BabDev\Http\Response;
+use Joomla\Http\Response;
 use BabDev\Transifex\Http;
 use BabDev\Transifex\Resources;
 
@@ -66,7 +66,7 @@ class ResourcesTest extends \PHPUnit_Framework_TestCase
 	{
 		$this->options = array();
 		$this->client = $this->getMock('\\BabDev\\Transifex\\Http', array('get', 'post', 'delete', 'put', 'patch'));
-		$this->response = $this->getMock('\\BabDev\\Http\\Response');
+		$this->response = $this->getMock('\\Joomla\\Http\\Response');
 
 		$this->object = new Resources($this->options, $this->client);
 	}

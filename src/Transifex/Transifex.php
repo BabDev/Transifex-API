@@ -8,8 +8,8 @@
 
 namespace BabDev\Transifex;
 
-use BabDev\Http\HttpFactory;
-use BabDev\Http\TransportInterface;
+use Joomla\Http\HttpFactory;
+use Joomla\Http\TransportInterface;
 
 /**
  * Base class for interacting with the Transifex API.
@@ -130,10 +130,14 @@ class Transifex
 	{
 		$this->options = $options;
 
-		// Set the authentication type if not already set.
-		if (!$this->getOption('api.authentication'))
+		// Set the Authorization header if we have credentials
+		if ($this->getOption('api.username') && $this->getOption('api.password'))
 		{
-			$this->setOption('api.authentication', 'HTTP');
+			$headers = array(
+				'Authorization' => 'Basic ' . base64_encode($this->getOption('api.username') . ':' . $this->getOption('api.password'))
+			);
+
+			$this->setOption('headers', $headers);
 		}
 
 		if (!isset($client))

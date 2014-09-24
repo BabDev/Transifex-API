@@ -11,15 +11,6 @@ matrix:
   allow_failures:
     - php: 5.6
 
-before_install:
-  - composer self-update
-
-before_script:
-  # Set up Apache
-  - sh -c "if [ '$TRAVIS_PHP_VERSION' != 'hhvm' ]; then ./.travis/php-apache.sh; fi"
-  - sh -c "if [ '$TRAVIS_PHP_VERSION' = 'hhvm' ]; then ./.travis/hhvm-apache.sh; fi"
-  - composer update --dev
-
 script:
   - ant clean
   - ./vendor/bin/phpunit --configuration phpunit.travis.xml --coverage-clover=coverage.clover

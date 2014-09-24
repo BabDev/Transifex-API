@@ -8,10 +8,9 @@
 
 namespace BabDev\Transifex;
 
-use BabDev\Http\HttpFactory;
-use BabDev\Http\Response;
-use BabDev\Http\TransportInterface;
-
+use Joomla\Http\HttpFactory;
+use Joomla\Http\Response;
+use Joomla\Http\TransportInterface;
 use Joomla\Uri\Uri;
 
 /**

@@ -8,8 +8,8 @@
 
 namespace BabDev\Transifex;
 
-use BabDev\Http\Http as BaseHttp;
-use BabDev\Http\TransportInterface;
+use Joomla\Http\Http as BaseHttp;
+use Joomla\Http\TransportInterface;
 
 /**
  * HTTP client class for connecting to the Transifex API.

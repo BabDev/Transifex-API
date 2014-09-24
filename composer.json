@@ -12,6 +12,7 @@
     ],
     "require": {
         "php": ">=5.3.10",
+        "joomla/http": "~1.1",
         "joomla/uri": "~1.0"
     },
     "require-dev": {
@@ -29,9 +30,9 @@
             "BabDev\\Tests\\": "tests/"
         }
     },
-	"extra": {
-		"branch-alias": {
-			"dev-master": "1.0-dev"
-		}
-	}
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
 }

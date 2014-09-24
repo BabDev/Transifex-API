@@ -1,4 +1,4 @@
-BabDev Library [![Build Status](https://travis-ci.org/BabDev/BabDev-Library.png?branch=master)](https://travis-ci.org/BabDev/BabDev-Library) [![Analytics](https://ga-beacon.appspot.com/UA-42602973-2/babdev-library/readme)](https://github.com/igrigorik/ga-beacon) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/BabDev/BabDev-Library/badges/quality-score.png?s=a338a281b006a93fb17c69a83ec8a239e9ed7e74)](https://scrutinizer-ci.com/g/BabDev/BabDev-Library/) [![Code Coverage](https://scrutinizer-ci.com/g/BabDev/BabDev-Library/badges/coverage.png?s=513f6de839a37e22865d8d688c60fbe35695cbb2)](https://scrutinizer-ci.com/g/BabDev/BabDev-Library/)
+BabDev Library [![Build Status](https://travis-ci.org/BabDev/BabDev-Library.png?branch=master)](https://travis-ci.org/BabDev/BabDev-Library) [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/BabDev/BabDev-Library/badges/quality-score.png?s=a338a281b006a93fb17c69a83ec8a239e9ed7e74)](https://scrutinizer-ci.com/g/BabDev/BabDev-Library/) [![Code Coverage](https://scrutinizer-ci.com/g/BabDev/BabDev-Library/badges/coverage.png?s=513f6de839a37e22865d8d688c60fbe35695cbb2)](https://scrutinizer-ci.com/g/BabDev/BabDev-Library/)
 ===============
 
 The *BabDev Library* is an collection of classes for general use in PHP based applications.  Originally inspired as libraries extending the Joomla! Platform, the library has evolved to be more suited for general use in PHP applications while still aiming to support Joomla developers.
@@ -18,13 +18,13 @@ Library Contents
 The *BabDev Library* is composed of the following classes and packages:
 
 - [\BabDev\Helper](/src/BabDev/Helper.php) - A basic helper class providing support methods I've found useful in projects
-- [\BabDev\Http](/src/BabDev/Http) - The `HTTP` package is a fork of the Joomla Framework's HTTP classes and expanded with support as needed to enable the `\BabDev\Transifex` package to work properly
 - [\BabDev\Transifex](/src/BabDev/Transifex) - The `Transifex` package is a PHP wrapper implementing the [Transifex API](http://support.transifex.com/customer/portal/topics/440186-api/articles)
 
 Requirements
 ------------
 
 * Production
+    * Joomla Framework [HTTP](https://github.com/joomla-framework/http) package
     * Joomla Framework [URI](https://github.com/joomla-framework/uri) package
     * PHP 5.3.10 or later
 * Development
