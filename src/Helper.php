@@ -60,6 +60,14 @@ abstract class Helper
 	);
 
 	/**
+	 * Array containing the authorized lookup types for ipInRange()
+	 *
+	 * @var    array
+	 * @since  1.0
+	 */
+	protected static $authorizedTypes = array('cidr', 'range');
+
+	/**
 	 * Determines if the supplied IP address is in the valid IP range
 	 *
 	 * @param   string  $testIp    The IP address to test
@@ -75,46 +83,16 @@ abstract class Helper
 	 */
 	public static function ipInRange($testIp, $validIps, $type = 'range')
 	{
-		// The authorised value types
-		$authorisedTypes = array('cidr', 'range');
-
 		// Loop through each element of the array
 		foreach ($validIps as $valid)
 		{
-			switch ($type)
-			{
-				case 'cidr':
-					// Split the CIDR address into a separate IP address and bits
-					list ($subnet, $bits) = explode('/', $valid);
-
-					// Convert the network address into number format and calculate the end value
-					$start = ip2long($subnet);
-					$end   = $start + (static::$cidrRanges[(int) $bits] - 1);
-
-					break;
-
-				case 'range':
-					// Convert the start_range and end_range values into number format
-					$start = ip2long($valid['start_range']);
-					$end   = ip2long($valid['end_range']);
-
-					break;
-
-				default:
-					// Not supported
-					throw new \InvalidArgumentException(
-						sprintf(
-							'You have supplied an invalid argument for the type parameter.  It must be one of the following: ',
-							implode(', ', $authorisedTypes)
-						)
-					);
-			}
+			$values = static::convertValues($valid, $type);
 
 			// Convert the requestor IP into number format
 			$ip = ip2long($testIp);
 
 			// Check if the IP is in our authorised range
-			if ($ip >= $start && $ip <= $end)
+			if ($ip >= $values['start'] && $ip <= $values['end'])
 			{
 				return true;
 			}
@@ -122,5 +100,50 @@ abstract class Helper
 
 		// The IP wasn't in range
 		return false;
+	}
+
+	/**
+	 * Converts input data to a numeric value
+	 *
+	 * @param   array|string  $valid  May be an IP address in CIDR format or an array containing a start and end address
+	 * @param   string        $type   The type of value supplied
+	 *
+	 * @return  array
+	 *
+	 * @since   1.0
+	 * @throws  \InvalidArgumentException
+	 */
+	protected static function convertValues($valid, $type)
+	{
+		switch ($type)
+		{
+			case 'cidr':
+				// Split the CIDR address into a separate IP address and bits
+				list ($subnet, $bits) = explode('/', $valid);
+
+				// Convert the network address into number format and calculate the end value
+				$start = ip2long($subnet);
+				$end   = $start + (static::$cidrRanges[(int) $bits] - 1);
+
+				break;
+
+			case 'range':
+				// Convert the start_range and end_range values into number format
+				$start = ip2long($valid['start_range']);
+				$end   = ip2long($valid['end_range']);
+
+				break;
+
+			default:
+				// Not supported
+				throw new \InvalidArgumentException(
+					sprintf(
+						'You have supplied an invalid argument for the type parameter.  It must be one of the following: ',
+						implode(', ', static::$authorizedTypes)
+					)
+				);
+		}
+
+		return array('start' => $start, 'end' => $end);
 	}
 }
