@@ -67,9 +67,7 @@ abstract class TransifexObject
 		$base = isset($this->options['api.url']) ? $this->options['api.url'] : '';
 
 		// Get a new Uri object using the API URL and given path.
-		$uri = new Uri($base . $path);
-
-		return (string) $uri;
+		return $base . $path;
 	}
 
 	/**
