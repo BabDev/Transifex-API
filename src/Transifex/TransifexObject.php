@@ -9,7 +9,6 @@
 namespace BabDev\Transifex;
 
 use Joomla\Http\Response;
-use Joomla\Uri\Uri;
 
 /**
  * Transifex API object class.
@@ -66,7 +65,6 @@ abstract class TransifexObject
 		// Ensure the API URL is set before moving on
 		$base = isset($this->options['api.url']) ? $this->options['api.url'] : '';
 
-		// Get a new Uri object using the API URL and given path.
 		return $base . $path;
 	}
 
