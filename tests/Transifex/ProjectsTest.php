@@ -6,9 +6,10 @@
 
 namespace BabDev\Tests\Transifex;
 
-use Joomla\Http\Response;
 use BabDev\Transifex\Http;
 use BabDev\Transifex\Projects;
+
+use Joomla\Http\Response;
 
 /**
  * Test class for \BabDev\Transifex\Projects.
@@ -76,6 +77,12 @@ class ProjectsTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\Projects::checkLicense
+	 * @covers  \BabDev\Transifex\Projects::createProject
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testCreateProject()
 	{
@@ -119,8 +126,14 @@ class ProjectsTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \DomainException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Projects::checkLicense
+	 * @covers  \BabDev\Transifex\Projects::createProject
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
-	public function testCreateProjectFailure()
+	public function testCreateProjectFailureForABadRequest()
 	{
 		$this->response->code = 500;
 		$this->response->body = $this->errorString;
@@ -140,40 +153,35 @@ class ProjectsTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \InvalidArgumentException
 	 * @since              1.0
-	 */
-	public function testCreateProjectFailure2()
-	{
-		$options = array(
-			'license' => 'INVALID'
-		);
-
-		$this->object->createProject('Joomla Platform', 'joomla-platform', 'Project for the Joomla Platform', 'en_GB', $options);
-	}
-
-	/**
-	 * Tests the createProject method - failure
 	 *
-	 * @return  void
-	 *
-	 * @expectedException  \InvalidArgumentException
-	 * @since              1.0
-	 */
-	public function testCreateProjectFailure3()
-	{
-		$this->object->createProject('Joomla Platform', 'joomla-platform', 'Project for the Joomla Platform', 'en_GB');
-	}
-
-	/**
-	 * Tests the createProject method - failure
-	 *
-	 * @return  void
-	 *
-	 * @expectedException  \InvalidArgumentException
-	 * @since              1.0
+	 * @covers  \BabDev\Transifex\Projects::checkLicense
+	 * @covers  \BabDev\Transifex\Projects::createProject
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testCreateProjectsBadLicense()
 	{
 		$this->object->createProject('Joomla Platform', 'joomla-platform', 'Project for the Joomla Platform', 'en_GB', array('license' => 'failure'));
+	}
+
+	/**
+	 * Tests the createProject method - failure
+	 *
+	 * @return  void
+	 *
+	 * @expectedException  \InvalidArgumentException
+	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Projects::checkLicense
+	 * @covers  \BabDev\Transifex\Projects::createProject
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
+	 */
+	public function testCreateProjectFailureForMissingFields()
+	{
+		$this->object->createProject('Joomla Platform', 'joomla-platform', 'Project for the Joomla Platform', 'en_GB');
 	}
 
 	/**
@@ -182,6 +190,11 @@ class ProjectsTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\Projects::deleteProject
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testDeleteProject()
 	{
@@ -206,6 +219,11 @@ class ProjectsTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \DomainException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Projects::deleteProject
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testDeleteProjectFailure()
 	{
@@ -226,6 +244,11 @@ class ProjectsTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\Projects::getProject
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetProject()
 	{
@@ -250,6 +273,11 @@ class ProjectsTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \DomainException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Projects::getProject
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetProjectFailure()
 	{
@@ -270,6 +298,11 @@ class ProjectsTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\Projects::getProjects
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetProjects()
 	{
@@ -294,6 +327,11 @@ class ProjectsTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \DomainException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Projects::getProjects
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetProjectsFailure()
 	{
@@ -314,6 +352,12 @@ class ProjectsTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\Projects::checkLicense
+	 * @covers  \BabDev\Transifex\Projects::updateProject
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testUpdateProject()
 	{
@@ -358,8 +402,14 @@ class ProjectsTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \DomainException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Projects::checkLicense
+	 * @covers  \BabDev\Transifex\Projects::updateProject
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
-	public function testUpdateProjectsFailure()
+	public function testUpdateProjectFailure()
 	{
 		$this->response->code = 500;
 		$this->response->body = $this->errorString;
@@ -379,8 +429,14 @@ class ProjectsTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \RuntimeException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Projects::checkLicense
+	 * @covers  \BabDev\Transifex\Projects::updateProject
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
-	public function testUpdateProjectsRuntimeException()
+	public function testUpdateProjectRuntimeException()
 	{
 		$this->object->updateProject('joomla-platform');
 	}
@@ -392,8 +448,14 @@ class ProjectsTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \InvalidArgumentException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Projects::checkLicense
+	 * @covers  \BabDev\Transifex\Projects::updateProject
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
-	public function testUpdateProjectsBadLicense()
+	public function testUpdateProjectBadLicense()
 	{
 		$this->object->updateProject('joomla-platform', array('license' => 'failure'));
 	}

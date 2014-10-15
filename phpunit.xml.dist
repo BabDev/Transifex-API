@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit bootstrap="vendor/autoload.php" colors="false">
+<phpunit bootstrap="vendor/autoload.php" colors="false" backupGlobals="false" strict="true">
 	<!-- These constants help setup environment configurations for running optional tests. -->
 	<php>
 		<!-- <const name="BDTEST_HTTP_STUB" value="http://localhost/BabDev-Libraries/tests/Http/stubs/http_stub.php" /> -->
-		<const name="JPATH_ROOT" value="__DIR__" />
 	</php>
 
 	<testsuites>

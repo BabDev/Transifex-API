@@ -76,6 +76,11 @@ class StatisticsTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\Statistics::getStatistics
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetStatistics()
 	{
@@ -100,6 +105,11 @@ class StatisticsTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \DomainException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Statistics::getStatistics
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetStatisticsFailure()
 	{

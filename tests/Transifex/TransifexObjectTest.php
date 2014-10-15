@@ -58,6 +58,9 @@ class TransifexObjectTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\TransifexObject::__construct
+	 * @uses    \BabDev\Transifex\Http
 	 */
 	public function test__constructWithNoInjectedClient()
 	{
@@ -83,6 +86,10 @@ class TransifexObjectTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\TransifexObject::fetchUrl
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject::__construct
 	 */
 	public function testFetchUrlBasicAuth()
 	{

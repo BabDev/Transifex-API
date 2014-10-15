@@ -129,6 +129,8 @@ class HelperTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return  void
 	 *
+	 * @covers        \BabDev\Helper::ipInRange
+	 * @covers        \BabDev\Helper::convertValues
 	 * @dataProvider  dataTestIpInRange
 	 * @since         1.0
 	 */
@@ -145,6 +147,8 @@ class HelperTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @return  void
 	 *
+	 * @covers             \BabDev\Helper::ipInRange
+	 * @covers             \BabDev\Helper::convertValues
 	 * @expectedException  \InvalidArgumentException
 	 * @since              1.0
 	 */

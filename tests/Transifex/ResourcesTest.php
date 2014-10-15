@@ -77,6 +77,11 @@ class ResourcesTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\Resources::createResource
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testCreateResourceContent()
 	{
@@ -108,6 +113,11 @@ class ResourcesTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\Resources::createResource
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testCreateResourceFile()
 	{
@@ -140,6 +150,11 @@ class ResourcesTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \DomainException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Resources::createResource
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testCreateResourceFailure()
 	{
@@ -160,6 +175,11 @@ class ResourcesTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\Resources::deleteResource
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testDeleteResource()
 	{
@@ -184,6 +204,11 @@ class ResourcesTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \DomainException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Resources::deleteResource
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testDeleteResourceFailure()
 	{
@@ -204,6 +229,11 @@ class ResourcesTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\Resources::getResource
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetResource()
 	{
@@ -228,6 +258,11 @@ class ResourcesTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \DomainException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Resources::getResource
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetResourceFailure()
 	{
@@ -248,6 +283,11 @@ class ResourcesTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\Resources::getResourceContent
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetResourceContent()
 	{
@@ -272,6 +312,11 @@ class ResourcesTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \DomainException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Resources::getResourceContent
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetResourceContentFailure()
 	{
@@ -292,6 +337,11 @@ class ResourcesTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\Resources::getResources
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetResources()
 	{
@@ -316,6 +366,11 @@ class ResourcesTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \DomainException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Resources::getResources
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetResourcesFailure()
 	{
@@ -336,6 +391,11 @@ class ResourcesTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\Resources::updateResourceContent
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testUpdateResourceContentFile()
 	{
@@ -360,6 +420,12 @@ class ResourcesTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\Resources::updateResourceContent
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @covers  \BabDev\Transifex\TransifexObject::updateResource
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testUpdateResourceContentString()
 	{
@@ -384,6 +450,12 @@ class ResourcesTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \DomainException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Resources::updateResourceContent
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @covers  \BabDev\Transifex\TransifexObject::updateResource
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testUpdateResourceContentFailure()
 	{
@@ -405,6 +477,12 @@ class ResourcesTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \InvalidArgumentException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Resources::updateResourceContent
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @covers  \BabDev\Transifex\TransifexObject::updateResource
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testUpdateResourceContentBadType()
 	{

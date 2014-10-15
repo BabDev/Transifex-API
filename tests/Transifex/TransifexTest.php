@@ -55,6 +55,11 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\Transifex::__construct
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\Transifex::getOption
+	 * @uses    \BabDev\Transifex\Transifex::setOption
 	 */
 	public function test__constructWithNoInjectedClient()
 	{
@@ -81,6 +86,12 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \InvalidArgumentException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Transifex::__get
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\Transifex::__construct
+	 * @uses    \BabDev\Transifex\Transifex::getOption
+	 * @uses    \BabDev\Transifex\Transifex::setOption
 	 */
 	public function test__GetFake()
 	{

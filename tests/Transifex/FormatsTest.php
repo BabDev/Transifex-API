@@ -6,9 +6,10 @@
 
 namespace BabDev\Tests\Transifex;
 
-use Joomla\Http\Response;
 use BabDev\Transifex\Formats;
 use BabDev\Transifex\Http;
+
+use Joomla\Http\Response;
 
 /**
  * Test class for \BabDev\Transifex\Formats.
@@ -76,6 +77,11 @@ class FormatsTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\Formats::getFormats
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetFormats()
 	{
@@ -100,6 +106,11 @@ class FormatsTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \DomainException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Formats::getFormats
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetFormatsFailure()
 	{

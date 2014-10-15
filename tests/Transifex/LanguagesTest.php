@@ -6,9 +6,10 @@
 
 namespace BabDev\Tests\Transifex;
 
-use Joomla\Http\Response;
 use BabDev\Transifex\Http;
 use BabDev\Transifex\Languages;
+
+use Joomla\Http\Response;
 
 /**
  * Test class for \BabDev\Transifex\Languages.
@@ -76,6 +77,11 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\Languages::createLanguage
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testCreateLanguage()
 	{
@@ -107,6 +113,11 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \DomainException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Languages::createLanguage
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testCreateLanguageFailure()
 	{
@@ -128,6 +139,11 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \InvalidArgumentException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Languages::createLanguage
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testCreateLanguageNoUsers()
 	{
@@ -140,6 +156,11 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\Languages::deleteLanguage
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testDeleteResource()
 	{
@@ -164,6 +185,11 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \DomainException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Languages::deleteLanguage
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testDeleteLanguageFailure()
 	{
@@ -184,6 +210,11 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\Languages::getCoordinators
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetCoordinators()
 	{
@@ -208,6 +239,11 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \DomainException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Languages::getCoordinators
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetCoordinatorsFailure()
 	{
@@ -228,6 +264,11 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\Languages::getLanguage
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetLanguage()
 	{
@@ -252,6 +293,11 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \DomainException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Languages::getLanguage
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetLanguageFailure()
 	{
@@ -272,6 +318,11 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\Languages::getLanguages
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetLanguages()
 	{
@@ -296,6 +347,11 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \DomainException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Languages::getLanguages
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetLanguagesFailure()
 	{
@@ -316,6 +372,11 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\Languages::getReviewers
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetReviewers()
 	{
@@ -340,6 +401,11 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \DomainException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Languages::getReviewers
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetReviewersFailure()
 	{
@@ -360,6 +426,11 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\Languages::getTranslators
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetTranslators()
 	{
@@ -384,6 +455,11 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \DomainException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Languages::getTranslators
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetTranslatorsFailure()
 	{
@@ -404,6 +480,12 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\Languages::updateCoordinators
+	 * @covers  \BabDev\Transifex\Languages::updateTeam
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testUpdateCoordinators()
 	{
@@ -428,6 +510,12 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \DomainException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Languages::updateCoordinators
+	 * @covers  \BabDev\Transifex\Languages::updateTeam
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testUpdateCoordinatorsFailure()
 	{
@@ -449,6 +537,12 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \InvalidArgumentException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Languages::updateCoordinators
+	 * @covers  \BabDev\Transifex\Languages::updateTeam
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testUpdateCoordinatorsNoUsers()
 	{
@@ -461,6 +555,11 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\Languages::updateLanguage
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testUpdateLanguage()
 	{
@@ -492,6 +591,11 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \DomainException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Languages::updateLanguage
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testUpdateLanguageFailure()
 	{
@@ -513,6 +617,11 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \InvalidArgumentException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Languages::updateLanguage
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testUpdateLanguageNoUsers()
 	{
@@ -525,6 +634,12 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\Languages::updateReviewers
+	 * @covers  \BabDev\Transifex\Languages::updateTeam
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testUpdateReviewers()
 	{
@@ -549,6 +664,12 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \DomainException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Languages::updateReviewers
+	 * @covers  \BabDev\Transifex\Languages::updateTeam
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testUpdateReviewersFailure()
 	{
@@ -570,6 +691,12 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \InvalidArgumentException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Languages::updateReviewers
+	 * @covers  \BabDev\Transifex\Languages::updateTeam
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testUpdateReviewersNoUsers()
 	{
@@ -582,6 +709,12 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\Languages::updateTranslators
+	 * @covers  \BabDev\Transifex\Languages::updateTeam
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testUpdateTranslators()
 	{
@@ -606,6 +739,12 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \DomainException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Languages::updateTranslators
+	 * @covers  \BabDev\Transifex\Languages::updateTeam
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testUpdateTranslatorsFailure()
 	{
@@ -627,6 +766,12 @@ class LanguagesTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \InvalidArgumentException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Languages::updateTranslators
+	 * @covers  \BabDev\Transifex\Languages::updateTeam
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testUpdateTranslatorsNoUsers()
 	{

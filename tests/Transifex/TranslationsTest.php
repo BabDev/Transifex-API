@@ -76,6 +76,11 @@ class TranslationsTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @covers  \BabDev\Transifex\Translations::getTranslation
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetTranslation()
 	{
@@ -100,6 +105,11 @@ class TranslationsTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \DomainException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @covers  \BabDev\Transifex\Translations::getTranslation
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetTranslationFailure()
 	{
@@ -120,6 +130,12 @@ class TranslationsTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @covers  \BabDev\Transifex\TransifexObject::updateResource
+	 * @covers  \BabDev\Transifex\Translations::updateTranslation
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testUpdateTranslationFile()
 	{
@@ -144,6 +160,12 @@ class TranslationsTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @covers  \BabDev\Transifex\TransifexObject::updateResource
+	 * @covers  \BabDev\Transifex\Translations::updateTranslation
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testUpdateTranslationString()
 	{
@@ -168,6 +190,12 @@ class TranslationsTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \DomainException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @covers  \BabDev\Transifex\TransifexObject::updateResource
+	 * @covers  \BabDev\Transifex\Translations::updateTranslation
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testUpdateTranslationFailure()
 	{
@@ -189,6 +217,12 @@ class TranslationsTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \InvalidArgumentException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @covers  \BabDev\Transifex\TransifexObject::updateResource
+	 * @covers  \BabDev\Transifex\Translations::updateTranslation
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testUpdateTranslationBadType()
 	{

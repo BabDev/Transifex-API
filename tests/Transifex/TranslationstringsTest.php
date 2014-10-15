@@ -76,6 +76,11 @@ class TranslationstringsTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @covers  \BabDev\Transifex\Translationstrings::getStrings
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetStrings()
 	{
@@ -99,6 +104,11 @@ class TranslationstringsTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @covers  \BabDev\Transifex\Translationstrings::getStrings
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetStringsDetails()
 	{
@@ -122,6 +132,11 @@ class TranslationstringsTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @covers  \BabDev\Transifex\Translationstrings::getStrings
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetStringsDetailsKey()
 	{
@@ -145,6 +160,11 @@ class TranslationstringsTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @covers  \BabDev\Transifex\Translationstrings::getStrings
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetStringsDetailsKeyContext()
 	{
@@ -168,6 +188,11 @@ class TranslationstringsTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @covers  \BabDev\Transifex\Translationstrings::getStrings
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetStringsKeyContext()
 	{
@@ -191,6 +216,11 @@ class TranslationstringsTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @covers  \BabDev\Transifex\Translationstrings::getStrings
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetStringsContext()
 	{
@@ -215,6 +245,11 @@ class TranslationstringsTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \DomainException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @covers  \BabDev\Transifex\Translationstrings::getStrings
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetStringsFailure()
 	{

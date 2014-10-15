@@ -6,9 +6,10 @@
 
 namespace BabDev\Tests\Transifex;
 
-use Joomla\Http\Response;
 use BabDev\Transifex\Http;
 use BabDev\Transifex\Languageinfo;
+
+use Joomla\Http\Response;
 
 /**
  * Test class for \BabDev\Transifex\Languageinfo.
@@ -76,6 +77,11 @@ class LanguageinfoTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\Languageinfo::getLanguage
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetLanguage()
 	{
@@ -100,6 +106,11 @@ class LanguageinfoTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \DomainException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Languageinfo::getLanguage
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetLanguageFailure()
 	{
@@ -120,6 +131,11 @@ class LanguageinfoTest extends \PHPUnit_Framework_TestCase
 	 * @return  void
 	 *
 	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\Languageinfo::getLanguages
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetLanguages()
 	{
@@ -144,6 +160,11 @@ class LanguageinfoTest extends \PHPUnit_Framework_TestCase
 	 *
 	 * @expectedException  \DomainException
 	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\Languageinfo::getLanguages
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetLanguagesFailure()
 	{
