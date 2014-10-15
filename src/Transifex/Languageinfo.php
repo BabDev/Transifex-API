@@ -24,7 +24,6 @@ class Languageinfo extends TransifexObject
 	 * @return  \stdClass  The language data.
 	 *
 	 * @since   1.0
-	 * @throws  \DomainException
 	 */
 	public function getLanguage($lang)
 	{
@@ -41,7 +40,6 @@ class Languageinfo extends TransifexObject
 	 * @return  \stdClass  The language data.
 	 *
 	 * @since   1.0
-	 * @throws  \DomainException
 	 */
 	public function getLanguages()
 	{

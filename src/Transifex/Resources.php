@@ -28,8 +28,6 @@ class Resources extends TransifexObject
 	 * @return  \stdClass
 	 *
 	 * @since   1.0
-	 * @throws  \DomainException
-	 * @throws  \InvalidArgumentException
 	 */
 	public function createResource($project, $name, $slug, $fileType, array $options = array())
 	{
@@ -91,7 +89,6 @@ class Resources extends TransifexObject
 	 * @return  \stdClass  The project details from the API.
 	 *
 	 * @since   1.0
-	 * @throws  \DomainException
 	 */
 	public function deleteResource($project, $resource)
 	{
@@ -112,7 +109,6 @@ class Resources extends TransifexObject
 	 * @return  \stdClass  The project details from the API.
 	 *
 	 * @since   1.0
-	 * @throws  \DomainException
 	 */
 	public function getResource($project, $resource, $details = false)
 	{
@@ -137,7 +133,6 @@ class Resources extends TransifexObject
 	 * @return  \stdClass  The project details from the API.
 	 *
 	 * @since   1.0
-	 * @throws  \DomainException
 	 */
 	public function getResourceContent($project, $resource)
 	{
@@ -156,7 +151,6 @@ class Resources extends TransifexObject
 	 * @return  \stdClass  The project details from the API.
 	 *
 	 * @since   1.0
-	 * @throws  \DomainException
 	 */
 	public function getResources($project)
 	{
@@ -178,8 +172,6 @@ class Resources extends TransifexObject
 	 * @return  \stdClass  The project details from the API.
 	 *
 	 * @since   1.0
-	 * @throws  \DomainException
-	 * @throws  \InvalidArgumentException
 	 */
 	public function updateResourceContent($project, $resource, $content, $type = 'string')
 	{

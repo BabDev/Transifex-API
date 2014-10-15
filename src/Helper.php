@@ -79,7 +79,6 @@ abstract class Helper
 	 * @return  boolean  True if authorized
 	 *
 	 * @since   1.0
-	 * @throws  \InvalidArgumentException
 	 */
 	public static function ipInRange($testIp, $validIps, $type = 'range')
 	{

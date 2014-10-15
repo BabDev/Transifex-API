@@ -28,7 +28,6 @@ class Translationstrings extends TransifexObject
 	 * @return  \stdClass  The resource's translation in the specified language.
 	 *
 	 * @since   1.0
-	 * @throws  \DomainException
 	 */
 	public function getStrings($project, $resource, $lang, $details = false, $options = array())
 	{

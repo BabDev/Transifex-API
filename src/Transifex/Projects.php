@@ -55,7 +55,6 @@ class Projects extends TransifexObject
 	 * @return  \stdClass
 	 *
 	 * @since   1.0
-	 * @throws  \UnexpectedValueException
 	 * @throws  \InvalidArgumentException
 	 */
 	public function createProject($name, $slug, $description, $sourceLanguage, array $options = array())
@@ -123,7 +122,6 @@ class Projects extends TransifexObject
 	 * @return  \stdClass
 	 *
 	 * @since   1.0
-	 * @throws  \DomainException
 	 */
 	public function deleteProject($slug)
 	{
@@ -143,7 +141,6 @@ class Projects extends TransifexObject
 	 * @return  \stdClass  The project details from the API.
 	 *
 	 * @since   1.0
-	 * @throws  \DomainException
 	 */
 	public function getProject($project, $details = false)
 	{
@@ -165,7 +162,6 @@ class Projects extends TransifexObject
 	 * @return  \stdClass  The list of projects from the API.
 	 *
 	 * @since   1.0
-	 * @throws  \DomainException
 	 */
 	public function getProjects()
 	{
@@ -185,8 +181,6 @@ class Projects extends TransifexObject
 	 * @return  \stdClass
 	 *
 	 * @since   1.0
-	 * @throws  \DomainException
-	 * @throws  \InvalidArgumentException
 	 * @throws  \RuntimeException
 	 */
 	public function updateProject($slug, array $options = array())

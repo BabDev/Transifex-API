@@ -26,7 +26,6 @@ class Translations extends TransifexObject
 	 * @return  \stdClass  The resource's translation in the specified language.
 	 *
 	 * @since   1.0
-	 * @throws  \DomainException
 	 */
 	public function getTranslation($project, $resource, $lang)
 	{
@@ -49,8 +48,6 @@ class Translations extends TransifexObject
 	 * @return  \stdClass  The project details from the API.
 	 *
 	 * @since   1.0
-	 * @throws  \DomainException
-	 * @throws  \InvalidArgumentException
 	 */
 	public function updateTranslation($project, $resource, $lang, $content, $type = 'string')
 	{

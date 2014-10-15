@@ -21,7 +21,6 @@ class Formats extends TransifexObject
 	 * @return  \stdClass  The supported formats from the API.
 	 *
 	 * @since   1.0
-	 * @throws  \DomainException
 	 */
 	public function getFormats()
 	{

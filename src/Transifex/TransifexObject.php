@@ -40,8 +40,6 @@ abstract class TransifexObject
 	 * @param   Http   $client   The HTTP client object.
 	 *
 	 * @since   1.0
-	 * @throws  \InvalidArgumentException
-	 * @throws  \RuntimeException
 	 */
 	public function __construct($options = array(), Http $client = null)
 	{

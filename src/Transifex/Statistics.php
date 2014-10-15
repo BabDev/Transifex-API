@@ -26,7 +26,6 @@ class Statistics extends TransifexObject
 	 * @return  \stdClass  The resource's statistics.
 	 *
 	 * @since   1.0
-	 * @throws  \DomainException
 	 */
 	public function getStatistics($project, $resource, $lang = null)
 	{

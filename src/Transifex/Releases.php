@@ -25,7 +25,6 @@ class Releases extends TransifexObject
 	 * @return  \stdClass  The release data from the API.
 	 *
 	 * @since   1.0
-	 * @throws  \DomainException
 	 */
 	public function getRelease($project, $release)
 	{

@@ -27,7 +27,6 @@ class Languages extends TransifexObject
 	 * @return  \stdClass
 	 *
 	 * @since   1.0
-	 * @throws  \DomainException
 	 * @throws  \InvalidArgumentException
 	 */
 	public function createLanguage($slug, $langCode, array $coordinators, array $options = array())
@@ -79,7 +78,6 @@ class Languages extends TransifexObject
 	 * @return  \stdClass
 	 *
 	 * @since   1.0
-	 * @throws  \DomainException
 	 */
 	public function deleteLanguage($project, $langCode)
 	{
@@ -99,7 +97,6 @@ class Languages extends TransifexObject
 	 * @return  \stdClass  The coordinator information from the API.
 	 *
 	 * @since   1.0
-	 * @throws  \DomainException
 	 */
 	public function getCoordinators($project, $langCode)
 	{
@@ -119,7 +116,6 @@ class Languages extends TransifexObject
 	 * @return  \stdClass  The language details for the specified project from the API.
 	 *
 	 * @since   1.0
-	 * @throws  \DomainException
 	 */
 	public function getLanguage($project, $langCode)
 	{
@@ -138,7 +134,6 @@ class Languages extends TransifexObject
 	 * @return  \stdClass  The language data for the project.
 	 *
 	 * @since   1.0
-	 * @throws  \DomainException
 	 */
 	public function getLanguages($project)
 	{
@@ -158,7 +153,6 @@ class Languages extends TransifexObject
 	 * @return  \stdClass  The reviewer information from the API.
 	 *
 	 * @since   1.0
-	 * @throws  \DomainException
 	 */
 	public function getReviewers($project, $langCode)
 	{
@@ -178,7 +172,6 @@ class Languages extends TransifexObject
 	 * @return  \stdClass  The translators information from the API.
 	 *
 	 * @since   1.0
-	 * @throws  \DomainException
 	 */
 	public function getTranslators($project, $langCode)
 	{
@@ -199,8 +192,6 @@ class Languages extends TransifexObject
 	 * @return  \stdClass
 	 *
 	 * @since   1.0
-	 * @throws  \DomainException
-	 * @throws  \InvalidArgumentException
 	 */
 	public function updateCoordinators($project, $langCode, array $coordinators)
 	{
@@ -218,7 +209,6 @@ class Languages extends TransifexObject
 	 * @return  \stdClass
 	 *
 	 * @since   1.0
-	 * @throws  \DomainException
 	 * @throws  \InvalidArgumentException
 	 */
 	public function updateLanguage($slug, $langCode, array $coordinators, array $options = array())
@@ -268,8 +258,6 @@ class Languages extends TransifexObject
 	 * @return  \stdClass
 	 *
 	 * @since   1.0
-	 * @throws  \DomainException
-	 * @throws  \InvalidArgumentException
 	 */
 	public function updateReviewers($project, $langCode, array $reviewers)
 	{
@@ -287,7 +275,6 @@ class Languages extends TransifexObject
 	 * @return  \stdClass
 	 *
 	 * @since   1.0
-	 * @throws  \DomainException
 	 * @throws  \InvalidArgumentException
 	 */
 	protected function updateTeam($project, $langCode, array $members, $team)
@@ -322,8 +309,6 @@ class Languages extends TransifexObject
 	 * @return  \stdClass
 	 *
 	 * @since   1.0
-	 * @throws  \DomainException
-	 * @throws  \InvalidArgumentException
 	 */
 	public function updateTranslators($project, $langCode, array $translators)
 	{
