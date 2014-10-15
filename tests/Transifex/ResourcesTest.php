@@ -6,53 +6,20 @@
 
 namespace BabDev\Tests\Transifex;
 
-use Joomla\Http\Response;
-use BabDev\Transifex\Http;
 use BabDev\Transifex\Resources;
 
 /**
  * Test class for \BabDev\Transifex\Resources.
  *
- * @note   Do not set the error object message here to test TransifexObject handling
  * @since  1.0
  */
-class ResourcesTest extends \PHPUnit_Framework_TestCase
+class ResourcesTest extends TransifexTestCase
 {
-	/**
-	 * @var    array  Options for the GitHub object.
-	 * @since  1.0
-	 */
-	protected $options;
-
-	/**
-	 * @var    Http  Mock client object.
-	 * @since  1.0
-	 */
-	protected $client;
-
-	/**
-	 * @var    Response  Mock response object.
-	 * @since  1.0
-	 */
-	protected $response;
-
 	/**
 	 * @var    Resources  Object under test.
 	 * @since  1.0
 	 */
 	protected $object;
-
-	/**
-	 * @var    string  Sample JSON string.
-	 * @since  1.0
-	 */
-	protected $sampleString = '{"a":1,"b":2,"c":3,"d":4,"e":5}';
-
-	/**
-	 * @var    string  Sample JSON error message.
-	 * @since  1.0
-	 */
-	protected $errorString = '{}';
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
@@ -64,9 +31,7 @@ class ResourcesTest extends \PHPUnit_Framework_TestCase
 	 */
 	protected function setUp()
 	{
-		$this->options = array();
-		$this->client = $this->getMock('\\BabDev\\Transifex\\Http', array('get', 'post', 'delete', 'put', 'patch'));
-		$this->response = $this->getMock('\\Joomla\\Http\\Response');
+		parent::setUp();
 
 		$this->object = new Resources($this->options, $this->client);
 	}
