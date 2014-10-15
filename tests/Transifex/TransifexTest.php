@@ -9,8 +9,6 @@ namespace BabDev\Tests\Transifex;
 use BabDev\Transifex\Http;
 use BabDev\Transifex\Transifex;
 
-use Joomla\Test\TestHelper;
-
 /**
  * Test class for \BabDev\Transifex\Transifex.
  *
@@ -47,9 +45,8 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 	protected function setUp()
 	{
 		$this->options = array('api.username' => 'test', 'api.password' => 'test');
-		$this->client = $this->getMock('\\BabDev\\Transifex\\Http', array('get', 'post', 'delete', 'put', 'patch'));
-
-		$this->object = new Transifex($this->options, $this->client);
+		$this->client  = $this->getMock('\\BabDev\\Transifex\\Http', array('get', 'post', 'delete', 'put', 'patch'));
+		$this->object  = new Transifex($this->options, $this->client);
 	}
 
 	/**
@@ -69,9 +66,10 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 			'The object successfully is created without a client injected.'
 		);
 
-		$this->assertInstanceOf(
+		$this->assertAttributeInstanceOf(
 			'\\Joomla\\Http\\Http',
-			TestHelper::getValue($object, 'client'),
+			'client',
+			$object,
 			'Ensure the Transifex object has a HTTP client instance.'
 		);
 	}
@@ -225,42 +223,21 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Tests the setOption method
+	 * Tests the setOption and getOption methods
 	 *
 	 * @return  void
 	 *
 	 * @since   1.0
 	 */
-	public function testSetOption()
+	public function testSetAndGetOption()
 	{
-		$this->object->setOption('api.url', 'https://example.com/settest');
+		$this->object->setOption('api.url', 'https://example.com/test');
 
-		$value = TestHelper::getValue($this->object, 'options');
+		$this->assertAttributeContains('https://example.com/test', 'options', $this->object);
 
-		$this->assertEquals(
-			$value['api.url'],
-			'https://example.com/settest'
-		);
-	}
-
-	/**
-	 * Tests the getOption method
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
-	 */
-	public function testGetOption()
-	{
-		TestHelper::setValue(
-			$this->object, 'options', array(
-				'api.url' => 'https://example.com/gettest'
-			)
-		);
-
-		$this->assertEquals(
+		$this->assertSame(
 			$this->object->getOption('api.url'),
-			'https://example.com/gettest'
+			'https://example.com/test'
 		);
 	}
 }
