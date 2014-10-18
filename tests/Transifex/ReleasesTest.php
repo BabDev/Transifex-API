@@ -50,13 +50,7 @@ class ReleasesTest extends TransifexTestCase
 	 */
 	public function testGetRelease()
 	{
-		$this->response->code = 200;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/project/joomla-platform/release/12.1/')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('get', '/project/joomla-platform/release/12.1/');
 
 		$this->assertEquals(
 			$this->object->getRelease('joomla-platform', '12.1'),
@@ -79,13 +73,7 @@ class ReleasesTest extends TransifexTestCase
 	 */
 	public function testGetReleaseFailure()
 	{
-		$this->response->code = 500;
-		$this->response->body = $this->errorString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/project/joomla-platform/release/12.1/')
-			->will($this->returnValue($this->response));
+		$this->prepareFailureTest('get', '/project/joomla-platform/release/12.1/');
 
 		$this->object->getRelease('joomla-platform', '12.1');
 	}

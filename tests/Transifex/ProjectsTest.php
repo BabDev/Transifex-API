@@ -51,13 +51,7 @@ class ProjectsTest extends TransifexTestCase
 	 */
 	public function testCreateProject()
 	{
-		$this->response->code = 201;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('post')
-			->with('/projects/')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('post', '/projects/', 201);
 
 		// Additional options
 		$options = array(
@@ -100,13 +94,7 @@ class ProjectsTest extends TransifexTestCase
 	 */
 	public function testCreateProjectFailureForABadRequest()
 	{
-		$this->response->code = 500;
-		$this->response->body = $this->errorString;
-
-		$this->client->expects($this->once())
-			->method('post')
-			->with('/projects/')
-			->will($this->returnValue($this->response));
+		$this->prepareFailureTest('post', '/projects/');
 
 		$this->object->createProject('Joomla Platform', 'joomla-platform', 'Project for the Joomla Platform', 'en_GB', array('repository_url' => 'http://www.joomla.org'));
 	}
@@ -163,13 +151,7 @@ class ProjectsTest extends TransifexTestCase
 	 */
 	public function testDeleteProject()
 	{
-		$this->response->code = 204;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('delete')
-			->with('/project/joomla-platform')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('delete', '/project/joomla-platform', 204);
 
 		$this->assertEquals(
 			$this->object->deleteProject('joomla-platform'),
@@ -192,13 +174,7 @@ class ProjectsTest extends TransifexTestCase
 	 */
 	public function testDeleteProjectFailure()
 	{
-		$this->response->code = 500;
-		$this->response->body = $this->errorString;
-
-		$this->client->expects($this->once())
-			->method('delete')
-			->with('/project/joomla-platform')
-			->will($this->returnValue($this->response));
+		$this->prepareFailureTest('delete', '/project/joomla-platform');
 
 		$this->object->deleteProject('joomla-platform');
 	}
@@ -217,13 +193,7 @@ class ProjectsTest extends TransifexTestCase
 	 */
 	public function testGetProject()
 	{
-		$this->response->code = 200;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/project/joomla-platform/?details')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('get', '/project/joomla-platform/?details');
 
 		$this->assertEquals(
 			$this->object->getProject('joomla-platform', true),
@@ -246,13 +216,7 @@ class ProjectsTest extends TransifexTestCase
 	 */
 	public function testGetProjectFailure()
 	{
-		$this->response->code = 500;
-		$this->response->body = $this->errorString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/project/joomla-platform/?details')
-			->will($this->returnValue($this->response));
+		$this->prepareFailureTest('get', '/project/joomla-platform/?details');
 
 		$this->object->getProject('joomla-platform', true);
 	}
@@ -271,13 +235,7 @@ class ProjectsTest extends TransifexTestCase
 	 */
 	public function testGetProjects()
 	{
-		$this->response->code = 200;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/projects/')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('get', '/projects/');
 
 		$this->assertEquals(
 			$this->object->getProjects(),
@@ -300,13 +258,7 @@ class ProjectsTest extends TransifexTestCase
 	 */
 	public function testGetProjectsFailure()
 	{
-		$this->response->code = 500;
-		$this->response->body = $this->errorString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/projects/')
-			->will($this->returnValue($this->response));
+		$this->prepareFailureTest('get', '/projects/');
 
 		$this->object->getProjects();
 	}
@@ -326,13 +278,7 @@ class ProjectsTest extends TransifexTestCase
 	 */
 	public function testUpdateProject()
 	{
-		$this->response->code = 200;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('put')
-			->with('/project/joomla-platform/')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('put', '/project/joomla-platform/');
 
 		// Additional options
 		$options = array(
@@ -376,13 +322,7 @@ class ProjectsTest extends TransifexTestCase
 	 */
 	public function testUpdateProjectFailure()
 	{
-		$this->response->code = 500;
-		$this->response->body = $this->errorString;
-
-		$this->client->expects($this->once())
-			->method('put')
-			->with('/project/joomla-platform/')
-			->will($this->returnValue($this->response));
+		$this->prepareFailureTest('put', '/project/joomla-platform/');
 
 		$this->object->updateProject('joomla-platform', array('name' => 'Joomla Platform'));
 	}

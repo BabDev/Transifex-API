@@ -50,13 +50,7 @@ class LanguageinfoTest extends TransifexTestCase
 	 */
 	public function testGetLanguage()
 	{
-		$this->response->code = 200;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/language/en_GB/')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('get', '/language/en_GB/');
 
 		$this->assertEquals(
 			$this->object->getLanguage('en_GB'),
@@ -79,13 +73,7 @@ class LanguageinfoTest extends TransifexTestCase
 	 */
 	public function testGetLanguageFailure()
 	{
-		$this->response->code = 500;
-		$this->response->body = $this->errorString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/language/en_GB/')
-			->will($this->returnValue($this->response));
+		$this->prepareFailureTest('get', '/language/en_GB/');
 
 		$this->object->getLanguage('en_GB');
 	}
@@ -104,13 +92,7 @@ class LanguageinfoTest extends TransifexTestCase
 	 */
 	public function testGetLanguages()
 	{
-		$this->response->code = 200;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/languages/')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('get', '/languages/');
 
 		$this->assertEquals(
 			$this->object->getLanguages(),
@@ -133,13 +115,7 @@ class LanguageinfoTest extends TransifexTestCase
 	 */
 	public function testGetLanguagesFailure()
 	{
-		$this->response->code = 500;
-		$this->response->body = $this->errorString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/languages/')
-			->will($this->returnValue($this->response));
+		$this->prepareFailureTest('get', '/languages/');
 
 		$this->object->getLanguages();
 	}

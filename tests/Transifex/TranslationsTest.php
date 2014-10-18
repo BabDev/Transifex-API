@@ -50,13 +50,7 @@ class TranslationsTest extends TransifexTestCase
 	 */
 	public function testGetTranslation()
 	{
-		$this->response->code = 200;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/project/joomla/resource/joomla-platform/translation/en_GB')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('get', '/project/joomla/resource/joomla-platform/translation/en_GB');
 
 		$this->assertEquals(
 			$this->object->getTranslation('joomla', 'joomla-platform', 'en_GB'),
@@ -79,13 +73,7 @@ class TranslationsTest extends TransifexTestCase
 	 */
 	public function testGetTranslationFailure()
 	{
-		$this->response->code = 500;
-		$this->response->body = $this->errorString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/project/joomla/resource/joomla-platform/translation/en_GB')
-			->will($this->returnValue($this->response));
+		$this->prepareFailureTest('get', '/project/joomla/resource/joomla-platform/translation/en_GB');
 
 		$this->object->getTranslation('joomla', 'joomla-platform', 'en_GB');
 	}
@@ -105,13 +93,7 @@ class TranslationsTest extends TransifexTestCase
 	 */
 	public function testUpdateTranslationFile()
 	{
-		$this->response->code = 200;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('put')
-			->with('/project/joomla/resource/joomla-platform/translation/en_GB')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('put', '/project/joomla/resource/joomla-platform/translation/en_GB');
 
 		$this->assertEquals(
 			$this->object->updateTranslation('joomla', 'joomla-platform', 'en_GB', __DIR__ . '/stubs/source.ini', 'file'),
@@ -135,13 +117,7 @@ class TranslationsTest extends TransifexTestCase
 	 */
 	public function testUpdateTranslationString()
 	{
-		$this->response->code = 200;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('put')
-			->with('/project/joomla/resource/joomla-platform/translation/en_GB')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('put', '/project/joomla/resource/joomla-platform/translation/en_GB');
 
 		$this->assertEquals(
 			$this->object->updateTranslation('joomla', 'joomla-platform', 'en_GB', 'TEST="Test"'),
@@ -165,13 +141,7 @@ class TranslationsTest extends TransifexTestCase
 	 */
 	public function testUpdateTranslationFailure()
 	{
-		$this->response->code = 500;
-		$this->response->body = $this->errorString;
-
-		$this->client->expects($this->once())
-			->method('put')
-			->with('/project/joomla/resource/joomla-platform/translation/en_GB')
-			->will($this->returnValue($this->response));
+		$this->prepareFailureTest('put', '/project/joomla/resource/joomla-platform/translation/en_GB');
 
 		$this->object->updateTranslation('joomla', 'joomla-platform', 'en_GB', 'TEST="Test"');
 	}

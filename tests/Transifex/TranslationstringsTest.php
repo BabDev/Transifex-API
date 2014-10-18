@@ -50,13 +50,7 @@ class TranslationstringsTest extends TransifexTestCase
 	 */
 	public function testGetStrings()
 	{
-		$this->response->code = 200;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/project/joomla/resource/joomla-platform/translation/en_GB/strings/')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('get', '/project/joomla/resource/joomla-platform/translation/en_GB/strings/');
 
 		$this->assertEquals(
 			$this->object->getStrings('joomla', 'joomla-platform', 'en_GB'),
@@ -78,13 +72,7 @@ class TranslationstringsTest extends TransifexTestCase
 	 */
 	public function testGetStringsDetails()
 	{
-		$this->response->code = 200;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/project/joomla/resource/joomla-platform/translation/en_GB/strings/?details')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('get', '/project/joomla/resource/joomla-platform/translation/en_GB/strings/?details');
 
 		$this->assertEquals(
 			$this->object->getStrings('joomla', 'joomla-platform', 'en_GB', true),
@@ -106,13 +94,7 @@ class TranslationstringsTest extends TransifexTestCase
 	 */
 	public function testGetStringsDetailsKey()
 	{
-		$this->response->code = 200;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/project/joomla/resource/joomla-platform/translation/en_GB/strings/?details\&key=Yes')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('get', '/project/joomla/resource/joomla-platform/translation/en_GB/strings/?details\&key=Yes');
 
 		$this->assertEquals(
 			$this->object->getStrings('joomla', 'joomla-platform', 'en_GB', true, array('key' => 'Yes')),
@@ -134,13 +116,7 @@ class TranslationstringsTest extends TransifexTestCase
 	 */
 	public function testGetStringsDetailsKeyContext()
 	{
-		$this->response->code = 200;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/project/joomla/resource/joomla-platform/translation/en_GB/strings/?details\&key=Yes\&context=Something')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('get', '/project/joomla/resource/joomla-platform/translation/en_GB/strings/?details\&key=Yes\&context=Something');
 
 		$this->assertEquals(
 			$this->object->getStrings('joomla', 'joomla-platform', 'en_GB', true, array('key' => 'Yes', 'context' => 'Something')),
@@ -162,13 +138,7 @@ class TranslationstringsTest extends TransifexTestCase
 	 */
 	public function testGetStringsKeyContext()
 	{
-		$this->response->code = 200;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/project/joomla/resource/joomla-platform/translation/en_GB/strings/?key=Yes\&context=Something')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('get', '/project/joomla/resource/joomla-platform/translation/en_GB/strings/?key=Yes\&context=Something');
 
 		$this->assertEquals(
 			$this->object->getStrings('joomla', 'joomla-platform', 'en_GB', false, array('key' => 'Yes', 'context' => 'Something')),
@@ -190,13 +160,7 @@ class TranslationstringsTest extends TransifexTestCase
 	 */
 	public function testGetStringsContext()
 	{
-		$this->response->code = 200;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/project/joomla/resource/joomla-platform/translation/en_GB/strings/?context=Something')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('get', '/project/joomla/resource/joomla-platform/translation/en_GB/strings/?context=Something');
 
 		$this->assertEquals(
 			$this->object->getStrings('joomla', 'joomla-platform', 'en_GB', false, array('context' => 'Something')),
@@ -219,13 +183,7 @@ class TranslationstringsTest extends TransifexTestCase
 	 */
 	public function testGetStringsFailure()
 	{
-		$this->response->code = 500;
-		$this->response->body = $this->errorString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/project/joomla/resource/joomla-platform/translation/en_GB/strings/')
-			->will($this->returnValue($this->response));
+		$this->prepareFailureTest('get', '/project/joomla/resource/joomla-platform/translation/en_GB/strings/');
 
 		$this->object->getStrings('joomla', 'joomla-platform', 'en_GB');
 	}

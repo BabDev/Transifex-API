@@ -50,13 +50,7 @@ class LanguagesTest extends TransifexTestCase
 	 */
 	public function testCreateLanguage()
 	{
-		$this->response->code = 201;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('post')
-			->with('/project/joomla-platform/languages/')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('post', '/project/joomla-platform/languages/', 201);
 
 		// Additional options
 		$options = array(
@@ -86,13 +80,7 @@ class LanguagesTest extends TransifexTestCase
 	 */
 	public function testCreateLanguageFailure()
 	{
-		$this->response->code = 500;
-		$this->response->body = $this->errorString;
-
-		$this->client->expects($this->once())
-			->method('post')
-			->with('/project/joomla-platform/languages/')
-			->will($this->returnValue($this->response));
+		$this->prepareFailureTest('post', '/project/joomla-platform/languages/');
 
 		$this->object->createLanguage('joomla-platform', 'en_GB', array('mbabker'));
 	}
@@ -129,13 +117,7 @@ class LanguagesTest extends TransifexTestCase
 	 */
 	public function testDeleteResource()
 	{
-		$this->response->code = 204;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('delete')
-			->with('/project/joomla-platform/language/en_US/')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('delete', '/project/joomla-platform/language/en_US/', 204);
 
 		$this->assertEquals(
 			$this->object->deleteLanguage('joomla-platform', 'en_US'),
@@ -158,13 +140,7 @@ class LanguagesTest extends TransifexTestCase
 	 */
 	public function testDeleteLanguageFailure()
 	{
-		$this->response->code = 500;
-		$this->response->body = $this->errorString;
-
-		$this->client->expects($this->once())
-			->method('delete')
-			->with('/project/joomla-platform/language/en_US/')
-			->will($this->returnValue($this->response));
+		$this->prepareFailureTest('delete', '/project/joomla-platform/language/en_US/');
 
 		$this->object->deleteLanguage('joomla-platform', 'en_US');
 	}
@@ -183,13 +159,7 @@ class LanguagesTest extends TransifexTestCase
 	 */
 	public function testGetCoordinators()
 	{
-		$this->response->code = 200;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/project/joomla-platform/language/en_US/coordinators/')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('get', '/project/joomla-platform/language/en_US/coordinators/');
 
 		$this->assertEquals(
 			$this->object->getCoordinators('joomla-platform', 'en_US'),
@@ -212,13 +182,7 @@ class LanguagesTest extends TransifexTestCase
 	 */
 	public function testGetCoordinatorsFailure()
 	{
-		$this->response->code = 500;
-		$this->response->body = $this->errorString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/project/joomla-platform/language/en_US/coordinators/')
-			->will($this->returnValue($this->response));
+		$this->prepareFailureTest('get', '/project/joomla-platform/language/en_US/coordinators/');
 
 		$this->object->getCoordinators('joomla-platform', 'en_US');
 	}
@@ -237,13 +201,7 @@ class LanguagesTest extends TransifexTestCase
 	 */
 	public function testGetLanguage()
 	{
-		$this->response->code = 200;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/project/joomla-platform/language/en_US/')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('get', '/project/joomla-platform/language/en_US/');
 
 		$this->assertEquals(
 			$this->object->getLanguage('joomla-platform', 'en_US'),
@@ -266,13 +224,7 @@ class LanguagesTest extends TransifexTestCase
 	 */
 	public function testGetLanguageFailure()
 	{
-		$this->response->code = 500;
-		$this->response->body = $this->errorString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/project/joomla-platform/language/en_US/')
-			->will($this->returnValue($this->response));
+		$this->prepareFailureTest('get', '/project/joomla-platform/language/en_US/');
 
 		$this->object->getLanguage('joomla-platform', 'en_US');
 	}
@@ -291,13 +243,7 @@ class LanguagesTest extends TransifexTestCase
 	 */
 	public function testGetLanguages()
 	{
-		$this->response->code = 200;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/project/joomla-platform/languages/')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('get', '/project/joomla-platform/languages/');
 
 		$this->assertEquals(
 			$this->object->getLanguages('joomla-platform'),
@@ -320,13 +266,7 @@ class LanguagesTest extends TransifexTestCase
 	 */
 	public function testGetLanguagesFailure()
 	{
-		$this->response->code = 500;
-		$this->response->body = $this->errorString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/project/joomla-platform/languages/')
-			->will($this->returnValue($this->response));
+		$this->prepareFailureTest('get', '/project/joomla-platform/languages/');
 
 		$this->object->getLanguages('joomla-platform');
 	}
@@ -345,13 +285,7 @@ class LanguagesTest extends TransifexTestCase
 	 */
 	public function testGetReviewers()
 	{
-		$this->response->code = 200;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/project/joomla-platform/language/en_US/reviewers/')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('get', '/project/joomla-platform/language/en_US/reviewers/');
 
 		$this->assertEquals(
 			$this->object->getReviewers('joomla-platform', 'en_US'),
@@ -374,13 +308,7 @@ class LanguagesTest extends TransifexTestCase
 	 */
 	public function testGetReviewersFailure()
 	{
-		$this->response->code = 500;
-		$this->response->body = $this->errorString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/project/joomla-platform/language/en_US/reviewers/')
-			->will($this->returnValue($this->response));
+		$this->prepareFailureTest('get', '/project/joomla-platform/language/en_US/reviewers/');
 
 		$this->object->getReviewers('joomla-platform', 'en_US');
 	}
@@ -399,13 +327,7 @@ class LanguagesTest extends TransifexTestCase
 	 */
 	public function testGetTranslators()
 	{
-		$this->response->code = 200;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/project/joomla-platform/language/en_US/translators/')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('get', '/project/joomla-platform/language/en_US/translators/');
 
 		$this->assertEquals(
 			$this->object->getTranslators('joomla-platform', 'en_US'),
@@ -428,13 +350,7 @@ class LanguagesTest extends TransifexTestCase
 	 */
 	public function testGetTranslatorsFailure()
 	{
-		$this->response->code = 500;
-		$this->response->body = $this->errorString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/project/joomla-platform/language/en_US/translators/')
-			->will($this->returnValue($this->response));
+		$this->prepareFailureTest('get', '/project/joomla-platform/language/en_US/translators/');
 
 		$this->object->getTranslators('joomla-platform', 'en_US');
 	}
@@ -454,13 +370,7 @@ class LanguagesTest extends TransifexTestCase
 	 */
 	public function testUpdateCoordinators()
 	{
-		$this->response->code = 200;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('put')
-			->with('/project/joomla-platform/language/en_US/coordinators/')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('put', '/project/joomla-platform/language/en_US/coordinators/');
 
 		$this->assertEquals(
 			$this->object->updateCoordinators('joomla-platform', 'en_US', array('mbabker')),
@@ -484,13 +394,7 @@ class LanguagesTest extends TransifexTestCase
 	 */
 	public function testUpdateCoordinatorsFailure()
 	{
-		$this->response->code = 500;
-		$this->response->body = $this->errorString;
-
-		$this->client->expects($this->once())
-			->method('put')
-			->with('/project/joomla-platform/language/en_US/coordinators/')
-			->will($this->returnValue($this->response));
+		$this->prepareFailureTest('put', '/project/joomla-platform/language/en_US/coordinators/');
 
 		$this->object->updateCoordinators('joomla-platform', 'en_US', array('mbabker'));
 	}
@@ -528,13 +432,7 @@ class LanguagesTest extends TransifexTestCase
 	 */
 	public function testUpdateLanguage()
 	{
-		$this->response->code = 200;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('put')
-			->with('/project/joomla-platform/language/en_US/')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('put', '/project/joomla-platform/language/en_US/');
 
 		// Additional options
 		$options = array(
@@ -564,13 +462,7 @@ class LanguagesTest extends TransifexTestCase
 	 */
 	public function testUpdateLanguageFailure()
 	{
-		$this->response->code = 500;
-		$this->response->body = $this->errorString;
-
-		$this->client->expects($this->once())
-			->method('put')
-			->with('/project/joomla-platform/language/en_US/')
-			->will($this->returnValue($this->response));
+		$this->prepareFailureTest('put', '/project/joomla-platform/language/en_US/');
 
 		$this->object->updateLanguage('joomla-platform', 'en_US', array('mbabker'));
 	}
@@ -608,13 +500,7 @@ class LanguagesTest extends TransifexTestCase
 	 */
 	public function testUpdateReviewers()
 	{
-		$this->response->code = 200;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('put')
-			->with('/project/joomla-platform/language/en_US/reviewers/')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('put', '/project/joomla-platform/language/en_US/reviewers/');
 
 		$this->assertEquals(
 			$this->object->updateReviewers('joomla-platform', 'en_US', array('mbabker')),
@@ -638,13 +524,7 @@ class LanguagesTest extends TransifexTestCase
 	 */
 	public function testUpdateReviewersFailure()
 	{
-		$this->response->code = 500;
-		$this->response->body = $this->errorString;
-
-		$this->client->expects($this->once())
-			->method('put')
-			->with('/project/joomla-platform/language/en_US/reviewers/')
-			->will($this->returnValue($this->response));
+		$this->prepareFailureTest('put', '/project/joomla-platform/language/en_US/reviewers/');
 
 		$this->object->updateReviewers('joomla-platform', 'en_US', array('mbabker'));
 	}
@@ -683,13 +563,7 @@ class LanguagesTest extends TransifexTestCase
 	 */
 	public function testUpdateTranslators()
 	{
-		$this->response->code = 200;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('put')
-			->with('/project/joomla-platform/language/en_US/translators/')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('put', '/project/joomla-platform/language/en_US/translators/');
 
 		$this->assertEquals(
 			$this->object->updateTranslators('joomla-platform', 'en_US', array('mbabker')),
@@ -713,13 +587,7 @@ class LanguagesTest extends TransifexTestCase
 	 */
 	public function testUpdateTranslatorsFailure()
 	{
-		$this->response->code = 500;
-		$this->response->body = $this->errorString;
-
-		$this->client->expects($this->once())
-			->method('put')
-			->with('/project/joomla-platform/language/en_US/translators/')
-			->will($this->returnValue($this->response));
+		$this->prepareFailureTest('put', '/project/joomla-platform/language/en_US/translators/');
 
 		$this->object->updateTranslators('joomla-platform', 'en_US', array('mbabker'));
 	}

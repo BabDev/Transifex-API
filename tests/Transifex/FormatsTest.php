@@ -50,13 +50,7 @@ class FormatsTest extends TransifexTestCase
 	 */
 	public function testGetFormats()
 	{
-		$this->response->code = 200;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/formats')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('get', '/formats');
 
 		$this->assertEquals(
 			$this->object->getFormats(),
@@ -79,13 +73,7 @@ class FormatsTest extends TransifexTestCase
 	 */
 	public function testGetFormatsFailure()
 	{
-		$this->response->code = 500;
-		$this->response->body = $this->errorString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/formats')
-			->will($this->returnValue($this->response));
+		$this->prepareFailureTest('get', '/formats');
 
 		$this->object->getFormats();
 	}

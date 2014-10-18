@@ -50,13 +50,7 @@ class StatisticsTest extends TransifexTestCase
 	 */
 	public function testGetStatistics()
 	{
-		$this->response->code = 200;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/project/joomla/resource/joomla-platform/stats/')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('get', '/project/joomla/resource/joomla-platform/stats/');
 
 		$this->assertEquals(
 			$this->object->getStatistics('joomla', 'joomla-platform'),
@@ -79,13 +73,7 @@ class StatisticsTest extends TransifexTestCase
 	 */
 	public function testGetStatisticsFailure()
 	{
-		$this->response->code = 500;
-		$this->response->body = $this->errorString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/project/joomla/resource/joomla-platform/stats/')
-			->will($this->returnValue($this->response));
+		$this->prepareFailureTest('get', '/project/joomla/resource/joomla-platform/stats/');
 
 		$this->object->getStatistics('joomla', 'joomla-platform');
 	}

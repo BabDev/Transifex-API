@@ -61,4 +61,46 @@ abstract class TransifexTestCase extends \PHPUnit_Framework_TestCase
 		$this->client   = $this->getMock('\\BabDev\\Transifex\\Http', array('get', 'post', 'delete', 'put', 'patch'));
 		$this->response = $this->getMock('\\Joomla\\Http\\Response');
 	}
+
+	/**
+	 * Prepares the test response for a failure (500) response
+	 *
+	 * @param   string  $method  The method being called
+	 * @param   string  $url     The URL being requested
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0
+	 */
+	protected function prepareFailureTest($method, $url)
+	{
+		$this->response->code = 500;
+		$this->response->body = $this->errorString;
+
+		$this->client->expects($this->once())
+			->method($method)
+			->with($url)
+			->will($this->returnValue($this->response));
+	}
+
+	/**
+	 * Prepares the test response for a success (200) response
+	 *
+	 * @param   string  $method  The method being called
+	 * @param   string  $url     The URL being requested
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0
+	 */
+	protected function prepareSuccessTest($method, $url, $code = 200)
+	{
+		$this->response->code = $code;
+		$this->response->body = $this->sampleString;
+
+		$this->client->expects($this->once())
+			->method($method)
+			->with($url)
+			->will($this->returnValue($this->response));
+	}
 }

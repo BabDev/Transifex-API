@@ -50,13 +50,7 @@ class ResourcesTest extends TransifexTestCase
 	 */
 	public function testCreateResourceContent()
 	{
-		$this->response->code = 201;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('post')
-			->with('/project/joomla-platform/resources/')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('post', '/project/joomla-platform/resources/', 201);
 
 		// Additional options
 		$options = array(
@@ -86,13 +80,7 @@ class ResourcesTest extends TransifexTestCase
 	 */
 	public function testCreateResourceFile()
 	{
-		$this->response->code = 201;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('post')
-			->with('/project/joomla-platform/resources/')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('post', '/project/joomla-platform/resources/', 201);
 
 		// Additional options
 		$options = array(
@@ -123,13 +111,7 @@ class ResourcesTest extends TransifexTestCase
 	 */
 	public function testCreateResourceFailure()
 	{
-		$this->response->code = 500;
-		$this->response->body = $this->errorString;
-
-		$this->client->expects($this->once())
-			->method('post')
-			->with('/project/joomla-platform/resources/')
-			->will($this->returnValue($this->response));
+		$this->prepareFailureTest('post', '/project/joomla-platform/resources/');
 
 		$this->object->createResource('joomla-platform', 'Joomla Platform Data', 'joomla-platform', 'INI', array('content' => 'Test="Test"'));
 	}
@@ -148,13 +130,7 @@ class ResourcesTest extends TransifexTestCase
 	 */
 	public function testDeleteResource()
 	{
-		$this->response->code = 204;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('delete')
-			->with('/project/joomla/resource/joomla-platform')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('delete', '/project/joomla/resource/joomla-platform', 204);
 
 		$this->assertEquals(
 			$this->object->deleteResource('joomla', 'joomla-platform'),
@@ -177,13 +153,7 @@ class ResourcesTest extends TransifexTestCase
 	 */
 	public function testDeleteResourceFailure()
 	{
-		$this->response->code = 500;
-		$this->response->body = $this->errorString;
-
-		$this->client->expects($this->once())
-			->method('delete')
-			->with('/project/joomla/resource/joomla-platform')
-			->will($this->returnValue($this->response));
+		$this->prepareFailureTest('delete', '/project/joomla/resource/joomla-platform');
 
 		$this->object->deleteResource('joomla', 'joomla-platform');
 	}
@@ -202,13 +172,7 @@ class ResourcesTest extends TransifexTestCase
 	 */
 	public function testGetResource()
 	{
-		$this->response->code = 200;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/project/joomla/resource/joomla-platform/?details')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('get', '/project/joomla/resource/joomla-platform/?details');
 
 		$this->assertEquals(
 			$this->object->getResource('joomla', 'joomla-platform', true),
@@ -231,13 +195,7 @@ class ResourcesTest extends TransifexTestCase
 	 */
 	public function testGetResourceFailure()
 	{
-		$this->response->code = 500;
-		$this->response->body = $this->errorString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/project/joomla/resource/joomla-platform/?details')
-			->will($this->returnValue($this->response));
+		$this->prepareFailureTest('get', '/project/joomla/resource/joomla-platform/?details');
 
 		$this->object->getResource('joomla', 'joomla-platform', true);
 	}
@@ -256,13 +214,7 @@ class ResourcesTest extends TransifexTestCase
 	 */
 	public function testGetResourceContent()
 	{
-		$this->response->code = 200;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/project/joomla/resource/joomla-platform/content/')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('get', '/project/joomla/resource/joomla-platform/content/');
 
 		$this->assertEquals(
 			$this->object->getResourceContent('joomla', 'joomla-platform'),
@@ -285,13 +237,7 @@ class ResourcesTest extends TransifexTestCase
 	 */
 	public function testGetResourceContentFailure()
 	{
-		$this->response->code = 500;
-		$this->response->body = $this->errorString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/project/joomla/resource/joomla-platform/content/')
-			->will($this->returnValue($this->response));
+		$this->prepareFailureTest('get', '/project/joomla/resource/joomla-platform/content/');
 
 		$this->object->getResourceContent('joomla', 'joomla-platform');
 	}
@@ -310,13 +256,7 @@ class ResourcesTest extends TransifexTestCase
 	 */
 	public function testGetResources()
 	{
-		$this->response->code = 200;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/project/joomla/resources')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('get', '/project/joomla/resources');
 
 		$this->assertEquals(
 			$this->object->getResources('joomla'),
@@ -339,13 +279,7 @@ class ResourcesTest extends TransifexTestCase
 	 */
 	public function testGetResourcesFailure()
 	{
-		$this->response->code = 500;
-		$this->response->body = $this->errorString;
-
-		$this->client->expects($this->once())
-			->method('get')
-			->with('/project/joomla/resources')
-			->will($this->returnValue($this->response));
+		$this->prepareFailureTest('get', '/project/joomla/resources');
 
 		$this->object->getResources('joomla');
 	}
@@ -364,13 +298,7 @@ class ResourcesTest extends TransifexTestCase
 	 */
 	public function testUpdateResourceContentFile()
 	{
-		$this->response->code = 200;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('put')
-			->with('/project/joomla/resource/joomla-platform/content/')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('put', '/project/joomla/resource/joomla-platform/content/');
 
 		$this->assertEquals(
 			$this->object->updateResourceContent('joomla', 'joomla-platform', __DIR__ . '/stubs/source.ini', 'file'),
@@ -394,13 +322,7 @@ class ResourcesTest extends TransifexTestCase
 	 */
 	public function testUpdateResourceContentString()
 	{
-		$this->response->code = 200;
-		$this->response->body = $this->sampleString;
-
-		$this->client->expects($this->once())
-			->method('put')
-			->with('/project/joomla/resource/joomla-platform/content/')
-			->will($this->returnValue($this->response));
+		$this->prepareSuccessTest('put', '/project/joomla/resource/joomla-platform/content/');
 
 		$this->assertEquals(
 			$this->object->updateResourceContent('joomla', 'joomla-platform', 'TEST="Test"'),
@@ -424,13 +346,7 @@ class ResourcesTest extends TransifexTestCase
 	 */
 	public function testUpdateResourceContentFailure()
 	{
-		$this->response->code = 500;
-		$this->response->body = $this->errorString;
-
-		$this->client->expects($this->once())
-			->method('put')
-			->with('/project/joomla/resource/joomla-platform/content/')
-			->will($this->returnValue($this->response));
+		$this->prepareFailureTest('put', '/project/joomla/resource/joomla-platform/content/');
 
 		$this->object->updateResourceContent('joomla', 'joomla-platform', 'TEST="Test"');
 	}
