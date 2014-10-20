@@ -31,20 +31,18 @@ git clone git://github.com/BabDev/Transifex-API.git
 
 ## Installation via Composer
 
-Add `"babdev/transifex": "dev-master"` to the require block in your composer.json, make sure you have `"minimum-stability": "dev"` and then run `composer install`.
+Add `"babdev/transifex": "~1.0"` to the require block in your composer.json and then run `composer install`.
 
 ```json
 {
 	"require": {
-		"babdev/transifex": "dev-master"
+		"babdev/transifex": "~1.0"
 	},
-	"minimum-stability": "dev"
 }
 ```
 
 Alternatively, you can simply run the following from the command line:
 
 ```sh
-composer init --stability="dev"
-composer require babdev/transifex "dev-master"
+composer require babdev/transifex "~1.0"
 ```
