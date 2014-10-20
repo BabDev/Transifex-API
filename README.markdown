@@ -25,7 +25,6 @@ Requirements
 
 * Production
     * Joomla Framework [HTTP](https://github.com/joomla-framework/http) package
-    * Joomla Framework [URI](https://github.com/joomla-framework/uri) package
     * PHP 5.3.10 or later
 * Development
     * Joomla Framework [Test](https://github.com/joomla-framework-test) package
