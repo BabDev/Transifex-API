@@ -37,6 +37,48 @@ class TranslationstringsTest extends TransifexTestCase
 	}
 
 	/**
+	 * Tests the getPseudolocalizationStrings method
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0
+	 *
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @covers  \BabDev\Transifex\Translationstrings::getPseudolocalizationStrings
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
+	 */
+	public function testGetPseudolocalizationStrings()
+	{
+		$this->prepareSuccessTest('get', '/project/joomla/resource/joomla-platform/pseudo/?pseudo_type=MIXED');
+
+		$this->assertEquals(
+			$this->object->getPseudolocalizationStrings('joomla', 'joomla-platform'),
+			json_decode($this->sampleString)
+		);
+	}
+
+	/**
+	 * Tests the getPseudolocalizationStrings method - failure
+	 *
+	 * @return  void
+	 *
+	 * @expectedException  \DomainException
+	 * @since              1.0
+	 *
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @covers  \BabDev\Transifex\Translationstrings::getPseudolocalizationStrings
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
+	 */
+	public function testGetPseudolocalizationStringsFailure()
+	{
+		$this->prepareFailureTest('get', '/project/joomla/resource/joomla-platform/pseudo/?pseudo_type=MIXED');
+
+		$this->object->getPseudolocalizationStrings('joomla', 'joomla-platform');
+	}
+
+	/**
 	 * Tests the getStrings method
 	 *
 	 * @return  void

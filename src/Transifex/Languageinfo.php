@@ -11,7 +11,7 @@ namespace BabDev\Transifex;
 /**
  * Transifex API Language Information class.
  *
- * @link   http://support.transifex.com/customer/portal/articles/1069339-language-info-api
+ * @link   http://docs.transifex.com/developer/api/language_info
  * @since  1.0
  */
 class Languageinfo extends TransifexObject

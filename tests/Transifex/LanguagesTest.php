@@ -50,7 +50,7 @@ class LanguagesTest extends TransifexTestCase
 	 */
 	public function testCreateLanguage()
 	{
-		$this->prepareSuccessTest('post', '/project/joomla-platform/languages/', 201);
+		$this->prepareSuccessTest('post', '/project/joomla-platform/languages/?skip_invalid_username', 201);
 
 		// Additional options
 		$options = array(
@@ -60,7 +60,7 @@ class LanguagesTest extends TransifexTestCase
 		);
 
 		$this->assertEquals(
-			$this->object->createLanguage('joomla-platform', 'en_GB', array('mbabker'), $options),
+			$this->object->createLanguage('joomla-platform', 'en_GB', array('mbabker'), $options, true),
 			json_decode($this->sampleString)
 		);
 	}
@@ -370,10 +370,10 @@ class LanguagesTest extends TransifexTestCase
 	 */
 	public function testUpdateCoordinators()
 	{
-		$this->prepareSuccessTest('put', '/project/joomla-platform/language/en_US/coordinators/');
+		$this->prepareSuccessTest('put', '/project/joomla-platform/language/en_US/coordinators/?skip_invalid_username');
 
 		$this->assertEquals(
-			$this->object->updateCoordinators('joomla-platform', 'en_US', array('mbabker')),
+			$this->object->updateCoordinators('joomla-platform', 'en_US', array('mbabker'), true),
 			json_decode($this->sampleString)
 		);
 	}
@@ -500,10 +500,10 @@ class LanguagesTest extends TransifexTestCase
 	 */
 	public function testUpdateReviewers()
 	{
-		$this->prepareSuccessTest('put', '/project/joomla-platform/language/en_US/reviewers/');
+		$this->prepareSuccessTest('put', '/project/joomla-platform/language/en_US/reviewers/?skip_invalid_username');
 
 		$this->assertEquals(
-			$this->object->updateReviewers('joomla-platform', 'en_US', array('mbabker')),
+			$this->object->updateReviewers('joomla-platform', 'en_US', array('mbabker'), true),
 			json_decode($this->sampleString)
 		);
 	}
@@ -563,10 +563,10 @@ class LanguagesTest extends TransifexTestCase
 	 */
 	public function testUpdateTranslators()
 	{
-		$this->prepareSuccessTest('put', '/project/joomla-platform/language/en_US/translators/');
+		$this->prepareSuccessTest('put', '/project/joomla-platform/language/en_US/translators/?skip_invalid_username');
 
 		$this->assertEquals(
-			$this->object->updateTranslators('joomla-platform', 'en_US', array('mbabker')),
+			$this->object->updateTranslators('joomla-platform', 'en_US', array('mbabker'), true),
 			json_decode($this->sampleString)
 		);
 	}

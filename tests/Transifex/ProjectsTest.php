@@ -282,19 +282,12 @@ class ProjectsTest extends TransifexTestCase
 
 		// Additional options
 		$options = array(
-			'name'               => 'Joomla Platform',
-			'description'        => 'Project for the Joomla Platform',
 			'long_description'   => 'My test project',
 		    'private'            => true,
 		    'homepage'           => 'http://www.example.com',
-		    'feed'               => 'http://www.example.com/feed.xml',
-		    'anyone_submit'      => true,
-		    'hidden'             => false,
-		    'bug_tracker'        => 'http://www.example.com/tracker',
 		    'trans_instructions' => 'http://www.example.com/instructions.html',
 		    'tags'               => 'joomla, babdev',
 		    'maintainers'        => 'joomla',
-		    'outsource'          => 'thirdparty',
 		    'auto_join'          => true,
 		    'license'            => 'other_open_source',
 		    'fill_up_resources'  => false
@@ -324,7 +317,7 @@ class ProjectsTest extends TransifexTestCase
 	{
 		$this->prepareFailureTest('put', '/project/joomla-platform/');
 
-		$this->object->updateProject('joomla-platform', array('name' => 'Joomla Platform'));
+		$this->object->updateProject('joomla-platform', array('long_description' => 'My test project'));
 	}
 
 	/**

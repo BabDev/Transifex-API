@@ -11,7 +11,7 @@ namespace BabDev\Transifex;
 /**
  * Transifex API Statistics class.
  *
- * @link   http://support.transifex.com/customer/portal/articles/1026125-statistics-api
+ * @link   http://docs.transifex.com/developer/api/statistics
  * @since  1.0
  */
 class Statistics extends TransifexObject

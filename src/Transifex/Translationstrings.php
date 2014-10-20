@@ -11,11 +11,30 @@ namespace BabDev\Transifex;
 /**
  * Transifex API Translation Strings class.
  *
- * @link   http://support.transifex.com/customer/portal/articles/1026117-translation-strings-api
+ * @link   http://docs.transifex.com/developer/api/translation_strings
  * @since  1.0
  */
 class Translationstrings extends TransifexObject
 {
+	/**
+	 * Method to get pseudolocalization strings on a specified resource.
+	 *
+	 * @param   string  $project   The slug for the project to pull from.
+	 * @param   string  $resource  The slug for the resource to pull from.
+	 *
+	 * @return  \stdClass  The resource's pseudolocalization.
+	 *
+	 * @since   1.0
+	 */
+	public function getPseudolocalizationStrings($project, $resource)
+	{
+		// Build the request path
+		$path = '/project/' . $project . '/resource/' . $resource . '/pseudo/?pseudo_type=MIXED';
+
+		// Send the request.
+		return $this->processResponse($this->client->get($this->fetchUrl($path)));
+	}
+
 	/**
 	 * Method to get the translation strings on a specified resource.
 	 *

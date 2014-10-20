@@ -11,7 +11,7 @@ namespace BabDev\Transifex;
 /**
  * Transifex API Resources class.
  *
- * @link   http://support.transifex.com/customer/portal/articles/1009524-resource-api
+ * @link   http://docs.transifex.com/developer/api/resources
  * @since  1.0
  */
 class Resources extends TransifexObject

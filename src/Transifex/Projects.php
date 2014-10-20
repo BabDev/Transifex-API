@@ -11,7 +11,7 @@ namespace BabDev\Transifex;
 /**
  * Transifex API Projects class.
  *
- * @link   http://support.transifex.com/customer/portal/articles/1009473-project-api
+ * @link   http://docs.transifex.com/developer/api/projects
  * @since  1.0
  */
 class Projects extends TransifexObject
@@ -71,8 +71,8 @@ class Projects extends TransifexObject
 		);
 
 		$customOptions = array(
-			'long_description', 'private', 'homepage', 'feed', 'anyone_submit', 'hidden', 'bug_tracker', 'trans_instructions', 'tags', 'maintainers',
-			'outsource', 'auto_join', 'license', 'fill_up_resources', 'repository_url', 'organization'
+			'long_description', 'private', 'homepage', 'trans_instructions', 'tags', 'maintainers', 'team', 'auto_join',
+			'license', 'fill_up_resources', 'repository_url', 'organization', 'archived'
 		);
 
 		foreach ($customOptions as $option)
@@ -193,8 +193,8 @@ class Projects extends TransifexObject
 
 		// Valid options to check
 		$validOptions = array(
-			'name', 'description', 'long_description', 'private', 'homepage', 'feed', 'anyone_submit', 'hidden', 'bug_tracker', 'trans_instructions',
-			'tags', 'maintainers', 'outsource', 'auto_join', 'fill_up_resources'
+			'long_description', 'private', 'homepage', 'trans_instructions', 'tags', 'maintainers', 'team', 'auto_join',
+			'license', 'fill_up_resources', 'repository_url', 'organization', 'archived'
 		);
 
 		// Loop through the valid options and if we have them, add them to the request data

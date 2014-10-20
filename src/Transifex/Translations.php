@@ -11,7 +11,7 @@ namespace BabDev\Transifex;
 /**
  * Transifex API Translations class.
  *
- * @link   http://support.transifex.com/customer/portal/articles/1026102-translations-api
+ * @link   http://docs.transifex.com/developer/api/translations
  * @since  1.0
  */
 class Translations extends TransifexObject
@@ -22,15 +22,21 @@ class Translations extends TransifexObject
 	 * @param   string  $project   The slug for the project to pull from.
 	 * @param   string  $resource  The slug for the resource to pull from.
 	 * @param   string  $lang      The language to return the translation for.
+	 * @param   string  $mode      The mode of the downloaded file.
 	 *
 	 * @return  \stdClass  The resource's translation in the specified language.
 	 *
 	 * @since   1.0
 	 */
-	public function getTranslation($project, $resource, $lang)
+	public function getTranslation($project, $resource, $lang, $mode = '')
 	{
 		// Build the request path.
 		$path = '/project/' . $project . '/resource/' . $resource . '/translation/' . $lang;
+
+		if (!empty($mode))
+		{
+			$path .= '?mode=' . $mode . '&file';
+		}
 
 		// Send the request.
 		return $this->processResponse($this->client->get($this->fetchUrl($path)));

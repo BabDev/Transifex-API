@@ -50,10 +50,10 @@ class TranslationsTest extends TransifexTestCase
 	 */
 	public function testGetTranslation()
 	{
-		$this->prepareSuccessTest('get', '/project/joomla/resource/joomla-platform/translation/en_GB');
+		$this->prepareSuccessTest('get', '/project/joomla/resource/joomla-platform/translation/en_GB?mode=default&file');
 
 		$this->assertEquals(
-			$this->object->getTranslation('joomla', 'joomla-platform', 'en_GB'),
+			$this->object->getTranslation('joomla', 'joomla-platform', 'en_GB', 'default'),
 			json_decode($this->sampleString)
 		);
 	}

@@ -11,7 +11,7 @@ namespace BabDev\Transifex;
 /**
  * Transifex API Languages class.
  *
- * @link   http://support.transifex.com/customer/portal/articles/1009525-language-api
+ * @link   http://docs.transifex.com/developer/api/languages
  * @since  1.0
  */
 class Languages extends TransifexObject
@@ -19,17 +19,18 @@ class Languages extends TransifexObject
 	/**
 	 * Method to create a language for a project.
 	 *
-	 * @param   string  $slug          The slug for the project
-	 * @param   string  $langCode      The language code for the new language
-	 * @param   array   $coordinators  An array of coordinators for the language
-	 * @param   array   $options       Optional additional params to send with the request
+	 * @param   string   $slug                 The slug for the project
+	 * @param   string   $langCode             The language code for the new language
+	 * @param   array    $coordinators         An array of coordinators for the language
+	 * @param   array    $options              Optional additional params to send with the request
+	 * @param   boolean  $skipInvalidUsername  If true, the API call does not fail and instead will return a list of invalid usernames
 	 *
 	 * @return  \stdClass
 	 *
 	 * @since   1.0
 	 * @throws  \InvalidArgumentException
 	 */
-	public function createLanguage($slug, $langCode, array $coordinators, array $options = array())
+	public function createLanguage($slug, $langCode, array $coordinators, array $options = array(), $skipInvalidUsername = false)
 	{
 		// Make sure the $coordinators array is not empty
 		if (count($coordinators) < 1)
@@ -39,6 +40,12 @@ class Languages extends TransifexObject
 
 		// Build the request path.
 		$path = '/project/' . $slug . '/languages/';
+
+		// Check if invalid usernames should be skipped
+		if ($skipInvalidUsername)
+		{
+			$path .= '?skip_invalid_username';
+		}
 
 		// Build the required request data.
 		$data = array(
@@ -185,17 +192,18 @@ class Languages extends TransifexObject
 	/**
 	 * Method to update the coordinators for a language team in a project
 	 *
-	 * @param   string  $project       The project to retrieve details for
-	 * @param   string  $langCode      The language code to retrieve details for
-	 * @param   array   $coordinators  An array of coordinators for the language
+	 * @param   string   $project              The project to retrieve details for
+	 * @param   string   $langCode             The language code to retrieve details for
+	 * @param   array    $coordinators         An array of coordinators for the language
+	 * @param   boolean  $skipInvalidUsername  If true, the API call does not fail and instead will return a list of invalid usernames
 	 *
 	 * @return  \stdClass
 	 *
 	 * @since   1.0
 	 */
-	public function updateCoordinators($project, $langCode, array $coordinators)
+	public function updateCoordinators($project, $langCode, array $coordinators, $skipInvalidUsername = false)
 	{
-		return $this->updateTeam($project, $langCode, $coordinators, 'coordinators');
+		return $this->updateTeam($project, $langCode, $coordinators, $skipInvalidUsername, 'coordinators');
 	}
 
 	/**
@@ -251,33 +259,35 @@ class Languages extends TransifexObject
 	/**
 	 * Method to update the reviewers for a language team in a project
 	 *
-	 * @param   string  $project    The project to retrieve details for
-	 * @param   string  $langCode   The language code to retrieve details for
-	 * @param   array   $reviewers  An array of reviewers for the language
+	 * @param   string   $project              The project to retrieve details for
+	 * @param   string   $langCode             The language code to retrieve details for
+	 * @param   array    $reviewers            An array of reviewers for the language
+	 * @param   boolean  $skipInvalidUsername  If true, the API call does not fail and instead will return a list of invalid usernames
 	 *
 	 * @return  \stdClass
 	 *
 	 * @since   1.0
 	 */
-	public function updateReviewers($project, $langCode, array $reviewers)
+	public function updateReviewers($project, $langCode, array $reviewers, $skipInvalidUsername = false)
 	{
-		return $this->updateTeam($project, $langCode, $reviewers, 'reviewers');
+		return $this->updateTeam($project, $langCode, $reviewers, $skipInvalidUsername, 'reviewers');
 	}
 
 	/**
 	 * Base method to update a given language team in a project
 	 *
-	 * @param   string  $project   The project to retrieve details for
-	 * @param   string  $langCode  The language code to retrieve details for
-	 * @param   array   $members   An array of the team members for the language
-	 * @param   string  $team      The team to update
+	 * @param   string   $project              The project to retrieve details for
+	 * @param   string   $langCode             The language code to retrieve details for
+	 * @param   array    $members              An array of the team members for the language
+	 * @param   boolean  $skipInvalidUsername  If true, the API call does not fail and instead will return a list of invalid usernames
+	 * @param   string   $team                 The team to update
 	 *
 	 * @return  \stdClass
 	 *
 	 * @since   1.0
 	 * @throws  \InvalidArgumentException
 	 */
-	protected function updateTeam($project, $langCode, array $members, $team)
+	protected function updateTeam($project, $langCode, array $members, $skipInvalidUsername, $team)
 	{
 		// Make sure the $members array is not empty
 		if (count($members) < 1)
@@ -287,6 +297,12 @@ class Languages extends TransifexObject
 
 		// Build the request path.
 		$path = '/project/' . $project . '/language/' . $langCode . '/' . $team . '/';
+
+		// Check if invalid usernames should be skipped
+		if ($skipInvalidUsername)
+		{
+			$path .= '?skip_invalid_username';
+		}
 
 		// Send the request.
 		return $this->processResponse(
@@ -302,16 +318,17 @@ class Languages extends TransifexObject
 	/**
 	 * Method to update the translators for a language team in a project
 	 *
-	 * @param   string  $project      The project to retrieve details for
-	 * @param   string  $langCode     The language code to retrieve details for
-	 * @param   array   $translators  An array of translators for the language
+	 * @param   string   $project              The project to retrieve details for
+	 * @param   string   $langCode             The language code to retrieve details for
+	 * @param   array    $translators          An array of translators for the language
+	 * @param   boolean  $skipInvalidUsername  If true, the API call does not fail and instead will return a list of invalid usernames
 	 *
 	 * @return  \stdClass
 	 *
 	 * @since   1.0
 	 */
-	public function updateTranslators($project, $langCode, array $translators)
+	public function updateTranslators($project, $langCode, array $translators, $skipInvalidUsername = false)
 	{
-		return $this->updateTeam($project, $langCode, $translators, 'translators');
+		return $this->updateTeam($project, $langCode, $translators, $skipInvalidUsername, 'translators');
 	}
 }

@@ -11,6 +11,7 @@ namespace BabDev\Transifex;
 /**
  * Transifex API Formats class.
  *
+ * @link   http://docs.transifex.com/developer/api/formats
  * @since  1.0
  */
 class Formats extends TransifexObject
