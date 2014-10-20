@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="babdev-library" default="build" basedir=".">
+<project name="babdev-transifex" default="build" basedir=".">
 	<!-- Run all tasks using build target -->
 	<target name="build" depends="clean,phpcs,phpunit" />
 
@@ -42,7 +42,7 @@
 			<arg value="--template" />
 			<arg value="clean" />
 			<arg value="--title" />
-			<arg value="BabDev Library Documentation" />
+			<arg value="BabDev Transifex API Package Documentation" />
 		</exec>
 	</target>
 </project>

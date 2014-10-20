@@ -21,12 +21,12 @@
     },
     "autoload": {
         "psr-4": {
-            "BabDev\\": "src/"
+            "BabDev\\Transifex\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "BabDev\\Tests\\": "tests/"
+            "BabDev\\Transifex\\Tests\\": "tests/"
         }
     },
     "extra": {

@@ -4,19 +4,19 @@
  * @license    http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License Version 2 or Later
  */
 
-namespace BabDev\Tests\Transifex;
+namespace BabDev\Transifex\Tests;
 
-use BabDev\Transifex\Formats;
+use BabDev\Transifex\Statistics;
 
 /**
- * Test class for \BabDev\Transifex\Formats.
+ * Test class for \BabDev\Transifex\Statistics.
  *
  * @since  1.0
  */
-class FormatsTest extends TransifexTestCase
+class StatisticsTest extends TransifexTestCase
 {
 	/**
-	 * @var    Formats  Object under test.
+	 * @var    Statistics  Object under test.
 	 * @since  1.0
 	 */
 	protected $object;
@@ -33,48 +33,48 @@ class FormatsTest extends TransifexTestCase
 	{
 		parent::setUp();
 
-		$this->object = new Formats($this->options, $this->client);
+		$this->object = new Statistics($this->options, $this->client);
 	}
 
 	/**
-	 * Tests the getFormats method
+	 * Tests the getStatistics method
 	 *
 	 * @return  void
 	 *
 	 * @since   1.0
 	 *
-	 * @covers  \BabDev\Transifex\Formats::getFormats
+	 * @covers  \BabDev\Transifex\Statistics::getStatistics
 	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
-	public function testGetFormats()
+	public function testGetStatistics()
 	{
-		$this->prepareSuccessTest('get', '/formats');
+		$this->prepareSuccessTest('get', '/project/joomla/resource/joomla-platform/stats/');
 
 		$this->assertEquals(
-			$this->object->getFormats(),
+			$this->object->getStatistics('joomla', 'joomla-platform'),
 			json_decode($this->sampleString)
 		);
 	}
 
 	/**
-	 * Tests the getList method - failure
+	 * Tests the getStatistics method - failure
 	 *
 	 * @return  void
 	 *
 	 * @expectedException  \DomainException
 	 * @since              1.0
 	 *
-	 * @covers  \BabDev\Transifex\Formats::getFormats
+	 * @covers  \BabDev\Transifex\Statistics::getStatistics
 	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
-	public function testGetFormatsFailure()
+	public function testGetStatisticsFailure()
 	{
-		$this->prepareFailureTest('get', '/formats');
+		$this->prepareFailureTest('get', '/project/joomla/resource/joomla-platform/stats/');
 
-		$this->object->getFormats();
+		$this->object->getStatistics('joomla', 'joomla-platform');
 	}
 }
