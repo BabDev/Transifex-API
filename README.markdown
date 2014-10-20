@@ -17,7 +17,6 @@ Library Contents
 ------------
 The *BabDev Library* is composed of the following classes and packages:
 
-- [\BabDev\Helper](/src/BabDev/Helper.php) - A basic helper class providing support methods I've found useful in projects
 - [\BabDev\Transifex](/src/BabDev/Transifex) - The `Transifex` package is a PHP wrapper implementing the [Transifex API](http://support.transifex.com/customer/portal/topics/440186-api/articles)
 
 Requirements
