@@ -15,7 +15,6 @@ namespace BabDev\Transifex;
  * @property-read  LanguageInfo        $languageinfo        Transifex API object for interacting with the Language Info API.
  * @property-read  Languages           $languages           Transifex API object for interacting with the Language API.
  * @property-read  Projects            $projects            Transifex API object for interacting with the Project API.
- * @property-read  Releases            $releases            Transifex API object for interacting with the Release API.
  * @property-read  Resources           $resources           Transifex API object for interacting with the Resource API.
  * @property-read  Statistics          $statistics          Transifex API object for interacting with the Statistics API.
  * @property-read  Translations        $translations        Transifex API object for interacting with the Translations API.
@@ -72,14 +71,6 @@ class Transifex
 	 * @since  1.0
 	 */
 	protected $projects;
-
-	/**
-	 * Transifex API object for interacting with the Release API.
-	 *
-	 * @var    Releases
-	 * @since  1.0
-	 */
-	protected $releases;
 
 	/**
 	 * Transifex API object for interacting with the Resource API.

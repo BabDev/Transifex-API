@@ -159,21 +159,6 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Tests the magic __get method - Releases object
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
-	 */
-	public function test__GetReleases()
-	{
-		$this->assertInstanceOf(
-		     '\\BabDev\\Transifex\\Releases',
-			$this->object->releases
-		);
-	}
-
-	/**
 	 * Tests the magic __get method - Resources object
 	 *
 	 * @return  void
