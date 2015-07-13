@@ -8,8 +8,6 @@
 
 namespace BabDev\Transifex;
 
-use Joomla\Http\Response;
-
 /**
  * Transifex API object class.
  *

@@ -118,7 +118,7 @@ class Transifex
 	 * @param   string  $key    The name of the option to set.
 	 * @param   mixed   $value  The option value to set.
 	 *
-	 * @return  Transifex  This object for method chaining.
+	 * @return  $this
 	 *
 	 * @since   1.0
 	 */
