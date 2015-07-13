@@ -1,46 +1,43 @@
 <?php
 /**
+ * BabDev Transifex Package
+ *
  * @copyright  Copyright (C) 2012-2015 Michael Babker. All rights reserved.
  * @license    http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License Version 2 or Later
  */
 
 namespace BabDev\Transifex\Tests;
 
-use BabDev\Transifex\Http;
 use BabDev\Transifex\Transifex;
 
 /**
  * Test class for \BabDev\Transifex\Transifex.
- *
- * @since  1.0
  */
 class TransifexTest extends \PHPUnit_Framework_TestCase
 {
 	/**
-	 * @var    array  Options for the Transifex object.
-	 * @since  1.0
-	 */
-	protected $options;
-
-	/**
-	 * @var    Http  Mock client object.
-	 * @since  1.0
-	 */
-	protected $client;
-
-	/**
-	 * @var    Transifex  Object being tested
-	 * @since  1.0
-	 */
-	protected $object;
-
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
+	 * Mock HTTP client object.
 	 *
-	 * @return  void
+	 * @var  \PHPUnit_Framework_MockObject_MockObject
+	 */
+	private $client;
+
+	/**
+	 * Object being tested.
 	 *
-	 * @since   1.0
+	 * @var  Transifex
+	 */
+	private $object;
+
+	/**
+	 * Options for the Transifex object.
+	 *
+	 * @var  array
+	 */
+	private $options;
+
+	/**
+	 * {@inheritdoc}
 	 */
 	protected function setUp()
 	{
@@ -50,13 +47,10 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Tests the constructor for building a proper Transifex instance without the client injected
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
+	 * @testdox __construct() with no injected client creates a Transifex instance with a default Http object
 	 *
 	 * @covers  \BabDev\Transifex\Transifex::__construct
+	 * @covers  \BabDev\Transifex\Http::__construct
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\Transifex::getOption
 	 * @uses    \BabDev\Transifex\Transifex::setOption
@@ -67,31 +61,23 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertInstanceOf(
 			'\\BabDev\\Transifex\\Transifex',
-			$object,
-			'The object successfully is created without a client injected.'
+			$object
 		);
 
 		$this->assertAttributeInstanceOf(
-			'\\Joomla\\Http\\Http',
+			'\\BabDev\\Transifex\\Http',
 			'client',
-			$object,
-			'Ensure the Transifex object has a HTTP client instance.'
+			$object
 		);
 	}
 
 	/**
-	 * Tests the get method - Non-existing object
-	 *
-	 * @return  void
+	 * @testdox get() throws an InvalidArgumentException for a non-existing object
 	 *
 	 * @expectedException  \InvalidArgumentException
-	 * @since              1.2
 	 *
 	 * @covers  \BabDev\Transifex\Transifex::get
-	 * @uses    \BabDev\Transifex\Http
-	 * @uses    \BabDev\Transifex\Transifex::__construct
 	 * @uses    \BabDev\Transifex\Transifex::getOption
-	 * @uses    \BabDev\Transifex\Transifex::setOption
 	 */
 	public function testGetFake()
 	{
@@ -99,11 +85,14 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Tests the get method - Formats object
+	 * @testdox get() with the "formats" parameter returns an instance of the Formats object
 	 *
-	 * @return  void
-	 *
-	 * @since   1.2
+	 * @covers  \BabDev\Transifex\Transifex::get
+	 * @uses    \BabDev\Transifex\Formats
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\Transifex::__construct
+	 * @uses    \BabDev\Transifex\Transifex::getOption
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
 	public function testGetFormats()
 	{
@@ -114,116 +103,52 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Tests the get method - Languageinfo object
+	 * @testdox get() with a custom namespace defined and the "formats" parameter returns an instance of the custom Formats object
 	 *
-	 * @return  void
-	 *
-	 * @since   1.2
+	 * @covers  \BabDev\Transifex\Transifex::get
+	 * @uses    \BabDev\Transifex\Formats
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\Transifex::__construct
+	 * @uses    \BabDev\Transifex\Transifex::getOption
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
-	public function testGetLanguageinfo()
+	public function testGetFormatsInCustomNamespace()
 	{
+		$this->object->setOption('object.namespace', 'BabDev\\Transifex\\Tests\\Mock');
+
 		$this->assertInstanceOf(
-		     '\\BabDev\\Transifex\\Languageinfo',
-			$this->object->get('languageinfo')
+			'\\BabDev\\Transifex\\Tests\\Mock\\Formats',
+			$this->object->get('formats')
 		);
 	}
 
 	/**
-	 * Tests the get method - Languages object
+	 * @testdox get() with a custom namespace defined and the "formats" parameter and a class not found in the custom namespace returns an instance of the default Formats object
 	 *
-	 * @return  void
-	 *
-	 * @since   1.2
+	 * @covers  \BabDev\Transifex\Transifex::get
+	 * @uses    \BabDev\Transifex\Formats
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\Transifex::__construct
+	 * @uses    \BabDev\Transifex\Transifex::getOption
+	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
-	public function testGetLanguages()
+	public function testGetFormatsInCustomNamespaceWhenNotFound()
 	{
+		$this->object->setOption('object.namespace', 'BabDev\\Transifex\\Tests');
+
 		$this->assertInstanceOf(
-		     '\\BabDev\\Transifex\\Languages',
-			$this->object->get('languages')
+			'\\BabDev\\Transifex\\Formats',
+			$this->object->get('formats')
 		);
 	}
 
 	/**
-	 * Tests the get method - Projects object
+	 * @testdox getOption() and setOption() correctly manage the object's options
 	 *
-	 * @return  void
-	 *
-	 * @since   1.2
-	 */
-	public function testGetProjects()
-	{
-		$this->assertInstanceOf(
-		     '\\BabDev\\Transifex\\Projects',
-			$this->object->get('projects')
-		);
-	}
-
-	/**
-	 * Tests the get method - Resources object
-	 *
-	 * @return  void
-	 *
-	 * @since   1.2
-	 */
-	public function testGetResources()
-	{
-		$this->assertInstanceOf(
-		     '\\BabDev\\Transifex\\Resources',
-			$this->object->get('resources')
-		);
-	}
-
-	/**
-	 * Tests the get method - Statistics object
-	 *
-	 * @return  void
-	 *
-	 * @since   1.2
-	 */
-	public function testGetStatistics()
-	{
-		$this->assertInstanceOf(
-		     '\\BabDev\\Transifex\\Statistics',
-			$this->object->get('statistics')
-		);
-	}
-
-	/**
-	 * Tests the get method - Translations object
-	 *
-	 * @return  void
-	 *
-	 * @since   1.2
-	 */
-	public function testGetTranslations()
-	{
-		$this->assertInstanceOf(
-		     '\\BabDev\\Transifex\\Translations',
-			$this->object->get('translations')
-		);
-	}
-
-	/**
-	 * Tests the get method - Translationstrings object
-	 *
-	 * @return  void
-	 *
-	 * @since   1.2
-	 */
-	public function testGetTranslationstrings()
-	{
-		$this->assertInstanceOf(
-		     '\\BabDev\\Transifex\\Translationstrings',
-			$this->object->get('translationstrings')
-		);
-	}
-
-	/**
-	 * Tests the setOption and getOption methods
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
+	 * @covers  \BabDev\Transifex\Transifex::getOption
+	 * @covers  \BabDev\Transifex\Transifex::setOption
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\Transifex::__construct
 	 */
 	public function testSetAndGetOption()
 	{
