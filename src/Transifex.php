@@ -163,6 +163,29 @@ class Transifex
 	}
 
 	/**
+	 * Method to fetch API objects
+	 *
+	 * @param   string  $name  Name of the API object to retrieve.
+	 *
+	 * @return  TransifexObject  Transifex API object.
+	 *
+	 * @since   1.2
+	 * @throws  \InvalidArgumentException
+	 */
+	public function get($name)
+	{
+		$class = __NAMESPACE__ . '\\' . ucfirst(strtolower($name));
+
+		if (class_exists($class))
+		{
+			return new $class($this->options, $this->client);
+		}
+
+		// No class found, sorry!
+		throw new \InvalidArgumentException(sprintf('Could not find an API object for "%s".', $name, $class));
+	}
+
+	/**
 	 * Get an option from the Transifex instance.
 	 *
 	 * @param   string  $key  The name of the option to get.
