@@ -219,6 +219,145 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * Tests the get method - Non-existing object
+	 *
+	 * @return  void
+	 *
+	 * @expectedException  \InvalidArgumentException
+	 * @since              1.2
+	 *
+	 * @covers  \BabDev\Transifex\Transifex::get
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\Transifex::__construct
+	 * @uses    \BabDev\Transifex\Transifex::getOption
+	 * @uses    \BabDev\Transifex\Transifex::setOption
+	 */
+	public function testGetFake()
+	{
+		$this->object->get('fake');
+	}
+
+	/**
+	 * Tests the get method - Formats object
+	 *
+	 * @return  void
+	 *
+	 * @since   1.2
+	 */
+	public function testGetFormats()
+	{
+		$this->assertInstanceOf(
+		     '\\BabDev\\Transifex\\Formats',
+			$this->object->get('formats')
+		);
+	}
+
+	/**
+	 * Tests the get method - Languageinfo object
+	 *
+	 * @return  void
+	 *
+	 * @since   1.2
+	 */
+	public function testGetLanguageinfo()
+	{
+		$this->assertInstanceOf(
+		     '\\BabDev\\Transifex\\Languageinfo',
+			$this->object->get('languageinfo')
+		);
+	}
+
+	/**
+	 * Tests the get method - Languages object
+	 *
+	 * @return  void
+	 *
+	 * @since   1.2
+	 */
+	public function testGetLanguages()
+	{
+		$this->assertInstanceOf(
+		     '\\BabDev\\Transifex\\Languages',
+			$this->object->get('languages')
+		);
+	}
+
+	/**
+	 * Tests the get method - Projects object
+	 *
+	 * @return  void
+	 *
+	 * @since   1.2
+	 */
+	public function testGetProjects()
+	{
+		$this->assertInstanceOf(
+		     '\\BabDev\\Transifex\\Projects',
+			$this->object->get('projects')
+		);
+	}
+
+	/**
+	 * Tests the get method - Resources object
+	 *
+	 * @return  void
+	 *
+	 * @since   1.2
+	 */
+	public function testGetResources()
+	{
+		$this->assertInstanceOf(
+		     '\\BabDev\\Transifex\\Resources',
+			$this->object->get('resources')
+		);
+	}
+
+	/**
+	 * Tests the get method - Statistics object
+	 *
+	 * @return  void
+	 *
+	 * @since   1.2
+	 */
+	public function testGetStatistics()
+	{
+		$this->assertInstanceOf(
+		     '\\BabDev\\Transifex\\Statistics',
+			$this->object->get('statistics')
+		);
+	}
+
+	/**
+	 * Tests the get method - Translations object
+	 *
+	 * @return  void
+	 *
+	 * @since   1.2
+	 */
+	public function testGetTranslations()
+	{
+		$this->assertInstanceOf(
+		     '\\BabDev\\Transifex\\Translations',
+			$this->object->get('translations')
+		);
+	}
+
+	/**
+	 * Tests the get method - Translationstrings object
+	 *
+	 * @return  void
+	 *
+	 * @since   1.2
+	 */
+	public function testGetTranslationstrings()
+	{
+		$this->assertInstanceOf(
+		     '\\BabDev\\Transifex\\Translationstrings',
+			$this->object->get('translationstrings')
+		);
+	}
+
+	/**
 	 * Tests the setOption and getOption methods
 	 *
 	 * @return  void

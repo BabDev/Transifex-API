@@ -7,6 +7,11 @@ CHANGELOG for the Transifex API Package
  * Removed `TransifexObject::processResponse()`
  * Support a default option in `Transifex::getOption()`
 
+* 1.2.0 (2015-07-13)
+
+ * Add `Transifex::get()` to fetch API objects
+ * Deprecated magic getter in `Transifex` and associated class member vars for storing objects
+
 * 1.1.0 (2015-07-12)
 
  * Deprecated `TransifexObject::processResponse()`, 2.0 will return the full `Joomla\Http\Response` object instead of processing the response internally

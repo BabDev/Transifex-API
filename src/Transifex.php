@@ -45,6 +45,7 @@ class Transifex
 	 *
 	 * @var    Formats
 	 * @since  1.0
+	 * @deprecated  2.0
 	 */
 	protected $formats;
 
@@ -53,6 +54,7 @@ class Transifex
 	 *
 	 * @var    LanguageInfo
 	 * @since  1.0
+	 * @deprecated  2.0
 	 */
 	protected $languageinfo;
 
@@ -61,6 +63,7 @@ class Transifex
 	 *
 	 * @var    Languages
 	 * @since  1.0
+	 * @deprecated  2.0
 	 */
 	protected $languages;
 
@@ -69,6 +72,7 @@ class Transifex
 	 *
 	 * @var    Projects
 	 * @since  1.0
+	 * @deprecated  2.0
 	 */
 	protected $projects;
 
@@ -77,6 +81,7 @@ class Transifex
 	 *
 	 * @var    Resources
 	 * @since  1.0
+	 * @deprecated  2.0
 	 */
 	protected $resources;
 
@@ -85,6 +90,7 @@ class Transifex
 	 *
 	 * @var    Statistics
 	 * @since  1.0
+	 * @deprecated  2.0
 	 */
 	protected $statistics;
 
@@ -93,6 +99,7 @@ class Transifex
 	 *
 	 * @var    Translations
 	 * @since  1.0
+	 * @deprecated  2.0
 	 */
 	protected $translations;
 
@@ -101,6 +108,7 @@ class Transifex
 	 *
 	 * @var    Translationstrings
 	 * @since  1.0
+	 * @deprecated  2.0
 	 */
 	protected $translationstrings;
 
@@ -142,6 +150,7 @@ class Transifex
 	 *
 	 * @return  TransifexObject  Transifex API object.
 	 *
+	 * @deprecated  2.0  Use get() method instead
 	 * @since   1.0
 	 * @throws  \InvalidArgumentException
 	 */
@@ -160,6 +169,29 @@ class Transifex
 		}
 
 		throw new \InvalidArgumentException(sprintf('Argument %s produced an invalid class name: %s', $name, $class));
+	}
+
+	/**
+	 * Method to fetch API objects
+	 *
+	 * @param   string  $name  Name of the API object to retrieve.
+	 *
+	 * @return  TransifexObject  Transifex API object.
+	 *
+	 * @since   1.2
+	 * @throws  \InvalidArgumentException
+	 */
+	public function get($name)
+	{
+		$class = __NAMESPACE__ . '\\' . ucfirst(strtolower($name));
+
+		if (class_exists($class))
+		{
+			return new $class($this->options, $this->client);
+		}
+
+		// No class found, sorry!
+		throw new \InvalidArgumentException(sprintf('Could not find an API object for "%s".', $name, $class));
 	}
 
 	/**
