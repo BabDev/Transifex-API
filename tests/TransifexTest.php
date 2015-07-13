@@ -142,6 +142,20 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
+	 * @testdox  get() with a custom namespace defined throws an InvalidArgumentException when the class is not found in either the custom or default namespace
+	 *
+	 * @expectedException  \InvalidArgumentException
+	 *
+	 * @covers  \BabDev\Transifex\Transifex::get
+	 * @uses    \BabDev\Transifex\Transifex::getOption
+	 */
+	public function testGetFakeInCustomNamespaceWhenNotFound()
+	{
+		$this->object->setOption('object.namespace', 'BabDev\\Transifex\\Tests');
+		$this->object->get('fake');
+	}
+
+	/**
 	 * @testdox  getOption() and setOption() correctly manage the object's options
 	 *
 	 * @covers  \BabDev\Transifex\Transifex::getOption
