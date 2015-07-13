@@ -110,6 +110,7 @@ abstract class TransifexObject
 	 *
 	 * @return  \stdClass
 	 *
+	 * @deprecated  2.0  The full Response object will be returned by the API connector methods
 	 * @since   1.0
 	 * @throws  \DomainException
 	 */
