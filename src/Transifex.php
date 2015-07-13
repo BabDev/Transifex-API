@@ -74,11 +74,23 @@ class Transifex
 	 */
 	public function get($name)
 	{
-		$class = __NAMESPACE__ . '\\' . ucfirst(strtolower($name));
+		$namespace = $this->getOption('object.namespace', __NAMESPACE__);
+		$class     = $namespace . '\\' . ucfirst(strtolower($name));
 
 		if (class_exists($class))
 		{
 			return new $class($this->options, $this->client);
+		}
+
+		// If a custom namespace was specified, let's try to find an object in the local namespace
+		if ($namespace !== __NAMESPACE__)
+		{
+			$class = __NAMESPACE__ . '\\' . ucfirst(strtolower($name));
+
+			if (class_exists($class))
+			{
+				return new $class($this->options, $this->client);
+			}
 		}
 
 		// No class found, sorry!
