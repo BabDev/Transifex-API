@@ -11,15 +11,6 @@ namespace BabDev\Transifex;
 /**
  * Base class for interacting with the Transifex API.
  *
- * @property-read  Formats             $formats             Transifex API object for interacting with the Format API.
- * @property-read  LanguageInfo        $languageinfo        Transifex API object for interacting with the Language Info API.
- * @property-read  Languages           $languages           Transifex API object for interacting with the Language API.
- * @property-read  Projects            $projects            Transifex API object for interacting with the Project API.
- * @property-read  Resources           $resources           Transifex API object for interacting with the Resource API.
- * @property-read  Statistics          $statistics          Transifex API object for interacting with the Statistics API.
- * @property-read  Translations        $translations        Transifex API object for interacting with the Translations API.
- * @property-read  Translationstrings  $translationstrings  Transifex API object for interacting with the Translation Strings API.
- *
  * @since  1.0
  */
 class Transifex
@@ -39,78 +30,6 @@ class Transifex
 	 * @since  1.0
 	 */
 	protected $client;
-
-	/**
-	 * Transifex API object for interacting with the Format API.
-	 *
-	 * @var    Formats
-	 * @since  1.0
-	 * @deprecated  2.0
-	 */
-	protected $formats;
-
-	/**
-	 * Transifex API object for interacting with the Language Info API.
-	 *
-	 * @var    LanguageInfo
-	 * @since  1.0
-	 * @deprecated  2.0
-	 */
-	protected $languageinfo;
-
-	/**
-	 * Transifex API object for interacting with the Language API.
-	 *
-	 * @var    Languages
-	 * @since  1.0
-	 * @deprecated  2.0
-	 */
-	protected $languages;
-
-	/**
-	 * Transifex API object for interacting with the Project API.
-	 *
-	 * @var    Projects
-	 * @since  1.0
-	 * @deprecated  2.0
-	 */
-	protected $projects;
-
-	/**
-	 * Transifex API object for interacting with the Resource API.
-	 *
-	 * @var    Resources
-	 * @since  1.0
-	 * @deprecated  2.0
-	 */
-	protected $resources;
-
-	/**
-	 * Transifex API object for interacting with the Statistics API.
-	 *
-	 * @var    Statistics
-	 * @since  1.0
-	 * @deprecated  2.0
-	 */
-	protected $statistics;
-
-	/**
-	 * Transifex API object for interacting with the Translations API.
-	 *
-	 * @var    Translations
-	 * @since  1.0
-	 * @deprecated  2.0
-	 */
-	protected $translations;
-
-	/**
-	 * Transifex API object for interacting with the Translation Strings API.
-	 *
-	 * @var    Translationstrings
-	 * @since  1.0
-	 * @deprecated  2.0
-	 */
-	protected $translationstrings;
 
 	/**
 	 * Constructor.
@@ -141,34 +60,6 @@ class Transifex
 		{
 			$this->setOption('api.url', 'https://www.transifex.com/api/2');
 		}
-	}
-
-	/**
-	 * Magic method to lazily create API objects
-	 *
-	 * @param   string  $name  Name of property to retrieve.
-	 *
-	 * @return  TransifexObject  Transifex API object.
-	 *
-	 * @deprecated  2.0  Use get() method instead
-	 * @since   1.0
-	 * @throws  \InvalidArgumentException
-	 */
-	public function __get($name)
-	{
-		$class = __NAMESPACE__ . '\\' . ucfirst(strtolower($name));
-
-		if (class_exists($class))
-		{
-			if (!isset($this->$name))
-			{
-				$this->$name = new $class($this->options, $this->client);
-			}
-
-			return $this->$name;
-		}
-
-		throw new \InvalidArgumentException(sprintf('Argument %s produced an invalid class name: %s', $name, $class));
 	}
 
 	/**
