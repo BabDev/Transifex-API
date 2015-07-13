@@ -36,7 +36,7 @@
 	<target name="phpdoc" description="Generate API documentation using phpDocumentor">
 		<exec executable="phpdoc">
 			<arg value="-d" />
-			<arg path="${basedir}/src" />
+			<arg path="${basedir}/src,${basedir}/vendor/joomla/http/src,${basedir}/vendor/joomla/uri/src" />
 			<arg value="-t" />
 			<arg path="${basedir}/build/docs/" />
 			<arg value="--template" />
