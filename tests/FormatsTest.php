@@ -1,5 +1,7 @@
 <?php
 /**
+ * BabDev Transifex Package
+ *
  * @copyright  Copyright (C) 2012-2015 Michael Babker. All rights reserved.
  * @license    http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License Version 2 or Later
  */
@@ -10,24 +12,18 @@ use BabDev\Transifex\Formats;
 
 /**
  * Test class for \BabDev\Transifex\Formats.
- *
- * @since  1.0
  */
 class FormatsTest extends TransifexTestCase
 {
 	/**
-	 * @var    Formats  Object under test.
-	 * @since  1.0
+	 * Object being tested.
+	 *
+	 * @var  Formats
 	 */
-	protected $object;
+	private $object;
 
 	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
+	 * {@inheritdoc}
 	 */
 	protected function setUp()
 	{
@@ -37,14 +33,9 @@ class FormatsTest extends TransifexTestCase
 	}
 
 	/**
-	 * Tests the getFormats method
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
+	 * @testdox  getFormats() returns a Response object on a successful API connection
 	 *
 	 * @covers  \BabDev\Transifex\Formats::getFormats
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -52,29 +43,9 @@ class FormatsTest extends TransifexTestCase
 	{
 		$this->prepareSuccessTest('get', '/formats');
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->object->getFormats(),
-			json_decode($this->sampleString)
+			$this->response
 		);
-	}
-
-	/**
-	 * Tests the getList method - failure
-	 *
-	 * @return  void
-	 *
-	 * @expectedException  \DomainException
-	 * @since              1.0
-	 *
-	 * @covers  \BabDev\Transifex\Formats::getFormats
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
-	 * @uses    \BabDev\Transifex\Http
-	 * @uses    \BabDev\Transifex\TransifexObject
-	 */
-	public function testGetFormatsFailure()
-	{
-		$this->prepareFailureTest('get', '/formats');
-
-		$this->object->getFormats();
 	}
 }

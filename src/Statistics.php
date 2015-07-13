@@ -23,7 +23,7 @@ class Statistics extends TransifexObject
 	 * @param   string  $resource  The slug for the resource to pull from.
 	 * @param   string  $lang      An optional language code to return data only for a specified language.
 	 *
-	 * @return  \stdClass  The resource's statistics.
+	 * @return  \Joomla\Http\Response  The resource's statistics.
 	 *
 	 * @since   1.0
 	 */
@@ -33,6 +33,6 @@ class Statistics extends TransifexObject
 		$path = '/project/' . $project . '/resource/' . $resource . '/stats/' . $lang;
 
 		// Send the request.
-		return $this->processResponse($this->client->get($this->fetchUrl($path)));
+		return $this->client->get($this->fetchUrl($path));
 	}
 }

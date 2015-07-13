@@ -1,5 +1,7 @@
 <?php
 /**
+ * BabDev Transifex Package
+ *
  * @copyright  Copyright (C) 2012-2015 Michael Babker. All rights reserved.
  * @license    http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License Version 2 or Later
  */
@@ -10,24 +12,18 @@ use BabDev\Transifex\Resources;
 
 /**
  * Test class for \BabDev\Transifex\Resources.
- *
- * @since  1.0
  */
 class ResourcesTest extends TransifexTestCase
 {
 	/**
-	 * @var    Resources  Object under test.
-	 * @since  1.0
+	 * Object being tested.
+	 *
+	 * @var  Resources
 	 */
-	protected $object;
+	private $object;
 
 	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
+	 * {@inheritdoc}
 	 */
 	protected function setUp()
 	{
@@ -37,14 +33,9 @@ class ResourcesTest extends TransifexTestCase
 	}
 
 	/**
-	 * Tests the createResource method with inline content
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
+	 * @testdox  createResource() with inline content provided in the options returns a Response object on a successful API connection
 	 *
 	 * @covers  \BabDev\Transifex\Resources::createResource
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -60,21 +51,16 @@ class ResourcesTest extends TransifexTestCase
 		    'content'             => 'Test="Test"'
 		);
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->object->createResource('joomla-platform', 'Joomla Platform Data', 'joomla-platform', 'INI', $options),
-			json_decode($this->sampleString)
+			$this->response
 		);
 	}
 
 	/**
-	 * Tests the createResource method with an attached file
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
+	 * @testdox  createResource() with an attached file in the options returns a Response object on a successful API connection
 	 *
 	 * @covers  \BabDev\Transifex\Resources::createResource
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -90,41 +76,16 @@ class ResourcesTest extends TransifexTestCase
 		    'file'                => __DIR__ . '/stubs/source.ini'
 		);
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->object->createResource('joomla-platform', 'Joomla Platform Data', 'joomla-platform', 'INI', $options),
-			json_decode($this->sampleString)
+			$this->response
 		);
 	}
 
 	/**
-	 * Tests the createResource method - failure
-	 *
-	 * @return  void
-	 *
-	 * @expectedException  \DomainException
-	 * @since              1.0
-	 *
-	 * @covers  \BabDev\Transifex\Resources::createResource
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
-	 * @uses    \BabDev\Transifex\Http
-	 * @uses    \BabDev\Transifex\TransifexObject
-	 */
-	public function testCreateResourceFailure()
-	{
-		$this->prepareFailureTest('post', '/project/joomla-platform/resources/');
-
-		$this->object->createResource('joomla-platform', 'Joomla Platform Data', 'joomla-platform', 'INI', array('content' => 'Test="Test"'));
-	}
-
-	/**
-	 * Tests the deleteResource method
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
+	 * @testdox  deleteResource() returns a Response object on a successful API connection
 	 *
 	 * @covers  \BabDev\Transifex\Resources::deleteResource
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -132,41 +93,16 @@ class ResourcesTest extends TransifexTestCase
 	{
 		$this->prepareSuccessTest('delete', '/project/joomla/resource/joomla-platform', 204);
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->object->deleteResource('joomla', 'joomla-platform'),
-			json_decode($this->sampleString)
+			$this->response
 		);
 	}
 
 	/**
-	 * Tests the deleteResource method - failure
-	 *
-	 * @return  void
-	 *
-	 * @expectedException  \DomainException
-	 * @since              1.0
-	 *
-	 * @covers  \BabDev\Transifex\Resources::deleteResource
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
-	 * @uses    \BabDev\Transifex\Http
-	 * @uses    \BabDev\Transifex\TransifexObject
-	 */
-	public function testDeleteResourceFailure()
-	{
-		$this->prepareFailureTest('delete', '/project/joomla/resource/joomla-platform');
-
-		$this->object->deleteResource('joomla', 'joomla-platform');
-	}
-
-	/**
-	 * Tests the getResource method
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
+	 * @testdox  getResource() returns a Response object on a successful API connection
 	 *
 	 * @covers  \BabDev\Transifex\Resources::getResource
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -174,41 +110,16 @@ class ResourcesTest extends TransifexTestCase
 	{
 		$this->prepareSuccessTest('get', '/project/joomla/resource/joomla-platform/?details');
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->object->getResource('joomla', 'joomla-platform', true),
-			json_decode($this->sampleString)
+			$this->response
 		);
 	}
 
 	/**
-	 * Tests the getResource method - failure
-	 *
-	 * @return  void
-	 *
-	 * @expectedException  \DomainException
-	 * @since              1.0
-	 *
-	 * @covers  \BabDev\Transifex\Resources::getResource
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
-	 * @uses    \BabDev\Transifex\Http
-	 * @uses    \BabDev\Transifex\TransifexObject
-	 */
-	public function testGetResourceFailure()
-	{
-		$this->prepareFailureTest('get', '/project/joomla/resource/joomla-platform/?details');
-
-		$this->object->getResource('joomla', 'joomla-platform', true);
-	}
-
-	/**
-	 * Tests the getResourceContent method
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
+	 * @testdox  getResourceContent() returns a Response object on a successful API connection
 	 *
 	 * @covers  \BabDev\Transifex\Resources::getResourceContent
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -216,41 +127,16 @@ class ResourcesTest extends TransifexTestCase
 	{
 		$this->prepareSuccessTest('get', '/project/joomla/resource/joomla-platform/content/');
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->object->getResourceContent('joomla', 'joomla-platform'),
-			json_decode($this->sampleString)
+			$this->response
 		);
 	}
 
 	/**
-	 * Tests the getResourceContent method - failure
-	 *
-	 * @return  void
-	 *
-	 * @expectedException  \DomainException
-	 * @since              1.0
-	 *
-	 * @covers  \BabDev\Transifex\Resources::getResourceContent
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
-	 * @uses    \BabDev\Transifex\Http
-	 * @uses    \BabDev\Transifex\TransifexObject
-	 */
-	public function testGetResourceContentFailure()
-	{
-		$this->prepareFailureTest('get', '/project/joomla/resource/joomla-platform/content/');
-
-		$this->object->getResourceContent('joomla', 'joomla-platform');
-	}
-
-	/**
-	 * Tests the getResources method
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
+	 * @testdox  getResources() returns a Response object on a successful API connection
 	 *
 	 * @covers  \BabDev\Transifex\Resources::getResources
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -258,41 +144,16 @@ class ResourcesTest extends TransifexTestCase
 	{
 		$this->prepareSuccessTest('get', '/project/joomla/resources');
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->object->getResources('joomla'),
-			json_decode($this->sampleString)
+			$this->response
 		);
 	}
 
 	/**
-	 * Tests the getResources method - failure
-	 *
-	 * @return  void
-	 *
-	 * @expectedException  \DomainException
-	 * @since              1.0
-	 *
-	 * @covers  \BabDev\Transifex\Resources::getResources
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
-	 * @uses    \BabDev\Transifex\Http
-	 * @uses    \BabDev\Transifex\TransifexObject
-	 */
-	public function testGetResourcesFailure()
-	{
-		$this->prepareFailureTest('get', '/project/joomla/resources');
-
-		$this->object->getResources('joomla');
-	}
-
-	/**
-	 * Tests the updateResourceContent method with the content sent as a file
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
+	 * @testdox  updateResourceContent() with an attached file returns a Response object on a successful API connection
 	 *
 	 * @covers  \BabDev\Transifex\Resources::updateResourceContent
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -300,22 +161,17 @@ class ResourcesTest extends TransifexTestCase
 	{
 		$this->prepareSuccessTest('put', '/project/joomla/resource/joomla-platform/content/');
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->object->updateResourceContent('joomla', 'joomla-platform', __DIR__ . '/stubs/source.ini', 'file'),
-			json_decode($this->sampleString)
+			$this->response
 		);
 	}
 
 
 	/**
-	 * Tests the updateResourceContent method with the content sent as a string
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
+	 * @testdox  updateResourceContent() with inline content returns a Response object on a successful API connection
 	 *
 	 * @covers  \BabDev\Transifex\Resources::updateResourceContent
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @covers  \BabDev\Transifex\TransifexObject::updateResource
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
@@ -324,43 +180,18 @@ class ResourcesTest extends TransifexTestCase
 	{
 		$this->prepareSuccessTest('put', '/project/joomla/resource/joomla-platform/content/');
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->object->updateResourceContent('joomla', 'joomla-platform', 'TEST="Test"'),
-			json_decode($this->sampleString)
+			$this->response
 		);
 	}
 
 	/**
-	 * Tests the updateResourceContent method - failure
-	 *
-	 * @return  void
-	 *
-	 * @expectedException  \DomainException
-	 * @since              1.0
-	 *
-	 * @covers  \BabDev\Transifex\Resources::updateResourceContent
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
-	 * @covers  \BabDev\Transifex\TransifexObject::updateResource
-	 * @uses    \BabDev\Transifex\Http
-	 * @uses    \BabDev\Transifex\TransifexObject
-	 */
-	public function testUpdateResourceContentFailure()
-	{
-		$this->prepareFailureTest('put', '/project/joomla/resource/joomla-platform/content/');
-
-		$this->object->updateResourceContent('joomla', 'joomla-platform', 'TEST="Test"');
-	}
-
-	/**
-	 * Tests the updateResourceContent method - failure
-	 *
-	 * @return  void
+	 * @testdox  updateResourceContent() throws an InvalidArgumentException when an invalid content type is specified
 	 *
 	 * @expectedException  \InvalidArgumentException
-	 * @since              1.0
 	 *
 	 * @covers  \BabDev\Transifex\Resources::updateResourceContent
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @covers  \BabDev\Transifex\TransifexObject::updateResource
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject

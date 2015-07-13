@@ -1,5 +1,7 @@
 <?php
 /**
+ * BabDev Transifex Package
+ *
  * @copyright  Copyright (C) 2012-2015 Michael Babker. All rights reserved.
  * @license    http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License Version 2 or Later
  */
@@ -10,24 +12,18 @@ use BabDev\Transifex\Statistics;
 
 /**
  * Test class for \BabDev\Transifex\Statistics.
- *
- * @since  1.0
  */
 class StatisticsTest extends TransifexTestCase
 {
 	/**
-	 * @var    Statistics  Object under test.
-	 * @since  1.0
+	 * Object being tested.
+	 *
+	 * @var  Statistics
 	 */
-	protected $object;
+	private $object;
 
 	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
+	 * {@inheritdoc}
 	 */
 	protected function setUp()
 	{
@@ -37,14 +33,9 @@ class StatisticsTest extends TransifexTestCase
 	}
 
 	/**
-	 * Tests the getStatistics method
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
+	 * @testdox  getStatistics() returns a Response object on a successful API connection
 	 *
 	 * @covers  \BabDev\Transifex\Statistics::getStatistics
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -52,29 +43,9 @@ class StatisticsTest extends TransifexTestCase
 	{
 		$this->prepareSuccessTest('get', '/project/joomla/resource/joomla-platform/stats/');
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->object->getStatistics('joomla', 'joomla-platform'),
-			json_decode($this->sampleString)
+			$this->response
 		);
-	}
-
-	/**
-	 * Tests the getStatistics method - failure
-	 *
-	 * @return  void
-	 *
-	 * @expectedException  \DomainException
-	 * @since              1.0
-	 *
-	 * @covers  \BabDev\Transifex\Statistics::getStatistics
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
-	 * @uses    \BabDev\Transifex\Http
-	 * @uses    \BabDev\Transifex\TransifexObject
-	 */
-	public function testGetStatisticsFailure()
-	{
-		$this->prepareFailureTest('get', '/project/joomla/resource/joomla-platform/stats/');
-
-		$this->object->getStatistics('joomla', 'joomla-platform');
 	}
 }

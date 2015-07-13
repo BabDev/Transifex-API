@@ -52,7 +52,7 @@ class Projects extends TransifexObject
 	 * @param   string  $sourceLanguage  The source language code for the project
 	 * @param   array   $options         Optional additional params to send with the request
 	 *
-	 * @return  \stdClass
+	 * @return  \Joomla\Http\Response
 	 *
 	 * @since   1.0
 	 * @throws  \InvalidArgumentException
@@ -104,13 +104,10 @@ class Projects extends TransifexObject
 		}
 
 		// Send the request.
-		return $this->processResponse(
-			$this->client->post(
-				$this->fetchUrl($path),
-				json_encode($data),
-				array('Content-Type' => 'application/json')
-			),
-			201
+		return $this->client->post(
+			$this->fetchUrl($path),
+			json_encode($data),
+			array('Content-Type' => 'application/json')
 		);
 	}
 
@@ -119,7 +116,7 @@ class Projects extends TransifexObject
 	 *
 	 * @param   string  $slug  The slug for the resource.
 	 *
-	 * @return  \stdClass
+	 * @return  \Joomla\Http\Response
 	 *
 	 * @since   1.0
 	 */
@@ -129,7 +126,7 @@ class Projects extends TransifexObject
 		$path = '/project/' . $slug;
 
 		// Send the request.
-		return $this->processResponse($this->client->delete($this->fetchUrl($path)), 204);
+		return $this->client->delete($this->fetchUrl($path));
 	}
 
 	/**
@@ -138,7 +135,7 @@ class Projects extends TransifexObject
 	 * @param   string   $project  The project to retrieve details for
 	 * @param   boolean  $details  True to retrieve additional project details
 	 *
-	 * @return  \stdClass  The project details from the API.
+	 * @return  \Joomla\Http\Response  The project details from the API.
 	 *
 	 * @since   1.0
 	 */
@@ -153,13 +150,13 @@ class Projects extends TransifexObject
 		}
 
 		// Send the request.
-		return $this->processResponse($this->client->get($this->fetchUrl($path)));
+		return $this->client->get($this->fetchUrl($path));
 	}
 
 	/**
 	 * Method to get a list of projects the user is part of.
 	 *
-	 * @return  \stdClass  The list of projects from the API.
+	 * @return  \Joomla\Http\Response  The list of projects from the API.
 	 *
 	 * @since   1.0
 	 */
@@ -169,7 +166,7 @@ class Projects extends TransifexObject
 		$path = '/projects/';
 
 		// Send the request.
-		return $this->processResponse($this->client->get($this->fetchUrl($path)));
+		return $this->client->get($this->fetchUrl($path));
 	}
 
 	/**
@@ -178,7 +175,7 @@ class Projects extends TransifexObject
 	 * @param   string  $slug     The slug for the project
 	 * @param   array   $options  Optional additional params to send with the request
 	 *
-	 * @return  \stdClass
+	 * @return  \Joomla\Http\Response
 	 *
 	 * @since   1.0
 	 * @throws  \RuntimeException
@@ -220,13 +217,10 @@ class Projects extends TransifexObject
 		}
 
 		// Send the request.
-		return $this->processResponse(
-			$this->client->put(
-				$this->fetchUrl($path),
-				json_encode($data),
-				array('Content-Type' => 'application/json')
-			),
-			200
+		return $this->client->put(
+			$this->fetchUrl($path),
+			json_encode($data),
+			array('Content-Type' => 'application/json')
 		);
 	}
 }

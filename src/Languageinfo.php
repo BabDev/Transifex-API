@@ -21,7 +21,7 @@ class Languageinfo extends TransifexObject
 	 *
 	 * @param   string  $lang  The language code to retrieve
 	 *
-	 * @return  \stdClass  The language data.
+	 * @return  \Joomla\Http\Response  The language data.
 	 *
 	 * @since   1.0
 	 */
@@ -31,13 +31,13 @@ class Languageinfo extends TransifexObject
 		$path = '/language/' . $lang . '/';
 
 		// Send the request.
-		return $this->processResponse($this->client->get($this->fetchUrl($path)));
+		return $this->client->get($this->fetchUrl($path));
 	}
 
 	/**
 	 * Method to get data on all supported API languages.
 	 *
-	 * @return  \stdClass  The language data.
+	 * @return  \Joomla\Http\Response  The language data.
 	 *
 	 * @since   1.0
 	 */
@@ -47,6 +47,6 @@ class Languageinfo extends TransifexObject
 		$path = '/languages/';
 
 		// Send the request.
-		return $this->processResponse($this->client->get($this->fetchUrl($path)));
+		return $this->client->get($this->fetchUrl($path));
 	}
 }

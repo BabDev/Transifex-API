@@ -19,7 +19,7 @@ class Formats extends TransifexObject
 	/**
 	 * Method to get the supported formats.
 	 *
-	 * @return  \stdClass  The supported formats from the API.
+	 * @return  \Joomla\Http\Response  The supported formats from the API.
 	 *
 	 * @since   1.0
 	 */
@@ -29,6 +29,6 @@ class Formats extends TransifexObject
 		$path = '/formats';
 
 		// Send the request.
-		return $this->processResponse($this->client->get($this->fetchUrl($path)));
+		return $this->client->get($this->fetchUrl($path));
 	}
 }

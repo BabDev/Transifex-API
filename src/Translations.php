@@ -24,7 +24,7 @@ class Translations extends TransifexObject
 	 * @param   string  $lang      The language to return the translation for.
 	 * @param   string  $mode      The mode of the downloaded file.
 	 *
-	 * @return  \stdClass  The resource's translation in the specified language.
+	 * @return  \Joomla\Http\Response  The resource's translation in the specified language.
 	 *
 	 * @since   1.0
 	 */
@@ -39,7 +39,7 @@ class Translations extends TransifexObject
 		}
 
 		// Send the request.
-		return $this->processResponse($this->client->get($this->fetchUrl($path)));
+		return $this->client->get($this->fetchUrl($path));
 	}
 
 	/**
@@ -51,7 +51,7 @@ class Translations extends TransifexObject
 	 * @param   string  $content   The content of the resource.  This can either be a string of data or a file path.
 	 * @param   string  $type      The type of content in the $content variable.  This should be either string or file.
 	 *
-	 * @return  \stdClass  The project details from the API.
+	 * @return  \Joomla\Http\Response  The project details from the API.
 	 *
 	 * @since   1.0
 	 */

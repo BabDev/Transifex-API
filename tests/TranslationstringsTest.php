@@ -1,5 +1,7 @@
 <?php
 /**
+ * BabDev Transifex Package
+ *
  * @copyright  Copyright (C) 2012-2015 Michael Babker. All rights reserved.
  * @license    http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License Version 2 or Later
  */
@@ -10,24 +12,18 @@ use BabDev\Transifex\Translationstrings;
 
 /**
  * Test class for \BabDev\Transifex\Translationstrings.
- *
- * @since  1.0
  */
 class TranslationstringsTest extends TransifexTestCase
 {
 	/**
-	 * @var    Translationstrings  Object under test.
-	 * @since  1.0
+	 * Object being tested.
+	 *
+	 * @var  Translationstrings
 	 */
-	protected $object;
+	private $object;
 
 	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
+	 * {@inheritdoc}
 	 */
 	protected function setUp()
 	{
@@ -37,13 +33,8 @@ class TranslationstringsTest extends TransifexTestCase
 	}
 
 	/**
-	 * Tests the getPseudolocalizationStrings method
+	 * @testdox  getPseudolocalizationStrings() returns a Response object on a successful API connection
 	 *
-	 * @return  void
-	 *
-	 * @since   1.0
-	 *
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @covers  \BabDev\Transifex\Translationstrings::getPseudolocalizationStrings
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
@@ -52,40 +43,15 @@ class TranslationstringsTest extends TransifexTestCase
 	{
 		$this->prepareSuccessTest('get', '/project/joomla/resource/joomla-platform/pseudo/?pseudo_type=MIXED');
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->object->getPseudolocalizationStrings('joomla', 'joomla-platform'),
-			json_decode($this->sampleString)
+			$this->response
 		);
 	}
 
 	/**
-	 * Tests the getPseudolocalizationStrings method - failure
+	 * @testdox  getStrings() returns a Response object on a successful API connection
 	 *
-	 * @return  void
-	 *
-	 * @expectedException  \DomainException
-	 * @since              1.0
-	 *
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
-	 * @covers  \BabDev\Transifex\Translationstrings::getPseudolocalizationStrings
-	 * @uses    \BabDev\Transifex\Http
-	 * @uses    \BabDev\Transifex\TransifexObject
-	 */
-	public function testGetPseudolocalizationStringsFailure()
-	{
-		$this->prepareFailureTest('get', '/project/joomla/resource/joomla-platform/pseudo/?pseudo_type=MIXED');
-
-		$this->object->getPseudolocalizationStrings('joomla', 'joomla-platform');
-	}
-
-	/**
-	 * Tests the getStrings method
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
-	 *
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @covers  \BabDev\Transifex\Translationstrings::getStrings
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
@@ -94,20 +60,15 @@ class TranslationstringsTest extends TransifexTestCase
 	{
 		$this->prepareSuccessTest('get', '/project/joomla/resource/joomla-platform/translation/en_GB/strings/');
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->object->getStrings('joomla', 'joomla-platform', 'en_GB'),
-			json_decode($this->sampleString)
+			$this->response
 		);
 	}
 
 	/**
-	 * Tests the getStrings method - Query for details
+	 * @testdox  getStrings() requesting full details returns a Response object on a successful API connection
 	 *
-	 * @return  void
-	 *
-	 * @since   1.0
-	 *
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @covers  \BabDev\Transifex\Translationstrings::getStrings
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
@@ -116,20 +77,15 @@ class TranslationstringsTest extends TransifexTestCase
 	{
 		$this->prepareSuccessTest('get', '/project/joomla/resource/joomla-platform/translation/en_GB/strings/?details');
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->object->getStrings('joomla', 'joomla-platform', 'en_GB', true),
-			json_decode($this->sampleString)
+			$this->response
 		);
 	}
 
 	/**
-	 * Tests the getStrings method - Query for details and key
+	 * @testdox  getStrings() requesting full details and the key returns a Response object on a successful API connection
 	 *
-	 * @return  void
-	 *
-	 * @since   1.0
-	 *
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @covers  \BabDev\Transifex\Translationstrings::getStrings
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
@@ -138,20 +94,15 @@ class TranslationstringsTest extends TransifexTestCase
 	{
 		$this->prepareSuccessTest('get', '/project/joomla/resource/joomla-platform/translation/en_GB/strings/?details\&key=Yes');
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->object->getStrings('joomla', 'joomla-platform', 'en_GB', true, array('key' => 'Yes')),
-			json_decode($this->sampleString)
+			$this->response
 		);
 	}
 
 	/**
-	 * Tests the getStrings method - Query for details, key, and context
+	 * @testdox  getStrings() requesting full details, key, and context returns a Response object on a successful API connection
 	 *
-	 * @return  void
-	 *
-	 * @since   1.0
-	 *
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @covers  \BabDev\Transifex\Translationstrings::getStrings
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
@@ -160,20 +111,15 @@ class TranslationstringsTest extends TransifexTestCase
 	{
 		$this->prepareSuccessTest('get', '/project/joomla/resource/joomla-platform/translation/en_GB/strings/?details\&key=Yes\&context=Something');
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->object->getStrings('joomla', 'joomla-platform', 'en_GB', true, array('key' => 'Yes', 'context' => 'Something')),
-			json_decode($this->sampleString)
+			$this->response
 		);
 	}
 
 	/**
-	 * Tests the getStrings method - Query for key, and context
+	 * @testdox  getStrings() requesting the key and context returns a Response object on a successful API connection
 	 *
-	 * @return  void
-	 *
-	 * @since   1.0
-	 *
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @covers  \BabDev\Transifex\Translationstrings::getStrings
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
@@ -182,20 +128,15 @@ class TranslationstringsTest extends TransifexTestCase
 	{
 		$this->prepareSuccessTest('get', '/project/joomla/resource/joomla-platform/translation/en_GB/strings/?key=Yes\&context=Something');
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->object->getStrings('joomla', 'joomla-platform', 'en_GB', false, array('key' => 'Yes', 'context' => 'Something')),
-			json_decode($this->sampleString)
+			$this->response
 		);
 	}
 
 	/**
-	 * Tests the getStrings method - Query for context
+	 * @testdox  getStrings() requesting a given context returns a Response object on a successful API connection
 	 *
-	 * @return  void
-	 *
-	 * @since   1.0
-	 *
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @covers  \BabDev\Transifex\Translationstrings::getStrings
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
@@ -204,29 +145,9 @@ class TranslationstringsTest extends TransifexTestCase
 	{
 		$this->prepareSuccessTest('get', '/project/joomla/resource/joomla-platform/translation/en_GB/strings/?context=Something');
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->object->getStrings('joomla', 'joomla-platform', 'en_GB', false, array('context' => 'Something')),
-			json_decode($this->sampleString)
+			$this->response
 		);
-	}
-
-	/**
-	 * Tests the getStrings method - failure
-	 *
-	 * @return  void
-	 *
-	 * @expectedException  \DomainException
-	 * @since              1.0
-	 *
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
-	 * @covers  \BabDev\Transifex\Translationstrings::getStrings
-	 * @uses    \BabDev\Transifex\Http
-	 * @uses    \BabDev\Transifex\TransifexObject
-	 */
-	public function testGetStringsFailure()
-	{
-		$this->prepareFailureTest('get', '/project/joomla/resource/joomla-platform/translation/en_GB/strings/');
-
-		$this->object->getStrings('joomla', 'joomla-platform', 'en_GB');
 	}
 }

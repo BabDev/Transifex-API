@@ -1,5 +1,7 @@
 <?php
 /**
+ * BabDev Transifex Package
+ *
  * @copyright  Copyright (C) 2012-2015 Michael Babker. All rights reserved.
  * @license    http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License Version 2 or Later
  */
@@ -10,24 +12,18 @@ use BabDev\Transifex\Translations;
 
 /**
  * Test class for \BabDev\Transifex\Translations.
- *
- * @since  1.0
  */
 class TranslationsTest extends TransifexTestCase
 {
 	/**
-	 * @var    Translations  Object under test.
-	 * @since  1.0
+	 * Object being tested.
+	 *
+	 * @var  Translations
 	 */
-	protected $object;
+	private $object;
 
 	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
+	 * {@inheritdoc}
 	 */
 	protected function setUp()
 	{
@@ -37,13 +33,8 @@ class TranslationsTest extends TransifexTestCase
 	}
 
 	/**
-	 * Tests the getTranslation method
+	 * @testdox  getTranslation() returns a Response object on a successful API connection
 	 *
-	 * @return  void
-	 *
-	 * @since   1.0
-	 *
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @covers  \BabDev\Transifex\Translations::getTranslation
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
@@ -52,40 +43,15 @@ class TranslationsTest extends TransifexTestCase
 	{
 		$this->prepareSuccessTest('get', '/project/joomla/resource/joomla-platform/translation/en_GB?mode=default&file');
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->object->getTranslation('joomla', 'joomla-platform', 'en_GB', 'default'),
-			json_decode($this->sampleString)
+			$this->response
 		);
 	}
 
 	/**
-	 * Tests the getTranslation method - failure
+	 * @testdox  updateTranslation() with an attached file returns a Response object on a successful API connection
 	 *
-	 * @return  void
-	 *
-	 * @expectedException  \DomainException
-	 * @since              1.0
-	 *
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
-	 * @covers  \BabDev\Transifex\Translations::getTranslation
-	 * @uses    \BabDev\Transifex\Http
-	 * @uses    \BabDev\Transifex\TransifexObject
-	 */
-	public function testGetTranslationFailure()
-	{
-		$this->prepareFailureTest('get', '/project/joomla/resource/joomla-platform/translation/en_GB');
-
-		$this->object->getTranslation('joomla', 'joomla-platform', 'en_GB');
-	}
-
-	/**
-	 * Tests the updateTranslation method with the content sent as a file
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
-	 *
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @covers  \BabDev\Transifex\TransifexObject::updateResource
 	 * @covers  \BabDev\Transifex\Translations::updateTranslation
 	 * @uses    \BabDev\Transifex\Http
@@ -95,21 +61,16 @@ class TranslationsTest extends TransifexTestCase
 	{
 		$this->prepareSuccessTest('put', '/project/joomla/resource/joomla-platform/translation/en_GB');
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->object->updateTranslation('joomla', 'joomla-platform', 'en_GB', __DIR__ . '/stubs/source.ini', 'file'),
-			json_decode($this->sampleString)
+			$this->response
 		);
 	}
 
 
 	/**
-	 * Tests the updateTranslation method with the content sent as a string
+	 * @testdox  updateTranslation() with inline content returns a Response object on a successful API connection
 	 *
-	 * @return  void
-	 *
-	 * @since   1.0
-	 *
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @covers  \BabDev\Transifex\TransifexObject::updateResource
 	 * @covers  \BabDev\Transifex\Translations::updateTranslation
 	 * @uses    \BabDev\Transifex\Http
@@ -119,42 +80,17 @@ class TranslationsTest extends TransifexTestCase
 	{
 		$this->prepareSuccessTest('put', '/project/joomla/resource/joomla-platform/translation/en_GB');
 
-		$this->assertEquals(
+		$this->assertSame(
 			$this->object->updateTranslation('joomla', 'joomla-platform', 'en_GB', 'TEST="Test"'),
-			json_decode($this->sampleString)
+			$this->response
 		);
 	}
 
 	/**
-	 * Tests the updateTranslation method - failure
-	 *
-	 * @return  void
-	 *
-	 * @expectedException  \DomainException
-	 * @since              1.0
-	 *
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
-	 * @covers  \BabDev\Transifex\TransifexObject::updateResource
-	 * @covers  \BabDev\Transifex\Translations::updateTranslation
-	 * @uses    \BabDev\Transifex\Http
-	 * @uses    \BabDev\Transifex\TransifexObject
-	 */
-	public function testUpdateTranslationFailure()
-	{
-		$this->prepareFailureTest('put', '/project/joomla/resource/joomla-platform/translation/en_GB');
-
-		$this->object->updateTranslation('joomla', 'joomla-platform', 'en_GB', 'TEST="Test"');
-	}
-
-	/**
-	 * Tests the updateTranslation method - failure
-	 *
-	 * @return  void
+	 * @testdox  updateTranslation() throws an InvalidArgumentException when an invalid content type is specified
 	 *
 	 * @expectedException  \InvalidArgumentException
-	 * @since              1.0
 	 *
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @covers  \BabDev\Transifex\TransifexObject::updateResource
 	 * @covers  \BabDev\Transifex\Translations::updateTranslation
 	 * @uses    \BabDev\Transifex\Http

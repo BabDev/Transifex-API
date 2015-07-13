@@ -1,59 +1,60 @@
 <?php
 /**
+ * BabDev Transifex Package
+ *
  * @copyright  Copyright (C) 2012-2015 Michael Babker. All rights reserved.
  * @license    http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License Version 2 or Later
  */
 
 namespace BabDev\Transifex\Tests;
 
-use BabDev\Transifex\Http;
-
-use Joomla\Http\Response;
-
 /**
  * Abstract test case for TransifexObject instances
- *
- * @since  1.0
  */
 abstract class TransifexTestCase extends \PHPUnit_Framework_TestCase
 {
 	/**
-	 * @var    array  Options for the Formats object.
+	 * Options for the Transifex object.
+	 *
+	 * @var    array
 	 * @since  1.0
 	 */
 	protected $options;
 
 	/**
-	 * @var    Http  Mock client object.
+	 * Mock HTTP client object.
+	 *
+	 * @var    \PHPUnit_Framework_MockObject_MockObject
 	 * @since  1.0
 	 */
 	protected $client;
 
 	/**
-	 * @var    Response  Mock response object.
+	 * Mock Response object.
+	 *
+	 * @var    \PHPUnit_Framework_MockObject_MockObject
 	 * @since  1.0
 	 */
 	protected $response;
 
 	/**
-	 * @var    string  Sample JSON string.
+	 * Sample JSON string.
+	 *
+	 * @var    string
 	 * @since  1.0
 	 */
 	protected $sampleString = '{"a":1,"b":2,"c":3,"d":4,"e":5}';
 
 	/**
-	 * @var    string  Sample JSON error message.
+	 * Sample JSON error message.
+	 *
+	 * @var    string
 	 * @since  1.0
 	 */
 	protected $errorString = '{"message": "Generic Error"}';
 
 	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
+	 * {@inheritdoc
 	 */
 	protected function setUp()
 	{
@@ -63,7 +64,7 @@ abstract class TransifexTestCase extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Prepares the test response for a failure (500) response
+	 * Prepares the mock response for a failed API connection
 	 *
 	 * @param   string  $method  The method being called
 	 * @param   string  $url     The URL being requested
@@ -80,11 +81,11 @@ abstract class TransifexTestCase extends \PHPUnit_Framework_TestCase
 		$this->client->expects($this->once())
 			->method($method)
 			->with($url)
-			->will($this->returnValue($this->response));
+			->willReturn($this->response);
 	}
 
 	/**
-	 * Prepares the test response for a success (200) response
+	 * Prepares the mock response for a successful API connection
 	 *
 	 * @param   string  $method  The method being called
 	 * @param   string  $url     The URL being requested
@@ -101,6 +102,6 @@ abstract class TransifexTestCase extends \PHPUnit_Framework_TestCase
 		$this->client->expects($this->once())
 			->method($method)
 			->with($url)
-			->will($this->returnValue($this->response));
+			->willReturn($this->response);
 	}
 }

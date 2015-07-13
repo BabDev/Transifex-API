@@ -25,7 +25,7 @@ class Languages extends TransifexObject
 	 * @param   array    $options              Optional additional params to send with the request
 	 * @param   boolean  $skipInvalidUsername  If true, the API call does not fail and instead will return a list of invalid usernames
 	 *
-	 * @return  \stdClass
+	 * @return  \Joomla\Http\Response
 	 *
 	 * @since   1.0
 	 * @throws  \InvalidArgumentException
@@ -66,13 +66,10 @@ class Languages extends TransifexObject
 		}
 
 		// Send the request.
-		return $this->processResponse(
-			$this->client->post(
-				$this->fetchUrl($path),
-				json_encode($data),
-				array('Content-Type' => 'application/json')
-			),
-			201
+		return $this->client->post(
+			$this->fetchUrl($path),
+			json_encode($data),
+			array('Content-Type' => 'application/json')
 		);
 	}
 
@@ -82,7 +79,7 @@ class Languages extends TransifexObject
 	 * @param   string  $project   The project to retrieve details for
 	 * @param   string  $langCode  The language code to retrieve details for
 	 *
-	 * @return  \stdClass
+	 * @return  \Joomla\Http\Response
 	 *
 	 * @since   1.0
 	 */
@@ -92,7 +89,7 @@ class Languages extends TransifexObject
 		$path = '/project/' . $project . '/language/' . $langCode . '/';
 
 		// Send the request.
-		return $this->processResponse($this->client->delete($this->fetchUrl($path)), 204);
+		return $this->client->delete($this->fetchUrl($path));
 	}
 
 	/**
@@ -101,7 +98,7 @@ class Languages extends TransifexObject
 	 * @param   string  $project   The project to retrieve details for
 	 * @param   string  $langCode  The language code to retrieve details for
 	 *
-	 * @return  \stdClass  The coordinator information from the API.
+	 * @return  \Joomla\Http\Response  The coordinator information from the API.
 	 *
 	 * @since   1.0
 	 */
@@ -111,7 +108,7 @@ class Languages extends TransifexObject
 		$path = '/project/' . $project . '/language/' . $langCode . '/coordinators/';
 
 		// Send the request.
-		return $this->processResponse($this->client->get($this->fetchUrl($path)));
+		return $this->client->get($this->fetchUrl($path));
 	}
 
 	/**
@@ -120,7 +117,7 @@ class Languages extends TransifexObject
 	 * @param   string  $project   The project to retrieve details for
 	 * @param   string  $langCode  The language code to retrieve details for
 	 *
-	 * @return  \stdClass  The language details for the specified project from the API.
+	 * @return  \Joomla\Http\Response  The language details for the specified project from the API.
 	 *
 	 * @since   1.0
 	 */
@@ -130,7 +127,7 @@ class Languages extends TransifexObject
 		$path = '/project/' . $project . '/language/' . $langCode . '/';
 
 		// Send the request.
-		return $this->processResponse($this->client->get($this->fetchUrl($path)));
+		return $this->client->get($this->fetchUrl($path));
 	}
 
 	/**
@@ -138,7 +135,7 @@ class Languages extends TransifexObject
 	 *
 	 * @param   string  $project  The project to retrieve details for
 	 *
-	 * @return  \stdClass  The language data for the project.
+	 * @return  \Joomla\Http\Response  The language data for the project.
 	 *
 	 * @since   1.0
 	 */
@@ -148,7 +145,7 @@ class Languages extends TransifexObject
 		$path = '/project/' . $project . '/languages/';
 
 		// Send the request.
-		return $this->processResponse($this->client->get($this->fetchUrl($path)));
+		return $this->client->get($this->fetchUrl($path));
 	}
 
 	/**
@@ -157,7 +154,7 @@ class Languages extends TransifexObject
 	 * @param   string  $project   The project to retrieve details for
 	 * @param   string  $langCode  The language code to retrieve details for
 	 *
-	 * @return  \stdClass  The reviewer information from the API.
+	 * @return  \Joomla\Http\Response  The reviewer information from the API.
 	 *
 	 * @since   1.0
 	 */
@@ -167,7 +164,7 @@ class Languages extends TransifexObject
 		$path = '/project/' . $project . '/language/' . $langCode . '/reviewers/';
 
 		// Send the request.
-		return $this->processResponse($this->client->get($this->fetchUrl($path)));
+		return $this->client->get($this->fetchUrl($path));
 	}
 
 	/**
@@ -176,7 +173,7 @@ class Languages extends TransifexObject
 	 * @param   string  $project   The project to retrieve details for
 	 * @param   string  $langCode  The language code to retrieve details for
 	 *
-	 * @return  \stdClass  The translators information from the API.
+	 * @return  \Joomla\Http\Response  The translators information from the API.
 	 *
 	 * @since   1.0
 	 */
@@ -186,7 +183,7 @@ class Languages extends TransifexObject
 		$path = '/project/' . $project . '/language/' . $langCode . '/translators/';
 
 		// Send the request.
-		return $this->processResponse($this->client->get($this->fetchUrl($path)));
+		return $this->client->get($this->fetchUrl($path));
 	}
 
 	/**
@@ -197,7 +194,7 @@ class Languages extends TransifexObject
 	 * @param   array    $coordinators         An array of coordinators for the language
 	 * @param   boolean  $skipInvalidUsername  If true, the API call does not fail and instead will return a list of invalid usernames
 	 *
-	 * @return  \stdClass
+	 * @return  \Joomla\Http\Response
 	 *
 	 * @since   1.0
 	 */
@@ -214,7 +211,7 @@ class Languages extends TransifexObject
 	 * @param   array   $coordinators  An array of coordinators for the language
 	 * @param   array   $options       Optional additional params to send with the request
 	 *
-	 * @return  \stdClass
+	 * @return  \Joomla\Http\Response
 	 *
 	 * @since   1.0
 	 * @throws  \InvalidArgumentException
@@ -246,13 +243,10 @@ class Languages extends TransifexObject
 		}
 
 		// Send the request.
-		return $this->processResponse(
-			$this->client->put(
-				$this->fetchUrl($path),
-				json_encode($data),
-				array('Content-Type' => 'application/json')
-			),
-			200
+		return $this->client->put(
+			$this->fetchUrl($path),
+			json_encode($data),
+			array('Content-Type' => 'application/json')
 		);
 	}
 
@@ -264,7 +258,7 @@ class Languages extends TransifexObject
 	 * @param   array    $reviewers            An array of reviewers for the language
 	 * @param   boolean  $skipInvalidUsername  If true, the API call does not fail and instead will return a list of invalid usernames
 	 *
-	 * @return  \stdClass
+	 * @return  \Joomla\Http\Response
 	 *
 	 * @since   1.0
 	 */
@@ -282,7 +276,7 @@ class Languages extends TransifexObject
 	 * @param   boolean  $skipInvalidUsername  If true, the API call does not fail and instead will return a list of invalid usernames
 	 * @param   string   $team                 The team to update
 	 *
-	 * @return  \stdClass
+	 * @return  \Joomla\Http\Response
 	 *
 	 * @since   1.0
 	 * @throws  \InvalidArgumentException
@@ -305,13 +299,10 @@ class Languages extends TransifexObject
 		}
 
 		// Send the request.
-		return $this->processResponse(
-			$this->client->put(
-				$this->fetchUrl($path),
-				json_encode($members),
-				array('Content-Type' => 'application/json')
-			),
-			200
+		return $this->client->put(
+			$this->fetchUrl($path),
+			json_encode($members),
+			array('Content-Type' => 'application/json')
 		);
 	}
 
@@ -323,7 +314,7 @@ class Languages extends TransifexObject
 	 * @param   array    $translators          An array of translators for the language
 	 * @param   boolean  $skipInvalidUsername  If true, the API call does not fail and instead will return a list of invalid usernames
 	 *
-	 * @return  \stdClass
+	 * @return  \Joomla\Http\Response
 	 *
 	 * @since   1.0
 	 */

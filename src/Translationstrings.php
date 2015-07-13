@@ -22,7 +22,7 @@ class Translationstrings extends TransifexObject
 	 * @param   string  $project   The slug for the project to pull from.
 	 * @param   string  $resource  The slug for the resource to pull from.
 	 *
-	 * @return  \stdClass  The resource's pseudolocalization.
+	 * @return  \Joomla\Http\Response  The resource's pseudolocalization.
 	 *
 	 * @since   1.0
 	 */
@@ -32,7 +32,7 @@ class Translationstrings extends TransifexObject
 		$path = '/project/' . $project . '/resource/' . $resource . '/pseudo/?pseudo_type=MIXED';
 
 		// Send the request.
-		return $this->processResponse($this->client->get($this->fetchUrl($path)));
+		return $this->client->get($this->fetchUrl($path));
 	}
 
 	/**
@@ -44,7 +44,7 @@ class Translationstrings extends TransifexObject
 	 * @param   boolean  $details   Flag to retrieve additional details on the strings
 	 * @param   array    $options   An array of additional options for the request
 	 *
-	 * @return  \stdClass  The resource's translation in the specified language.
+	 * @return  \Joomla\Http\Response  The resource's translation in the specified language.
 	 *
 	 * @since   1.0
 	 */
@@ -53,41 +53,22 @@ class Translationstrings extends TransifexObject
 		// Build the request path.
 		$path = '/project/' . $project . '/resource/' . $resource . '/translation/' . $lang . '/strings/';
 
-		// Flag for when the query string starts
-		$firstQuerySet = false;
-
 		if ($details)
 		{
-			$path         .= '?details';
-			$firstQuerySet = true;
+			$path .= '?details';
 		}
 
 		if (isset($options['key']))
 		{
-			if ($firstQuerySet)
-			{
-				$path .= '\&key=' . $options['key'];
-			}
-			else
-			{
-				$path         .= '?key=' . $options['key'];
-				$firstQuerySet = true;
-			}
+			$path .= (strpos($path, '?') === false ? '?' : '\&') . 'key=' . $options['key'];
 		}
 
 		if (isset($options['context']))
 		{
-			if ($firstQuerySet)
-			{
-				$path .= '\&context=' . $options['context'];
-			}
-			else
-			{
-				$path .= '?context=' . $options['context'];
-			}
+			$path .= (strpos($path, '?') === false ? '?' : '\&') . 'context=' . $options['context'];
 		}
 
 		// Send the request.
-		return $this->processResponse($this->client->get($this->fetchUrl($path)));
+		return $this->client->get($this->fetchUrl($path));
 	}
 }

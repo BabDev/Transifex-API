@@ -25,7 +25,7 @@ class Resources extends TransifexObject
 	 * @param   string  $fileType  The file type of the resource
 	 * @param   array   $options   Optional additional params to send with the request
 	 *
-	 * @return  \stdClass
+	 * @return  \Joomla\Http\Response
 	 *
 	 * @since   1.0
 	 */
@@ -70,13 +70,10 @@ class Resources extends TransifexObject
 		}
 
 		// Send the request.
-		return $this->processResponse(
-			$this->client->post(
-				$this->fetchUrl($path),
-				json_encode($data),
-				array('Content-Type' => 'application/json')
-			),
-			201
+		return $this->client->post(
+			$this->fetchUrl($path),
+			json_encode($data),
+			array('Content-Type' => 'application/json')
 		);
 	}
 
@@ -86,7 +83,7 @@ class Resources extends TransifexObject
 	 * @param   string  $project   The project the resource is part of
 	 * @param   string  $resource  The resource slug within the project
 	 *
-	 * @return  \stdClass  The project details from the API.
+	 * @return  \Joomla\Http\Response  The project details from the API.
 	 *
 	 * @since   1.0
 	 */
@@ -96,7 +93,7 @@ class Resources extends TransifexObject
 		$path = '/project/' . $project . '/resource/' . $resource;
 
 		// Send the request.
-		return $this->processResponse($this->client->delete($this->fetchUrl($path)), 204);
+		return $this->client->delete($this->fetchUrl($path));
 	}
 
 	/**
@@ -106,7 +103,7 @@ class Resources extends TransifexObject
 	 * @param   string   $resource  The resource slug within the project
 	 * @param   boolean  $details   True to retrieve additional project details
 	 *
-	 * @return  \stdClass  The project details from the API.
+	 * @return  \Joomla\Http\Response  The project details from the API.
 	 *
 	 * @since   1.0
 	 */
@@ -121,7 +118,7 @@ class Resources extends TransifexObject
 		}
 
 		// Send the request.
-		return $this->processResponse($this->client->get($this->fetchUrl($path)));
+		return $this->client->get($this->fetchUrl($path));
 	}
 
 	/**
@@ -130,7 +127,7 @@ class Resources extends TransifexObject
 	 * @param   string  $project   The project the resource is part of
 	 * @param   string  $resource  The resource slug within the project
 	 *
-	 * @return  \stdClass  The project details from the API.
+	 * @return  \Joomla\Http\Response  The project details from the API.
 	 *
 	 * @since   1.0
 	 */
@@ -140,7 +137,7 @@ class Resources extends TransifexObject
 		$path = '/project/' . $project . '/resource/' . $resource . '/content/';
 
 		// Send the request.
-		return $this->processResponse($this->client->get($this->fetchUrl($path)));
+		return $this->client->get($this->fetchUrl($path));
 	}
 
 	/**
@@ -148,7 +145,7 @@ class Resources extends TransifexObject
 	 *
 	 * @param   string  $project  The project to retrieve details for
 	 *
-	 * @return  \stdClass  The project details from the API.
+	 * @return  \Joomla\Http\Response  The project details from the API.
 	 *
 	 * @since   1.0
 	 */
@@ -158,7 +155,7 @@ class Resources extends TransifexObject
 		$path = '/project/' . $project . '/resources';
 
 		// Send the request.
-		return $this->processResponse($this->client->get($this->fetchUrl($path)));
+		return $this->client->get($this->fetchUrl($path));
 	}
 
 	/**
@@ -169,7 +166,7 @@ class Resources extends TransifexObject
 	 * @param   string  $content   The content of the resource.  This can either be a string of data or a file path.
 	 * @param   string  $type      The type of content in the $content variable.  This should be either string or file.
 	 *
-	 * @return  \stdClass  The project details from the API.
+	 * @return  \Joomla\Http\Response  The project details from the API.
 	 *
 	 * @since   1.0
 	 */

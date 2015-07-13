@@ -48,9 +48,9 @@ abstract class TransifexObject
 	}
 
 	/**
-	 * Method to build and return a full request URL for the request.  This method will
-	 * add appropriate pagination details if necessary and also prepend the API url
-	 * to have a complete URL for the request.
+	 * Method to build and return a full request URL for the request.
+	 *
+	 * This method will add appropriate pagination details if necessary and also prepend the API URL to have a complete URL for the request.
 	 *
 	 * @param   string  $path  URL to inflect
 	 *
@@ -73,7 +73,7 @@ abstract class TransifexObject
 	 * @param   string  $content  The content of the resource.  This can either be a string of data or a file path.
 	 * @param   string  $type     The type of content in the $content variable.  This should be either string or file.
 	 *
-	 * @return  \stdClass
+	 * @return  \Joomla\Http\Response
 	 *
 	 * @since   1.0
 	 * @throws  \DomainException
@@ -92,13 +92,10 @@ abstract class TransifexObject
 		);
 
 		// Send the request.
-		return $this->processResponse(
-			$this->client->put(
-				$this->fetchUrl($path),
-				json_encode($data),
-				array('Content-Type' => 'application/json')
-			),
-			200
+		return $this->client->put(
+			$this->fetchUrl($path),
+			json_encode($data),
+			array('Content-Type' => 'application/json')
 		);
 	}
 
