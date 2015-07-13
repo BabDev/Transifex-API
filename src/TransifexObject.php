@@ -98,33 +98,4 @@ abstract class TransifexObject
 			array('Content-Type' => 'application/json')
 		);
 	}
-
-	/**
-	 * Process the response and decode it.
-	 *
-	 * @param   Response  $response      The response.
-	 * @param   integer   $expectedCode  The expected "good" code.
-	 *
-	 * @return  \stdClass
-	 *
-	 * @deprecated  2.0  The full Response object will be returned by the API connector methods
-	 * @since   1.0
-	 * @throws  \DomainException
-	 */
-	protected function processResponse(Response $response, $expectedCode = 200)
-	{
-		// Validate the response code.
-		if ($response->code != $expectedCode)
-		{
-			// Decode the error response and throw an exception.
-			$error = json_decode($response->body);
-
-			// Check if the error message is set; send a generic one if not
-			$message = isset($error->message) ? $error->message : $response->body;
-
-			throw new \DomainException($message, $response->code);
-		}
-
-		return json_decode($response->body);
-	}
 }
