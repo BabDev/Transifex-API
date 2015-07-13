@@ -5,6 +5,7 @@ CHANGELOG for the Transifex API Package
 
  * Refactor API connector methods to return a full `Joomla\Http\Response` object
  * Removed `TransifexObject::processResponse()`
+ * Support a default option in `Transifex::getOption()`
 
 * 1.1.0 (2015-07-12)
 
