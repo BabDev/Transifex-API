@@ -4,6 +4,7 @@ CHANGELOG for the Transifex API Package
 * 1.2.0 (2015-07-13)
 
  * Add `Transifex::get()` to fetch API objects
+ * Deprecated magic getter in `Transifex` and associated class member vars for storing objects
 
 * 1.1.0 (2015-07-12)
 
