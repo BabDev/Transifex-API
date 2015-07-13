@@ -1,5 +1,7 @@
 <?php
 /**
+ * BabDev Transifex Package
+ *
  * @copyright  Copyright (C) 2012-2015 Michael Babker. All rights reserved.
  * @license    http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License Version 2 or Later
  */
@@ -10,36 +12,32 @@ use Joomla\Test\TestHelper;
 
 /**
  * Test class for \BabDev\Transifex\TransifexObject.
- *
- * @since  1.0
  */
 class TransifexObjectTest extends \PHPUnit_Framework_TestCase
 {
 	/**
-	 * @var    array  Options for the Transifex object.
-	 * @since  1.0
-	 */
-	protected $options;
-
-	/**
-	 * @var    \BabDev\Transifex\Http  Mock client object.
-	 * @since  1.0
-	 */
-	protected $client;
-
-	/**
-	 * @var    \BabDev\Transifex\TransifexObject  Object being tested
-	 * @since  1.0
-	 */
-	protected $object;
-
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
+	 * Mock HTTP client object.
 	 *
-	 * @return  void
+	 * @var  \PHPUnit_Framework_MockObject_MockObject
+	 */
+	private $client;
+
+	/**
+	 * Object being tested.
 	 *
-	 * @since   1.0
+	 * @var  TransifexObject
+	 */
+	private $object;
+
+	/**
+	 * Options for the Transifex object.
+	 *
+	 * @var  array
+	 */
+	private $options;
+
+	/**
+	 * {@inheritdoc}
 	 */
 	protected function setUp()
 	{
@@ -53,14 +51,10 @@ class TransifexObjectTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * Tests the constructor for building a proper TransifexObject instance without the client injected
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
+	 * @testdox  __construct() with no injected client creates a Transifex instance with a default Http object
 	 *
 	 * @covers  \BabDev\Transifex\TransifexObject::__construct
-	 * @uses    \BabDev\Transifex\Http
+	 * @covers  \BabDev\Transifex\Http::__construct
 	 */
 	public function test__constructWithNoInjectedClient()
 	{
@@ -68,24 +62,18 @@ class TransifexObjectTest extends \PHPUnit_Framework_TestCase
 
 		$this->assertInstanceOf(
 			'\\BabDev\\Transifex\\TransifexObject',
-			$object,
-			'The object successfully is created without a client injected.'
+			$object
 		);
 
 		$this->assertAttributeInstanceOf(
-			'\\Joomla\\Http\\Http',
+			'\\BabDev\\Transifex\\Http',
 			'client',
-			$object,
-			'Ensure the TransifexObject has a HTTP client instance.'
+			$object
 		);
 	}
 
 	/**
-	 * Tests the fetchUrl method with basic authentication data
-	 *
-	 * @return  void
-	 *
-	 * @since   1.0
+	 * @testdox  fetchUrl() returns the full API URL
 	 *
 	 * @covers  \BabDev\Transifex\TransifexObject::fetchUrl
 	 * @uses    \BabDev\Transifex\Http

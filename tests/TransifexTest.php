@@ -47,11 +47,10 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @testdox __construct() with no injected client creates a Transifex instance with a default Http object
+	 * @testdox  __construct() with no injected client creates a Transifex instance with a default Http object
 	 *
 	 * @covers  \BabDev\Transifex\Transifex::__construct
 	 * @covers  \BabDev\Transifex\Http::__construct
-	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\Transifex::getOption
 	 * @uses    \BabDev\Transifex\Transifex::setOption
 	 */
@@ -72,7 +71,7 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @testdox get() throws an InvalidArgumentException for a non-existing object
+	 * @testdox  get() throws an InvalidArgumentException for a non-existing object
 	 *
 	 * @expectedException  \InvalidArgumentException
 	 *
@@ -85,7 +84,7 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @testdox get() with the "formats" parameter returns an instance of the Formats object
+	 * @testdox  get() with the "formats" parameter returns an instance of the Formats object
 	 *
 	 * @covers  \BabDev\Transifex\Transifex::get
 	 * @uses    \BabDev\Transifex\Formats
@@ -103,7 +102,7 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @testdox get() with a custom namespace defined and the "formats" parameter returns an instance of the custom Formats object
+	 * @testdox  get() with a custom namespace defined and the "formats" parameter returns an instance of the custom Formats object
 	 *
 	 * @covers  \BabDev\Transifex\Transifex::get
 	 * @uses    \BabDev\Transifex\Formats
@@ -123,7 +122,7 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @testdox get() with a custom namespace defined and the "formats" parameter and a class not found in the custom namespace returns an instance of the default Formats object
+	 * @testdox  get() with a custom namespace defined and the "formats" parameter and a class not found in the custom namespace returns an instance of the default Formats object
 	 *
 	 * @covers  \BabDev\Transifex\Transifex::get
 	 * @uses    \BabDev\Transifex\Formats
@@ -143,7 +142,7 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
 	}
 
 	/**
-	 * @testdox getOption() and setOption() correctly manage the object's options
+	 * @testdox  getOption() and setOption() correctly manage the object's options
 	 *
 	 * @covers  \BabDev\Transifex\Transifex::getOption
 	 * @covers  \BabDev\Transifex\Transifex::setOption
