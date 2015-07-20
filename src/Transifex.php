@@ -63,7 +63,7 @@ class Transifex
 	}
 
 	/**
-	 * Method to fetch API objects
+	 * Factory method to fetch API objects
 	 *
 	 * @param   string  $name  Name of the API object to retrieve.
 	 *

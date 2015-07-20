@@ -1,7 +1,10 @@
 Transifex API Package [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/BabDev/Transifex-API/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/BabDev/Transifex-API/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/BabDev/Transifex-API/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/BabDev/Transifex-API/?branch=master) [![Build Status](https://scrutinizer-ci.com/g/BabDev/Transifex-API/badges/build.png?b=master)](https://scrutinizer-ci.com/g/BabDev/Transifex-API/build-status/master)
 ===============
 
-[![Latest Stable Version](https://poser.pugx.org/babdev/transifex/v/stable.svg)](https://packagist.org/packages/babdev/transifex) [![Total Downloads](https://poser.pugx.org/babdev/transifex/downloads.svg)](https://packagist.org/packages/babdev/transifex) [![Latest Unstable Version](https://poser.pugx.org/babdev/transifex/v/unstable.svg)](https://packagist.org/packages/babdev/transifex) [![License](https://poser.pugx.org/babdev/transifex/license.svg)](https://packagist.org/packages/babdev/transifex)
+[![Latest Stable Version](https://poser.pugx.org/babdev/transifex/v/stable.svg)](https://packagist.org/packages/babdev/transifex)
+[![Total Downloads](https://poser.pugx.org/babdev/transifex/downloads.svg)](https://packagist.org/packages/babdev/transifex)
+[![Latest Unstable Version](https://poser.pugx.org/babdev/transifex/v/unstable.svg)](https://packagist.org/packages/babdev/transifex)
+[![License](https://poser.pugx.org/babdev/transifex/license.svg)](https://packagist.org/packages/babdev/transifex)
 
 The *Transifex API Package* wrapping the Transifex API for easy use.
 
@@ -15,6 +18,11 @@ Requirements
     * Joomla Framework [Test](https://github.com/joomla-framework-test) package
     * [PHPUnit](http://phpunit.de/)
     * [PHP_CodeSniffer](http://www.squizlabs.com/php-codesniffer)
+    
+Documentation
+-------------
+
+The package's documentation can be found in the [docs](docs) folder of the repository.
 
 Installation
 ------------
