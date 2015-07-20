@@ -25,9 +25,9 @@ use BabDev\Transifex\Transifex;
 $transifex = new Transifex;
 
 // The trailing slash should be omitted on this value
-$transifex->setOption('object.namespace', 'My\Custom\Namespace');
+$transifex->setOption('object.namespace', 'My\Custom\Transifex');
 
-// $namespace = 'My\Custom\Namespace'
+// $namespace = 'My\Custom\Transifex'
 $namespace = $transifex->getOption('object.namespace');
 ```
 
@@ -39,7 +39,7 @@ use BabDev\Transifex\Transifex;
 
 $transifex = new Transifex;
 
-/** @var \BabDev\Transifex\Formats */
+/** @var \BabDev\Transifex\Formats $formats */
 $formats = $transifex->get('formats');
 ```
 
