@@ -1,6 +1,10 @@
 CHANGELOG for the Transifex API Package
 ===============
 
+* 1.3.0 (2015-XX-XX)
+
+ * Undeprecated `TransifexObject::processResponse()`
+
 * 1.2.0 (2015-07-13)
 
  * Add `Transifex::get()` to fetch API objects
