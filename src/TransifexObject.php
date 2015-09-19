@@ -8,6 +8,9 @@
 
 namespace BabDev\Transifex;
 
+use Joomla\Http\Exception\UnexpectedResponseException;
+use Joomla\Http\Response;
+
 /**
  * Transifex API object class.
  *
@@ -65,16 +68,43 @@ abstract class TransifexObject
 	}
 
 	/**
+	 * Process the response and return it.
+	 *
+	 * @param   Response  $response      The response.
+	 * @param   integer   $expectedCode  The expected "good" code.
+	 *
+	 * @return  Response
+	 *
+	 * @since   1.0
+	 * @throws  UnexpectedResponseException
+	 */
+	protected function processResponse(Response $response, $expectedCode = 200)
+	{
+		// Validate the response code.
+		if ($response->code != $expectedCode)
+		{
+			// Decode the error response and throw an exception.
+			$error = json_decode($response->body);
+
+			// Check if the error message is set; send a generic one if not
+			$message = isset($error->message) ? $error->message : $response->body;
+
+			throw new UnexpectedResponseException($response, $message, $response->code);
+		}
+
+		return $response;
+	}
+
+	/**
 	 * Method to update an API endpoint with resource content
 	 *
 	 * @param   string  $path     API path
 	 * @param   string  $content  The content of the resource.  This can either be a string of data or a file path.
 	 * @param   string  $type     The type of content in the $content variable.  This should be either string or file.
 	 *
-	 * @return  \Joomla\Http\Response
+	 * @return  Response
 	 *
 	 * @since   1.0
-	 * @throws  \DomainException
 	 * @throws  \InvalidArgumentException
 	 */
 	protected function updateResource($path, $content, $type)
@@ -90,10 +120,12 @@ abstract class TransifexObject
 		);
 
 		// Send the request.
-		return $this->client->put(
-			$this->fetchUrl($path),
-			json_encode($data),
-			array('Content-Type' => 'application/json')
+		return $this->processResponse(
+			$this->client->put(
+				$this->fetchUrl($path),
+				json_encode($data),
+				array('Content-Type' => 'application/json')
+			)
 		);
 	}
 }

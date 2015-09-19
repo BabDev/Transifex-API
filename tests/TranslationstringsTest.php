@@ -35,6 +35,7 @@ class TranslationstringsTest extends TransifexTestCase
 	/**
 	 * @testdox  getPseudolocalizationStrings() returns a Response object on a successful API connection
 	 *
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @covers  \BabDev\Transifex\Translationstrings::getPseudolocalizationStrings
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
@@ -50,8 +51,26 @@ class TranslationstringsTest extends TransifexTestCase
 	}
 
 	/**
+	 * @testdox  getPseudolocalizationStrings() throws an UnexpectedResponseException on a failed API connection
+	 *
+	 * @expectedException  \Joomla\Http\Exception\UnexpectedResponseException
+	 *
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @covers  \BabDev\Transifex\Translationstrings::getPseudolocalizationStrings
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
+	 */
+	public function testGetPseudolocalizationStringsFailure()
+	{
+		$this->prepareFailureTest('get', '/project/joomla/resource/joomla-platform/pseudo/?pseudo_type=MIXED');
+
+		$this->object->getPseudolocalizationStrings('joomla', 'joomla-platform');
+	}
+
+	/**
 	 * @testdox  getStrings() returns a Response object on a successful API connection
 	 *
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @covers  \BabDev\Transifex\Translationstrings::getStrings
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
@@ -69,6 +88,7 @@ class TranslationstringsTest extends TransifexTestCase
 	/**
 	 * @testdox  getStrings() requesting full details returns a Response object on a successful API connection
 	 *
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @covers  \BabDev\Transifex\Translationstrings::getStrings
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
@@ -86,6 +106,7 @@ class TranslationstringsTest extends TransifexTestCase
 	/**
 	 * @testdox  getStrings() requesting full details and the key returns a Response object on a successful API connection
 	 *
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @covers  \BabDev\Transifex\Translationstrings::getStrings
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
@@ -103,6 +124,7 @@ class TranslationstringsTest extends TransifexTestCase
 	/**
 	 * @testdox  getStrings() requesting full details, key, and context returns a Response object on a successful API connection
 	 *
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @covers  \BabDev\Transifex\Translationstrings::getStrings
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
@@ -120,6 +142,7 @@ class TranslationstringsTest extends TransifexTestCase
 	/**
 	 * @testdox  getStrings() requesting the key and context returns a Response object on a successful API connection
 	 *
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @covers  \BabDev\Transifex\Translationstrings::getStrings
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
@@ -137,6 +160,7 @@ class TranslationstringsTest extends TransifexTestCase
 	/**
 	 * @testdox  getStrings() requesting a given context returns a Response object on a successful API connection
 	 *
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @covers  \BabDev\Transifex\Translationstrings::getStrings
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
@@ -149,5 +173,22 @@ class TranslationstringsTest extends TransifexTestCase
 			$this->object->getStrings('joomla', 'joomla-platform', 'en_GB', false, array('context' => 'Something')),
 			$this->response
 		);
+	}
+
+	/**
+	 * @testdox  getStrings() throws an UnexpectedResponseException on a failed API connection
+	 *
+	 * @expectedException  \Joomla\Http\Exception\UnexpectedResponseException
+	 *
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @covers  \BabDev\Transifex\Translationstrings::getStrings
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
+	 */
+	public function testGetStringsFailure()
+	{
+		$this->prepareFailureTest('get', '/project/joomla/resource/joomla-platform/translation/en_GB/strings/');
+
+		$this->object->getStrings('joomla', 'joomla-platform', 'en_GB');
 	}
 }

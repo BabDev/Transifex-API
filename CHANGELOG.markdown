@@ -5,7 +5,6 @@ CHANGELOG for the Transifex API Package
 
  * Add support for custom namespaces to `Transifex::get()`
  * Refactor API connector methods to return a full `Joomla\Http\Response` object
- * Removed `TransifexObject::processResponse()`
  * Removed magic getter in `Transifex` and associated class member vars
  * Support a default option in `Transifex::getOption()`
 

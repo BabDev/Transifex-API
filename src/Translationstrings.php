@@ -32,7 +32,7 @@ class Translationstrings extends TransifexObject
 		$path = '/project/' . $project . '/resource/' . $resource . '/pseudo/?pseudo_type=MIXED';
 
 		// Send the request.
-		return $this->client->get($this->fetchUrl($path));
+		return $this->processResponse($this->client->get($this->fetchUrl($path)));
 	}
 
 	/**
@@ -69,6 +69,6 @@ class Translationstrings extends TransifexObject
 		}
 
 		// Send the request.
-		return $this->client->get($this->fetchUrl($path));
+		return $this->processResponse($this->client->get($this->fetchUrl($path)));
 	}
 }

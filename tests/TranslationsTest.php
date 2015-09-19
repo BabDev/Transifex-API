@@ -35,6 +35,7 @@ class TranslationsTest extends TransifexTestCase
 	/**
 	 * @testdox  getTranslation() returns a Response object on a successful API connection
 	 *
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @covers  \BabDev\Transifex\Translations::getTranslation
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
@@ -50,8 +51,26 @@ class TranslationsTest extends TransifexTestCase
 	}
 
 	/**
+	 * @testdox  getTranslation() throws an UnexpectedResponseException on a failed API connection
+	 *
+	 * @expectedException  \Joomla\Http\Exception\UnexpectedResponseException
+	 *
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @covers  \BabDev\Transifex\Translations::getTranslation
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
+	 */
+	public function testGetTranslationFailure()
+	{
+		$this->prepareFailureTest('get', '/project/joomla/resource/joomla-platform/translation/en_GB');
+
+		$this->object->getTranslation('joomla', 'joomla-platform', 'en_GB');
+	}
+
+	/**
 	 * @testdox  updateTranslation() with an attached file returns a Response object on a successful API connection
 	 *
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @covers  \BabDev\Transifex\TransifexObject::updateResource
 	 * @covers  \BabDev\Transifex\Translations::updateTranslation
 	 * @uses    \BabDev\Transifex\Http
@@ -67,10 +86,10 @@ class TranslationsTest extends TransifexTestCase
 		);
 	}
 
-
 	/**
 	 * @testdox  updateTranslation() with inline content returns a Response object on a successful API connection
 	 *
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @covers  \BabDev\Transifex\TransifexObject::updateResource
 	 * @covers  \BabDev\Transifex\Translations::updateTranslation
 	 * @uses    \BabDev\Transifex\Http
@@ -84,6 +103,24 @@ class TranslationsTest extends TransifexTestCase
 			$this->object->updateTranslation('joomla', 'joomla-platform', 'en_GB', 'TEST="Test"'),
 			$this->response
 		);
+	}
+
+	/**
+	 * @testdox  updateTranslation() throws an UnexpectedResponseException on a failed API connection
+	 *
+	 * @expectedException  \Joomla\Http\Exception\UnexpectedResponseException
+	 *
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @covers  \BabDev\Transifex\TransifexObject::updateResource
+	 * @covers  \BabDev\Transifex\Translations::updateTranslation
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
+	 */
+	public function testUpdateTranslationFailure()
+	{
+		$this->prepareFailureTest('put', '/project/joomla/resource/joomla-platform/translation/en_GB');
+
+		$this->object->updateTranslation('joomla', 'joomla-platform', 'en_GB', 'TEST="Test"');
 	}
 
 	/**

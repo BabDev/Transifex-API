@@ -66,10 +66,13 @@ class Languages extends TransifexObject
 		}
 
 		// Send the request.
-		return $this->client->post(
-			$this->fetchUrl($path),
-			json_encode($data),
-			array('Content-Type' => 'application/json')
+		return $this->processResponse(
+			$this->client->post(
+				$this->fetchUrl($path),
+				json_encode($data),
+				array('Content-Type' => 'application/json')
+			),
+			201
 		);
 	}
 
@@ -89,7 +92,7 @@ class Languages extends TransifexObject
 		$path = '/project/' . $project . '/language/' . $langCode . '/';
 
 		// Send the request.
-		return $this->client->delete($this->fetchUrl($path));
+		return $this->processResponse($this->client->delete($this->fetchUrl($path)), 204);
 	}
 
 	/**
@@ -108,7 +111,7 @@ class Languages extends TransifexObject
 		$path = '/project/' . $project . '/language/' . $langCode . '/coordinators/';
 
 		// Send the request.
-		return $this->client->get($this->fetchUrl($path));
+		return $this->processResponse($this->client->get($this->fetchUrl($path)));
 	}
 
 	/**
@@ -127,7 +130,7 @@ class Languages extends TransifexObject
 		$path = '/project/' . $project . '/language/' . $langCode . '/';
 
 		// Send the request.
-		return $this->client->get($this->fetchUrl($path));
+		return $this->processResponse($this->client->get($this->fetchUrl($path)));
 	}
 
 	/**
@@ -145,7 +148,7 @@ class Languages extends TransifexObject
 		$path = '/project/' . $project . '/languages/';
 
 		// Send the request.
-		return $this->client->get($this->fetchUrl($path));
+		return $this->processResponse($this->client->get($this->fetchUrl($path)));
 	}
 
 	/**
@@ -164,7 +167,7 @@ class Languages extends TransifexObject
 		$path = '/project/' . $project . '/language/' . $langCode . '/reviewers/';
 
 		// Send the request.
-		return $this->client->get($this->fetchUrl($path));
+		return $this->processResponse($this->client->get($this->fetchUrl($path)));
 	}
 
 	/**
@@ -183,7 +186,7 @@ class Languages extends TransifexObject
 		$path = '/project/' . $project . '/language/' . $langCode . '/translators/';
 
 		// Send the request.
-		return $this->client->get($this->fetchUrl($path));
+		return $this->processResponse($this->client->get($this->fetchUrl($path)));
 	}
 
 	/**
@@ -243,10 +246,12 @@ class Languages extends TransifexObject
 		}
 
 		// Send the request.
-		return $this->client->put(
-			$this->fetchUrl($path),
-			json_encode($data),
-			array('Content-Type' => 'application/json')
+		return $this->processResponse(
+			$this->client->put(
+				$this->fetchUrl($path),
+				json_encode($data),
+				array('Content-Type' => 'application/json')
+			)
 		);
 	}
 
@@ -299,10 +304,12 @@ class Languages extends TransifexObject
 		}
 
 		// Send the request.
-		return $this->client->put(
-			$this->fetchUrl($path),
-			json_encode($members),
-			array('Content-Type' => 'application/json')
+		return $this->processResponse(
+			$this->client->put(
+				$this->fetchUrl($path),
+				json_encode($members),
+				array('Content-Type' => 'application/json')
+			)
 		);
 	}
 

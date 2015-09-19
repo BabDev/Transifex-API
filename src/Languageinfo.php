@@ -31,7 +31,7 @@ class Languageinfo extends TransifexObject
 		$path = '/language/' . $lang . '/';
 
 		// Send the request.
-		return $this->client->get($this->fetchUrl($path));
+		return $this->processResponse($this->client->get($this->fetchUrl($path)));
 	}
 
 	/**
@@ -47,6 +47,6 @@ class Languageinfo extends TransifexObject
 		$path = '/languages/';
 
 		// Send the request.
-		return $this->client->get($this->fetchUrl($path));
+		return $this->processResponse($this->client->get($this->fetchUrl($path)));
 	}
 }

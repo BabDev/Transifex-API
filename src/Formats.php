@@ -29,6 +29,6 @@ class Formats extends TransifexObject
 		$path = '/formats';
 
 		// Send the request.
-		return $this->client->get($this->fetchUrl($path));
+		return $this->processResponse($this->client->get($this->fetchUrl($path)));
 	}
 }

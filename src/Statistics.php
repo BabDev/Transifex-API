@@ -33,6 +33,6 @@ class Statistics extends TransifexObject
 		$path = '/project/' . $project . '/resource/' . $resource . '/stats/' . $lang;
 
 		// Send the request.
-		return $this->client->get($this->fetchUrl($path));
+		return $this->processResponse($this->client->get($this->fetchUrl($path)));
 	}
 }

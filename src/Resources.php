@@ -70,10 +70,13 @@ class Resources extends TransifexObject
 		}
 
 		// Send the request.
-		return $this->client->post(
-			$this->fetchUrl($path),
-			json_encode($data),
-			array('Content-Type' => 'application/json')
+		return $this->processResponse(
+			$this->client->post(
+				$this->fetchUrl($path),
+				json_encode($data),
+				array('Content-Type' => 'application/json')
+			),
+			201
 		);
 	}
 
@@ -93,7 +96,7 @@ class Resources extends TransifexObject
 		$path = '/project/' . $project . '/resource/' . $resource;
 
 		// Send the request.
-		return $this->client->delete($this->fetchUrl($path));
+		return $this->processResponse($this->client->delete($this->fetchUrl($path)), 204);
 	}
 
 	/**
@@ -118,7 +121,7 @@ class Resources extends TransifexObject
 		}
 
 		// Send the request.
-		return $this->client->get($this->fetchUrl($path));
+		return $this->processResponse($this->client->get($this->fetchUrl($path)));
 	}
 
 	/**
@@ -137,7 +140,7 @@ class Resources extends TransifexObject
 		$path = '/project/' . $project . '/resource/' . $resource . '/content/';
 
 		// Send the request.
-		return $this->client->get($this->fetchUrl($path));
+		return $this->processResponse($this->client->get($this->fetchUrl($path)));
 	}
 
 	/**
@@ -155,7 +158,7 @@ class Resources extends TransifexObject
 		$path = '/project/' . $project . '/resources';
 
 		// Send the request.
-		return $this->client->get($this->fetchUrl($path));
+		return $this->processResponse($this->client->get($this->fetchUrl($path)));
 	}
 
 	/**

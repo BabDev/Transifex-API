@@ -36,6 +36,7 @@ class LanguagesTest extends TransifexTestCase
 	 * @testdox  createLanguage() returns a Response object on a successful API connection
 	 *
 	 * @covers  \BabDev\Transifex\Languages::createLanguage
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -57,11 +58,29 @@ class LanguagesTest extends TransifexTestCase
 	}
 
 	/**
+	 * @testdox  createLanguage() throws an UnexpectedResponseException on a failed API connection
+	 *
+	 * @expectedException  \Joomla\Http\Exception\UnexpectedResponseException
+	 *
+	 * @covers  \BabDev\Transifex\Languages::createLanguage
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
+	 */
+	public function testCreateLanguageFailure()
+	{
+		$this->prepareFailureTest('post', '/project/joomla-platform/languages/');
+
+		$this->object->createLanguage('joomla-platform', 'en_GB', array('mbabker'));
+	}
+
+	/**
 	 * @testdox  createLanguage() throws an InvalidArgumentException when no contributors are given
 	 *
 	 * @expectedException  \InvalidArgumentException
 	 *
 	 * @covers  \BabDev\Transifex\Languages::createLanguage
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -74,10 +93,11 @@ class LanguagesTest extends TransifexTestCase
 	 * @testdox  deleteLanguage() returns a Response object on a successful API connection
 	 *
 	 * @covers  \BabDev\Transifex\Languages::deleteLanguage
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
-	public function testDeleteResource()
+	public function testDeleteLanguage()
 	{
 		$this->prepareSuccessTest('delete', '/project/joomla-platform/language/en_US/', 204);
 
@@ -88,9 +108,27 @@ class LanguagesTest extends TransifexTestCase
 	}
 
 	/**
+	 * @testdox  deleteLanguage() throws an UnexpectedResponseException on a failed API connection
+	 *
+	 * @expectedException  \Joomla\Http\Exception\UnexpectedResponseException
+	 *
+	 * @covers  \BabDev\Transifex\Languages::deleteLanguage
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
+	 */
+	public function testDeleteLanguageFailure()
+	{
+		$this->prepareFailureTest('delete', '/project/joomla-platform/language/en_US/');
+
+		$this->object->deleteLanguage('joomla-platform', 'en_US');
+	}
+
+	/**
 	 * @testdox  getCoordinators() returns a Response object on a successful API connection
 	 *
 	 * @covers  \BabDev\Transifex\Languages::getCoordinators
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -105,9 +143,27 @@ class LanguagesTest extends TransifexTestCase
 	}
 
 	/**
+	 * @testdox  getCoordinators() throws an UnexpectedResponseException on a failed API connection
+	 *
+	 * @expectedException  \Joomla\Http\Exception\UnexpectedResponseException
+	 *
+	 * @covers  \BabDev\Transifex\Languages::getCoordinators
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
+	 */
+	public function testGetCoordinatorsFailure()
+	{
+		$this->prepareFailureTest('get', '/project/joomla-platform/language/en_US/coordinators/');
+
+		$this->object->getCoordinators('joomla-platform', 'en_US');
+	}
+
+	/**
 	 * @testdox  getLanguage() returns a Response object on a successful API connection
 	 *
 	 * @covers  \BabDev\Transifex\Languages::getLanguage
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -122,9 +178,27 @@ class LanguagesTest extends TransifexTestCase
 	}
 
 	/**
+	 * @testdox  getLanguage() throws an UnexpectedResponseException on a failed API connection
+	 *
+	 * @expectedException  \Joomla\Http\Exception\UnexpectedResponseException
+	 *
+	 * @covers  \BabDev\Transifex\Languages::getLanguage
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
+	 */
+	public function testGetLanguageFailure()
+	{
+		$this->prepareFailureTest('get', '/project/joomla-platform/language/en_US/');
+
+		$this->object->getLanguage('joomla-platform', 'en_US');
+	}
+
+	/**
 	 * @testdox  getLanguages() returns a Response object on a successful API connection
 	 *
 	 * @covers  \BabDev\Transifex\Languages::getLanguages
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -139,9 +213,27 @@ class LanguagesTest extends TransifexTestCase
 	}
 
 	/**
+	 * @testdox  getLanguages() throws an UnexpectedResponseException on a failed API connection
+	 *
+	 * @expectedException  \Joomla\Http\Exception\UnexpectedResponseException
+	 *
+	 * @covers  \BabDev\Transifex\Languages::getLanguages
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
+	 */
+	public function testGetLanguagesFailure()
+	{
+		$this->prepareFailureTest('get', '/project/joomla-platform/languages/');
+
+		$this->object->getLanguages('joomla-platform');
+	}
+
+	/**
 	 * @testdox  getReviewers() returns a Response object on a successful API connection
 	 *
 	 * @covers  \BabDev\Transifex\Languages::getReviewers
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -156,9 +248,27 @@ class LanguagesTest extends TransifexTestCase
 	}
 
 	/**
+	 * @testdox  getReviewers() throws an UnexpectedResponseException on a failed API connection
+	 *
+	 * @expectedException  \Joomla\Http\Exception\UnexpectedResponseException
+	 *
+	 * @covers  \BabDev\Transifex\Languages::getReviewers
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
+	 */
+	public function testGetReviewersFailure()
+	{
+		$this->prepareFailureTest('get', '/project/joomla-platform/language/en_US/reviewers/');
+
+		$this->object->getReviewers('joomla-platform', 'en_US');
+	}
+
+	/**
 	 * @testdox  getTranslators() returns a Response object on a successful API connection
 	 *
 	 * @covers  \BabDev\Transifex\Languages::getTranslators
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -173,10 +283,28 @@ class LanguagesTest extends TransifexTestCase
 	}
 
 	/**
+	 * @testdox  getTranslators() throws an UnexpectedResponseException on a failed API connection
+	 *
+	 * @expectedException  \Joomla\Http\Exception\UnexpectedResponseException
+	 *
+	 * @covers  \BabDev\Transifex\Languages::getTranslators
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
+	 */
+	public function testGetTranslatorsFailure()
+	{
+		$this->prepareFailureTest('get', '/project/joomla-platform/language/en_US/translators/');
+
+		$this->object->getTranslators('joomla-platform', 'en_US');
+	}
+
+	/**
 	 * @testdox  updateCoordinators() returns a Response object on a successful API connection
 	 *
 	 * @covers  \BabDev\Transifex\Languages::updateCoordinators
 	 * @covers  \BabDev\Transifex\Languages::updateTeam
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -191,12 +319,31 @@ class LanguagesTest extends TransifexTestCase
 	}
 
 	/**
+	 * @testdox  updateCoordinators() throws an UnexpectedResponseException on a failed API connection
+	 *
+	 * @expectedException  \Joomla\Http\Exception\UnexpectedResponseException
+	 *
+	 * @covers  \BabDev\Transifex\Languages::updateCoordinators
+	 * @covers  \BabDev\Transifex\Languages::updateTeam
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
+	 */
+	public function testUpdateCoordinatorsFailure()
+	{
+		$this->prepareFailureTest('put', '/project/joomla-platform/language/en_US/coordinators/');
+
+		$this->object->updateCoordinators('joomla-platform', 'en_US', array('mbabker'));
+	}
+
+	/**
 	 * @testdox  updateCoordinators() throws an InvalidArgumentException when no contributors are given
 	 *
 	 * @expectedException  \InvalidArgumentException
 	 *
 	 * @covers  \BabDev\Transifex\Languages::updateCoordinators
 	 * @covers  \BabDev\Transifex\Languages::updateTeam
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -209,6 +356,7 @@ class LanguagesTest extends TransifexTestCase
 	 * @testdox  updateLanguage() returns a Response object on a successful API connection
 	 *
 	 * @covers  \BabDev\Transifex\Languages::updateLanguage
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -230,11 +378,29 @@ class LanguagesTest extends TransifexTestCase
 	}
 
 	/**
+	 * @testdox  updateLanguage() throws an UnexpectedResponseException on a failed API connection
+	 *
+	 * @expectedException  \Joomla\Http\Exception\UnexpectedResponseException
+	 *
+	 * @covers  \BabDev\Transifex\Languages::updateLanguage
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
+	 */
+	public function testUpdateLanguageFailure()
+	{
+		$this->prepareFailureTest('put', '/project/joomla-platform/language/en_US/');
+
+		$this->object->updateLanguage('joomla-platform', 'en_US', array('mbabker'));
+	}
+
+	/**
 	 * @testdox  updateLanguage() throws an InvalidArgumentException when no contributors are given
 	 *
 	 * @expectedException  \InvalidArgumentException
 	 *
 	 * @covers  \BabDev\Transifex\Languages::updateLanguage
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -248,6 +414,7 @@ class LanguagesTest extends TransifexTestCase
 	 *
 	 * @covers  \BabDev\Transifex\Languages::updateReviewers
 	 * @covers  \BabDev\Transifex\Languages::updateTeam
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -262,12 +429,31 @@ class LanguagesTest extends TransifexTestCase
 	}
 
 	/**
+	 * @testdox  updateReviewers() throws an UnexpectedResponseException on a failed API connection
+	 *
+	 * @expectedException  \Joomla\Http\Exception\UnexpectedResponseException
+	 *
+	 * @covers  \BabDev\Transifex\Languages::updateReviewers
+	 * @covers  \BabDev\Transifex\Languages::updateTeam
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
+	 */
+	public function testUpdateReviewersFailure()
+	{
+		$this->prepareFailureTest('put', '/project/joomla-platform/language/en_US/reviewers/');
+
+		$this->object->updateReviewers('joomla-platform', 'en_US', array('mbabker'));
+	}
+
+	/**
 	 * @testdox  updateReviewers() throws an InvalidArgumentException when no contributors are given
 	 *
 	 * @expectedException  \InvalidArgumentException
 	 *
 	 * @covers  \BabDev\Transifex\Languages::updateReviewers
 	 * @covers  \BabDev\Transifex\Languages::updateTeam
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -281,6 +467,7 @@ class LanguagesTest extends TransifexTestCase
 	 *
 	 * @covers  \BabDev\Transifex\Languages::updateTranslators
 	 * @covers  \BabDev\Transifex\Languages::updateTeam
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -295,12 +482,31 @@ class LanguagesTest extends TransifexTestCase
 	}
 
 	/**
+	 * @testdox  updateTranslators() throws an UnexpectedResponseException on a failed API connection
+	 *
+	 * @expectedException  \Joomla\Http\Exception\UnexpectedResponseException
+	 *
+	 * @covers  \BabDev\Transifex\Languages::updateTranslators
+	 * @covers  \BabDev\Transifex\Languages::updateTeam
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
+	 */
+	public function testUpdateTranslatorsFailure()
+	{
+		$this->prepareFailureTest('put', '/project/joomla-platform/language/en_US/translators/');
+
+		$this->object->updateTranslators('joomla-platform', 'en_US', array('mbabker'));
+	}
+
+	/**
 	 * @testdox  updateTranslators() throws an InvalidArgumentException when no contributors are given
 	 *
 	 * @expectedException  \InvalidArgumentException
 	 *
 	 * @covers  \BabDev\Transifex\Languages::updateTranslators
 	 * @covers  \BabDev\Transifex\Languages::updateTeam
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */

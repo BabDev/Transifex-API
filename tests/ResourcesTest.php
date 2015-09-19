@@ -36,6 +36,7 @@ class ResourcesTest extends TransifexTestCase
 	 * @testdox  createResource() with inline content provided in the options returns a Response object on a successful API connection
 	 *
 	 * @covers  \BabDev\Transifex\Resources::createResource
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -61,6 +62,7 @@ class ResourcesTest extends TransifexTestCase
 	 * @testdox  createResource() with an attached file in the options returns a Response object on a successful API connection
 	 *
 	 * @covers  \BabDev\Transifex\Resources::createResource
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -83,9 +85,27 @@ class ResourcesTest extends TransifexTestCase
 	}
 
 	/**
+	 * @testdox  createResource() throws an UnexpectedResponseException on a failed API connection
+	 *
+	 * @expectedException  \Joomla\Http\Exception\UnexpectedResponseException
+	 *
+	 * @covers  \BabDev\Transifex\Resources::createResource
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
+	 */
+	public function testCreateResourceFailure()
+	{
+		$this->prepareFailureTest('post', '/project/joomla-platform/resources/');
+
+		$this->object->createResource('joomla-platform', 'Joomla Platform Data', 'joomla-platform', 'INI', array('content' => 'Test="Test"'));
+	}
+
+	/**
 	 * @testdox  deleteResource() returns a Response object on a successful API connection
 	 *
 	 * @covers  \BabDev\Transifex\Resources::deleteResource
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -100,9 +120,27 @@ class ResourcesTest extends TransifexTestCase
 	}
 
 	/**
+	 * @testdox  deleteResource() throws an UnexpectedResponseException on a failed API connection
+	 *
+	 * @expectedException  \Joomla\Http\Exception\UnexpectedResponseException
+	 *
+	 * @covers  \BabDev\Transifex\Resources::deleteResource
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
+	 */
+	public function testDeleteResourceFailure()
+	{
+		$this->prepareFailureTest('delete', '/project/joomla/resource/joomla-platform');
+
+		$this->object->deleteResource('joomla', 'joomla-platform');
+	}
+
+	/**
 	 * @testdox  getResource() returns a Response object on a successful API connection
 	 *
 	 * @covers  \BabDev\Transifex\Resources::getResource
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -117,9 +155,27 @@ class ResourcesTest extends TransifexTestCase
 	}
 
 	/**
+	 * @testdox  getResource() throws an UnexpectedResponseException on a failed API connection
+	 *
+	 * @expectedException  \Joomla\Http\Exception\UnexpectedResponseException
+	 *
+	 * @covers  \BabDev\Transifex\Resources::getResource
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
+	 */
+	public function testGetResourceFailure()
+	{
+		$this->prepareFailureTest('get', '/project/joomla/resource/joomla-platform/?details');
+
+		$this->object->getResource('joomla', 'joomla-platform', true);
+	}
+
+	/**
 	 * @testdox  getResourceContent() returns a Response object on a successful API connection
 	 *
 	 * @covers  \BabDev\Transifex\Resources::getResourceContent
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -134,9 +190,27 @@ class ResourcesTest extends TransifexTestCase
 	}
 
 	/**
+	 * @testdox  getResourceContent() throws an UnexpectedResponseException on a failed API connection
+	 *
+	 * @expectedException  \Joomla\Http\Exception\UnexpectedResponseException
+	 *
+	 * @covers  \BabDev\Transifex\Resources::getResourceContent
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
+	 */
+	public function testGetResourceContentFailure()
+	{
+		$this->prepareFailureTest('get', '/project/joomla/resource/joomla-platform/content/');
+
+		$this->object->getResourceContent('joomla', 'joomla-platform');
+	}
+
+	/**
 	 * @testdox  getResources() returns a Response object on a successful API connection
 	 *
 	 * @covers  \BabDev\Transifex\Resources::getResources
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -151,9 +225,27 @@ class ResourcesTest extends TransifexTestCase
 	}
 
 	/**
+	 * @testdox  getResources() throws an UnexpectedResponseException on a failed API connection
+	 *
+	 * @expectedException  \Joomla\Http\Exception\UnexpectedResponseException
+	 *
+	 * @covers  \BabDev\Transifex\Resources::getResources
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
+	 */
+	public function testGetResourcesFailure()
+	{
+		$this->prepareFailureTest('get', '/project/joomla/resources');
+
+		$this->object->getResources('joomla');
+	}
+
+	/**
 	 * @testdox  updateResourceContent() with an attached file returns a Response object on a successful API connection
 	 *
 	 * @covers  \BabDev\Transifex\Resources::updateResourceContent
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -167,11 +259,11 @@ class ResourcesTest extends TransifexTestCase
 		);
 	}
 
-
 	/**
 	 * @testdox  updateResourceContent() with inline content returns a Response object on a successful API connection
 	 *
 	 * @covers  \BabDev\Transifex\Resources::updateResourceContent
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @covers  \BabDev\Transifex\TransifexObject::updateResource
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
@@ -184,6 +276,24 @@ class ResourcesTest extends TransifexTestCase
 			$this->object->updateResourceContent('joomla', 'joomla-platform', 'TEST="Test"'),
 			$this->response
 		);
+	}
+
+	/**
+	 * @testdox  updateResourceContent() throws an UnexpectedResponseException on a failed API connection
+	 *
+	 * @expectedException  \Joomla\Http\Exception\UnexpectedResponseException
+	 *
+	 * @covers  \BabDev\Transifex\Resources::updateResourceContent
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @covers  \BabDev\Transifex\TransifexObject::updateResource
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
+	 */
+	public function testUpdateResourceContentFailure()
+	{
+		$this->prepareFailureTest('put', '/project/joomla/resource/joomla-platform/content/');
+
+		$this->object->updateResourceContent('joomla', 'joomla-platform', 'TEST="Test"');
 	}
 
 	/**

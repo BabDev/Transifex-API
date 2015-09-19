@@ -37,6 +37,7 @@ class ProjectsTest extends TransifexTestCase
 	 *
 	 * @covers  \BabDev\Transifex\Projects::checkLicense
 	 * @covers  \BabDev\Transifex\Projects::createProject
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -61,12 +62,30 @@ class ProjectsTest extends TransifexTestCase
 		    'license'            => 'other_open_source',
 		    'fill_up_resources'  => false,
 			'repository_url'     => 'http://www.example.com'
-	);
+		);
 
 		$this->assertSame(
 			$this->object->createProject('Joomla Platform', 'joomla-platform', 'Project for the Joomla Platform', 'en_GB', $options),
 			$this->response
 		);
+	}
+
+	/**
+	 * @testdox  createProject() throws an UnexpectedResponseException on a failed API connection
+	 *
+	 * @expectedException  \Joomla\Http\Exception\UnexpectedResponseException
+	 *
+	 * @covers  \BabDev\Transifex\Projects::checkLicense
+	 * @covers  \BabDev\Transifex\Projects::createProject
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
+	 */
+	public function testCreateProjectFailureForABadRequest()
+	{
+		$this->prepareFailureTest('post', '/projects/');
+
+		$this->object->createProject('Joomla Platform', 'joomla-platform', 'Project for the Joomla Platform', 'en_GB', array('repository_url' => 'http://www.joomla.org'));
 	}
 
 	/**
@@ -103,6 +122,7 @@ class ProjectsTest extends TransifexTestCase
 	 * @testdox  deleteProject() returns a Response object on a successful API connection
 	 *
 	 * @covers  \BabDev\Transifex\Projects::deleteProject
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -117,9 +137,27 @@ class ProjectsTest extends TransifexTestCase
 	}
 
 	/**
+	 * @testdox  deleteProject() throws an UnexpectedResponseException on a failed API connection
+	 *
+	 * @expectedException  \Joomla\Http\Exception\UnexpectedResponseException
+	 *
+	 * @covers  \BabDev\Transifex\Projects::deleteProject
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
+	 */
+	public function testDeleteProjectFailure()
+	{
+		$this->prepareFailureTest('delete', '/project/joomla-platform');
+
+		$this->object->deleteProject('joomla-platform');
+	}
+
+	/**
 	 * @testdox  getProject() returns a Response object on a successful API connection
 	 *
 	 * @covers  \BabDev\Transifex\Projects::getProject
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -134,9 +172,27 @@ class ProjectsTest extends TransifexTestCase
 	}
 
 	/**
+	 * @testdox  getProject() throws an UnexpectedResponseException on a failed API connection
+	 *
+	 * @expectedException  \Joomla\Http\Exception\UnexpectedResponseException
+	 *
+	 * @covers  \BabDev\Transifex\Projects::getProject
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
+	 */
+	public function testGetProjectFailure()
+	{
+		$this->prepareFailureTest('get', '/project/joomla-platform/?details');
+
+		$this->object->getProject('joomla-platform', true);
+	}
+
+	/**
 	 * @testdox  getProjects() returns a Response object on a successful API connection
 	 *
 	 * @covers  \BabDev\Transifex\Projects::getProjects
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -151,10 +207,28 @@ class ProjectsTest extends TransifexTestCase
 	}
 
 	/**
+	 * @testdox  getProjects() throws an UnexpectedResponseException on a failed API connection
+	 *
+	 * @expectedException  \Joomla\Http\Exception\UnexpectedResponseException
+	 *
+	 * @covers  \BabDev\Transifex\Projects::getProjects
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
+	 */
+	public function testGetProjectsFailure()
+	{
+		$this->prepareFailureTest('get', '/projects/');
+
+		$this->object->getProjects();
+	}
+
+	/**
 	 * @testdox  updateProject() returns a Response object on a successful API connection
 	 *
 	 * @covers  \BabDev\Transifex\Projects::checkLicense
 	 * @covers  \BabDev\Transifex\Projects::updateProject
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -179,6 +253,24 @@ class ProjectsTest extends TransifexTestCase
 			$this->object->updateProject('joomla-platform', $options),
 			$this->response
 		);
+	}
+
+	/**
+	 * @testdox  updateProject() throws an UnexpectedResponseException on a failed API connection
+	 *
+	 * @expectedException  \Joomla\Http\Exception\UnexpectedResponseException
+	 *
+	 * @covers  \BabDev\Transifex\Projects::checkLicense
+	 * @covers  \BabDev\Transifex\Projects::updateProject
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
+	 */
+	public function testUpdateProjectFailure()
+	{
+		$this->prepareFailureTest('put', '/project/joomla-platform/');
+
+		$this->object->updateProject('joomla-platform', array('long_description' => 'My test project'));
 	}
 
 	/**

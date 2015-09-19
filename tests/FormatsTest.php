@@ -35,6 +35,7 @@ class FormatsTest extends TransifexTestCase
 	/**
 	 * @testdox  getFormats() returns a Response object on a successful API connection
 	 *
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @covers  \BabDev\Transifex\Formats::getFormats
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
@@ -47,5 +48,22 @@ class FormatsTest extends TransifexTestCase
 			$this->object->getFormats(),
 			$this->response
 		);
+	}
+
+	/**
+	 * @testdox  getFormats() throws an UnexpectedResponseException on a failed API connection
+	 *
+	 * @expectedException  \Joomla\Http\Exception\UnexpectedResponseException
+	 *
+	 * @covers  \BabDev\Transifex\Formats::getFormats
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
+	 */
+	public function testGetFormatsFailure()
+	{
+		$this->prepareFailureTest('get', '/formats');
+
+		$this->object->getFormats();
 	}
 }

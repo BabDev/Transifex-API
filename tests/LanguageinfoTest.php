@@ -36,6 +36,7 @@ class LanguageinfoTest extends TransifexTestCase
 	 * @testdox  getLanguage() returns a Response object on a successful API connection
 	 *
 	 * @covers  \BabDev\Transifex\Languageinfo::getLanguage
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -50,9 +51,27 @@ class LanguageinfoTest extends TransifexTestCase
 	}
 
 	/**
+	 * @testdox  getLanguage() throws an UnexpectedResponseException on a failed API connection
+	 *
+	 * @expectedException  \Joomla\Http\Exception\UnexpectedResponseException
+	 *
+	 * @covers  \BabDev\Transifex\Languageinfo::getLanguage
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
+	 */
+	public function testGetLanguageFailure()
+	{
+		$this->prepareFailureTest('get', '/language/en_GB/');
+
+		$this->object->getLanguage('en_GB');
+	}
+
+	/**
 	 * @testdox  getLanguages() returns a Response object on a successful API connection
 	 *
 	 * @covers  \BabDev\Transifex\Languageinfo::getLanguages
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -64,5 +83,22 @@ class LanguageinfoTest extends TransifexTestCase
 			$this->object->getLanguages(),
 			$this->response
 		);
+	}
+
+	/**
+	 * @testdox  getLanguages() throws an UnexpectedResponseException on a failed API connection
+	 *
+	 * @expectedException  \Joomla\Http\Exception\UnexpectedResponseException
+	 *
+	 * @covers  \BabDev\Transifex\Languageinfo::getLanguages
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
+	 */
+	public function testGetLanguagesFailure()
+	{
+		$this->prepareFailureTest('get', '/languages/');
+
+		$this->object->getLanguages();
 	}
 }

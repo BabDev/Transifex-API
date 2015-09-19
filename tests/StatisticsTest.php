@@ -36,6 +36,7 @@ class StatisticsTest extends TransifexTestCase
 	 * @testdox  getStatistics() returns a Response object on a successful API connection
 	 *
 	 * @covers  \BabDev\Transifex\Statistics::getStatistics
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
 	 * @uses    \BabDev\Transifex\Http
 	 * @uses    \BabDev\Transifex\TransifexObject
 	 */
@@ -47,5 +48,22 @@ class StatisticsTest extends TransifexTestCase
 			$this->object->getStatistics('joomla', 'joomla-platform'),
 			$this->response
 		);
+	}
+
+	/**
+	 * @testdox  getStatistics() throws an UnexpectedResponseException on a failed API connection
+	 *
+	 * @expectedException  \Joomla\Http\Exception\UnexpectedResponseException
+	 *
+	 * @covers  \BabDev\Transifex\Statistics::getStatistics
+	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
+	 * @uses    \BabDev\Transifex\Http
+	 * @uses    \BabDev\Transifex\TransifexObject
+	 */
+	public function testGetStatisticsFailure()
+	{
+		$this->prepareFailureTest('get', '/project/joomla/resource/joomla-platform/stats/');
+
+		$this->object->getStatistics('joomla', 'joomla-platform');
 	}
 }

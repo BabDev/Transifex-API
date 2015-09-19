@@ -39,7 +39,7 @@ class Translations extends TransifexObject
 		}
 
 		// Send the request.
-		return $this->client->get($this->fetchUrl($path));
+		return $this->processResponse($this->client->get($this->fetchUrl($path)));
 	}
 
 	/**

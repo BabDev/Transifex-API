@@ -54,7 +54,11 @@ abstract class TransifexTestCase extends \PHPUnit_Framework_TestCase
 	protected $errorString = '{"message": "Generic Error"}';
 
 	/**
-	 * {@inheritdoc
+	 * {@inheritdoc}
+	 *
+	 * @return  void
+	 *
+	 * @since   1.0
 	 */
 	protected function setUp()
 	{
