@@ -3,20 +3,34 @@ sudo: false
 
 language: php
 
-php:
-  - 5.3
-  - 5.4
-  - 5.5
-  - 5.6
-  - 7.0
-  - hhvm
+env:
+  global:
+    - RUN_PHPCS="no"
+    - USE_MINIMUM="no"
+    - USE_SCRUTINIZER="no"
+
+matrix:
+  include:
+    - php: 5.3.10
+      env: USE_MINIMUM="yes"
+    - php: 5.3
+    - php: 5.4
+    - php: 5.5
+    - php: 5.6
+      env: PHPUNIT_FLAGS="--coverage-clover=coverage.clover" RUN_PHPCS="yes" USE_SCRUTINIZER="yes"
+    - php: 7.0
+
+
+before_install:
+  - composer self-update
 
 install:
-  - composer install
+  - if [ "$USE_MINIMUM == "yes"]; then composer update --prefer-lowest; fi;
+  - if [ "$USE_MINIMUM == "no"]; then composer install; fi;
 
 script:
   - ant clean
-  - ./vendor/bin/phpunit --configuration phpunit.travis.xml --coverage-clover=coverage.clover
-  - if [[ "$TRAVIS_PHP_VERSION" != "7.0" ]] && [[ "$TRAVIS_PHP_VERSION" != "hhvm" ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
-  - if [[ "$TRAVIS_PHP_VERSION" != "7.0" ]] && [[ "$TRAVIS_PHP_VERSION" != "hhvm" ]]; then php ocular.phar code-coverage:upload --format=php-clover coverage.clover; fi
-  - if [[ "$TRAVIS_PHP_VERSION" != "7.0" ]] && [[ "$TRAVIS_PHP_VERSION" != "hhvm" ]]; then ./vendor/bin/phpcs --report=full --extensions=php -p --standard=build/phpcs/Joomla/ruleset.xml src/; fi
+  - vendor/bin/phpunit --configuration phpunit.travis.xml $PHPUNIT_FLAGS
+  - if [ "$USE_SCRUTINIZER" == "yes" ]; then wget https://scrutinizer-ci.com/ocular.phar; fi;
+  - if [ "$USE_SCRUTINIZER" == "yes" ]; then php ocular.phar code-coverage:upload --format=php-clover coverage.clover; fi;
+  - if [ "$RUN_PHPCS" == "yes" ]; then vendor/bin/phpcs --report=full --extensions=php -p --standard=build/phpcs/Joomla/ruleset.xml src/; fi
