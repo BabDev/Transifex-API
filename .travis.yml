@@ -25,8 +25,8 @@ before_install:
   - composer self-update
 
 install:
-  - if [ "$USE_MINIMUM == "yes"]; then composer update --prefer-lowest; fi;
-  - if [ "$USE_MINIMUM == "no"]; then composer install; fi;
+  - if [ "$USE_MINIMUM" == "yes" ]; then composer update --prefer-lowest; fi;
+  - if [ "$USE_MINIMUM" == "no" ]; then composer install; fi;
 
 script:
   - ant clean
