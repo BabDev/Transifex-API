@@ -11,7 +11,7 @@ env:
 
 matrix:
   include:
-    - php: 5.3.10
+    - php: 5.3
       env: USE_MINIMUM="yes"
     - php: 5.3
     - php: 5.4
@@ -19,6 +19,7 @@ matrix:
     - php: 5.6
       env: PHPUNIT_FLAGS="--coverage-clover=coverage.clover" RUN_PHPCS="yes" USE_SCRUTINIZER="yes"
     - php: 7.0
+    - php: hhvm
 
 
 before_install:
