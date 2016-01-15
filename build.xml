@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="babdev-transifex" default="build" basedir=".">
 	<!-- Run all tasks using build target -->
-	<target name="build" depends="clean,phpcs,phpunit" />
+	<target name="build" depends="clean,phpunit" />
 
 	<!-- Clean the build directory -->
 	<target name="clean" description="Clean up and create artifact directories">
