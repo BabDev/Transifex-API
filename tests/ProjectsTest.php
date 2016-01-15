@@ -36,6 +36,7 @@ class ProjectsTest extends TransifexTestCase
     /**
      * @testdox createProject() returns a Response object on a successful API connection
      *
+     * @covers  \BabDev\Transifex\Projects::buildProjectRequest
      * @covers  \BabDev\Transifex\Projects::checkLicense
      * @covers  \BabDev\Transifex\Projects::createProject
      * @covers  \BabDev\Transifex\TransifexObject::processResponse
@@ -75,6 +76,7 @@ class ProjectsTest extends TransifexTestCase
     /**
      * @testdox createProject() throws an UnexpectedResponseException on a failed API connection
      *
+     * @covers  \BabDev\Transifex\Projects::buildProjectRequest
      * @covers  \BabDev\Transifex\Projects::checkLicense
      * @covers  \BabDev\Transifex\Projects::createProject
      * @covers  \BabDev\Transifex\TransifexObject::processResponse
@@ -94,6 +96,7 @@ class ProjectsTest extends TransifexTestCase
     /**
      * @testdox createProject() throws an InvalidArgumentException when an invalid license is specified
      *
+     * @covers  \BabDev\Transifex\Projects::buildProjectRequest
      * @covers  \BabDev\Transifex\Projects::checkLicense
      * @covers  \BabDev\Transifex\Projects::createProject
      * @uses    \BabDev\Transifex\Http
@@ -110,6 +113,7 @@ class ProjectsTest extends TransifexTestCase
     /**
      * @testdox createProject() throws an InvalidArgumentException when required fields are missing
      *
+     * @covers  \BabDev\Transifex\Projects::buildProjectRequest
      * @covers  \BabDev\Transifex\Projects::checkLicense
      * @covers  \BabDev\Transifex\Projects::createProject
      * @uses    \BabDev\Transifex\Http
@@ -262,6 +266,7 @@ class ProjectsTest extends TransifexTestCase
     /**
      * @testdox updateProject() throws an UnexpectedResponseException on a failed API connection
      *
+     * @covers  \BabDev\Transifex\Projects::buildProjectRequest
      * @covers  \BabDev\Transifex\Projects::checkLicense
      * @covers  \BabDev\Transifex\Projects::updateProject
      * @covers  \BabDev\Transifex\TransifexObject::processResponse
@@ -280,6 +285,7 @@ class ProjectsTest extends TransifexTestCase
     /**
      * @testdox updateProject() throws a RuntimeException when there is no data to send to the API
      *
+     * @covers  \BabDev\Transifex\Projects::buildProjectRequest
      * @covers  \BabDev\Transifex\Projects::checkLicense
      * @covers  \BabDev\Transifex\Projects::updateProject
      * @uses    \BabDev\Transifex\Http
@@ -295,6 +301,7 @@ class ProjectsTest extends TransifexTestCase
     /**
      * @testdox updateProject() throws an InvalidArgumentException when an invalid license is specified
      *
+     * @covers  \BabDev\Transifex\Projects::buildProjectRequest
      * @covers  \BabDev\Transifex\Projects::checkLicense
      * @covers  \BabDev\Transifex\Projects::updateProject
      * @uses    \BabDev\Transifex\Http

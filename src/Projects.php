@@ -19,6 +19,50 @@ namespace BabDev\Transifex;
 class Projects extends TransifexObject
 {
     /**
+     * Build the data array to send with create and update requests.
+     *
+     * @param array $options Optional additional params to send with the request
+     *
+     * @return array
+     */
+    private function buildProjectRequest(array $options)
+    {
+        $data = [];
+
+        // Valid options to check
+        $validOptions = [
+            'long_description',
+            'private',
+            'homepage',
+            'trans_instructions',
+            'tags',
+            'maintainers',
+            'team',
+            'auto_join',
+            'license',
+            'fill_up_resources',
+            'repository_url',
+            'organization',
+            'archived',
+        ];
+
+        // Loop through the valid options and if we have them, add them to the request data
+        foreach ($validOptions as $option) {
+            if (isset($options[$option])) {
+                $data[$option] = $options[$option];
+            }
+        }
+
+        // Set the license if present
+        if (isset($options['license'])) {
+            $this->checkLicense($options['license']);
+            $data['license'] = $options['license'];
+        }
+
+        return $data;
+    }
+
+    /**
      * Checks that a license is an accepted value.
      *
      * @param string $license The license to check
@@ -67,33 +111,7 @@ class Projects extends TransifexObject
             'source_language_code' => $sourceLanguage,
         ];
 
-        $customOptions = [
-            'long_description',
-            'private',
-            'homepage',
-            'trans_instructions',
-            'tags',
-            'maintainers',
-            'team',
-            'auto_join',
-            'license',
-            'fill_up_resources',
-            'repository_url',
-            'organization',
-            'archived',
-        ];
-
-        foreach ($customOptions as $option) {
-            if (isset($options[$option])) {
-                $data[$option] = $options[$option];
-            }
-        }
-
-        // Check if the license is acceptable.
-        if (isset($options['license'])) {
-            $this->checkLicense($options['license']);
-            $data['license'] = $options['license'];
-        }
+        $data = array_merge($data, $this->buildProjectRequest($options));
 
         // Check mandatory fields.
         if (!isset($data['license']) || in_array($data['license'], ['permissive_open_source', 'other_open_source'])) {
@@ -182,37 +200,7 @@ class Projects extends TransifexObject
         $path = '/project/' . $slug . '/';
 
         // Build the request data.
-        $data = [];
-
-        // Valid options to check
-        $validOptions = [
-            'long_description',
-            'private',
-            'homepage',
-            'trans_instructions',
-            'tags',
-            'maintainers',
-            'team',
-            'auto_join',
-            'license',
-            'fill_up_resources',
-            'repository_url',
-            'organization',
-            'archived',
-        ];
-
-        // Loop through the valid options and if we have them, add them to the request data
-        foreach ($validOptions as $option) {
-            if (isset($options[$option])) {
-                $data[$option] = $options[$option];
-            }
-        }
-
-        // Set the license if present
-        if (isset($options['license'])) {
-            $this->checkLicense($options['license']);
-            $data['license'] = $options['license'];
-        }
+        $data = $this->buildProjectRequest($options);
 
         // Make sure we actually have data to send
         if (empty($data)) {
