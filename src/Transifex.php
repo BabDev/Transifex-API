@@ -19,7 +19,7 @@ class Transifex
     /**
      * Options for the Transifex object.
      *
-     * @var array
+     * @var array|\ArrayAccess
      */
     protected $options;
 
@@ -31,11 +31,19 @@ class Transifex
     protected $client;
 
     /**
-     * @param array $options Transifex options array.
-     * @param Http  $client  The HTTP client object.
+     * @param array|\ArrayAccess $options Transifex options array.
+     * @param Http               $client  The HTTP client object.
+     *
+     * @throws \InvalidArgumentException
      */
     public function __construct($options = [], Http $client = null)
     {
+        if (!is_array($options) && !($options instanceof \ArrayAccess)) {
+            throw new \InvalidArgumentException(
+                'The options param must be an array or implement the ArrayAccess interface.'
+            );
+        }
+
         $this->options = $options;
 
         // Set the Authorization header if we have credentials

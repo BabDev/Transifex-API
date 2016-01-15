@@ -22,7 +22,7 @@ abstract class TransifexObject
     /**
      * Options for the Transifex object.
      *
-     * @var array
+     * @var array|\ArrayAccess
      */
     protected $options;
 
@@ -34,11 +34,17 @@ abstract class TransifexObject
     protected $client;
 
     /**
-     * @param array $options Transifex options array.
-     * @param Http  $client  The HTTP client object.
+     * @param array|\ArrayAccess $options Transifex options array.
+     * @param Http               $client  The HTTP client object.
      */
     public function __construct($options = [], Http $client = null)
     {
+        if (!is_array($options) && !($options instanceof \ArrayAccess)) {
+            throw new \InvalidArgumentException(
+                'The options param must be an array or implement the ArrayAccess interface.'
+            );
+        }
+
         $this->options = $options;
         $this->client  = isset($client) ? $client : new Http($this->options);
     }
@@ -65,7 +71,7 @@ abstract class TransifexObject
      * Process the response and return it.
      *
      * @param Response $response     The response.
-     * @param int      $expectedCode The expected "good" code.
+     * @param int      $expectedCode The expected response code.
      *
      * @return Response
      *

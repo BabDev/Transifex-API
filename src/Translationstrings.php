@@ -46,7 +46,7 @@ class Translationstrings extends TransifexObject
      *
      * @return \Joomla\Http\Response
      */
-    public function getStrings($project, $resource, $lang, $details = false, $options = [])
+    public function getStrings($project, $resource, $lang, $details = false, array $options = [])
     {
         // Build the request path.
         $path = '/project/' . $project . '/resource/' . $resource . '/translation/' . $lang . '/strings/';

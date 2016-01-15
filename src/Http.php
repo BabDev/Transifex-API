@@ -20,7 +20,7 @@ use Joomla\Http\TransportInterface;
 class Http extends BaseHttp
 {
     /**
-     * @param array              $options   Client options array.
+     * @param array|\ArrayAccess $options   Client options array.
      * @param TransportInterface $transport The HTTP transport object.
      */
     public function __construct($options = [], TransportInterface $transport = null)

@@ -8,6 +8,7 @@ CHANGELOG for the Transifex API Package
  * Refactor API connector methods to return a full `Joomla\Http\Response` object
  * Removed magic getter in `Transifex` and associated class member vars
  * Support a default option in `Transifex::getOption()`
+ * `Translationstrings::getStrings()` now typehints the `$options` parameter
 
 * 1.3.0 (2015-XX-XX)
 
