@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace BabDev\Transifex\tests;
+namespace BabDev\Transifex\Tests;
 
 use BabDev\Transifex\Resources;
 

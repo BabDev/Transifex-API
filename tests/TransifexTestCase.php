@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace BabDev\Transifex\tests;
+namespace BabDev\Transifex\Tests;
 
 /**
  * Abstract test case for TransifexObject instances.

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace BabDev\Transifex\tests\Mock;
+namespace BabDev\Transifex\Tests\Mock;
 
 use BabDev\Transifex\Formats as RealFormats;
 
