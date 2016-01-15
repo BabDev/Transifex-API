@@ -100,18 +100,16 @@ class Projects extends TransifexObject
      */
     public function createProject($name, $slug, $description, $sourceLanguage, array $options = [])
     {
-        // Build the request path.
-        $path = '/projects/';
-
         // Build the request data.
-        $data = [
-            'name'                 => $name,
-            'slug'                 => $slug,
-            'description'          => $description,
-            'source_language_code' => $sourceLanguage,
-        ];
-
-        $data = array_merge($data, $this->buildProjectRequest($options));
+        $data = array_merge(
+            [
+                'name'                 => $name,
+                'slug'                 => $slug,
+                'description'          => $description,
+                'source_language_code' => $sourceLanguage,
+            ],
+            $this->buildProjectRequest($options)
+        );
 
         // Check mandatory fields.
         if (!isset($data['license']) || in_array($data['license'], ['permissive_open_source', 'other_open_source'])) {
@@ -125,7 +123,7 @@ class Projects extends TransifexObject
         // Send the request.
         return $this->processResponse(
             $this->client->post(
-                $this->fetchUrl($path),
+                $this->fetchUrl('/projects/'),
                 json_encode($data),
                 ['Content-Type' => 'application/json']
             ),
@@ -142,11 +140,7 @@ class Projects extends TransifexObject
      */
     public function deleteProject($slug)
     {
-        // Build the request path.
-        $path = '/project/' . $slug;
-
-        // Send the request.
-        return $this->processResponse($this->client->delete($this->fetchUrl($path)), 204);
+        return $this->processResponse($this->client->delete($this->fetchUrl('/project/' . $slug)), 204);
     }
 
     /**
@@ -177,11 +171,7 @@ class Projects extends TransifexObject
      */
     public function getProjects()
     {
-        // Build the request path.
-        $path = '/projects/';
-
-        // Send the request.
-        return $this->processResponse($this->client->get($this->fetchUrl($path)));
+        return $this->processResponse($this->client->get($this->fetchUrl('/projects/')));
     }
 
     /**
@@ -196,9 +186,6 @@ class Projects extends TransifexObject
      */
     public function updateProject($slug, array $options = [])
     {
-        // Build the request path.
-        $path = '/project/' . $slug . '/';
-
         // Build the request data.
         $data = $this->buildProjectRequest($options);
 
@@ -210,7 +197,7 @@ class Projects extends TransifexObject
         // Send the request.
         return $this->processResponse(
             $this->client->put(
-                $this->fetchUrl($path),
+                $this->fetchUrl('/project/' . $slug . '/'),
                 json_encode($data),
                 ['Content-Type' => 'application/json']
             )
