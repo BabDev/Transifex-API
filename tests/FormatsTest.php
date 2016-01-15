@@ -1,12 +1,15 @@
 <?php
-/**
+
+/*
  * BabDev Transifex Package
  *
- * @copyright  Copyright (C) 2012-2015 Michael Babker. All rights reserved.
- * @license    http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License Version 2 or Later
+ * (c) Michael Babker <michael.babker@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
-namespace BabDev\Transifex\Tests;
+namespace BabDev\Transifex\tests;
 
 use BabDev\Transifex\Formats;
 
@@ -15,55 +18,53 @@ use BabDev\Transifex\Formats;
  */
 class FormatsTest extends TransifexTestCase
 {
-	/**
-	 * Object being tested.
-	 *
-	 * @var  Formats
-	 */
-	private $object;
+    /**
+     * @var Formats
+     */
+    private $object;
 
-	/**
-	 * {@inheritdoc}
-	 */
-	protected function setUp()
-	{
-		parent::setUp();
+    /**
+     * {@inheritdoc}
+     */
+    protected function setUp()
+    {
+        parent::setUp();
 
-		$this->object = new Formats($this->options, $this->client);
-	}
+        $this->object = new Formats($this->options, $this->client);
+    }
 
-	/**
-	 * @testdox  getFormats() returns a Response object on a successful API connection
-	 *
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
-	 * @covers  \BabDev\Transifex\Formats::getFormats
-	 * @uses    \BabDev\Transifex\Http
-	 * @uses    \BabDev\Transifex\TransifexObject
-	 */
-	public function testGetFormats()
-	{
-		$this->prepareSuccessTest('get', '/formats');
+    /**
+     * @testdox getFormats() returns a Response object on a successful API connection
+     *
+     * @covers  \BabDev\Transifex\TransifexObject::processResponse
+     * @covers  \BabDev\Transifex\Formats::getFormats
+     * @uses    \BabDev\Transifex\Http
+     * @uses    \BabDev\Transifex\TransifexObject
+     */
+    public function testGetFormats()
+    {
+        $this->prepareSuccessTest('get', '/formats');
 
-		$this->assertSame(
-			$this->object->getFormats(),
-			$this->response
-		);
-	}
+        $this->assertSame(
+            $this->object->getFormats(),
+            $this->response
+        );
+    }
 
-	/**
-	 * @testdox  getFormats() throws an UnexpectedResponseException on a failed API connection
-	 *
-	 * @expectedException  \Joomla\Http\Exception\UnexpectedResponseException
-	 *
-	 * @covers  \BabDev\Transifex\Formats::getFormats
-	 * @covers  \BabDev\Transifex\TransifexObject::processResponse
-	 * @uses    \BabDev\Transifex\Http
-	 * @uses    \BabDev\Transifex\TransifexObject
-	 */
-	public function testGetFormatsFailure()
-	{
-		$this->prepareFailureTest('get', '/formats');
+    /**
+     * @testdox getFormats() throws an UnexpectedResponseException on a failed API connection
+     *
+     * @covers  \BabDev\Transifex\Formats::getFormats
+     * @covers  \BabDev\Transifex\TransifexObject::processResponse
+     * @uses    \BabDev\Transifex\Http
+     * @uses    \BabDev\Transifex\TransifexObject
+     *
+     * @expectedException \Joomla\Http\Exception\UnexpectedResponseException
+     */
+    public function testGetFormatsFailure()
+    {
+        $this->prepareFailureTest('get', '/formats');
 
-		$this->object->getFormats();
-	}
+        $this->object->getFormats();
+    }
 }

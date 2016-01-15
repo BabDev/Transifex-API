@@ -13,11 +13,10 @@ Requirements
 
 * Production
     * Joomla Framework [HTTP](https://github.com/joomla-framework/http) package
-    * PHP 5.3.10 or later
+    * PHP 5.4 or later
 * Development
     * Joomla Framework [Test](https://github.com/joomla-framework-test) package
     * [PHPUnit](http://phpunit.de/)
-    * [PHP_CodeSniffer](http://www.squizlabs.com/php-codesniffer)
     
 Documentation
 -------------

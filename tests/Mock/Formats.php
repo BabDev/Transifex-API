@@ -1,17 +1,20 @@
 <?php
-/**
+
+/*
  * BabDev Transifex Package
  *
- * @copyright  Copyright (C) 2012-2015 Michael Babker. All rights reserved.
- * @license    http://www.gnu.org/licenses/gpl-2.0.txt GNU General Public License Version 2 or Later
+ * (c) Michael Babker <michael.babker@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
-namespace BabDev\Transifex\Tests\Mock;
+namespace BabDev\Transifex\tests\Mock;
 
 use BabDev\Transifex\Formats as RealFormats;
 
 /**
- * Stub Formats object in custom namespace for testing
+ * Stub Formats object in custom namespace for testing.
  */
 class Formats extends RealFormats
 {
