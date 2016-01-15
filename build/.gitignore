@@ -1,7 +1,6 @@
+/api
+/code-browser
 /coverage
+/docs
 /logs
 /pdepend
-/code-browser
-/api
-/docs
-/pulltests

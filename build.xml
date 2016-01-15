@@ -14,18 +14,6 @@
 		<mkdir dir="${basedir}/build/logs" />
 	</target>
 
-	<!-- Check code style based on Joomla Coding Standards -->
-	<target name="phpcs" description="Generate codestyle report using PHP_CodeSniffer for output on Travis-CI">
-		<exec executable="${basedir}/vendor/bin/phpcs">
-			<arg line="-p" />
-			<arg line="-w" />
-			<arg line="--extensions=php" />
-			<arg line="--report=full" />
-			<arg line="--standard=${basedir}/build/phpcs/Joomla/ruleset.xml" />
-			<arg line="${basedir}/src" />
-		</exec>
-	</target>
-
 	<!-- Run the PHPUnit suite -->
 	<target name="phpunit" description="Runs the unit tests">
 		<echo msg="Beginning unit testing" />
