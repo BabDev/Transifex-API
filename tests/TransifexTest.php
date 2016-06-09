@@ -11,7 +11,9 @@
 
 namespace BabDev\Transifex\Tests;
 
-use BabDev\Transifex\Transifex;
+use BabDev\Transifex\{
+    Formats, Http, Transifex
+};
 
 /**
  * Test class for \BabDev\Transifex\Transifex.
@@ -19,7 +21,7 @@ use BabDev\Transifex\Transifex;
 class TransifexTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit_Framework_MockObject_MockObject|Http
      */
     private $client;
 
@@ -39,7 +41,7 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->options = ['api.username' => 'test', 'api.password' => 'test'];
-        $this->client  = $this->getMock('\BabDev\Transifex\Http', ['get', 'post', 'delete', 'put', 'patch']);
+        $this->client  = $this->createMock(Http::class);
         $this->object  = new Transifex($this->options, $this->client);
     }
 
@@ -56,12 +58,12 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
         $object = new Transifex($this->options);
 
         $this->assertInstanceOf(
-            '\BabDev\Transifex\Transifex',
+            Transifex::class,
             $object
         );
 
         $this->assertAttributeInstanceOf(
-            '\BabDev\Transifex\Http',
+            Http::class,
             'client',
             $object
         );
@@ -93,7 +95,7 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
     public function testGetFormats()
     {
         $this->assertInstanceOf(
-            '\BabDev\Transifex\Formats',
+            Formats::class,
             $this->object->get('formats')
         );
     }
@@ -133,7 +135,7 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
         $this->object->setOption('object.namespace', 'BabDev\Transifex\Tests');
 
         $this->assertInstanceOf(
-            '\BabDev\Transifex\Formats',
+            Formats::class,
             $this->object->get('formats')
         );
     }

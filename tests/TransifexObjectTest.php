@@ -11,6 +11,9 @@
 
 namespace BabDev\Transifex\Tests;
 
+use BabDev\Transifex\{
+    Http, TransifexObject
+};
 use Joomla\Test\TestHelper;
 
 /**
@@ -19,7 +22,7 @@ use Joomla\Test\TestHelper;
 class TransifexObjectTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var \PHPUnit_Framework_MockObject_MockObject|Http
      */
     private $client;
 
@@ -43,9 +46,9 @@ class TransifexObjectTest extends \PHPUnit_Framework_TestCase
             'api.username' => 'MyTestUser',
             'api.password' => 'MyTestPass',
         ];
-        $this->client  = $this->getMock('\BabDev\Transifex\Http', ['get', 'post', 'delete', 'put', 'patch']);
+        $this->client  = $this->createMock(Http::class);
         $this->object  = $this->getMockForAbstractClass(
-            '\BabDev\Transifex\TransifexObject',
+            TransifexObject::class,
             [$this->options, $this->client]
         );
     }
@@ -58,15 +61,15 @@ class TransifexObjectTest extends \PHPUnit_Framework_TestCase
      */
     public function test__constructWithNoInjectedClient()
     {
-        $object = $this->getMockForAbstractClass('\BabDev\Transifex\TransifexObject', [$this->options]);
+        $object = $this->getMockForAbstractClass(TransifexObject::class, [$this->options]);
 
         $this->assertInstanceOf(
-            '\BabDev\Transifex\TransifexObject',
+            TransifexObject::class,
             $object
         );
 
         $this->assertAttributeInstanceOf(
-            '\BabDev\Transifex\Http',
+            Http::class,
             'client',
             $object
         );

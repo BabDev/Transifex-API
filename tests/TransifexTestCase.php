@@ -11,6 +11,9 @@
 
 namespace BabDev\Transifex\Tests;
 
+use BabDev\Transifex\Http;
+use Joomla\Http\Response;
+
 /**
  * Abstract test case for TransifexObject instances.
  */
@@ -47,8 +50,8 @@ abstract class TransifexTestCase extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->options  = [];
-        $this->client   = $this->getMock('\BabDev\Transifex\Http', ['get', 'post', 'delete', 'put', 'patch']);
-        $this->response = $this->getMock('\Joomla\Http\Response');
+        $this->client   = $this->createMock(Http::class);
+        $this->response = $this->createMock(Response::class);
     }
 
     /**
