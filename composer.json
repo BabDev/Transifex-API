@@ -16,7 +16,7 @@
     },
     "require-dev": {
         "joomla/test": "~1.1",
-        "fabpot/php-cs-fixer": "~1.11",
+        "friendsofphp/php-cs-fixer": "~1.11",
         "phpunit/phpunit": "~5.4"
     },
     "autoload": {
