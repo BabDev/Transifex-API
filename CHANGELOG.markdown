@@ -3,7 +3,7 @@ CHANGELOG for the Transifex API Package
 
 * 2.0.0
 
- * Dropped support for PHP 5.3
+ * Dropped support for PHP 5.x, PHP 7.0 is the minimum requirement
  * Add support for custom namespaces to `Transifex::get()`
  * Refactor API connector methods to return a full `Joomla\Http\Response` object
  * Removed magic getter in `Transifex` and associated class member vars
