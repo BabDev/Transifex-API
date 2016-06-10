@@ -11,15 +11,17 @@
 
 namespace BabDev\Transifex;
 
+use Psr\Http\Message\ResponseInterface;
+
 /**
  * Transifex API Languages class.
  *
- * @link http://docs.transifex.com/developer/api/languages
+ * @link http://docs.transifex.com/api/languages/
  */
 class Languages extends TransifexObject
 {
     /**
-     * Method to create a language for a project.
+     * Create a language for a project.
      *
      * @param string $slug                The slug for the project
      * @param string $langCode            The language code for the new language
@@ -27,24 +29,25 @@ class Languages extends TransifexObject
      * @param array  $options             Optional additional params to send with the request
      * @param bool   $skipInvalidUsername If true, the API call does not fail and instead will return a list of invalid usernames
      *
-     * @return \Joomla\Http\Response
+     * @return ResponseInterface
      *
      * @throws \InvalidArgumentException
      */
     public function createLanguage(
-        $slug,
-        $langCode,
+        string $slug,
+        string $langCode,
         array $coordinators,
         array $options = [],
-        $skipInvalidUsername = false
-    ) {
+        bool $skipInvalidUsername = false
+    ) : ResponseInterface
+    {
         // Make sure the $coordinators array is not empty
-        if (count($coordinators) < 1) {
+        if (!count($coordinators)) {
             throw new \InvalidArgumentException('The coordinators array must contain at least one username.');
         }
 
         // Build the request path.
-        $path = '/project/' . $slug . '/languages/';
+        $path = "project/$slug/languages/";
 
         // Check if invalid usernames should be skipped
         if ($skipInvalidUsername) {
@@ -67,154 +70,151 @@ class Languages extends TransifexObject
             }
         }
 
-        // Send the request.
-        return $this->processResponse(
-            $this->client->post(
-                $this->fetchUrl($path),
-                json_encode($data),
-                ['Content-Type' => 'application/json']
-            ),
-            201
+        return $this->client->post(
+            "/api/2/$path",
+            [
+                'body'    => json_encode($data),
+                'auth'    => $this->getAuthData(),
+                'headers' => ['Content-Type' => 'application/json'],
+            ]
         );
     }
 
     /**
-     * Method to delete a language within a project.
+     * Delete a language within a project.
      *
      * @param string $project  The project to retrieve details for
      * @param string $langCode The language code to retrieve details for
      *
-     * @return \Joomla\Http\Response
+     * @return ResponseInterface
      */
-    public function deleteLanguage($project, $langCode)
+    public function deleteLanguage(string $project, string $langCode) : ResponseInterface
     {
-        // Build the request path.
-        $path = '/project/' . $project . '/language/' . $langCode . '/';
+        $path = "project/$project/language/$langCode/";
 
-        // Send the request.
-        return $this->processResponse($this->client->delete($this->fetchUrl($path)), 204);
+        return $this->client->delete("/api/2/$path", ['auth' => $this->getAuthData()]);
     }
 
     /**
-     * Method to get the coordinators for a language team in a project.
+     * Get the coordinators for a language team in a project.
      *
      * @param string $project  The project to retrieve details for
      * @param string $langCode The language code to retrieve details for
      *
-     * @return \Joomla\Http\Response
+     * @return ResponseInterface
      */
-    public function getCoordinators($project, $langCode)
+    public function getCoordinators(string $project, string $langCode) : ResponseInterface
     {
-        // Build the request path.
-        $path = '/project/' . $project . '/language/' . $langCode . '/coordinators/';
+        $path = "project/$project/language/$langCode/coordinators/";
 
-        // Send the request.
-        return $this->processResponse($this->client->get($this->fetchUrl($path)));
+        return $this->client->get("/api/2/$path", ['auth' => $this->getAuthData()]);
     }
 
     /**
-     * Method to get information about a given language in a project.
+     * Get information about a given language in a project.
      *
      * @param string $project  The project to retrieve details for
      * @param string $langCode The language code to retrieve details for
      *
-     * @return \Joomla\Http\Response
+     * @return ResponseInterface
      */
-    public function getLanguage($project, $langCode)
+    public function getLanguage(string $project, string $langCode) : ResponseInterface
     {
-        // Build the request path.
-        $path = '/project/' . $project . '/language/' . $langCode . '/';
+        $path = "project/$project/language/$langCode/";
 
-        // Send the request.
-        return $this->processResponse($this->client->get($this->fetchUrl($path)));
+        return $this->client->get("/api/2/$path", ['auth' => $this->getAuthData()]);
     }
 
     /**
-     * Method to get a list of languages for a specified project.
+     * Get a list of languages for a specified project.
      *
      * @param string $project The project to retrieve details for
      *
-     * @return \Joomla\Http\Response
+     * @return ResponseInterface
      */
-    public function getLanguages($project)
+    public function getLanguages(string $project) : ResponseInterface
     {
-        // Build the request path.
-        $path = '/project/' . $project . '/languages/';
+        $path = "project/$project/languages/";
 
-        // Send the request.
-        return $this->processResponse($this->client->get($this->fetchUrl($path)));
+        return $this->client->get("/api/2/$path", ['auth' => $this->getAuthData()]);
     }
 
     /**
-     * Method to get the reviewers for a language team in a project.
+     * Get the reviewers for a language team in a project.
      *
      * @param string $project  The project to retrieve details for
      * @param string $langCode The language code to retrieve details for
      *
-     * @return \Joomla\Http\Response
+     * @return ResponseInterface
      */
-    public function getReviewers($project, $langCode)
+    public function getReviewers(string $project, string $langCode) : ResponseInterface
     {
-        // Build the request path.
-        $path = '/project/' . $project . '/language/' . $langCode . '/reviewers/';
+        $path = "project/$project/language/$langCode/reviewers/";
 
-        // Send the request.
-        return $this->processResponse($this->client->get($this->fetchUrl($path)));
+        return $this->client->get("/api/2/$path", ['auth' => $this->getAuthData()]);
     }
 
     /**
-     * Method to get the translators for a language team in a project.
+     * Get the translators for a language team in a project.
      *
      * @param string $project  The project to retrieve details for
      * @param string $langCode The language code to retrieve details for
      *
-     * @return \Joomla\Http\Response
+     * @return ResponseInterface
      */
-    public function getTranslators($project, $langCode)
+    public function getTranslators(string $project, string $langCode) : ResponseInterface
     {
-        // Build the request path.
-        $path = '/project/' . $project . '/language/' . $langCode . '/translators/';
+        $path = "project/$project/language/$langCode/translators/";
 
-        // Send the request.
-        return $this->processResponse($this->client->get($this->fetchUrl($path)));
+        return $this->client->get("/api/2/$path", ['auth' => $this->getAuthData()]);
     }
 
     /**
-     * Method to update the coordinators for a language team in a project.
+     * Update the coordinators for a language team in a project.
      *
      * @param string $project             The project to retrieve details for
      * @param string $langCode            The language code to retrieve details for
      * @param array  $coordinators        An array of coordinators for the language
      * @param bool   $skipInvalidUsername If true, the API call does not fail and instead will return a list of invalid usernames
      *
-     * @return \Joomla\Http\Response
+     * @return ResponseInterface
      */
-    public function updateCoordinators($project, $langCode, array $coordinators, $skipInvalidUsername = false)
+    public function updateCoordinators(
+        string $project,
+        string $langCode,
+        array $coordinators,
+        bool $skipInvalidUsername = false
+    ) : ResponseInterface
     {
         return $this->updateTeam($project, $langCode, $coordinators, $skipInvalidUsername, 'coordinators');
     }
 
     /**
-     * Method to update a language within a project.
+     * Update a language within a project.
      *
      * @param string $slug         The slug for the project
      * @param string $langCode     The language code for the new language
      * @param array  $coordinators An array of coordinators for the language
      * @param array  $options      Optional additional params to send with the request
      *
-     * @return \Joomla\Http\Response
+     * @return ResponseInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function updateLanguage($slug, $langCode, array $coordinators, array $options = [])
+    public function updateLanguage(
+        string $slug,
+        string $langCode,
+        array $coordinators,
+        array $options = []
+    ) : ResponseInterface
     {
         // Make sure the $coordinators array is not empty
-        if (count($coordinators) < 1) {
+        if (!count($coordinators)) {
             throw new \InvalidArgumentException('The coordinators array must contain at least one username.');
         }
 
         // Build the request path.
-        $path = '/project/' . $slug . '/language/' . $langCode . '/';
+        $path = "project/$slug/language/$langCode/";
 
         // Build the required request data.
         $data = ['coordinators' => $coordinators];
@@ -229,27 +229,27 @@ class Languages extends TransifexObject
             $data['reviewers'] = $options['reviewers'];
         }
 
-        // Send the request.
-        return $this->processResponse(
-            $this->client->put(
-                $this->fetchUrl($path),
-                json_encode($data),
-                ['Content-Type' => 'application/json']
-            )
+        return $this->client->put(
+            "/api/2/$path",
+            [
+                'body'    => json_encode($data),
+                'auth'    => $this->getAuthData(),
+                'headers' => ['Content-Type' => 'application/json'],
+            ]
         );
     }
 
     /**
-     * Method to update the reviewers for a language team in a project.
+     * Update the reviewers for a language team in a project.
      *
      * @param string $project             The project to retrieve details for
      * @param string $langCode            The language code to retrieve details for
      * @param array  $reviewers           An array of reviewers for the language
      * @param bool   $skipInvalidUsername If true, the API call does not fail and instead will return a list of invalid usernames
      *
-     * @return \Joomla\Http\Response
+     * @return ResponseInterface
      */
-    public function updateReviewers($project, $langCode, array $reviewers, $skipInvalidUsername = false)
+    public function updateReviewers(string $project, string $langCode, array $reviewers, bool $skipInvalidUsername = false) : ResponseInterface
     {
         return $this->updateTeam($project, $langCode, $reviewers, $skipInvalidUsername, 'reviewers');
     }
@@ -263,46 +263,51 @@ class Languages extends TransifexObject
      * @param bool   $skipInvalidUsername If true, the API call does not fail and instead will return a list of invalid usernames
      * @param string $team                The team to update
      *
-     * @return \Joomla\Http\Response
+     * @return ResponseInterface
      *
      * @throws \InvalidArgumentException
      */
-    protected function updateTeam($project, $langCode, array $members, $skipInvalidUsername, $team)
+    protected function updateTeam(string $project, string $langCode, array $members, bool $skipInvalidUsername, string $team) : ResponseInterface
     {
         // Make sure the $members array is not empty
-        if (count($members) < 1) {
-            throw new \InvalidArgumentException('The ' . $team . ' array must contain at least one username.');
+        if (!count($members)) {
+            throw new \InvalidArgumentException("The $team array must contain at least one username.");
         }
 
         // Build the request path.
-        $path = '/project/' . $project . '/language/' . $langCode . '/' . $team . '/';
+        $path = "project/$project/language/$langCode/$team/";
 
         // Check if invalid usernames should be skipped
         if ($skipInvalidUsername) {
             $path .= '?skip_invalid_username';
         }
 
-        // Send the request.
-        return $this->processResponse(
-            $this->client->put(
-                $this->fetchUrl($path),
-                json_encode($members),
-                ['Content-Type' => 'application/json']
-            )
+        return $this->client->put(
+            "/api/2/$path",
+            [
+                'body'    => json_encode($members),
+                'auth'    => $this->getAuthData(),
+                'headers' => ['Content-Type' => 'application/json'],
+            ]
         );
     }
 
     /**
-     * Method to update the translators for a language team in a project.
+     * Update the translators for a language team in a project.
      *
      * @param string $project             The project to retrieve details for
      * @param string $langCode            The language code to retrieve details for
      * @param array  $translators         An array of translators for the language
      * @param bool   $skipInvalidUsername If true, the API call does not fail and instead will return a list of invalid usernames
      *
-     * @return \Joomla\Http\Response
+     * @return ResponseInterface
      */
-    public function updateTranslators($project, $langCode, array $translators, $skipInvalidUsername = false)
+    public function updateTranslators(
+        string $project,
+        string $langCode,
+        array $translators,
+        bool $skipInvalidUsername = false
+    ) : ResponseInterface
     {
         return $this->updateTeam($project, $langCode, $translators, $skipInvalidUsername, 'translators');
     }

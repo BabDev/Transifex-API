@@ -11,28 +11,28 @@
 
 namespace BabDev\Transifex;
 
+use Psr\Http\Message\ResponseInterface;
+
 /**
  * Transifex API Statistics class.
  *
- * @link http://docs.transifex.com/developer/api/statistics
+ * @link http://docs.transifex.com/api/statistics/
  */
 class Statistics extends TransifexObject
 {
     /**
-     * Method to get statistics on a specified resource.
+     * Get statistics on a specified resource.
      *
      * @param string $project  The slug for the project to pull from.
      * @param string $resource The slug for the resource to pull from.
      * @param string $lang     An optional language code to return data only for a specified language.
      *
-     * @return \Joomla\Http\Response
+     * @return ResponseInterface
      */
-    public function getStatistics($project, $resource, $lang = null)
+    public function getStatistics(string $project, string $resource, string $lang = '') : ResponseInterface
     {
-        // Build the request path.
-        $path = '/project/' . $project . '/resource/' . $resource . '/stats/' . $lang;
+        $path = "project/$project/resource/$resource/stats/$lang";
 
-        // Send the request.
-        return $this->processResponse($this->client->get($this->fetchUrl($path)));
+        return $this->client->get("/api/2/$path", ['auth' => $this->getAuthData()]);
     }
 }

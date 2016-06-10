@@ -11,15 +11,17 @@
 
 namespace BabDev\Transifex;
 
+use Psr\Http\Message\ResponseInterface;
+
 /**
  * Transifex API Resources class.
  *
- * @link http://docs.transifex.com/developer/api/resources
+ * @link http://docs.transifex.com/api/resources/
  */
 class Resources extends TransifexObject
 {
     /**
-     * Method to create a resource.
+     * Create a resource.
      *
      * @param string $project  The slug for the project
      * @param string $name     The name of the resource
@@ -27,12 +29,18 @@ class Resources extends TransifexObject
      * @param string $fileType The file type of the resource
      * @param array  $options  Optional additional params to send with the request
      *
-     * @return \Joomla\Http\Response
+     * @return ResponseInterface
      */
-    public function createResource($project, $name, $slug, $fileType, array $options = [])
+    public function createResource(
+        string $project,
+        string $name,
+        string $slug,
+        string $fileType,
+        array $options = []
+    ) : ResponseInterface
     {
         // Build the request path.
-        $path = '/project/' . $project . '/resources/';
+        $path = "project/$project/resources/";
 
         // Build the required request data.
         $data = [
@@ -63,103 +71,98 @@ class Resources extends TransifexObject
             $data['content'] = file_get_contents($options['file']);
         }
 
-        // Send the request.
-        return $this->processResponse(
-            $this->client->post(
-                $this->fetchUrl($path),
-                json_encode($data),
-                ['Content-Type' => 'application/json']
-            ),
-            201
+        return $this->client->post(
+            "/api/2/$path",
+            [
+                'body'    => json_encode($data),
+                'auth'    => $this->getAuthData(),
+                'headers' => ['Content-Type' => 'application/json'],
+            ]
         );
     }
 
     /**
-     * Method to delete a resource within a project.
+     * Delete a resource within a project.
      *
      * @param string $project  The project the resource is part of
      * @param string $resource The resource slug within the project
      *
-     * @return \Joomla\Http\Response
+     * @return ResponseInterface
      */
-    public function deleteResource($project, $resource)
+    public function deleteResource(string $project, string $resource) : ResponseInterface
     {
-        // Build the request path.
-        $path = '/project/' . $project . '/resource/' . $resource;
+        $path = "project/$project/resource/$resource";
 
-        // Send the request.
-        return $this->processResponse($this->client->delete($this->fetchUrl($path)), 204);
+        return $this->client->delete("/api/2/$path", ['auth' => $this->getAuthData()]);
     }
 
     /**
-     * Method to get information about a resource within a project.
+     * Get information about a resource within a project.
      *
      * @param string $project  The project the resource is part of
      * @param string $resource The resource slug within the project
      * @param bool   $details  True to retrieve additional project details
      *
-     * @return \Joomla\Http\Response
+     * @return ResponseInterface
      */
-    public function getResource($project, $resource, $details = false)
+    public function getResource(string $project, string $resource, bool $details = false) : ResponseInterface
     {
-        // Build the request path.
-        $path = '/project/' . $project . '/resource/' . $resource . '/';
+        $path = "project/$project/resource/$resource/";
 
         if ($details) {
             $path .= '?details';
         }
 
-        // Send the request.
-        return $this->processResponse($this->client->get($this->fetchUrl($path)));
+        return $this->client->get("/api/2/$path", ['auth' => $this->getAuthData()]);
     }
 
     /**
-     * Method to get the content of a resource within a project.
+     * Get the content of a resource within a project.
      *
      * @param string $project  The project the resource is part of
      * @param string $resource The resource slug within the project
      *
-     * @return \Joomla\Http\Response
+     * @return ResponseInterface
      */
-    public function getResourceContent($project, $resource)
+    public function getResourceContent(string $project, string $resource) : ResponseInterface
     {
-        // Build the request path.
-        $path = '/project/' . $project . '/resource/' . $resource . '/content/';
+        $path = "project/$project/resource/$resource/content/";
 
-        // Send the request.
-        return $this->processResponse($this->client->get($this->fetchUrl($path)));
+        return $this->client->get("/api/2/$path", ['auth' => $this->getAuthData()]);
     }
 
     /**
-     * Method to get information about a project's resources.
+     * Get information about a project's resources.
      *
      * @param string $project The project to retrieve details for
      *
-     * @return \Joomla\Http\Response
+     * @return ResponseInterface
      */
-    public function getResources($project)
+    public function getResources(string $project) : ResponseInterface
     {
-        // Build the request path.
-        $path = '/project/' . $project . '/resources';
+        $path = "project/$project/resources";
 
-        // Send the request.
-        return $this->processResponse($this->client->get($this->fetchUrl($path)));
+        return $this->client->get("/api/2/$path", ['auth' => $this->getAuthData()]);
     }
 
     /**
-     * Method to update the content of a resource within a project.
+     * Update the content of a resource within a project.
      *
      * @param string $project  The project the resource is part of
      * @param string $resource The resource slug within the project
      * @param string $content  The content of the resource.  This can either be a string of data or a file path.
      * @param string $type     The type of content in the $content variable.  This should be either string or file.
      *
-     * @return \Joomla\Http\Response
+     * @return ResponseInterface
      */
-    public function updateResourceContent($project, $resource, $content, $type = 'string')
+    public function updateResourceContent(
+        string $project,
+        string $resource,
+        string $content,
+        string $type = 'string'
+    ) : ResponseInterface
     {
-        // Build the request path.
-        $path = '/project/' . $project . '/resource/' . $resource . '/content/';
+        $path = "project/$project/resource/$resource/content/";
 
         return $this->updateResource($path, $content, $type);
     }

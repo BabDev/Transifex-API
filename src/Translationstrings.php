@@ -11,10 +11,12 @@
 
 namespace BabDev\Transifex;
 
+use Psr\Http\Message\ResponseInterface;
+
 /**
  * Transifex API Translation Strings class.
  *
- * @link http://docs.transifex.com/developer/api/translation_strings
+ * @link http://docs.transifex.com/api/translation_strings/
  */
 class Translationstrings extends TransifexObject
 {
@@ -24,15 +26,13 @@ class Translationstrings extends TransifexObject
      * @param string $project  The slug for the project to pull from.
      * @param string $resource The slug for the resource to pull from.
      *
-     * @return \Joomla\Http\Response
+     * @return ResponseInterface
      */
-    public function getPseudolocalizationStrings($project, $resource)
+    public function getPseudolocalizationStrings(string $project, string $resource) : ResponseInterface
     {
-        // Build the request path
-        $path = '/project/' . $project . '/resource/' . $resource . '/pseudo/?pseudo_type=MIXED';
+        $path = "project/$project/resource/$resource/pseudo/?pseudo_type=MIXED";
 
-        // Send the request.
-        return $this->processResponse($this->client->get($this->fetchUrl($path)));
+        return $this->client->get("/api/2/$path", ['auth' => $this->getAuthData()]);
     }
 
     /**
@@ -44,12 +44,17 @@ class Translationstrings extends TransifexObject
      * @param bool   $details  Flag to retrieve additional details on the strings
      * @param array  $options  An array of additional options for the request
      *
-     * @return \Joomla\Http\Response
+     * @return ResponseInterface
      */
-    public function getStrings($project, $resource, $lang, $details = false, array $options = [])
+    public function getStrings(
+        string $project,
+        string $resource,
+        string $lang,
+        bool $details = false,
+        array $options = []
+    ) : ResponseInterface
     {
-        // Build the request path.
-        $path = '/project/' . $project . '/resource/' . $resource . '/translation/' . $lang . '/strings/';
+        $path = "project/$project/resource/$resource/translation/$lang/strings/";
 
         if ($details) {
             $path .= '?details';
@@ -63,7 +68,6 @@ class Translationstrings extends TransifexObject
             $path .= (strpos($path, '?') === false ? '?' : '\&') . 'context=' . $options['context'];
         }
 
-        // Send the request.
-        return $this->processResponse($this->client->get($this->fetchUrl($path)));
+        return $this->client->get("/api/2/$path", ['auth' => $this->getAuthData()]);
     }
 }

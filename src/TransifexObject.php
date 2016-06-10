@@ -12,8 +12,6 @@
 namespace BabDev\Transifex;
 
 use GuzzleHttp\Client;
-use Joomla\Http\Exception\UnexpectedResponseException;
-use Joomla\Http\Response;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -73,23 +71,23 @@ abstract class TransifexObject
      *
      * @return mixed The option value.
      */
-    protected function getOption($key, $default = null)
+    protected function getOption(string $key, $default = null)
     {
         return isset($this->options[$key]) ? $this->options[$key] : $default;
     }
 
     /**
-     * Method to update an API endpoint with resource content.
+     * Update an API endpoint with resource content.
      *
      * @param string $path    API path
      * @param string $content The content of the resource.  This can either be a string of data or a file path.
      * @param string $type    The type of content in the $content variable.  This should be either string or file.
      *
-     * @return Response
+     * @return ResponseInterface
      *
      * @throws \InvalidArgumentException
      */
-    protected function updateResource($path, $content, $type)
+    protected function updateResource(string $path, string $content, string $type) : ResponseInterface
     {
         // Verify the content type is allowed
         if (!in_array($type, ['string', 'file'])) {
@@ -100,13 +98,13 @@ abstract class TransifexObject
             'content' => ($type == 'string') ? $content : file_get_contents($content),
         ];
 
-        // Send the request.
-        return $this->processResponse(
-            $this->client->put(
-                $this->fetchUrl($path),
-                json_encode($data),
-                ['Content-Type' => 'application/json']
-            )
+        return $this->client->put(
+            "/api/2/$path/",
+            [
+                'body'    => json_encode($data),
+                'auth'    => $this->getAuthData(),
+                'headers' => ['Content-Type' => 'application/json'],
+            ]
         );
     }
 }

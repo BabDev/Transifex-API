@@ -57,7 +57,7 @@ class Transifex
      *
      * @throws \InvalidArgumentException
      */
-    public function get($name)
+    public function get(string $name) : TransifexObject
     {
         $namespace = $this->getOption('object.namespace', __NAMESPACE__);
         $class     = $namespace . '\\' . ucfirst(strtolower($name));
@@ -87,7 +87,7 @@ class Transifex
      *
      * @return mixed The option value.
      */
-    public function getOption($key, $default = null)
+    public function getOption(string $key, $default = null)
     {
         return isset($this->options[$key]) ? $this->options[$key] : $default;
     }
@@ -100,7 +100,7 @@ class Transifex
      *
      * @return $this
      */
-    public function setOption($key, $value)
+    public function setOption(string $key, $value) : Transifex
     {
         $this->options[$key] = $value;
 

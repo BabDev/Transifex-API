@@ -11,10 +11,12 @@
 
 namespace BabDev\Transifex;
 
+use Psr\Http\Message\ResponseInterface;
+
 /**
  * Transifex API Projects class.
  *
- * @link http://docs.transifex.com/developer/api/projects
+ * @link http://docs.transifex.com/api/projects/
  */
 class Projects extends TransifexObject
 {
@@ -25,7 +27,7 @@ class Projects extends TransifexObject
      *
      * @return array
      */
-    private function buildProjectRequest(array $options)
+    private function buildProjectRequest(array $options) : array
     {
         $data = [];
 
@@ -86,7 +88,7 @@ class Projects extends TransifexObject
     }
 
     /**
-     * Method to create a project.
+     * Create a project.
      *
      * @param string $name           The name of the project
      * @param string $slug           The slug for the project
@@ -94,11 +96,17 @@ class Projects extends TransifexObject
      * @param string $sourceLanguage The source language code for the project
      * @param array  $options        Optional additional params to send with the request
      *
-     * @return \Joomla\Http\Response
+     * @return ResponseInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function createProject($name, $slug, $description, $sourceLanguage, array $options = [])
+    public function createProject(
+        string $name,
+        string $slug,
+        string $description,
+        string $sourceLanguage,
+        array $options = []
+    ) : ResponseInterface
     {
         // Build the request data.
         $data = array_merge(
@@ -120,73 +128,69 @@ class Projects extends TransifexObject
             }
         }
 
-        // Send the request.
-        return $this->processResponse(
-            $this->client->post(
-                $this->fetchUrl('/projects/'),
-                json_encode($data),
-                ['Content-Type' => 'application/json']
-            ),
-            201
+        return $this->client->post(
+            '/api/2/projects/',
+            [
+                'body'    => json_encode($data),
+                'auth'    => $this->getAuthData(),
+                'headers' => ['Content-Type' => 'application/json'],
+            ]
         );
     }
 
     /**
-     * Method to delete a project.
+     * Delete a project.
      *
      * @param string $slug The slug for the resource.
      *
-     * @return \Joomla\Http\Response
+     * @return ResponseInterface
      */
-    public function deleteProject($slug)
+    public function deleteProject(string $slug) : ResponseInterface
     {
-        return $this->processResponse($this->client->delete($this->fetchUrl('/project/' . $slug)), 204);
+        return $this->client->delete("/api/2/project/$slug", ['auth' => $this->getAuthData()]);
     }
 
     /**
-     * Method to get information about a project.
+     * Get information about a project.
      *
      * @param string $project The project to retrieve details for
      * @param bool   $details True to retrieve additional project details
      *
-     * @return \Joomla\Http\Response
+     * @return ResponseInterface
      */
-    public function getProject($project, $details = false)
+    public function getProject(string $project, bool $details = false) : ResponseInterface
     {
-        // Build the request path.
-        $path = '/project/' . $project . '/';
+        $path = "project/$project/";
 
         if ($details) {
             $path .= '?details';
         }
 
-        // Send the request.
-        return $this->processResponse($this->client->get($this->fetchUrl($path)));
+        return $this->client->get("/api/2/$path", ['auth' => $this->getAuthData()]);
     }
 
     /**
-     * Method to get a list of projects the user is part of.
+     * Get a list of projects the user is part of.
      *
-     * @return \Joomla\Http\Response
+     * @return ResponseInterface
      */
-    public function getProjects()
+    public function getProjects() : ResponseInterface
     {
-        return $this->processResponse($this->client->get($this->fetchUrl('/projects/')));
+        return $this->client->get('/api/2/projects/', ['auth' => $this->getAuthData()]);
     }
 
     /**
-     * Method to update a project.
+     * Update a project.
      *
      * @param string $slug    The slug for the project
      * @param array  $options Optional additional params to send with the request
      *
-     * @return \Joomla\Http\Response
+     * @return ResponseInterface
      *
      * @throws \RuntimeException
      */
-    public function updateProject($slug, array $options = [])
+    public function updateProject(string $slug, array $options = []) : ResponseInterface
     {
-        // Build the request data.
         $data = $this->buildProjectRequest($options);
 
         // Make sure we actually have data to send
@@ -194,13 +198,13 @@ class Projects extends TransifexObject
             throw new \RuntimeException('There is no data to send to Transifex.');
         }
 
-        // Send the request.
-        return $this->processResponse(
-            $this->client->put(
-                $this->fetchUrl('/project/' . $slug . '/'),
-                json_encode($data),
-                ['Content-Type' => 'application/json']
-            )
+        return $this->client->put(
+            "/api/2/project/$slug/",
+            [
+                'body'    => json_encode($data),
+                'auth'    => $this->getAuthData(),
+                'headers' => ['Content-Type' => 'application/json'],
+            ]
         );
     }
 }

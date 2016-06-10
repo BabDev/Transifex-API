@@ -11,32 +11,34 @@
 
 namespace BabDev\Transifex;
 
+use Psr\Http\Message\ResponseInterface;
+
 /**
  * Transifex API Language Information class.
  *
- * @link http://docs.transifex.com/developer/api/language_info
+ * @link http://docs.transifex.com/api/language_info/
  */
 class Languageinfo extends TransifexObject
 {
     /**
-     * Method to get data on the specified language.
+     * Get data on the specified language.
      *
      * @param string $lang The language code to retrieve
      *
-     * @return \Joomla\Http\Response
+     * @return ResponseInterface
      */
-    public function getLanguage($lang)
+    public function getLanguage(string $lang) : ResponseInterface
     {
-        return $this->processResponse($this->client->get($this->fetchUrl('/language/' . $lang . '/')));
+        return $this->client->get("/api/2/language/$lang/", ['auth' => $this->getAuthData()]);
     }
 
     /**
-     * Method to get data on all supported API languages.
+     * Get data on all supported API languages.
      *
-     * @return \Joomla\Http\Response
+     * @return ResponseInterface
      */
-    public function getLanguages()
+    public function getLanguages() : ResponseInterface
     {
-        return $this->processResponse($this->client->get($this->fetchUrl('/languages/')));
+        return $this->client->get('/api/2/language/', ['auth' => $this->getAuthData()]);
     }
 }
