@@ -12,7 +12,6 @@ matrix:
   include:
     - php: 7.0
       env: PHPUNIT_FLAGS="--coverage-clover=coverage.clover" RUN_PHPCS="yes" USE_SCRUTINIZER="yes"
-    - php: hhvm
 
 before_install:
   - composer self-update
