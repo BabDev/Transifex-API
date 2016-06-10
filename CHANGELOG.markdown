@@ -15,9 +15,10 @@ CHANGELOG for the Transifex API Package
  * Removed `TransifexObject::fetchUrl()`, use the Guzzle API instead
  * Removed `TransifexObject::processResponse()`, use the Guzzle API instead
 
-* 1.3.0 (2015-XX-XX)
+* 1.3.0 (2016-06-09)
 
- * Undeprecated `TransifexObject::processResponse()`
+ * Deprecated `Http` class and `joomla/http` package integration
+ * Deprecated `TransifexObject::fetchUrl()`, 2.0 will use the Guzzle API to replace this functionality
 
 * 1.2.0 (2015-07-13)
 
