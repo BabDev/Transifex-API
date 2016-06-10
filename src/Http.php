@@ -15,6 +15,7 @@ use Joomla\Http\TransportInterface;
  * HTTP client class for connecting to the Transifex API.
  *
  * @since  1.0
+ * @deprecated  2.0  The joomla/http package will no longer be used.
  */
 class Http extends BaseHttp
 {
