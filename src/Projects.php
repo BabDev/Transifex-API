@@ -128,7 +128,8 @@ class Projects extends TransifexObject
             }
         }
 
-        return $this->client->post(
+        return $this->client->request(
+            'POST',
             '/api/2/projects/',
             [
                 'body'    => json_encode($data),
@@ -147,7 +148,7 @@ class Projects extends TransifexObject
      */
     public function deleteProject(string $slug) : ResponseInterface
     {
-        return $this->client->delete("/api/2/project/$slug", ['auth' => $this->getAuthData()]);
+        return $this->client->request('DELETE', "/api/2/project/$slug", ['auth' => $this->getAuthData()]);
     }
 
     /**
@@ -166,7 +167,7 @@ class Projects extends TransifexObject
             $path .= '?details';
         }
 
-        return $this->client->get("/api/2/$path", ['auth' => $this->getAuthData()]);
+        return $this->client->request('GET', "/api/2/$path", ['auth' => $this->getAuthData()]);
     }
 
     /**
@@ -176,7 +177,7 @@ class Projects extends TransifexObject
      */
     public function getProjects() : ResponseInterface
     {
-        return $this->client->get('/api/2/projects/', ['auth' => $this->getAuthData()]);
+        return $this->client->request('GET', '/api/2/projects/', ['auth' => $this->getAuthData()]);
     }
 
     /**
@@ -198,7 +199,8 @@ class Projects extends TransifexObject
             throw new \RuntimeException('There is no data to send to Transifex.');
         }
 
-        return $this->client->put(
+        return $this->client->request(
+            'PUT',
             "/api/2/project/$slug/",
             [
                 'body'    => json_encode($data),

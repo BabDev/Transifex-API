@@ -32,7 +32,7 @@ class Translationstrings extends TransifexObject
     {
         $path = "project/$project/resource/$resource/pseudo/?pseudo_type=MIXED";
 
-        return $this->client->get("/api/2/$path", ['auth' => $this->getAuthData()]);
+        return $this->client->request('GET', "/api/2/$path", ['auth' => $this->getAuthData()]);
     }
 
     /**
@@ -61,13 +61,13 @@ class Translationstrings extends TransifexObject
         }
 
         if (isset($options['key'])) {
-            $path .= (strpos($path, '?') === false ? '?' : '\&') . 'key=' . $options['key'];
+            $path .= (strpos($path, '?') === false ? '?' : '&') . 'key=' . $options['key'];
         }
 
         if (isset($options['context'])) {
-            $path .= (strpos($path, '?') === false ? '?' : '\&') . 'context=' . $options['context'];
+            $path .= (strpos($path, '?') === false ? '?' : '&') . 'context=' . $options['context'];
         }
 
-        return $this->client->get("/api/2/$path", ['auth' => $this->getAuthData()]);
+        return $this->client->request('GET', "/api/2/$path", ['auth' => $this->getAuthData()]);
     }
 }

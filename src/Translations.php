@@ -43,7 +43,7 @@ class Translations extends TransifexObject
             $path .= "?mode=$mode&file";
         }
 
-        return $this->client->get("/api/2/$path", ['auth' => $this->getAuthData()]);
+        return $this->client->request('GET', "/api/2/$path", ['auth' => $this->getAuthData()]);
     }
 
     /**

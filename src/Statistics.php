@@ -33,6 +33,6 @@ class Statistics extends TransifexObject
     {
         $path = "project/$project/resource/$resource/stats/$lang";
 
-        return $this->client->get("/api/2/$path", ['auth' => $this->getAuthData()]);
+        return $this->client->request('GET', "/api/2/$path", ['auth' => $this->getAuthData()]);
     }
 }

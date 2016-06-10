@@ -11,7 +11,9 @@
 
 namespace BabDev\Transifex;
 
-use GuzzleHttp\Client;
+use GuzzleHttp\{
+    Client, ClientInterface
+};
 
 /**
  * Base class for interacting with the Transifex API.
@@ -28,15 +30,15 @@ class Transifex
     /**
      * The HTTP client object to use in sending HTTP requests.
      *
-     * @var Client
+     * @var ClientInterface
      */
     protected $client;
 
     /**
-     * @param array  $options Transifex options array.
-     * @param Client $client  The HTTP client object.
+     * @param array           $options Transifex options array.
+     * @param ClientInterface $client  The HTTP client object.
      */
-    public function __construct(array $options = [], Client $client = null)
+    public function __construct(array $options = [], ClientInterface $client = null)
     {
         $this->options = $options;
 

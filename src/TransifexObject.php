@@ -11,7 +11,9 @@
 
 namespace BabDev\Transifex;
 
-use GuzzleHttp\Client;
+use GuzzleHttp\{
+    Client, ClientInterface
+};
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -29,15 +31,15 @@ abstract class TransifexObject
     /**
      * The HTTP client object to use in sending HTTP requests.
      *
-     * @var Client
+     * @var ClientInterface
      */
     protected $client;
 
     /**
-     * @param array  $options Transifex options array.
-     * @param Client $client  The HTTP client object.
+     * @param array           $options Transifex options array.
+     * @param ClientInterface $client  The HTTP client object.
      */
-    public function __construct(array $options = [], Client $client = null)
+    public function __construct(array $options = [], ClientInterface $client = null)
     {
         $this->options = $options;
         $this->client  = $client ?: new Client($this->options);
@@ -98,8 +100,9 @@ abstract class TransifexObject
             'content' => ($type == 'string') ? $content : file_get_contents($content),
         ];
 
-        return $this->client->put(
-            "/api/2/$path/",
+        return $this->client->request(
+            'PUT',
+            "/api/2/$path",
             [
                 'body'    => json_encode($data),
                 'auth'    => $this->getAuthData(),

@@ -70,7 +70,8 @@ class Languages extends TransifexObject
             }
         }
 
-        return $this->client->post(
+        return $this->client->request(
+            'POST',
             "/api/2/$path",
             [
                 'body'    => json_encode($data),
@@ -92,7 +93,7 @@ class Languages extends TransifexObject
     {
         $path = "project/$project/language/$langCode/";
 
-        return $this->client->delete("/api/2/$path", ['auth' => $this->getAuthData()]);
+        return $this->client->request('DELETE', "/api/2/$path", ['auth' => $this->getAuthData()]);
     }
 
     /**
@@ -107,7 +108,7 @@ class Languages extends TransifexObject
     {
         $path = "project/$project/language/$langCode/coordinators/";
 
-        return $this->client->get("/api/2/$path", ['auth' => $this->getAuthData()]);
+        return $this->client->request('GET', "/api/2/$path", ['auth' => $this->getAuthData()]);
     }
 
     /**
@@ -122,7 +123,7 @@ class Languages extends TransifexObject
     {
         $path = "project/$project/language/$langCode/";
 
-        return $this->client->get("/api/2/$path", ['auth' => $this->getAuthData()]);
+        return $this->client->request('GET', "/api/2/$path", ['auth' => $this->getAuthData()]);
     }
 
     /**
@@ -136,7 +137,7 @@ class Languages extends TransifexObject
     {
         $path = "project/$project/languages/";
 
-        return $this->client->get("/api/2/$path", ['auth' => $this->getAuthData()]);
+        return $this->client->request('GET', "/api/2/$path", ['auth' => $this->getAuthData()]);
     }
 
     /**
@@ -151,7 +152,7 @@ class Languages extends TransifexObject
     {
         $path = "project/$project/language/$langCode/reviewers/";
 
-        return $this->client->get("/api/2/$path", ['auth' => $this->getAuthData()]);
+        return $this->client->request('GET', "/api/2/$path", ['auth' => $this->getAuthData()]);
     }
 
     /**
@@ -166,7 +167,7 @@ class Languages extends TransifexObject
     {
         $path = "project/$project/language/$langCode/translators/";
 
-        return $this->client->get("/api/2/$path", ['auth' => $this->getAuthData()]);
+        return $this->client->request('GET', "/api/2/$path", ['auth' => $this->getAuthData()]);
     }
 
     /**
@@ -229,7 +230,8 @@ class Languages extends TransifexObject
             $data['reviewers'] = $options['reviewers'];
         }
 
-        return $this->client->put(
+        return $this->client->request(
+            'PUT',
             "/api/2/$path",
             [
                 'body'    => json_encode($data),
@@ -282,7 +284,8 @@ class Languages extends TransifexObject
             $path .= '?skip_invalid_username';
         }
 
-        return $this->client->put(
+        return $this->client->request(
+            'PUT',
             "/api/2/$path",
             [
                 'body'    => json_encode($members),

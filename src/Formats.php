@@ -27,6 +27,6 @@ class Formats extends TransifexObject
      */
     public function getFormats() : ResponseInterface
     {
-        return $this->client->get('/api/2/formats', ['auth' => $this->getAuthData()]);
+        return $this->client->request('GET', '/api/2/formats', ['auth' => $this->getAuthData()]);
     }
 }

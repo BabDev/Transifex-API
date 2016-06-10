@@ -71,7 +71,8 @@ class Resources extends TransifexObject
             $data['content'] = file_get_contents($options['file']);
         }
 
-        return $this->client->post(
+        return $this->client->request(
+            'POST',
             "/api/2/$path",
             [
                 'body'    => json_encode($data),
@@ -93,7 +94,7 @@ class Resources extends TransifexObject
     {
         $path = "project/$project/resource/$resource";
 
-        return $this->client->delete("/api/2/$path", ['auth' => $this->getAuthData()]);
+        return $this->client->request('DELETE', "/api/2/$path", ['auth' => $this->getAuthData()]);
     }
 
     /**
@@ -113,7 +114,7 @@ class Resources extends TransifexObject
             $path .= '?details';
         }
 
-        return $this->client->get("/api/2/$path", ['auth' => $this->getAuthData()]);
+        return $this->client->request('GET', "/api/2/$path", ['auth' => $this->getAuthData()]);
     }
 
     /**
@@ -128,7 +129,7 @@ class Resources extends TransifexObject
     {
         $path = "project/$project/resource/$resource/content/";
 
-        return $this->client->get("/api/2/$path", ['auth' => $this->getAuthData()]);
+        return $this->client->request('GET', "/api/2/$path", ['auth' => $this->getAuthData()]);
     }
 
     /**
@@ -142,7 +143,7 @@ class Resources extends TransifexObject
     {
         $path = "project/$project/resources";
 
-        return $this->client->get("/api/2/$path", ['auth' => $this->getAuthData()]);
+        return $this->client->request('GET', "/api/2/$path", ['auth' => $this->getAuthData()]);
     }
 
     /**
