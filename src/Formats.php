@@ -11,20 +11,22 @@
 
 namespace BabDev\Transifex;
 
+use Psr\Http\Message\ResponseInterface;
+
 /**
  * Transifex API Formats class.
  *
- * @link http://docs.transifex.com/developer/api/formats
+ * @link http://docs.transifex.com/api/formats/
  */
 class Formats extends TransifexObject
 {
     /**
-     * Method to get the supported formats.
+     * Get the supported file formats.
      *
-     * @return \Joomla\Http\Response
+     * @return ResponseInterface
      */
-    public function getFormats()
+    public function getFormats() : ResponseInterface
     {
-        return $this->processResponse($this->client->get($this->fetchUrl('/formats')));
+        return $this->client->get('/api/2/formats', ['auth' => $this->getAuthData()]);
     }
 }

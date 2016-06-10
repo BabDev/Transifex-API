@@ -11,6 +11,8 @@
 
 namespace BabDev\Transifex;
 
+use GuzzleHttp\Client;
+
 /**
  * Base class for interacting with the Transifex API.
  */
@@ -19,49 +21,31 @@ class Transifex
     /**
      * Options for the Transifex object.
      *
-     * @var array|\ArrayAccess
+     * @var array
      */
     protected $options;
 
     /**
      * The HTTP client object to use in sending HTTP requests.
      *
-     * @var Http
+     * @var Client
      */
     protected $client;
 
     /**
-     * @param array|\ArrayAccess $options Transifex options array.
-     * @param Http               $client  The HTTP client object.
-     *
-     * @throws \InvalidArgumentException
+     * @param array  $options Transifex options array.
+     * @param Client $client  The HTTP client object.
      */
-    public function __construct($options = [], Http $client = null)
+    public function __construct(array $options = [], Client $client = null)
     {
-        if (!is_array($options) && !($options instanceof \ArrayAccess)) {
-            throw new \InvalidArgumentException(
-                'The options param must be an array or implement the ArrayAccess interface.'
-            );
-        }
-
         $this->options = $options;
 
-        // Set the Authorization header if we have credentials
-        if ($this->getOption('api.username') && $this->getOption('api.password')) {
-            $headers = [
-                'Authorization' => 'Basic ' . base64_encode($this->getOption('api.username') . ':'
-                        . $this->getOption('api.password')),
-            ];
-
-            $this->setOption('headers', $headers);
-        }
-
-        $this->client = isset($client) ? $client : new Http($this->options);
-
         // Setup the default API url if not already set.
-        if (!$this->getOption('api.url')) {
-            $this->setOption('api.url', 'https://www.transifex.com/api/2');
+        if (!$this->getOption('base_uri')) {
+            $this->setOption('base_uri', 'https://www.transifex.com');
         }
+
+        $this->client = $client ?: new Client($this->options);
     }
 
     /**

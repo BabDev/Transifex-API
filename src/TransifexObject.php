@@ -11,8 +11,10 @@
 
 namespace BabDev\Transifex;
 
+use GuzzleHttp\Client;
 use Joomla\Http\Exception\UnexpectedResponseException;
 use Joomla\Http\Response;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Transifex API object class.
@@ -22,75 +24,58 @@ abstract class TransifexObject
     /**
      * Options for the Transifex object.
      *
-     * @var array|\ArrayAccess
+     * @var array
      */
     protected $options;
 
     /**
      * The HTTP client object to use in sending HTTP requests.
      *
-     * @var Http
+     * @var Client
      */
     protected $client;
 
     /**
-     * @param array|\ArrayAccess $options Transifex options array.
-     * @param Http               $client  The HTTP client object.
+     * @param array  $options Transifex options array.
+     * @param Client $client  The HTTP client object.
      */
-    public function __construct($options = [], Http $client = null)
+    public function __construct(array $options = [], Client $client = null)
     {
-        if (!is_array($options) && !($options instanceof \ArrayAccess)) {
-            throw new \InvalidArgumentException(
-                'The options param must be an array or implement the ArrayAccess interface.'
-            );
-        }
-
         $this->options = $options;
-        $this->client  = isset($client) ? $client : new Http($this->options);
+        $this->client  = $client ?: new Client($this->options);
     }
 
     /**
-     * Method to build and return a full request URL for the request.
+     * Get the authentication credentials for the API request.
      *
-     * This method will add appropriate pagination details if necessary and also prepend the API URL
-     * to have a complete URL for the request.
+     * @return array
      *
-     * @param string $path URL to inflect
-     *
-     * @return string
+     * @throws \InvalidArgumentException if credentials are not set
      */
-    protected function fetchUrl($path)
+    protected function getAuthData() : array
     {
-        // Ensure the API URL is set before moving on
-        $base = isset($this->options['api.url']) ? $this->options['api.url'] : '';
+        $username = $this->getOption('api.username');
+        $password = $this->getOption('api.password');
 
-        return $base . $path;
-    }
-
-    /**
-     * Process the response and return it.
-     *
-     * @param Response $response     The response.
-     * @param int      $expectedCode The expected response code.
-     *
-     * @return Response
-     *
-     * @throws UnexpectedResponseException
-     */
-    protected function processResponse(Response $response, $expectedCode = 200)
-    {
-        // Validate the response code.
-        if ($response->code != $expectedCode) {
-            // Decode the error response and throw an exception.
-            $error = json_decode($response->body);
-
-            // Check if the error message is set; send a generic one if not
-            $message = isset($error->message) ? $error->message : $response->body;
-
-            throw new UnexpectedResponseException($response, $message, $response->code);
+        // The API requires HTTP Basic Authentication, we can't proceed without credentials
+        if ($username === null || $password === null) {
+            throw new \InvalidArgumentException('Missing credentials for API authentication.');
         }
 
-        return $response;
+        return [$username, $password];
+    }
+
+    /**
+     * Get an option from the options store.
+     *
+     * @param string $key     The name of the option to get.
+     * @param mixed  $default The default value if the option is not set.
+     *
+     * @return mixed The option value.
+     */
+    protected function getOption($key, $default = null)
+    {
+        return isset($this->options[$key]) ? $this->options[$key] : $default;
     }
 
     /**
