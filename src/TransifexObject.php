@@ -112,6 +112,7 @@ abstract class TransifexObject
 	 *
 	 * @since   1.0
 	 * @throws  \DomainException
+	 * @deprecated  2.0  Deprecated without replacement
 	 */
 	protected function processResponse(Response $response, $expectedCode = 200)
 	{
