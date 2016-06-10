@@ -12,8 +12,7 @@
     ],
     "require": {
         "php": "~7.0",
-        "guzzlehttp/guzzle": "~6.2",
-        "joomla/http": "~1.2"
+        "guzzlehttp/guzzle": "~6.2"
     },
     "require-dev": {
         "joomla/test": "~1.1",
