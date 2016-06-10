@@ -12,11 +12,11 @@ Requirements
 ------------
 
 * Production
-    * Joomla Framework [HTTP](https://github.com/joomla-framework/http) package
-    * PHP 5.4 or later
+    * [Guzzle HTTP](https://github.com/guzzle/guzzle) client
+    * PHP 7.0 or later
 * Development
-    * Joomla Framework [Test](https://github.com/joomla-framework-test) package
     * [PHPUnit](http://phpunit.de/)
+    * [PHP Coding Standards Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer)
     
 Documentation
 -------------

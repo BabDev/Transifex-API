@@ -5,7 +5,7 @@ used by the API objects and HTTP connector as well as retrieve instances of the 
 
 ### Instantiating Transifex
 
-The `Transifex` object should be instantiated directly and optionally supports two arguments; an options array and a [`BabDev\Transifex\Http`](Http.md)
+The `Transifex` object should be instantiated directly and optionally supports two arguments; an options array and a `GuzzleHttp\ClientInterface`
 instance.
 
 #### Example 1: Basic Instantiation
@@ -19,26 +19,17 @@ $transifex = new Transifex;
 #### Example 2: Injection of an Options Array and HTTP object
 
 ```php
-use BabDev\Transifex\Http;
 use BabDev\Transifex\Transifex;
-use Joomla\Http\HttpFactory;
-
-// Get a Joomla\Http\TransportInterface implementation for our HTTP connector
-$driver = HttpFactory::getAvailableDriver();
-
-if ($driver === false)
-{
-	// A driver could not be created by the factory, handle errors here
-}
+use GuzzleHttp\Client;
 
 // Build our HTTP connector using our already retrieved driver and passing an empty options array in
-$http = new Http(array(), $driver);
+$http = new Client();
 
 // Build our options array setting our API credentials to authenticate
-$options = array(
+$options = [
 	'api.username' => 'MyUsername',
 	'api.password' => 'MyPassword'
-);
+];
 
 $transifex = new Transifex($options, $http);
 ```
@@ -50,14 +41,10 @@ when instantiating the `Transifex` object or using the `getOption()` method.
 
 - 'api.username' - The username of the user account you are using to authenticate to the Transifex API
 - 'api.password' - The password of the user account you are using to authenticate to the Transifex API
-- 'api.url' - The base API URL for connecting to the Transifex API, this typically should remain unchanged
+- 'base_url' - The base API URL for connecting to the Transifex API, this typically should remain unchanged
 - 'object.namespace' - A custom base namespace to locate `TransifexObject` implementations in
 
-The following options are part of the [Http](Http.md) class options and can only be set when the `Transifex` object is instantiated without injecting
-a `Http` instance or by creating a `Http` instance and setting the options on it before injecting it into the `Transifex` object.
-
-- 'timeout' - Used by the `Joomla\Http` transport objects to set a length of time (in seconds) before a connection times out
-- 'userAgent' - Used by the `Joomla\Http` transport objects to set a user agent string for the API connection
+Please refer to the [Guzzle documentation](http://docs.guzzlephp.org/en/latest/) for information on how to configure the Guzzle HTTP client.
 
 ### Retrieving a TransifexObject instance
 
@@ -86,9 +73,9 @@ code would instantiate the `Transifex` object and enable the `get()` method to f
 use BabDev\Transifex\Transifex;
 
 // Build our options array
-$options = array(
+$options = [
 	'object.namespace' => 'My\Custom\Transifex'
-);
+];
 
 $transifex = new Transifex($options, $http);
 
@@ -122,10 +109,10 @@ The following example demonstrates use of the option API methods.
 use BabDev\Transifex\Transifex;
 
 // Build our options array setting our API credentials to authenticate
-$options = array(
+$options = [
 	'api.username' => 'MyUsername',
 	'api.password' => 'MyPassword'
-);
+];
 
 $transifex = new Transifex($options);
 
