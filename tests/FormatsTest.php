@@ -19,52 +19,34 @@ use BabDev\Transifex\Formats;
 class FormatsTest extends TransifexTestCase
 {
     /**
-     * @var Formats
-     */
-    private $object;
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->object = new Formats($this->options, $this->client);
-    }
-
-    /**
      * @testdox getFormats() returns a Response object on a successful API connection
      *
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Formats::getFormats
-     * @uses    \BabDev\Transifex\Http
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetFormats()
     {
-        $this->prepareSuccessTest('get', '/formats');
+        $this->prepareSuccessTest();
 
-        $this->assertSame(
-            $this->object->getFormats(),
-            $this->response
-        );
+        (new Formats($this->options, $this->client))->getFormats();
+
+        $this->validateSuccessTest('/api/2/formats');
     }
 
     /**
-     * @testdox getFormats() throws an UnexpectedResponseException on a failed API connection
+     * @testdox getFormats() throws a ServerException on a failed API connection
      *
      * @covers  \BabDev\Transifex\Formats::getFormats
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      *
-     * @expectedException \Joomla\Http\Exception\UnexpectedResponseException
+     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testGetFormatsFailure()
     {
-        $this->prepareFailureTest('get', '/formats');
+        $this->prepareFailureTest();
 
-        $this->object->getFormats();
+        (new Formats($this->options, $this->client))->getFormats();
     }
 }

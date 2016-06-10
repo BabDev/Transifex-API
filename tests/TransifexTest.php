@@ -12,8 +12,9 @@
 namespace BabDev\Transifex\Tests;
 
 use BabDev\Transifex\{
-    Formats, Http, Transifex
+    Formats, Transifex
 };
+use GuzzleHttp\Client;
 
 /**
  * Test class for \BabDev\Transifex\Transifex.
@@ -21,7 +22,7 @@ use BabDev\Transifex\{
 class TransifexTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|Http
+     * @var \PHPUnit_Framework_MockObject_MockObject|Client
      */
     private $client;
 
@@ -41,15 +42,14 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->options = ['api.username' => 'test', 'api.password' => 'test'];
-        $this->client  = $this->createMock(Http::class);
+        $this->client  = $this->createMock(Client::class);
         $this->object  = new Transifex($this->options, $this->client);
     }
 
     /**
-     * @testdox __construct() with no injected client creates a Transifex instance with a default Http object
+     * @testdox __construct() with no injected client creates a Transifex instance with a default Client object
      *
      * @covers  \BabDev\Transifex\Transifex::__construct
-     * @covers  \BabDev\Transifex\Http::__construct
      * @uses    \BabDev\Transifex\Transifex::getOption
      * @uses    \BabDev\Transifex\Transifex::setOption
      */
@@ -63,7 +63,7 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertAttributeInstanceOf(
-            Http::class,
+            Client::class,
             'client',
             $object
         );
@@ -87,7 +87,6 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
      *
      * @covers  \BabDev\Transifex\Transifex::get
      * @uses    \BabDev\Transifex\Formats
-     * @uses    \BabDev\Transifex\Http
      * @uses    \BabDev\Transifex\Transifex::__construct
      * @uses    \BabDev\Transifex\Transifex::getOption
      * @uses    \BabDev\Transifex\TransifexObject
@@ -105,7 +104,6 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
      *
      * @covers  \BabDev\Transifex\Transifex::get
      * @uses    \BabDev\Transifex\Formats
-     * @uses    \BabDev\Transifex\Http
      * @uses    \BabDev\Transifex\Transifex::__construct
      * @uses    \BabDev\Transifex\Transifex::getOption
      * @uses    \BabDev\Transifex\TransifexObject
@@ -125,7 +123,6 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
      *
      * @covers  \BabDev\Transifex\Transifex::get
      * @uses    \BabDev\Transifex\Formats
-     * @uses    \BabDev\Transifex\Http
      * @uses    \BabDev\Transifex\Transifex::__construct
      * @uses    \BabDev\Transifex\Transifex::getOption
      * @uses    \BabDev\Transifex\TransifexObject
@@ -159,7 +156,6 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
      *
      * @covers  \BabDev\Transifex\Transifex::getOption
      * @covers  \BabDev\Transifex\Transifex::setOption
-     * @uses    \BabDev\Transifex\Http
      * @uses    \BabDev\Transifex\Transifex::__construct
      */
     public function testSetAndGetOption()

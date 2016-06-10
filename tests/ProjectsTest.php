@@ -19,33 +19,17 @@ use BabDev\Transifex\Projects;
 class ProjectsTest extends TransifexTestCase
 {
     /**
-     * @var Projects
-     */
-    private $object;
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->object = new Projects($this->options, $this->client);
-    }
-
-    /**
      * @testdox createProject() returns a Response object on a successful API connection
      *
      * @covers  \BabDev\Transifex\Projects::buildProjectRequest
      * @covers  \BabDev\Transifex\Projects::checkLicense
      * @covers  \BabDev\Transifex\Projects::createProject
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testCreateProject()
     {
-        $this->prepareSuccessTest('post', '/projects/', 201);
+        $this->prepareSuccessTest(201);
 
         // Additional options
         $options = [
@@ -66,31 +50,29 @@ class ProjectsTest extends TransifexTestCase
             'repository_url'     => 'http://www.example.com',
         ];
 
-        $this->assertSame(
-            $this->object->createProject('Joomla Platform', 'joomla-platform', 'Project for the Joomla Platform',
-                'en_GB', $options),
-            $this->response
-        );
+        (new Projects($this->options, $this->client))->createProject('BabDev Transifex', 'babdev-transifex',
+            'Test Project', 'en_US', $options);
+
+        $this->validateSuccessTest('/api/2/projects/', 'POST', 201);
     }
 
     /**
-     * @testdox createProject() throws an UnexpectedResponseException on a failed API connection
+     * @testdox createProject() throws a ServerException on a failed API connection
      *
      * @covers  \BabDev\Transifex\Projects::buildProjectRequest
      * @covers  \BabDev\Transifex\Projects::checkLicense
      * @covers  \BabDev\Transifex\Projects::createProject
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      *
-     * @expectedException \Joomla\Http\Exception\UnexpectedResponseException
+     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testCreateProjectFailureForABadRequest()
     {
-        $this->prepareFailureTest('post', '/projects/');
+        $this->prepareFailureTest();
 
-        $this->object->createProject('Joomla Platform', 'joomla-platform', 'Project for the Joomla Platform', 'en_GB',
-            ['repository_url' => 'http://www.joomla.org']);
+        (new Projects($this->options, $this->client))->createProject('BabDev Transifex', 'babdev-transifex',
+            'Test Project', 'en_US', ['repository_url' => 'https://www.babdev.com']);
     }
 
     /**
@@ -99,15 +81,14 @@ class ProjectsTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\Projects::buildProjectRequest
      * @covers  \BabDev\Transifex\Projects::checkLicense
      * @covers  \BabDev\Transifex\Projects::createProject
-     * @uses    \BabDev\Transifex\Http
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \InvalidArgumentException
      */
     public function testCreateProjectsBadLicense()
     {
-        $this->object->createProject('Joomla Platform', 'joomla-platform', 'Project for the Joomla Platform', 'en_GB',
-            ['license' => 'failure']);
+        (new Projects($this->options, $this->client))->createProject('BabDev Transifex', 'babdev-transifex',
+            'Test Project', 'en_US', ['license' => 'failure']);
     }
 
     /**
@@ -116,119 +97,119 @@ class ProjectsTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\Projects::buildProjectRequest
      * @covers  \BabDev\Transifex\Projects::checkLicense
      * @covers  \BabDev\Transifex\Projects::createProject
-     * @uses    \BabDev\Transifex\Http
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \InvalidArgumentException
      */
     public function testCreateProjectFailureForMissingFields()
     {
-        $this->object->createProject('Joomla Platform', 'joomla-platform', 'Project for the Joomla Platform', 'en_GB');
+        (new Projects($this->options, $this->client))->createProject('BabDev Transifex', 'babdev-transifex',
+            'Test Project', 'en_US');
     }
 
     /**
      * @testdox deleteProject() returns a Response object on a successful API connection
      *
      * @covers  \BabDev\Transifex\Projects::deleteProject
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testDeleteProject()
     {
-        $this->prepareSuccessTest('delete', '/project/joomla-platform', 204);
+        $this->prepareSuccessTest(204);
 
-        $this->assertSame(
-            $this->object->deleteProject('joomla-platform'),
-            $this->response
-        );
+        (new Projects($this->options, $this->client))->deleteProject('babdev-transifex');
+
+        $this->validateSuccessTest('/api/2/project/babdev-transifex', 'DELETE', 204);
     }
 
     /**
-     * @testdox deleteProject() throws an UnexpectedResponseException on a failed API connection
+     * @testdox deleteProject() throws a ServerException on a failed API connection
      *
      * @covers  \BabDev\Transifex\Projects::deleteProject
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      *
-     * @expectedException \Joomla\Http\Exception\UnexpectedResponseException
+     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testDeleteProjectFailure()
     {
-        $this->prepareFailureTest('delete', '/project/joomla-platform');
+        $this->prepareFailureTest();
 
-        $this->object->deleteProject('joomla-platform');
+        (new Projects($this->options, $this->client))->deleteProject('babdev-transifex');
     }
 
     /**
      * @testdox getProject() returns a Response object on a successful API connection
      *
      * @covers  \BabDev\Transifex\Projects::getProject
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetProject()
     {
-        $this->prepareSuccessTest('get', '/project/joomla-platform/?details');
+        $this->prepareSuccessTest();
+
+        (new Projects($this->options, $this->client))->getProject('babdev-transifex', true);
+
+        $this->validateSuccessTest('/api/2/project/babdev-transifex/');
+
+        /** @var \Psr\Http\Message\RequestInterface $request */
+        $request = $this->historyContainer[0]['request'];
 
         $this->assertSame(
-            $this->object->getProject('joomla-platform', true),
-            $this->response
+            'details',
+            $request->getUri()->getQuery(),
+            'The API request did not include the expected query string.'
         );
     }
 
     /**
-     * @testdox getProject() throws an UnexpectedResponseException on a failed API connection
+     * @testdox getProject() throws a ServerException on a failed API connection
      *
      * @covers  \BabDev\Transifex\Projects::getProject
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      *
-     * @expectedException \Joomla\Http\Exception\UnexpectedResponseException
+     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testGetProjectFailure()
     {
-        $this->prepareFailureTest('get', '/project/joomla-platform/?details');
+        $this->prepareFailureTest();
 
-        $this->object->getProject('joomla-platform', true);
+        (new Projects($this->options, $this->client))->getProject('babdev-transifex', true);
     }
 
     /**
      * @testdox getProjects() returns a Response object on a successful API connection
      *
      * @covers  \BabDev\Transifex\Projects::getProjects
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetProjects()
     {
-        $this->prepareSuccessTest('get', '/projects/');
+        $this->prepareSuccessTest();
 
-        $this->assertSame(
-            $this->object->getProjects(),
-            $this->response
-        );
+        (new Projects($this->options, $this->client))->getProjects();
+
+        $this->validateSuccessTest('/api/2/projects/');
     }
 
     /**
-     * @testdox getProjects() throws an UnexpectedResponseException on a failed API connection
+     * @testdox getProjects() throws a ServerException on a failed API connection
      *
      * @covers  \BabDev\Transifex\Projects::getProjects
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      *
-     * @expectedException \Joomla\Http\Exception\UnexpectedResponseException
+     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testGetProjectsFailure()
     {
-        $this->prepareFailureTest('get', '/projects/');
+        $this->prepareFailureTest();
 
-        $this->object->getProjects();
+        (new Projects($this->options, $this->client))->getProjects();
     }
 
     /**
@@ -236,13 +217,12 @@ class ProjectsTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Projects::checkLicense
      * @covers  \BabDev\Transifex\Projects::updateProject
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testUpdateProject()
     {
-        $this->prepareSuccessTest('put', '/project/joomla-platform/');
+        $this->prepareSuccessTest();
 
         // Additional options
         $options = [
@@ -257,29 +237,28 @@ class ProjectsTest extends TransifexTestCase
             'fill_up_resources'  => false,
         ];
 
-        $this->assertSame(
-            $this->object->updateProject('joomla-platform', $options),
-            $this->response
-        );
+        (new Projects($this->options, $this->client))->updateProject('babdev-transifex', $options);
+
+        $this->validateSuccessTest('/api/2/project/babdev-transifex/', 'PUT');
     }
 
     /**
-     * @testdox updateProject() throws an UnexpectedResponseException on a failed API connection
+     * @testdox updateProject() throws a ServerException on a failed API connection
      *
      * @covers  \BabDev\Transifex\Projects::buildProjectRequest
      * @covers  \BabDev\Transifex\Projects::checkLicense
      * @covers  \BabDev\Transifex\Projects::updateProject
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      *
-     * @expectedException \Joomla\Http\Exception\UnexpectedResponseException
+     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testUpdateProjectFailure()
     {
-        $this->prepareFailureTest('put', '/project/joomla-platform/');
+        $this->prepareFailureTest();
 
-        $this->object->updateProject('joomla-platform', ['long_description' => 'My test project']);
+        (new Projects($this->options, $this->client))->updateProject('babdev-transifex',
+            ['long_description' => 'My test project']);
     }
 
     /**
@@ -288,14 +267,13 @@ class ProjectsTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\Projects::buildProjectRequest
      * @covers  \BabDev\Transifex\Projects::checkLicense
      * @covers  \BabDev\Transifex\Projects::updateProject
-     * @uses    \BabDev\Transifex\Http
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \RuntimeException
      */
     public function testUpdateProjectRuntimeException()
     {
-        $this->object->updateProject('joomla-platform');
+        (new Projects($this->options, $this->client))->updateProject('babdev-transifex');
     }
 
     /**
@@ -304,13 +282,12 @@ class ProjectsTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\Projects::buildProjectRequest
      * @covers  \BabDev\Transifex\Projects::checkLicense
      * @covers  \BabDev\Transifex\Projects::updateProject
-     * @uses    \BabDev\Transifex\Http
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \InvalidArgumentException
      */
     public function testUpdateProjectBadLicense()
     {
-        $this->object->updateProject('joomla-platform', ['license' => 'failure']);
+        (new Projects($this->options, $this->client))->updateProject('babdev-transifex', ['license' => 'failure']);
     }
 }

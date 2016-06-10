@@ -19,52 +19,34 @@ use BabDev\Transifex\Statistics;
 class StatisticsTest extends TransifexTestCase
 {
     /**
-     * @var Statistics
-     */
-    private $object;
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->object = new Statistics($this->options, $this->client);
-    }
-
-    /**
      * @testdox getStatistics() returns a Response object on a successful API connection
      *
      * @covers  \BabDev\Transifex\Statistics::getStatistics
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetStatistics()
     {
-        $this->prepareSuccessTest('get', '/project/joomla/resource/joomla-platform/stats/');
+        $this->prepareSuccessTest();
 
-        $this->assertSame(
-            $this->object->getStatistics('joomla', 'joomla-platform'),
-            $this->response
-        );
+        (new Statistics($this->options, $this->client))->getStatistics('babdev', 'babdev-transifex');
+
+        $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/stats/');
     }
 
     /**
-     * @testdox getStatistics() throws an UnexpectedResponseException on a failed API connection
+     * @testdox getStatistics() throws a ServerException on a failed API connection
      *
      * @covers  \BabDev\Transifex\Statistics::getStatistics
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      *
-     * @expectedException \Joomla\Http\Exception\UnexpectedResponseException
+     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testGetStatisticsFailure()
     {
-        $this->prepareFailureTest('get', '/project/joomla/resource/joomla-platform/stats/');
+        $this->prepareFailureTest();
 
-        $this->object->getStatistics('joomla', 'joomla-platform');
+        (new Statistics($this->options, $this->client))->getStatistics('babdev', 'babdev-transifex');
     }
 }

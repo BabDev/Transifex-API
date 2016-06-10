@@ -12,9 +12,9 @@
 namespace BabDev\Transifex\Tests;
 
 use BabDev\Transifex\{
-    Http, TransifexObject
+    Formats, TransifexObject
 };
-use Joomla\Test\TestHelper;
+use GuzzleHttp\Client;
 
 /**
  * Test class for \BabDev\Transifex\TransifexObject.
@@ -22,7 +22,7 @@ use Joomla\Test\TestHelper;
 class TransifexObjectTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|Http
+     * @var \PHPUnit_Framework_MockObject_MockObject|Client
      */
     private $client;
 
@@ -34,19 +34,18 @@ class TransifexObjectTest extends \PHPUnit_Framework_TestCase
     /**
      * @var array
      */
-    private $options;
+    private $options = [
+        'base_url'     => 'http://www.transifex.com/api/2',
+        'api.username' => 'MyTestUser',
+        'api.password' => 'MyTestPass',
+    ];
 
     /**
      * {@inheritdoc}
      */
     protected function setUp()
     {
-        $this->options = [
-            'api.url'      => 'http://www.transifex.com/api/2',
-            'api.username' => 'MyTestUser',
-            'api.password' => 'MyTestPass',
-        ];
-        $this->client  = $this->createMock(Http::class);
+        $this->client  = $this->createMock(Client::class);
         $this->object  = $this->getMockForAbstractClass(
             TransifexObject::class,
             [$this->options, $this->client]
@@ -54,10 +53,9 @@ class TransifexObjectTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @testdox __construct() with no injected client creates a Transifex instance with a default Http object
+     * @testdox __construct() with no injected client creates a Transifex instance with a default Client object
      *
      * @covers  \BabDev\Transifex\TransifexObject::__construct
-     * @covers  \BabDev\Transifex\Http::__construct
      */
     public function test__constructWithNoInjectedClient()
     {
@@ -69,25 +67,24 @@ class TransifexObjectTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertAttributeInstanceOf(
-            Http::class,
+            Client::class,
             'client',
             $object
         );
     }
 
     /**
-     * @testdox fetchUrl() returns the full API URL
+     * @testdox The API does not connect when API credentials are not available
      *
-     * @covers  \BabDev\Transifex\TransifexObject::fetchUrl
-     * @uses    \BabDev\Transifex\Http
-     * @uses    \BabDev\Transifex\TransifexObject::__construct
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     * @covers  \BabDev\Transifex\TransifexObject::getOption
+     * @uses    \BabDev\Transifex\Formats
+     *
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Missing credentials for API authentication.
      */
-    public function testFetchUrlBasicAuth()
+    public function testApiFailureWhenNoAuthenticationIsSet()
     {
-        // Use Reflection to trigger fetchUrl()
-        $this->assertSame(
-            TestHelper::invoke($this->object, 'fetchUrl', '/formats'),
-            'http://www.transifex.com/api/2/formats'
-        );
+        (new Formats([], $this->client))->getFormats();
     }
 }

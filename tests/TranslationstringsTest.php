@@ -19,183 +19,204 @@ use BabDev\Transifex\Translationstrings;
 class TranslationstringsTest extends TransifexTestCase
 {
     /**
-     * @var Translationstrings
-     */
-    private $object;
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->object = new Translationstrings($this->options, $this->client);
-    }
-
-    /**
      * @testdox getPseudolocalizationStrings() returns a Response object on a successful API connection
      *
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Translationstrings::getPseudolocalizationStrings
-     * @uses    \BabDev\Transifex\Http
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetPseudolocalizationStrings()
     {
-        $this->prepareSuccessTest('get', '/project/joomla/resource/joomla-platform/pseudo/?pseudo_type=MIXED');
+        $this->prepareSuccessTest();
+
+        (new Translationstrings($this->options, $this->client))->getPseudolocalizationStrings('babdev', 'babdev-transifex');
+
+        $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/pseudo/');
+
+        /** @var \Psr\Http\Message\RequestInterface $request */
+        $request = $this->historyContainer[0]['request'];
 
         $this->assertSame(
-            $this->object->getPseudolocalizationStrings('joomla', 'joomla-platform'),
-            $this->response
+            'pseudo_type=MIXED',
+            $request->getUri()->getQuery(),
+            'The API request did not include the expected query string.'
         );
     }
 
     /**
-     * @testdox getPseudolocalizationStrings() throws an UnexpectedResponseException on a failed API connection
+     * @testdox getPseudolocalizationStrings() throws a ServerException on a failed API connection
      *
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Translationstrings::getPseudolocalizationStrings
-     * @uses    \BabDev\Transifex\Http
      * @uses    \BabDev\Transifex\TransifexObject
      *
-     * @expectedException \Joomla\Http\Exception\UnexpectedResponseException
+     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testGetPseudolocalizationStringsFailure()
     {
-        $this->prepareFailureTest('get', '/project/joomla/resource/joomla-platform/pseudo/?pseudo_type=MIXED');
+        $this->prepareFailureTest();
 
-        $this->object->getPseudolocalizationStrings('joomla', 'joomla-platform');
+        (new Translationstrings($this->options, $this->client))->getPseudolocalizationStrings('babdev', 'babdev-transifex');
     }
 
     /**
      * @testdox getStrings() returns a Response object on a successful API connection
      *
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Translationstrings::getStrings
-     * @uses    \BabDev\Transifex\Http
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetStrings()
     {
-        $this->prepareSuccessTest('get', '/project/joomla/resource/joomla-platform/translation/en_GB/strings/');
+        $this->prepareSuccessTest();
 
-        $this->assertSame(
-            $this->object->getStrings('joomla', 'joomla-platform', 'en_GB'),
-            $this->response
-        );
+        (new Translationstrings($this->options, $this->client))->getStrings('babdev', 'babdev-transifex', 'en_US');
+
+        $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US/strings/');
     }
 
     /**
      * @testdox getStrings() requesting full details returns a Response object on a successful API connection
      *
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Translationstrings::getStrings
-     * @uses    \BabDev\Transifex\Http
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetStringsDetails()
     {
-        $this->prepareSuccessTest('get', '/project/joomla/resource/joomla-platform/translation/en_GB/strings/?details');
+        $this->prepareSuccessTest();
+
+        (new Translationstrings($this->options, $this->client))->getStrings('babdev', 'babdev-transifex', 'en_US', true);
+
+        $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US/strings/');
+
+        /** @var \Psr\Http\Message\RequestInterface $request */
+        $request = $this->historyContainer[0]['request'];
 
         $this->assertSame(
-            $this->object->getStrings('joomla', 'joomla-platform', 'en_GB', true),
-            $this->response
+            'details',
+            $request->getUri()->getQuery(),
+            'The API request did not include the expected query string.'
         );
     }
 
     /**
      * @testdox getStrings() requesting full details and the key returns a Response object on a successful API connection
      *
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Translationstrings::getStrings
-     * @uses    \BabDev\Transifex\Http
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetStringsDetailsKey()
     {
-        $this->prepareSuccessTest('get',
-            '/project/joomla/resource/joomla-platform/translation/en_GB/strings/?details\&key=Yes');
+        $this->prepareSuccessTest();
+
+        (new Translationstrings($this->options, $this->client))->getStrings('babdev', 'babdev-transifex', 'en_US', true,
+            ['key' => 'Yes']);
+
+        $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US/strings/');
+
+        /** @var \Psr\Http\Message\RequestInterface $request */
+        $request = $this->historyContainer[0]['request'];
 
         $this->assertSame(
-            $this->object->getStrings('joomla', 'joomla-platform', 'en_GB', true, ['key' => 'Yes']),
-            $this->response
+            'details&key=Yes',
+            $request->getUri()->getQuery(),
+            'The API request did not include the expected query string.'
         );
     }
 
     /**
      * @testdox getStrings() requesting full details, key, and context returns a Response object on a successful API connection
      *
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Translationstrings::getStrings
-     * @uses    \BabDev\Transifex\Http
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetStringsDetailsKeyContext()
     {
-        $this->prepareSuccessTest('get',
-            '/project/joomla/resource/joomla-platform/translation/en_GB/strings/?details\&key=Yes\&context=Something');
+        $this->prepareSuccessTest();
+
+        (new Translationstrings($this->options, $this->client))->getStrings('babdev', 'babdev-transifex', 'en_US', true,
+            ['key' => 'Yes', 'context' => 'Something']);
+
+        $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US/strings/');
+
+        /** @var \Psr\Http\Message\RequestInterface $request */
+        $request = $this->historyContainer[0]['request'];
 
         $this->assertSame(
-            $this->object->getStrings('joomla', 'joomla-platform', 'en_GB', true,
-                ['key' => 'Yes', 'context' => 'Something']),
-            $this->response
+            'details&key=Yes&context=Something',
+            $request->getUri()->getQuery(),
+            'The API request did not include the expected query string.'
         );
     }
 
     /**
      * @testdox getStrings() requesting the key and context returns a Response object on a successful API connection
      *
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Translationstrings::getStrings
-     * @uses    \BabDev\Transifex\Http
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetStringsKeyContext()
     {
-        $this->prepareSuccessTest('get',
-            '/project/joomla/resource/joomla-platform/translation/en_GB/strings/?key=Yes\&context=Something');
+        $this->prepareSuccessTest();
+
+        (new Translationstrings($this->options, $this->client))->getStrings('babdev', 'babdev-transifex', 'en_US', false,
+            ['key' => 'Yes', 'context' => 'Something']);
+
+        $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US/strings/');
+
+        /** @var \Psr\Http\Message\RequestInterface $request */
+        $request = $this->historyContainer[0]['request'];
 
         $this->assertSame(
-            $this->object->getStrings('joomla', 'joomla-platform', 'en_GB', false,
-                ['key' => 'Yes', 'context' => 'Something']),
-            $this->response
+            'key=Yes&context=Something',
+            $request->getUri()->getQuery(),
+            'The API request did not include the expected query string.'
         );
     }
 
     /**
      * @testdox getStrings() requesting a given context returns a Response object on a successful API connection
      *
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Translationstrings::getStrings
-     * @uses    \BabDev\Transifex\Http
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetStringsContext()
     {
-        $this->prepareSuccessTest('get',
-            '/project/joomla/resource/joomla-platform/translation/en_GB/strings/?context=Something');
+        $this->prepareSuccessTest();
+
+        (new Translationstrings($this->options, $this->client))->getStrings('babdev', 'babdev-transifex', 'en_US', false,
+            ['context' => 'Something']);
+
+        $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US/strings/');
+
+        /** @var \Psr\Http\Message\RequestInterface $request */
+        $request = $this->historyContainer[0]['request'];
 
         $this->assertSame(
-            $this->object->getStrings('joomla', 'joomla-platform', 'en_GB', false, ['context' => 'Something']),
-            $this->response
+            'context=Something',
+            $request->getUri()->getQuery(),
+            'The API request did not include the expected query string.'
         );
     }
 
     /**
-     * @testdox getStrings() throws an UnexpectedResponseException on a failed API connection
+     * @testdox getStrings() throws a ServerException on a failed API connection
      *
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Translationstrings::getStrings
-     * @uses    \BabDev\Transifex\Http
      * @uses    \BabDev\Transifex\TransifexObject
      *
-     * @expectedException \Joomla\Http\Exception\UnexpectedResponseException
+     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testGetStringsFailure()
     {
-        $this->prepareFailureTest('get', '/project/joomla/resource/joomla-platform/translation/en_GB/strings/');
+        $this->prepareFailureTest();
 
-        $this->object->getStrings('joomla', 'joomla-platform', 'en_GB');
+        (new Translationstrings($this->options, $this->client))->getStrings('babdev', 'babdev-transifex', 'en_US');
     }
 }

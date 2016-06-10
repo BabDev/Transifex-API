@@ -19,31 +19,15 @@ use BabDev\Transifex\Languages;
 class LanguagesTest extends TransifexTestCase
 {
     /**
-     * @var Languages
-     */
-    private $object;
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->object = new Languages($this->options, $this->client);
-    }
-
-    /**
      * @testdox createLanguage() returns a Response object on a successful API connection
      *
      * @covers  \BabDev\Transifex\Languages::createLanguage
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testCreateLanguage()
     {
-        $this->prepareSuccessTest('post', '/project/joomla-platform/languages/?skip_invalid_username', 201);
+        $this->prepareSuccessTest(201);
 
         // Additional options
         $options = [
@@ -52,252 +36,241 @@ class LanguagesTest extends TransifexTestCase
             'list'        => 'test@example.com',
         ];
 
+        (new Languages($this->options, $this->client))->createLanguage('babdev-transifex', 'en_US', ['mbabker'],
+            $options, true);
+
+        $this->validateSuccessTest('/api/2/project/babdev-transifex/languages/', 'POST', 201);
+
+        /** @var \Psr\Http\Message\RequestInterface $request */
+        $request = $this->historyContainer[0]['request'];
+
         $this->assertSame(
-            $this->object->createLanguage('joomla-platform', 'en_GB', ['mbabker'], $options, true),
-            $this->response
+            'skip_invalid_username',
+            $request->getUri()->getQuery(),
+            'The API request did not include the expected query string.'
         );
     }
 
     /**
-     * @testdox createLanguage() throws an UnexpectedResponseException on a failed API connection
+     * @testdox createLanguage() throws a ServerException on a failed API connection
      *
      * @covers  \BabDev\Transifex\Languages::createLanguage
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      *
-     * @expectedException \Joomla\Http\Exception\UnexpectedResponseException
+     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testCreateLanguageFailure()
     {
-        $this->prepareFailureTest('post', '/project/joomla-platform/languages/');
+        $this->prepareFailureTest();
 
-        $this->object->createLanguage('joomla-platform', 'en_GB', ['mbabker']);
+        (new Languages($this->options, $this->client))->createLanguage('babdev-transifex', 'en_US', ['mbabker']);
     }
 
     /**
      * @testdox createLanguage() throws an InvalidArgumentException when no contributors are given
      *
      * @covers  \BabDev\Transifex\Languages::createLanguage
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \InvalidArgumentException
      */
     public function testCreateLanguageNoUsers()
     {
-        $this->object->createLanguage('joomla-platform', 'en_US', []);
+        (new Languages($this->options, $this->client))->createLanguage('babdev-transifex', 'en_US', []);
     }
 
     /**
      * @testdox deleteLanguage() returns a Response object on a successful API connection
      *
      * @covers  \BabDev\Transifex\Languages::deleteLanguage
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testDeleteLanguage()
     {
-        $this->prepareSuccessTest('delete', '/project/joomla-platform/language/en_US/', 204);
+        $this->prepareSuccessTest(204);
 
-        $this->assertSame(
-            $this->object->deleteLanguage('joomla-platform', 'en_US'),
-            $this->response
-        );
+        (new Languages($this->options, $this->client))->deleteLanguage('babdev-transifex', 'en_US');
+
+        $this->validateSuccessTest('/api/2/project/babdev-transifex/language/en_US/', 'DELETE', 204);
     }
 
     /**
-     * @testdox deleteLanguage() throws an UnexpectedResponseException on a failed API connection
+     * @testdox deleteLanguage() throws a ServerException on a failed API connection
      *
      * @covers  \BabDev\Transifex\Languages::deleteLanguage
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      *
-     * @expectedException \Joomla\Http\Exception\UnexpectedResponseException
+     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testDeleteLanguageFailure()
     {
-        $this->prepareFailureTest('delete', '/project/joomla-platform/language/en_US/');
+        $this->prepareFailureTest();
 
-        $this->object->deleteLanguage('joomla-platform', 'en_US');
+        (new Languages($this->options, $this->client))->deleteLanguage('babdev-transifex', 'en_US');
     }
 
     /**
      * @testdox getCoordinators() returns a Response object on a successful API connection
      *
      * @covers  \BabDev\Transifex\Languages::getCoordinators
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetCoordinators()
     {
-        $this->prepareSuccessTest('get', '/project/joomla-platform/language/en_US/coordinators/');
+        $this->prepareSuccessTest();
 
-        $this->assertSame(
-            $this->object->getCoordinators('joomla-platform', 'en_US'),
-            $this->response
-        );
+        (new Languages($this->options, $this->client))->getCoordinators('babdev-transifex', 'en_US');
+
+        $this->validateSuccessTest('/api/2/project/babdev-transifex/language/en_US/coordinators/');
     }
 
     /**
-     * @testdox getCoordinators() throws an UnexpectedResponseException on a failed API connection
+     * @testdox getCoordinators() throws a ServerException on a failed API connection
      *
      * @covers  \BabDev\Transifex\Languages::getCoordinators
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      *
-     * @expectedException \Joomla\Http\Exception\UnexpectedResponseException
+     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testGetCoordinatorsFailure()
     {
-        $this->prepareFailureTest('get', '/project/joomla-platform/language/en_US/coordinators/');
+        $this->prepareFailureTest();
 
-        $this->object->getCoordinators('joomla-platform', 'en_US');
+        (new Languages($this->options, $this->client))->getCoordinators('babdev-transifex', 'en_US');
     }
 
     /**
      * @testdox getLanguage() returns a Response object on a successful API connection
      *
      * @covers  \BabDev\Transifex\Languages::getLanguage
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetLanguage()
     {
-        $this->prepareSuccessTest('get', '/project/joomla-platform/language/en_US/');
+        $this->prepareSuccessTest();
 
-        $this->assertSame(
-            $this->object->getLanguage('joomla-platform', 'en_US'),
-            $this->response
-        );
+        (new Languages($this->options, $this->client))->getLanguage('babdev-transifex', 'en_US');
+
+        $this->validateSuccessTest('/api/2/project/babdev-transifex/language/en_US/');
     }
 
     /**
-     * @testdox getLanguage() throws an UnexpectedResponseException on a failed API connection
+     * @testdox getLanguage() throws a ServerException on a failed API connection
      *
      * @covers  \BabDev\Transifex\Languages::getLanguage
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      *
-     * @expectedException \Joomla\Http\Exception\UnexpectedResponseException
+     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testGetLanguageFailure()
     {
-        $this->prepareFailureTest('get', '/project/joomla-platform/language/en_US/');
+        $this->prepareFailureTest();
 
-        $this->object->getLanguage('joomla-platform', 'en_US');
+        (new Languages($this->options, $this->client))->getLanguage('babdev-transifex', 'en_US');
     }
 
     /**
      * @testdox getLanguages() returns a Response object on a successful API connection
      *
      * @covers  \BabDev\Transifex\Languages::getLanguages
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetLanguages()
     {
-        $this->prepareSuccessTest('get', '/project/joomla-platform/languages/');
+        $this->prepareSuccessTest();
 
-        $this->assertSame(
-            $this->object->getLanguages('joomla-platform'),
-            $this->response
-        );
+        (new Languages($this->options, $this->client))->getLanguages('babdev-transifex');
+
+        $this->validateSuccessTest('/api/2/project/babdev-transifex/languages/');
     }
 
     /**
-     * @testdox getLanguages() throws an UnexpectedResponseException on a failed API connection
+     * @testdox getLanguages() throws a ServerException on a failed API connection
      *
      * @covers  \BabDev\Transifex\Languages::getLanguages
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      *
-     * @expectedException \Joomla\Http\Exception\UnexpectedResponseException
+     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testGetLanguagesFailure()
     {
-        $this->prepareFailureTest('get', '/project/joomla-platform/languages/');
+        $this->prepareFailureTest();
 
-        $this->object->getLanguages('joomla-platform');
+        (new Languages($this->options, $this->client))->getLanguages('babdev-transifex');
     }
 
     /**
      * @testdox getReviewers() returns a Response object on a successful API connection
      *
      * @covers  \BabDev\Transifex\Languages::getReviewers
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetReviewers()
     {
-        $this->prepareSuccessTest('get', '/project/joomla-platform/language/en_US/reviewers/');
+        $this->prepareSuccessTest();
 
-        $this->assertSame(
-            $this->object->getReviewers('joomla-platform', 'en_US'),
-            $this->response
-        );
+        (new Languages($this->options, $this->client))->getReviewers('babdev-transifex', 'en_US');
+
+        $this->validateSuccessTest('/api/2/project/babdev-transifex/language/en_US/reviewers/');
     }
 
     /**
-     * @testdox getReviewers() throws an UnexpectedResponseException on a failed API connection
+     * @testdox getReviewers() throws a ServerException on a failed API connection
      *
      * @covers  \BabDev\Transifex\Languages::getReviewers
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      *
-     * @expectedException \Joomla\Http\Exception\UnexpectedResponseException
+     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testGetReviewersFailure()
     {
-        $this->prepareFailureTest('get', '/project/joomla-platform/language/en_US/reviewers/');
+        $this->prepareFailureTest();
 
-        $this->object->getReviewers('joomla-platform', 'en_US');
+        (new Languages($this->options, $this->client))->getReviewers('babdev-transifex', 'en_US');
     }
 
     /**
      * @testdox getTranslators() returns a Response object on a successful API connection
      *
      * @covers  \BabDev\Transifex\Languages::getTranslators
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetTranslators()
     {
-        $this->prepareSuccessTest('get', '/project/joomla-platform/language/en_US/translators/');
+        $this->prepareSuccessTest();
 
-        $this->assertSame(
-            $this->object->getTranslators('joomla-platform', 'en_US'),
-            $this->response
-        );
+        (new Languages($this->options, $this->client))->getTranslators('babdev-transifex', 'en_US');
+
+        $this->validateSuccessTest('/api/2/project/babdev-transifex/language/en_US/translators/');
     }
 
     /**
-     * @testdox getTranslators() throws an UnexpectedResponseException on a failed API connection
+     * @testdox getTranslators() throws a ServerException on a failed API connection
      *
      * @covers  \BabDev\Transifex\Languages::getTranslators
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      *
-     * @expectedException \Joomla\Http\Exception\UnexpectedResponseException
+     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testGetTranslatorsFailure()
     {
-        $this->prepareFailureTest('get', '/project/joomla-platform/language/en_US/translators/');
+        $this->prepareFailureTest();
 
-        $this->object->getTranslators('joomla-platform', 'en_US');
+        (new Languages($this->options, $this->client))->getTranslators('babdev-transifex', 'en_US');
     }
 
     /**
@@ -305,36 +278,42 @@ class LanguagesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Languages::updateCoordinators
      * @covers  \BabDev\Transifex\Languages::updateTeam
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testUpdateCoordinators()
     {
-        $this->prepareSuccessTest('put', '/project/joomla-platform/language/en_US/coordinators/?skip_invalid_username');
+        $this->prepareSuccessTest();
+
+        (new Languages($this->options, $this->client))->updateCoordinators('babdev-transifex', 'en_US', ['mbabker'], true);
+
+        $this->validateSuccessTest('/api/2/project/babdev-transifex/language/en_US/coordinators/', 'PUT');
+
+        /** @var \Psr\Http\Message\RequestInterface $request */
+        $request = $this->historyContainer[0]['request'];
 
         $this->assertSame(
-            $this->object->updateCoordinators('joomla-platform', 'en_US', ['mbabker'], true),
-            $this->response
+            'skip_invalid_username',
+            $request->getUri()->getQuery(),
+            'The API request did not include the expected query string.'
         );
     }
 
     /**
-     * @testdox updateCoordinators() throws an UnexpectedResponseException on a failed API connection
+     * @testdox updateCoordinators() throws a ServerException on a failed API connection
      *
      * @covers  \BabDev\Transifex\Languages::updateCoordinators
      * @covers  \BabDev\Transifex\Languages::updateTeam
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      *
-     * @expectedException \Joomla\Http\Exception\UnexpectedResponseException
+     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testUpdateCoordinatorsFailure()
     {
-        $this->prepareFailureTest('put', '/project/joomla-platform/language/en_US/coordinators/');
+        $this->prepareFailureTest();
 
-        $this->object->updateCoordinators('joomla-platform', 'en_US', ['mbabker']);
+        (new Languages($this->options, $this->client))->updateCoordinators('babdev-transifex', 'en_US', ['mbabker']);
     }
 
     /**
@@ -342,28 +321,26 @@ class LanguagesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Languages::updateCoordinators
      * @covers  \BabDev\Transifex\Languages::updateTeam
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \InvalidArgumentException
      */
     public function testUpdateCoordinatorsNoUsers()
     {
-        $this->object->updateCoordinators('joomla-platform', 'en_US', []);
+        (new Languages($this->options, $this->client))->updateCoordinators('babdev-transifex', 'en_US', []);
     }
 
     /**
      * @testdox updateLanguage() returns a Response object on a successful API connection
      *
      * @covers  \BabDev\Transifex\Languages::updateLanguage
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testUpdateLanguage()
     {
-        $this->prepareSuccessTest('put', '/project/joomla-platform/language/en_US/');
+        $this->prepareSuccessTest();
 
         // Additional options
         $options = [
@@ -372,42 +349,39 @@ class LanguagesTest extends TransifexTestCase
             'list'        => 'test@example.com',
         ];
 
-        $this->assertSame(
-            $this->object->updateLanguage('joomla-platform', 'en_US', ['mbabker'], $options),
-            $this->response
-        );
+        (new Languages($this->options, $this->client))->updateLanguage('babdev-transifex', 'en_US', ['mbabker'], $options);
+
+        $this->validateSuccessTest('/api/2/project/babdev-transifex/language/en_US/', 'PUT');
     }
 
     /**
-     * @testdox updateLanguage() throws an UnexpectedResponseException on a failed API connection
+     * @testdox updateLanguage() throws a ServerException on a failed API connection
      *
      * @covers  \BabDev\Transifex\Languages::updateLanguage
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      *
-     * @expectedException \Joomla\Http\Exception\UnexpectedResponseException
+     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testUpdateLanguageFailure()
     {
-        $this->prepareFailureTest('put', '/project/joomla-platform/language/en_US/');
+        $this->prepareFailureTest();
 
-        $this->object->updateLanguage('joomla-platform', 'en_US', ['mbabker']);
+        (new Languages($this->options, $this->client))->updateLanguage('babdev-transifex', 'en_US', ['mbabker']);
     }
 
     /**
      * @testdox updateLanguage() throws an InvalidArgumentException when no contributors are given
      *
      * @covers  \BabDev\Transifex\Languages::updateLanguage
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \InvalidArgumentException
      */
     public function testUpdateLanguageNoUsers()
     {
-        $this->object->updateLanguage('joomla-platform', 'en_US', []);
+        (new Languages($this->options, $this->client))->updateLanguage('babdev-transifex', 'en_US', []);
     }
 
     /**
@@ -415,36 +389,42 @@ class LanguagesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Languages::updateReviewers
      * @covers  \BabDev\Transifex\Languages::updateTeam
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testUpdateReviewers()
     {
-        $this->prepareSuccessTest('put', '/project/joomla-platform/language/en_US/reviewers/?skip_invalid_username');
+        $this->prepareSuccessTest();
+
+        (new Languages($this->options, $this->client))->updateReviewers('babdev-transifex', 'en_US', ['mbabker'], true);
+
+        $this->validateSuccessTest('/api/2/project/babdev-transifex/language/en_US/reviewers/', 'PUT');
+
+        /** @var \Psr\Http\Message\RequestInterface $request */
+        $request = $this->historyContainer[0]['request'];
 
         $this->assertSame(
-            $this->object->updateReviewers('joomla-platform', 'en_US', ['mbabker'], true),
-            $this->response
+            'skip_invalid_username',
+            $request->getUri()->getQuery(),
+            'The API request did not include the expected query string.'
         );
     }
 
     /**
-     * @testdox updateReviewers() throws an UnexpectedResponseException on a failed API connection
+     * @testdox updateReviewers() throws a ServerException on a failed API connection
      *
      * @covers  \BabDev\Transifex\Languages::updateReviewers
      * @covers  \BabDev\Transifex\Languages::updateTeam
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      *
-     * @expectedException \Joomla\Http\Exception\UnexpectedResponseException
+     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testUpdateReviewersFailure()
     {
-        $this->prepareFailureTest('put', '/project/joomla-platform/language/en_US/reviewers/');
+        $this->prepareFailureTest();
 
-        $this->object->updateReviewers('joomla-platform', 'en_US', ['mbabker']);
+        (new Languages($this->options, $this->client))->updateReviewers('babdev-transifex', 'en_US', ['mbabker']);
     }
 
     /**
@@ -452,15 +432,14 @@ class LanguagesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Languages::updateReviewers
      * @covers  \BabDev\Transifex\Languages::updateTeam
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \InvalidArgumentException
      */
     public function testUpdateReviewersNoUsers()
     {
-        $this->object->updateReviewers('joomla-platform', 'en_US', []);
+        (new Languages($this->options, $this->client))->updateReviewers('babdev-transifex', 'en_US', []);
     }
 
     /**
@@ -468,36 +447,42 @@ class LanguagesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Languages::updateTranslators
      * @covers  \BabDev\Transifex\Languages::updateTeam
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testUpdateTranslators()
     {
-        $this->prepareSuccessTest('put', '/project/joomla-platform/language/en_US/translators/?skip_invalid_username');
+        $this->prepareSuccessTest();
+
+        (new Languages($this->options, $this->client))->updateTranslators('babdev-transifex', 'en_US', ['mbabker'], true);
+
+        $this->validateSuccessTest('/api/2/project/babdev-transifex/language/en_US/translators/', 'PUT');
+
+        /** @var \Psr\Http\Message\RequestInterface $request */
+        $request = $this->historyContainer[0]['request'];
 
         $this->assertSame(
-            $this->object->updateTranslators('joomla-platform', 'en_US', ['mbabker'], true),
-            $this->response
+            'skip_invalid_username',
+            $request->getUri()->getQuery(),
+            'The API request did not include the expected query string.'
         );
     }
 
     /**
-     * @testdox updateTranslators() throws an UnexpectedResponseException on a failed API connection
+     * @testdox updateTranslators() throws a ServerException on a failed API connection
      *
      * @covers  \BabDev\Transifex\Languages::updateTranslators
      * @covers  \BabDev\Transifex\Languages::updateTeam
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      *
-     * @expectedException \Joomla\Http\Exception\UnexpectedResponseException
+     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testUpdateTranslatorsFailure()
     {
-        $this->prepareFailureTest('put', '/project/joomla-platform/language/en_US/translators/');
+        $this->prepareFailureTest();
 
-        $this->object->updateTranslators('joomla-platform', 'en_US', ['mbabker']);
+        (new Languages($this->options, $this->client))->updateTranslators('babdev-transifex', 'en_US', ['mbabker']);
     }
 
     /**
@@ -505,14 +490,13 @@ class LanguagesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Languages::updateTranslators
      * @covers  \BabDev\Transifex\Languages::updateTeam
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \InvalidArgumentException
      */
     public function testUpdateTranslatorsNoUsers()
     {
-        $this->object->updateTranslators('joomla-platform', 'en_US', []);
+        (new Languages($this->options, $this->client))->updateTranslators('babdev-transifex', 'en_US', []);
     }
 }

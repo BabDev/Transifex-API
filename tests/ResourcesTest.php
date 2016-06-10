@@ -19,31 +19,15 @@ use BabDev\Transifex\Resources;
 class ResourcesTest extends TransifexTestCase
 {
     /**
-     * @var Resources
-     */
-    private $object;
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->object = new Resources($this->options, $this->client);
-    }
-
-    /**
      * @testdox createResource() with inline content provided in the options returns a Response object on a successful API connection
      *
      * @covers  \BabDev\Transifex\Resources::createResource
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testCreateResourceContent()
     {
-        $this->prepareSuccessTest('post', '/project/joomla-platform/resources/', 201);
+        $this->prepareSuccessTest(201);
 
         // Additional options
         $options = [
@@ -53,24 +37,22 @@ class ResourcesTest extends TransifexTestCase
             'content'             => 'Test="Test"',
         ];
 
-        $this->assertSame(
-            $this->object->createResource('joomla-platform', 'Joomla Platform Data', 'joomla-platform', 'INI',
-                $options),
-            $this->response
-        );
+        (new Resources($this->options, $this->client))->createResource('babdev-transifex', 'BabDev Transifex Data',
+            'babdev-transifex', 'INI', $options);
+
+        $this->validateSuccessTest('/api/2/project/babdev-transifex/resources/', 'POST', 201);
     }
 
     /**
      * @testdox createResource() with an attached file in the options returns a Response object on a successful API connection
      *
      * @covers  \BabDev\Transifex\Resources::createResource
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testCreateResourceFile()
     {
-        $this->prepareSuccessTest('post', '/project/joomla-platform/resources/', 201);
+        $this->prepareSuccessTest(201);
 
         // Additional options
         $options = [
@@ -80,224 +62,216 @@ class ResourcesTest extends TransifexTestCase
             'file'                => __DIR__ . '/stubs/source.ini',
         ];
 
-        $this->assertSame(
-            $this->object->createResource('joomla-platform', 'Joomla Platform Data', 'joomla-platform', 'INI',
-                $options),
-            $this->response
-        );
+        (new Resources($this->options, $this->client))->createResource('babdev-transifex', 'BabDev Transifex Data',
+            'babdev-transifex', 'INI', $options);
+
+        $this->validateSuccessTest('/api/2/project/babdev-transifex/resources/', 'POST', 201);
     }
 
     /**
-     * @testdox createResource() throws an UnexpectedResponseException on a failed API connection
+     * @testdox createResource() throws a ServerException on a failed API connection
      *
      * @covers  \BabDev\Transifex\Resources::createResource
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      *
-     * @expectedException \Joomla\Http\Exception\UnexpectedResponseException
+     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testCreateResourceFailure()
     {
-        $this->prepareFailureTest('post', '/project/joomla-platform/resources/');
+        $this->prepareFailureTest();
 
-        $this->object->createResource('joomla-platform', 'Joomla Platform Data', 'joomla-platform', 'INI',
-            ['content' => 'Test="Test"']);
+        (new Resources($this->options, $this->client))->createResource('babdev-transifex', 'BabDev Transifex Data',
+            'babdev-transifex', 'INI', ['content' => 'Test="Test"']);
     }
 
     /**
      * @testdox deleteResource() returns a Response object on a successful API connection
      *
      * @covers  \BabDev\Transifex\Resources::deleteResource
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testDeleteResource()
     {
-        $this->prepareSuccessTest('delete', '/project/joomla/resource/joomla-platform', 204);
+        $this->prepareSuccessTest(204);
 
-        $this->assertSame(
-            $this->object->deleteResource('joomla', 'joomla-platform'),
-            $this->response
-        );
+        (new Resources($this->options, $this->client))->deleteResource('babdev', 'babdev-transifex');
+
+        $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex', 'DELETE', 204);
     }
 
     /**
-     * @testdox deleteResource() throws an UnexpectedResponseException on a failed API connection
+     * @testdox deleteResource() throws a ServerException on a failed API connection
      *
      * @covers  \BabDev\Transifex\Resources::deleteResource
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      *
-     * @expectedException \Joomla\Http\Exception\UnexpectedResponseException
+     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testDeleteResourceFailure()
     {
-        $this->prepareFailureTest('delete', '/project/joomla/resource/joomla-platform');
+        $this->prepareFailureTest();
 
-        $this->object->deleteResource('joomla', 'joomla-platform');
+        (new Resources($this->options, $this->client))->deleteResource('babdev', 'babdev-transifex');
     }
 
     /**
      * @testdox getResource() returns a Response object on a successful API connection
      *
      * @covers  \BabDev\Transifex\Resources::getResource
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetResource()
     {
-        $this->prepareSuccessTest('get', '/project/joomla/resource/joomla-platform/?details');
+        $this->prepareSuccessTest();
+
+        (new Resources($this->options, $this->client))->getResource('babdev', 'babdev-transifex', true);
+
+        $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/');
+
+        /** @var \Psr\Http\Message\RequestInterface $request */
+        $request = $this->historyContainer[0]['request'];
 
         $this->assertSame(
-            $this->object->getResource('joomla', 'joomla-platform', true),
-            $this->response
+            'details',
+            $request->getUri()->getQuery(),
+            'The API request did not include the expected query string.'
         );
     }
 
     /**
-     * @testdox getResource() throws an UnexpectedResponseException on a failed API connection
+     * @testdox getResource() throws a ServerException on a failed API connection
      *
      * @covers  \BabDev\Transifex\Resources::getResource
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      *
-     * @expectedException \Joomla\Http\Exception\UnexpectedResponseException
+     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testGetResourceFailure()
     {
-        $this->prepareFailureTest('get', '/project/joomla/resource/joomla-platform/?details');
+        $this->prepareFailureTest();
 
-        $this->object->getResource('joomla', 'joomla-platform', true);
+        (new Resources($this->options, $this->client))->getResource('babdev', 'babdev-transifex', true);
     }
 
     /**
      * @testdox getResourceContent() returns a Response object on a successful API connection
      *
      * @covers  \BabDev\Transifex\Resources::getResourceContent
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetResourceContent()
     {
-        $this->prepareSuccessTest('get', '/project/joomla/resource/joomla-platform/content/');
+        $this->prepareSuccessTest();
 
-        $this->assertSame(
-            $this->object->getResourceContent('joomla', 'joomla-platform'),
-            $this->response
-        );
+        (new Resources($this->options, $this->client))->getResourceContent('babdev', 'babdev-transifex');
+
+        $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/content/');
     }
 
     /**
-     * @testdox getResourceContent() throws an UnexpectedResponseException on a failed API connection
+     * @testdox getResourceContent() throws a ServerException on a failed API connection
      *
      * @covers  \BabDev\Transifex\Resources::getResourceContent
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      *
-     * @expectedException \Joomla\Http\Exception\UnexpectedResponseException
+     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testGetResourceContentFailure()
     {
-        $this->prepareFailureTest('get', '/project/joomla/resource/joomla-platform/content/');
+        $this->prepareFailureTest();
 
-        $this->object->getResourceContent('joomla', 'joomla-platform');
+        (new Resources($this->options, $this->client))->getResourceContent('babdev', 'babdev-transifex');
     }
 
     /**
      * @testdox getResources() returns a Response object on a successful API connection
      *
      * @covers  \BabDev\Transifex\Resources::getResources
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetResources()
     {
-        $this->prepareSuccessTest('get', '/project/joomla/resources');
+        $this->prepareSuccessTest();
 
-        $this->assertSame(
-            $this->object->getResources('joomla'),
-            $this->response
-        );
+        (new Resources($this->options, $this->client))->getResources('babdev');
+
+        $this->validateSuccessTest('/api/2/project/babdev/resources');
     }
 
     /**
-     * @testdox getResources() throws an UnexpectedResponseException on a failed API connection
+     * @testdox getResources() throws a ServerException on a failed API connection
      *
      * @covers  \BabDev\Transifex\Resources::getResources
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      *
-     * @expectedException \Joomla\Http\Exception\UnexpectedResponseException
+     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testGetResourcesFailure()
     {
-        $this->prepareFailureTest('get', '/project/joomla/resources');
+        $this->prepareFailureTest();
 
-        $this->object->getResources('joomla');
+        (new Resources($this->options, $this->client))->getResources('babdev');
     }
 
     /**
      * @testdox updateResourceContent() with an attached file returns a Response object on a successful API connection
      *
      * @covers  \BabDev\Transifex\Resources::updateResourceContent
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testUpdateResourceContentFile()
     {
-        $this->prepareSuccessTest('put', '/project/joomla/resource/joomla-platform/content/');
+        $this->prepareSuccessTest();
 
-        $this->assertSame(
-            $this->object->updateResourceContent('joomla', 'joomla-platform', __DIR__ . '/stubs/source.ini', 'file'),
-            $this->response
-        );
+        (new Resources($this->options, $this->client))->updateResourceContent('babdev', 'babdev-transifex',
+            __DIR__ . '/stubs/source.ini', 'file');
+
+        $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/content/', 'PUT');
     }
 
     /**
      * @testdox updateResourceContent() with inline content returns a Response object on a successful API connection
      *
      * @covers  \BabDev\Transifex\Resources::updateResourceContent
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\TransifexObject::updateResource
-     * @uses    \BabDev\Transifex\Http
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testUpdateResourceContentString()
     {
-        $this->prepareSuccessTest('put', '/project/joomla/resource/joomla-platform/content/');
+        $this->prepareSuccessTest();
 
-        $this->assertSame(
-            $this->object->updateResourceContent('joomla', 'joomla-platform', 'TEST="Test"'),
-            $this->response
-        );
+        (new Resources($this->options, $this->client))->updateResourceContent('babdev', 'babdev-transifex',
+            'TEST="Test"');
+
+        $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/content/', 'PUT');
     }
 
     /**
-     * @testdox updateResourceContent() throws an UnexpectedResponseException on a failed API connection
+     * @testdox updateResourceContent() throws a ServerException on a failed API connection
      *
      * @covers  \BabDev\Transifex\Resources::updateResourceContent
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\TransifexObject::updateResource
-     * @uses    \BabDev\Transifex\Http
      * @uses    \BabDev\Transifex\TransifexObject
      *
-     * @expectedException \Joomla\Http\Exception\UnexpectedResponseException
+     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testUpdateResourceContentFailure()
     {
-        $this->prepareFailureTest('put', '/project/joomla/resource/joomla-platform/content/');
+        $this->prepareFailureTest();
 
-        $this->object->updateResourceContent('joomla', 'joomla-platform', 'TEST="Test"');
+        (new Resources($this->options, $this->client))->updateResourceContent('babdev', 'babdev-transifex', 'TEST="Test"');
     }
 
     /**
@@ -305,13 +279,13 @@ class ResourcesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Resources::updateResourceContent
      * @covers  \BabDev\Transifex\TransifexObject::updateResource
-     * @uses    \BabDev\Transifex\Http
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \InvalidArgumentException
      */
     public function testUpdateResourceContentBadType()
     {
-        $this->object->updateResourceContent('joomla', 'joomla-platform', 'TEST="Test"', 'stuff');
+        (new Resources($this->options, $this->client))->updateResourceContent('babdev', 'babdev-transifex',
+            'TEST="Test"', 'stuff');
     }
 }

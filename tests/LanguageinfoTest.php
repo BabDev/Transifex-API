@@ -19,87 +19,66 @@ use BabDev\Transifex\Languageinfo;
 class LanguageinfoTest extends TransifexTestCase
 {
     /**
-     * @var Languageinfo
-     */
-    private $object;
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->object = new Languageinfo($this->options, $this->client);
-    }
-
-    /**
      * @testdox getLanguage() returns a Response object on a successful API connection
      *
      * @covers  \BabDev\Transifex\Languageinfo::getLanguage
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetLanguage()
     {
-        $this->prepareSuccessTest('get', '/language/en_GB/');
+        $this->prepareSuccessTest();
 
-        $this->assertSame(
-            $this->object->getLanguage('en_GB'),
-            $this->response
-        );
+        (new Languageinfo($this->options, $this->client))->getLanguage('en_GB');
+
+        $this->validateSuccessTest('/api/2/language/en_GB/');
     }
 
     /**
-     * @testdox getLanguage() throws an UnexpectedResponseException on a failed API connection
+     * @testdox getLanguage() throws a ServerException on a failed API connection
      *
      * @covers  \BabDev\Transifex\Languageinfo::getLanguage
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      *
-     * @expectedException \Joomla\Http\Exception\UnexpectedResponseException
+     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testGetLanguageFailure()
     {
-        $this->prepareFailureTest('get', '/language/en_GB/');
+        $this->prepareFailureTest();
 
-        $this->object->getLanguage('en_GB');
+        (new Languageinfo($this->options, $this->client))->getLanguage('en_GB');
     }
 
     /**
      * @testdox getLanguages() returns a Response object on a successful API connection
      *
      * @covers  \BabDev\Transifex\Languageinfo::getLanguages
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetLanguages()
     {
-        $this->prepareSuccessTest('get', '/languages/');
+        $this->prepareSuccessTest();
 
-        $this->assertSame(
-            $this->object->getLanguages(),
-            $this->response
-        );
+        (new Languageinfo($this->options, $this->client))->getLanguages();
+
+        $this->validateSuccessTest('/api/2/languages/');
     }
 
     /**
-     * @testdox getLanguages() throws an UnexpectedResponseException on a failed API connection
+     * @testdox getLanguages() throws a ServerException on a failed API connection
      *
      * @covers  \BabDev\Transifex\Languageinfo::getLanguages
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
-     * @uses    \BabDev\Transifex\Http
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @uses    \BabDev\Transifex\TransifexObject
      *
-     * @expectedException \Joomla\Http\Exception\UnexpectedResponseException
+     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testGetLanguagesFailure()
     {
-        $this->prepareFailureTest('get', '/languages/');
+        $this->prepareFailureTest();
 
-        $this->object->getLanguages();
+        (new Languageinfo($this->options, $this->client))->getLanguages();
     }
 }

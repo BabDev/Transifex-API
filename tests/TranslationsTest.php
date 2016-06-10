@@ -19,113 +19,98 @@ use BabDev\Transifex\Translations;
 class TranslationsTest extends TransifexTestCase
 {
     /**
-     * @var Translations
-     */
-    private $object;
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->object = new Translations($this->options, $this->client);
-    }
-
-    /**
      * @testdox getTranslation() returns a Response object on a successful API connection
      *
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Translations::getTranslation
-     * @uses    \BabDev\Transifex\Http
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetTranslation()
     {
-        $this->prepareSuccessTest(
-            'get',
-            '/project/joomla/resource/joomla-platform/translation/en_GB?mode=default&file'
-        );
+        $this->prepareSuccessTest();
+
+        (new Translations($this->options, $this->client))->getTranslation('babdev', 'babdev-transifex', 'en_US', 'default');
+
+        $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US');
+
+        /** @var \Psr\Http\Message\RequestInterface $request */
+        $request = $this->historyContainer[0]['request'];
 
         $this->assertSame(
-            $this->object->getTranslation('joomla', 'joomla-platform', 'en_GB', 'default'),
-            $this->response
+            'mode=default&file',
+            $request->getUri()->getQuery(),
+            'The API request did not include the expected query string.'
         );
     }
 
     /**
-     * @testdox getTranslation() throws an UnexpectedResponseException on a failed API connection
+     * @testdox getTranslation() throws a ServerException on a failed API connection
      *
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Translations::getTranslation
-     * @uses    \BabDev\Transifex\Http
      * @uses    \BabDev\Transifex\TransifexObject
      *
-     * @expectedException \Joomla\Http\Exception\UnexpectedResponseException
+     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testGetTranslationFailure()
     {
-        $this->prepareFailureTest('get', '/project/joomla/resource/joomla-platform/translation/en_GB');
+        $this->prepareFailureTest();
 
-        $this->object->getTranslation('joomla', 'joomla-platform', 'en_GB');
+        (new Translations($this->options, $this->client))->getTranslation('babdev', 'babdev-transifex', 'en_US', 'default');
     }
 
     /**
      * @testdox updateTranslation() with an attached file returns a Response object on a successful API connection
      *
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\TransifexObject::updateResource
      * @covers  \BabDev\Transifex\Translations::updateTranslation
-     * @uses    \BabDev\Transifex\Http
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testUpdateTranslationFile()
     {
-        $this->prepareSuccessTest('put', '/project/joomla/resource/joomla-platform/translation/en_GB');
+        $this->prepareSuccessTest();
 
-        $this->assertSame(
-            $this->object->updateTranslation('joomla', 'joomla-platform', 'en_GB', __DIR__ . '/stubs/source.ini',
-                'file'),
-            $this->response
-        );
+        (new Translations($this->options, $this->client))->updateTranslation('babdev', 'babdev-transifex', 'en_US',
+            __DIR__ . '/stubs/source.ini', 'file');
+
+        $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US', 'PUT');
     }
 
     /**
      * @testdox updateTranslation() with inline content returns a Response object on a successful API connection
      *
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\TransifexObject::updateResource
      * @covers  \BabDev\Transifex\Translations::updateTranslation
-     * @uses    \BabDev\Transifex\Http
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testUpdateTranslationString()
     {
-        $this->prepareSuccessTest('put', '/project/joomla/resource/joomla-platform/translation/en_GB');
+        $this->prepareSuccessTest();
 
-        $this->assertSame(
-            $this->object->updateTranslation('joomla', 'joomla-platform', 'en_GB', 'TEST="Test"'),
-            $this->response
-        );
+        (new Translations($this->options, $this->client))->updateTranslation('babdev', 'babdev-transifex', 'en_US',
+            'TEST="Test"');
+
+        $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US', 'PUT');
     }
 
     /**
-     * @testdox updateTranslation() throws an UnexpectedResponseException on a failed API connection
+     * @testdox updateTranslation() throws a ServerException on a failed API connection
      *
-     * @covers  \BabDev\Transifex\TransifexObject::processResponse
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\TransifexObject::updateResource
      * @covers  \BabDev\Transifex\Translations::updateTranslation
-     * @uses    \BabDev\Transifex\Http
      * @uses    \BabDev\Transifex\TransifexObject
      *
-     * @expectedException \Joomla\Http\Exception\UnexpectedResponseException
+     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testUpdateTranslationFailure()
     {
-        $this->prepareFailureTest('put', '/project/joomla/resource/joomla-platform/translation/en_GB');
+        $this->prepareFailureTest();
 
-        $this->object->updateTranslation('joomla', 'joomla-platform', 'en_GB', 'TEST="Test"');
+        (new Translations($this->options, $this->client))->updateTranslation('babdev', 'babdev-transifex', 'en_US',
+            'TEST="Test"');
     }
 
     /**
@@ -133,13 +118,13 @@ class TranslationsTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\TransifexObject::updateResource
      * @covers  \BabDev\Transifex\Translations::updateTranslation
-     * @uses    \BabDev\Transifex\Http
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \InvalidArgumentException
      */
     public function testUpdateTranslationBadType()
     {
-        $this->object->updateTranslation('joomla', 'joomla-platform', 'en_GB', 'TEST="Test"', 'stuff');
+        (new Translations($this->options, $this->client))->updateTranslation('babdev', 'babdev-transifex', 'en_US',
+            'TEST="Test"', 'stuff');
     }
 }

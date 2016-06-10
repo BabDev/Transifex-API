@@ -11,8 +11,11 @@
 
 namespace BabDev\Transifex\Tests;
 
-use BabDev\Transifex\Http;
-use Joomla\Http\Response;
+use GuzzleHttp\Client;
+use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\HandlerStack;
+use GuzzleHttp\Middleware;
+use GuzzleHttp\Psr7\Response;
 
 /**
  * Abstract test case for TransifexObject instances.
@@ -22,17 +25,17 @@ abstract class TransifexTestCase extends \PHPUnit_Framework_TestCase
     /**
      * @var array
      */
-    protected $options;
+    protected $options = ['api.username' => 'test', 'api.password' => 'pass', 'base_uri' => 'https://www.transifex.com'];
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var Client
      */
     protected $client;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject
+     * @var array
      */
-    protected $response;
+    protected $historyContainer = [];
 
     /**
      * @var string
@@ -45,46 +48,77 @@ abstract class TransifexTestCase extends \PHPUnit_Framework_TestCase
     protected $errorString = '{"message": "Generic Error"}';
 
     /**
-     * {@inheritdoc}
+     * Create the Guzzle client for the test
+     *
+     * @param HandlerStack $stack
      */
-    protected function setUp()
+    protected function createClient(HandlerStack $stack)
     {
-        $this->options  = [];
-        $this->client   = $this->createMock(Http::class);
-        $this->response = $this->createMock(Response::class);
+        $history = Middleware::history($this->historyContainer);
+
+        $stack->push($history);
+
+        $this->client = new Client(['handler' => $stack]);
     }
 
     /**
      * Prepares the mock response for a failed API connection.
-     *
-     * @param string $method The method being called
-     * @param string $url    The URL being requested
      */
-    protected function prepareFailureTest($method, $url)
+    protected function prepareFailureTest()
     {
-        $this->response->code = 500;
-        $this->response->body = $this->errorString;
+        $mock = new MockHandler([
+            new Response(500, [], $this->errorString),
+        ]);
 
-        $this->client->expects($this->once())
-            ->method($method)
-            ->with($url)
-            ->willReturn($this->response);
+        $this->createClient(HandlerStack::create($mock));
     }
 
     /**
      * Prepares the mock response for a successful API connection.
      *
-     * @param string $method The method being called
-     * @param string $url    The URL being requested
+     * @param int $code The expected HTTP code
      */
-    protected function prepareSuccessTest($method, $url, $code = 200)
+    protected function prepareSuccessTest(int $code = 200)
     {
-        $this->response->code = $code;
-        $this->response->body = $this->sampleString;
+        $mock = new MockHandler([
+            new Response($code, [], $this->sampleString),
+        ]);
 
-        $this->client->expects($this->once())
-            ->method($method)
-            ->with($url)
-            ->willReturn($this->response);
+        $this->createClient(HandlerStack::create($mock));
+    }
+
+    /**
+     * Validate the request for a success test is valid
+     *
+     * @param string $path   The expected URI path
+     * @param string $method The expected HTTP method
+     * @param int    $code   The expected HTTP code
+     */
+    protected function validateSuccessTest(string $path, string $method = 'GET', int $code = 200)
+    {
+        // There should be one request in the stack now
+        if (!isset($this->historyContainer[0])) {
+            $this->fail('Request not completed.');
+        }
+
+        /** @var \Psr\Http\Message\RequestInterface $request */
+        $request = $this->historyContainer[0]['request'];
+
+        /** @var \Psr\Http\Message\ResponseInterface $response */
+        $response = $this->historyContainer[0]['response'];
+
+        $this->assertSame(
+            $method,
+            $request->getMethod(),
+            'The API did not use the right HTTP method.'
+        );
+
+        $this->assertSame(
+            $path,
+            $request->getUri()->getPath(),
+            'The API did not request the right endpoint.'
+        );
+
+        $this->assertSame($code, $response->getStatusCode(), 'The API did not return the right HTTP code.');
     }
 }
