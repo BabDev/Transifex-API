@@ -11,12 +11,12 @@
         }
     ],
     "require": {
-        "php": ">=5.3.10",
+        "php": "^5.3.10|~7.0",
         "joomla/http": "~1.1"
     },
     "require-dev": {
         "joomla/test": "~1.0",
-        "phpunit/phpunit": "~4.5",
+        "phpunit/phpunit": "~4.8|>=5.0 <5.4",
         "squizlabs/php_codesniffer": "~1.5"
     },
     "autoload": {
