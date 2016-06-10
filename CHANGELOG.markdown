@@ -1,7 +1,7 @@
 CHANGELOG for the Transifex API Package
 ===============
 
-* 1.3.0 (2016-XX-XX)
+* 1.3.0 (2016-06-09)
 
  * Deprecated `Http` class and `joomla/http` package integration
  * Deprecated `TransifexObject::fetchUrl()`, 2.0 will use the Guzzle API to replace this functionality
