@@ -5,13 +5,12 @@ language: php
 
 env:
   global:
-    - RUN_PHPCS="no"
     - USE_SCRUTINIZER="no"
 
 matrix:
   include:
     - php: 7.0
-      env: PHPUNIT_FLAGS="--coverage-clover=coverage.clover" RUN_PHPCS="yes" USE_SCRUTINIZER="yes"
+      env: PHPUNIT_FLAGS="--coverage-clover=coverage.clover" USE_SCRUTINIZER="yes"
 
 before_install:
   - composer self-update
