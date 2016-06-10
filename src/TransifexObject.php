@@ -11,9 +11,8 @@
 
 namespace BabDev\Transifex;
 
-use GuzzleHttp\{
-    Client, ClientInterface
-};
+use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 use Psr\Http\Message\ResponseInterface;
 
 /**

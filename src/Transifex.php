@@ -11,9 +11,8 @@
 
 namespace BabDev\Transifex;
 
-use GuzzleHttp\{
-    Client, ClientInterface
-};
+use GuzzleHttp\Client;
+use GuzzleHttp\ClientInterface;
 
 /**
  * Base class for interacting with the Transifex API.

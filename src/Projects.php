@@ -106,8 +106,7 @@ class Projects extends TransifexObject
         string $description,
         string $sourceLanguage,
         array $options = []
-    ) : ResponseInterface
-    {
+    ) : ResponseInterface {
         // Build the request data.
         $data = array_merge(
             [

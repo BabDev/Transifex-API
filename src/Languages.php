@@ -39,8 +39,7 @@ class Languages extends TransifexObject
         array $coordinators,
         array $options = [],
         bool $skipInvalidUsername = false
-    ) : ResponseInterface
-    {
+    ) : ResponseInterface {
         // Make sure the $coordinators array is not empty
         if (!count($coordinators)) {
             throw new \InvalidArgumentException('The coordinators array must contain at least one username.');
@@ -185,8 +184,7 @@ class Languages extends TransifexObject
         string $langCode,
         array $coordinators,
         bool $skipInvalidUsername = false
-    ) : ResponseInterface
-    {
+    ) : ResponseInterface {
         return $this->updateTeam($project, $langCode, $coordinators, $skipInvalidUsername, 'coordinators');
     }
 
@@ -207,8 +205,7 @@ class Languages extends TransifexObject
         string $langCode,
         array $coordinators,
         array $options = []
-    ) : ResponseInterface
-    {
+    ) : ResponseInterface {
         // Make sure the $coordinators array is not empty
         if (!count($coordinators)) {
             throw new \InvalidArgumentException('The coordinators array must contain at least one username.');
@@ -310,8 +307,7 @@ class Languages extends TransifexObject
         string $langCode,
         array $translators,
         bool $skipInvalidUsername = false
-    ) : ResponseInterface
-    {
+    ) : ResponseInterface {
         return $this->updateTeam($project, $langCode, $translators, $skipInvalidUsername, 'translators');
     }
 }

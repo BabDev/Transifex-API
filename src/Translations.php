@@ -35,8 +35,7 @@ class Translations extends TransifexObject
         string $resource,
         string $lang,
         string $mode = ''
-    ) : ResponseInterface
-    {
+    ) : ResponseInterface {
         $path = "project/$project/resource/$resource/translation/$lang";
 
         if (!empty($mode)) {
@@ -63,8 +62,7 @@ class Translations extends TransifexObject
         string $lang,
         string $content,
         string $type = 'string'
-    ) : ResponseInterface
-    {
+    ) : ResponseInterface {
         $path = "project/$project/resource/$resource/translation/$lang";
 
         return $this->updateResource($path, $content, $type);

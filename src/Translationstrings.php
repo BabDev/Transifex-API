@@ -52,8 +52,7 @@ class Translationstrings extends TransifexObject
         string $lang,
         bool $details = false,
         array $options = []
-    ) : ResponseInterface
-    {
+    ) : ResponseInterface {
         $path = "project/$project/resource/$resource/translation/$lang/strings/";
 
         if ($details) {

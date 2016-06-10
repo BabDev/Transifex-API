@@ -37,8 +37,7 @@ class Resources extends TransifexObject
         string $slug,
         string $fileType,
         array $options = []
-    ) : ResponseInterface
-    {
+    ) : ResponseInterface {
         // Build the request path.
         $path = "project/$project/resources/";
 
@@ -161,8 +160,7 @@ class Resources extends TransifexObject
         string $resource,
         string $content,
         string $type = 'string'
-    ) : ResponseInterface
-    {
+    ) : ResponseInterface {
         $path = "project/$project/resource/$resource/content/";
 
         return $this->updateResource($path, $content, $type);

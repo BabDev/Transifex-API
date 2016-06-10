@@ -48,7 +48,7 @@ abstract class TransifexTestCase extends \PHPUnit_Framework_TestCase
     protected $errorString = '{"message": "Generic Error"}';
 
     /**
-     * Create the Guzzle client for the test
+     * Create the Guzzle client for the test.
      *
      * @param HandlerStack $stack
      */
@@ -88,7 +88,7 @@ abstract class TransifexTestCase extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Validate the request for a success test is valid
+     * Validate the request for a success test is valid.
      *
      * @param string $path   The expected URI path
      * @param string $method The expected HTTP method
