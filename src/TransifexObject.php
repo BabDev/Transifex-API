@@ -57,6 +57,7 @@ abstract class TransifexObject
 	 * @return  string  The request URL.
 	 *
 	 * @since   1.0
+	 * @deprecated  2.0  Deprecated without replacement
 	 */
 	protected function fetchUrl($path)
 	{
