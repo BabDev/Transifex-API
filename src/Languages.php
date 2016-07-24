@@ -23,11 +23,11 @@ class Languages extends TransifexObject
     /**
      * Create a language for a project.
      *
-     * @param string $slug                The slug for the project
-     * @param string $langCode            The language code for the new language
-     * @param array  $coordinators        An array of coordinators for the language
-     * @param array  $options             Optional additional params to send with the request
-     * @param bool   $skipInvalidUsername If true, the API call does not fail and instead will return a list of invalid usernames
+     * @param string   $slug                The slug for the project
+     * @param string   $langCode            The language code for the new language
+     * @param string[] $coordinators        An array of coordinators for the language
+     * @param array    $options             Optional additional params to send with the request
+     * @param bool     $skipInvalidUsername If true, the API call does not fail and instead will return a list of invalid usernames
      *
      * @return ResponseInterface
      *
@@ -172,10 +172,10 @@ class Languages extends TransifexObject
     /**
      * Update the coordinators for a language team in a project.
      *
-     * @param string $project             The project to retrieve details for
-     * @param string $langCode            The language code to retrieve details for
-     * @param array  $coordinators        An array of coordinators for the language
-     * @param bool   $skipInvalidUsername If true, the API call does not fail and instead will return a list of invalid usernames
+     * @param string   $project             The project to retrieve details for
+     * @param string   $langCode            The language code to retrieve details for
+     * @param string[] $coordinators        An array of coordinators for the language
+     * @param bool     $skipInvalidUsername If true, the API call does not fail and instead will return a list of invalid usernames
      *
      * @return ResponseInterface
      */
@@ -191,10 +191,10 @@ class Languages extends TransifexObject
     /**
      * Update a language within a project.
      *
-     * @param string $slug         The slug for the project
-     * @param string $langCode     The language code for the new language
-     * @param array  $coordinators An array of coordinators for the language
-     * @param array  $options      Optional additional params to send with the request
+     * @param string   $slug         The slug for the project
+     * @param string   $langCode     The language code for the new language
+     * @param string[] $coordinators An array of coordinators for the language
+     * @param array    $options      Optional additional params to send with the request
      *
      * @return ResponseInterface
      *
@@ -241,10 +241,10 @@ class Languages extends TransifexObject
     /**
      * Update the reviewers for a language team in a project.
      *
-     * @param string $project             The project to retrieve details for
-     * @param string $langCode            The language code to retrieve details for
-     * @param array  $reviewers           An array of reviewers for the language
-     * @param bool   $skipInvalidUsername If true, the API call does not fail and instead will return a list of invalid usernames
+     * @param string   $project             The project to retrieve details for
+     * @param string   $langCode            The language code to retrieve details for
+     * @param string[] $reviewers           An array of reviewers for the language
+     * @param bool     $skipInvalidUsername If true, the API call does not fail and instead will return a list of invalid usernames
      *
      * @return ResponseInterface
      */
@@ -256,11 +256,11 @@ class Languages extends TransifexObject
     /**
      * Base method to update a given language team in a project.
      *
-     * @param string $project             The project to retrieve details for
-     * @param string $langCode            The language code to retrieve details for
-     * @param array  $members             An array of the team members for the language
-     * @param bool   $skipInvalidUsername If true, the API call does not fail and instead will return a list of invalid usernames
-     * @param string $team                The team to update
+     * @param string   $project             The project to retrieve details for
+     * @param string   $langCode            The language code to retrieve details for
+     * @param string[] $members             An array of the team members for the language
+     * @param bool     $skipInvalidUsername If true, the API call does not fail and instead will return a list of invalid usernames
+     * @param string   $team                The team to update
      *
      * @return ResponseInterface
      *
@@ -295,10 +295,10 @@ class Languages extends TransifexObject
     /**
      * Update the translators for a language team in a project.
      *
-     * @param string $project             The project to retrieve details for
-     * @param string $langCode            The language code to retrieve details for
-     * @param array  $translators         An array of translators for the language
-     * @param bool   $skipInvalidUsername If true, the API call does not fail and instead will return a list of invalid usernames
+     * @param string   $project             The project to retrieve details for
+     * @param string   $langCode            The language code to retrieve details for
+     * @param string[] $translators         An array of translators for the language
+     * @param bool     $skipInvalidUsername If true, the API call does not fail and instead will return a list of invalid usernames
      *
      * @return ResponseInterface
      */

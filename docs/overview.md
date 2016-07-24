@@ -45,3 +45,10 @@ $formats = $transifex->get('formats');
 
 The `get()` method optionally supports locating objects in a custom namespace to enable developers to add custom connectors or extend the base
 API classes.  This behavior is documented in the [class documentation](classes/Transifex.md) page.
+
+### API Responses
+
+This package utilizes [PSR-7 compatible](http://www.php-fig.org/psr/psr-7/) requests and responses by way of the [Guzzle]((https://github.com/guzzle/guzzle))
+HTTP client.  For all API requests, a [`ResponseInterface`](http://www.php-fig.org/psr/psr-7/#3-3-psr-http-message-responseinterface) compatible object will
+be returned on a successful request.  This package is not catching Exceptions thrown by the HTTP client so users implementing this package should implement
+appropriate error handling mechanisms.
