@@ -91,7 +91,7 @@ class Resources extends TransifexObject
     /**
      * Delete a resource within a project.
      *
-     * @param string $project  The project the resource is part of
+     * @param string $project  The slug for the project the resource is part of
      * @param string $resource The resource slug within the project
      *
      * @return ResponseInterface
@@ -106,7 +106,7 @@ class Resources extends TransifexObject
     /**
      * Get information about a resource within a project.
      *
-     * @param string $project  The project the resource is part of
+     * @param string $project  The slug for the project the resource is part of
      * @param string $resource The resource slug within the project
      * @param bool   $details  True to retrieve additional project details
      *
@@ -126,7 +126,7 @@ class Resources extends TransifexObject
     /**
      * Get the content of a resource within a project.
      *
-     * @param string $project  The project the resource is part of
+     * @param string $project  The slug for the project the resource is part of
      * @param string $resource The resource slug within the project
      *
      * @return ResponseInterface
@@ -141,7 +141,7 @@ class Resources extends TransifexObject
     /**
      * Get information about a project's resources.
      *
-     * @param string $project The project to retrieve details for
+     * @param string $project The slug for the project to retrieve details for
      *
      * @return ResponseInterface
      */
@@ -155,7 +155,7 @@ class Resources extends TransifexObject
     /**
      * Update the content of a resource within a project.
      *
-     * @param string $project  The project the resource is part of
+     * @param string $project  The slug for the project the resource is part of
      * @param string $resource The resource slug within the project
      * @param string $content  The content of the resource.  This can either be a string of data or a file path.
      * @param string $type     The type of content in the $content variable.  This should be either string or file.
