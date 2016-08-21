@@ -9,7 +9,7 @@ An instance of the `Languages` class should be retrieved through the `Transifex`
 ```php
 use BabDev\Transifex\Transifex;
 
-/** @var \BabDev\Transifex\Languages $formats */
+/** @var \BabDev\Transifex\Languages $languages */
 $languages = (new Transifex())->get('languages');
 ```
 
