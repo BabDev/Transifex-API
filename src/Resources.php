@@ -30,6 +30,8 @@ class Resources extends TransifexObject
      * @param array  $options  Optional additional params to send with the request
      *
      * @return ResponseInterface
+     *
+     * @throws \InvalidArgumentException
      */
     public function createResource(
         string $project,
