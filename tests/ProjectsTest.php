@@ -25,6 +25,7 @@ class ProjectsTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\Projects::checkLicense
      * @covers  \BabDev\Transifex\Projects::createProject
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testCreateProject()
@@ -63,6 +64,7 @@ class ProjectsTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\Projects::checkLicense
      * @covers  \BabDev\Transifex\Projects::createProject
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \GuzzleHttp\Exception\ServerException
@@ -81,6 +83,7 @@ class ProjectsTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\Projects::buildProjectRequest
      * @covers  \BabDev\Transifex\Projects::checkLicense
      * @covers  \BabDev\Transifex\Projects::createProject
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \InvalidArgumentException
@@ -97,6 +100,7 @@ class ProjectsTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\Projects::buildProjectRequest
      * @covers  \BabDev\Transifex\Projects::checkLicense
      * @covers  \BabDev\Transifex\Projects::createProject
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \InvalidArgumentException
@@ -112,6 +116,7 @@ class ProjectsTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Projects::deleteProject
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testDeleteProject()
@@ -128,6 +133,7 @@ class ProjectsTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Projects::deleteProject
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \GuzzleHttp\Exception\ServerException
@@ -144,6 +150,7 @@ class ProjectsTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Projects::getProject
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetProject()
@@ -169,6 +176,7 @@ class ProjectsTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Projects::getProject
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \GuzzleHttp\Exception\ServerException
@@ -185,6 +193,7 @@ class ProjectsTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Projects::getProjects
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetProjects()
@@ -201,6 +210,7 @@ class ProjectsTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Projects::getProjects
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \GuzzleHttp\Exception\ServerException
@@ -218,6 +228,7 @@ class ProjectsTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\Projects::checkLicense
      * @covers  \BabDev\Transifex\Projects::updateProject
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testUpdateProject()
@@ -249,6 +260,7 @@ class ProjectsTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\Projects::checkLicense
      * @covers  \BabDev\Transifex\Projects::updateProject
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \GuzzleHttp\Exception\ServerException
@@ -267,6 +279,7 @@ class ProjectsTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\Projects::buildProjectRequest
      * @covers  \BabDev\Transifex\Projects::checkLicense
      * @covers  \BabDev\Transifex\Projects::updateProject
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \RuntimeException
@@ -282,6 +295,7 @@ class ProjectsTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\Projects::buildProjectRequest
      * @covers  \BabDev\Transifex\Projects::checkLicense
      * @covers  \BabDev\Transifex\Projects::updateProject
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \InvalidArgumentException

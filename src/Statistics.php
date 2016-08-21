@@ -24,9 +24,9 @@ class Statistics extends TransifexObject
     /**
      * Get statistics on a specified resource.
      *
-     * @param string $project  The slug for the project to pull from.
-     * @param string $resource The slug for the resource to pull from.
-     * @param string $lang     An optional language code to return data only for a specified language.
+     * @param string $project  The slug for the project to pull from
+     * @param string $resource The slug for the resource to pull from
+     * @param string $lang     An optional language code to return data only for a specified language
      *
      * @return ResponseInterface
      */

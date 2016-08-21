@@ -161,8 +161,8 @@ class Resources extends TransifexObject
      *
      * @param string $project  The slug for the project the resource is part of
      * @param string $resource The resource slug within the project
-     * @param string $content  The content of the resource.  This can either be a string of data or a file path.
-     * @param string $type     The type of content in the $content variable.  This should be either string or file.
+     * @param string $content  The content of the resource, this can either be a string of data or a file path
+     * @param string $type     The type of content in the $content variable, this should be either string or file
      *
      * @return ResponseInterface
      */

@@ -23,6 +23,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Languages::createLanguage
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testCreateLanguage()
@@ -56,6 +57,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Languages::createLanguage
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \GuzzleHttp\Exception\ServerException
@@ -72,6 +74,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Languages::createLanguage
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \InvalidArgumentException
@@ -86,6 +89,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Languages::deleteLanguage
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testDeleteLanguage()
@@ -102,6 +106,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Languages::deleteLanguage
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \GuzzleHttp\Exception\ServerException
@@ -118,6 +123,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Languages::getCoordinators
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetCoordinators()
@@ -134,6 +140,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Languages::getCoordinators
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \GuzzleHttp\Exception\ServerException
@@ -150,6 +157,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Languages::getLanguage
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetLanguage()
@@ -166,6 +174,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Languages::getLanguage
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \GuzzleHttp\Exception\ServerException
@@ -182,6 +191,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Languages::getLanguages
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetLanguages()
@@ -198,6 +208,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Languages::getLanguages
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \GuzzleHttp\Exception\ServerException
@@ -214,6 +225,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Languages::getReviewers
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetReviewers()
@@ -230,6 +242,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Languages::getReviewers
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \GuzzleHttp\Exception\ServerException
@@ -246,6 +259,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Languages::getTranslators
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetTranslators()
@@ -262,6 +276,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Languages::getTranslators
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \GuzzleHttp\Exception\ServerException
@@ -279,6 +294,7 @@ class LanguagesTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\Languages::updateCoordinators
      * @covers  \BabDev\Transifex\Languages::updateTeam
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testUpdateCoordinators()
@@ -305,6 +321,7 @@ class LanguagesTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\Languages::updateCoordinators
      * @covers  \BabDev\Transifex\Languages::updateTeam
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \GuzzleHttp\Exception\ServerException
@@ -322,6 +339,7 @@ class LanguagesTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\Languages::updateCoordinators
      * @covers  \BabDev\Transifex\Languages::updateTeam
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \InvalidArgumentException
@@ -336,6 +354,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Languages::updateLanguage
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testUpdateLanguage()
@@ -359,6 +378,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Languages::updateLanguage
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \GuzzleHttp\Exception\ServerException
@@ -375,6 +395,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Languages::updateLanguage
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \InvalidArgumentException
@@ -390,6 +411,7 @@ class LanguagesTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\Languages::updateReviewers
      * @covers  \BabDev\Transifex\Languages::updateTeam
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testUpdateReviewers()
@@ -416,6 +438,7 @@ class LanguagesTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\Languages::updateReviewers
      * @covers  \BabDev\Transifex\Languages::updateTeam
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \GuzzleHttp\Exception\ServerException
@@ -433,6 +456,7 @@ class LanguagesTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\Languages::updateReviewers
      * @covers  \BabDev\Transifex\Languages::updateTeam
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \InvalidArgumentException
@@ -448,6 +472,7 @@ class LanguagesTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\Languages::updateTranslators
      * @covers  \BabDev\Transifex\Languages::updateTeam
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testUpdateTranslators()
@@ -474,6 +499,7 @@ class LanguagesTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\Languages::updateTranslators
      * @covers  \BabDev\Transifex\Languages::updateTeam
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \GuzzleHttp\Exception\ServerException
@@ -491,6 +517,7 @@ class LanguagesTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\Languages::updateTranslators
      * @covers  \BabDev\Transifex\Languages::updateTeam
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \InvalidArgumentException

@@ -11,9 +11,8 @@
 
 namespace BabDev\Transifex\Tests;
 
-use BabDev\Transifex\{
-    Formats, Transifex
-};
+use BabDev\Transifex\Formats;
+use BabDev\Transifex\Transifex;
 use GuzzleHttp\Client;
 
 /**
@@ -50,6 +49,7 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
      * @testdox __construct() with no injected client creates a Transifex instance with a default Client object
      *
      * @covers  \BabDev\Transifex\Transifex::__construct
+     *
      * @uses    \BabDev\Transifex\Transifex::getOption
      * @uses    \BabDev\Transifex\Transifex::setOption
      */
@@ -73,6 +73,7 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
      * @testdox get() throws an InvalidArgumentException for a non-existing object
      *
      * @covers  \BabDev\Transifex\Transifex::get
+     *
      * @uses    \BabDev\Transifex\Transifex::getOption
      *
      * @expectedException \InvalidArgumentException
@@ -86,6 +87,7 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
      * @testdox get() with the "formats" parameter returns an instance of the Formats object
      *
      * @covers  \BabDev\Transifex\Transifex::get
+     *
      * @uses    \BabDev\Transifex\Formats
      * @uses    \BabDev\Transifex\Transifex::__construct
      * @uses    \BabDev\Transifex\Transifex::getOption
@@ -103,6 +105,7 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
      * @testdox get() with a custom namespace defined and the "formats" parameter returns an instance of the custom Formats object
      *
      * @covers  \BabDev\Transifex\Transifex::get
+     *
      * @uses    \BabDev\Transifex\Formats
      * @uses    \BabDev\Transifex\Transifex::__construct
      * @uses    \BabDev\Transifex\Transifex::getOption
@@ -122,6 +125,7 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
      * @testdox get() with a custom namespace defined and the "formats" parameter and a class not found in the custom namespace returns an instance of the default Formats object
      *
      * @covers  \BabDev\Transifex\Transifex::get
+     *
      * @uses    \BabDev\Transifex\Formats
      * @uses    \BabDev\Transifex\Transifex::__construct
      * @uses    \BabDev\Transifex\Transifex::getOption
@@ -141,6 +145,7 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
      * @testdox get() with a custom namespace defined throws an InvalidArgumentException when the class is not found in either the custom or default namespace
      *
      * @covers  \BabDev\Transifex\Transifex::get
+     *
      * @uses    \BabDev\Transifex\Transifex::getOption
      *
      * @expectedException \InvalidArgumentException
@@ -156,6 +161,7 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
      *
      * @covers  \BabDev\Transifex\Transifex::getOption
      * @covers  \BabDev\Transifex\Transifex::setOption
+     *
      * @uses    \BabDev\Transifex\Transifex::__construct
      */
     public function testSetAndGetOption()

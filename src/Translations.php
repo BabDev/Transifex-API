@@ -24,10 +24,10 @@ class Translations extends TransifexObject
     /**
      * Get translations on a specified resource.
      *
-     * @param string $project  The slug for the project to pull from.
-     * @param string $resource The slug for the resource to pull from.
-     * @param string $lang     The language to return the translation for.
-     * @param string $mode     The mode of the downloaded file.
+     * @param string $project  The slug for the project to pull from
+     * @param string $resource The slug for the resource to pull from
+     * @param string $lang     The language to return the translation for
+     * @param string $mode     The mode of the downloaded file
      *
      * @return ResponseInterface
      */
@@ -52,9 +52,9 @@ class Translations extends TransifexObject
      *
      * @param string $project  The project the resource is part of
      * @param string $resource The resource slug within the project
-     * @param string $lang     The language to return the translation for.
-     * @param string $content  The content of the resource.  This can either be a string of data or a file path.
-     * @param string $type     The type of content in the $content variable.  This should be either string or file.
+     * @param string $lang     The language to return the translation for
+     * @param string $content  The content of the resource, this can either be a string of data or a file path
+     * @param string $type     The type of content in the $content variable, this should be either string or file
      *
      * @return ResponseInterface
      */

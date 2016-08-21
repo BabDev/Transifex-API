@@ -34,8 +34,8 @@ class Transifex
     protected $client;
 
     /**
-     * @param array           $options Transifex options array.
-     * @param ClientInterface $client  The HTTP client object.
+     * @param array           $options Transifex options array
+     * @param ClientInterface $client  The HTTP client object
      */
     public function __construct(array $options = [], ClientInterface $client = null)
     {
@@ -52,7 +52,7 @@ class Transifex
     /**
      * Factory method to fetch API objects.
      *
-     * @param string $name Name of the API object to retrieve.
+     * @param string $name Name of the API object to retrieve
      *
      * @return TransifexObject
      *
@@ -83,10 +83,10 @@ class Transifex
     /**
      * Get an option from the Transifex instance.
      *
-     * @param string $key     The name of the option to get.
-     * @param mixed  $default The default value if the option is not set.
+     * @param string $key     The name of the option to get
+     * @param mixed  $default The default value if the option is not set
      *
-     * @return mixed The option value.
+     * @return mixed The option value
      */
     public function getOption(string $key, $default = null)
     {
@@ -96,8 +96,8 @@ class Transifex
     /**
      * Set an option for the Transifex instance.
      *
-     * @param string $key   The name of the option to set.
-     * @param mixed  $value The option value to set.
+     * @param string $key   The name of the option to set
+     * @param mixed  $value The option value to set
      *
      * @return $this
      */

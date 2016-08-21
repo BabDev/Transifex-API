@@ -23,6 +23,7 @@ class FormatsTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Formats::getFormats
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetFormats()
@@ -39,6 +40,7 @@ class FormatsTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Formats::getFormats
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \GuzzleHttp\Exception\ServerException

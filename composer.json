@@ -15,7 +15,7 @@
         "guzzlehttp/guzzle": "^6.2.1"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "~1.11",
+        "friendsofphp/php-cs-fixer": "~1.12",
         "phpunit/phpunit": "~5.4"
     },
     "autoload": {

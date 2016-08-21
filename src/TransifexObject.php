@@ -36,8 +36,8 @@ abstract class TransifexObject
     protected $client;
 
     /**
-     * @param array           $options Transifex options array.
-     * @param ClientInterface $client  The HTTP client object.
+     * @param array           $options Transifex options array
+     * @param ClientInterface $client  The HTTP client object
      */
     public function __construct(array $options = [], ClientInterface $client = null)
     {
@@ -68,10 +68,10 @@ abstract class TransifexObject
     /**
      * Get an option from the options store.
      *
-     * @param string $key     The name of the option to get.
-     * @param mixed  $default The default value if the option is not set.
+     * @param string $key     The name of the option to get
+     * @param mixed  $default The default value if the option is not set
      *
-     * @return mixed The option value.
+     * @return mixed The option value
      */
     protected function getOption(string $key, $default = null)
     {
@@ -81,9 +81,9 @@ abstract class TransifexObject
     /**
      * Update an API endpoint with resource content.
      *
-     * @param UriInterface $uri     URI object representing the API path to request.
-     * @param string       $content The content of the resource.  This can either be a string of data or a file path.
-     * @param string       $type    The type of content in the $content variable.  This should be either string or file.
+     * @param UriInterface $uri     URI object representing the API path to request
+     * @param string       $content The content of the resource, this can either be a string of data or a file path
+     * @param string       $type    The type of content in the $content variable, this should be either string or file
      *
      * @return ResponseInterface
      *

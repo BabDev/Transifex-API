@@ -11,9 +11,8 @@
 
 namespace BabDev\Transifex\Tests;
 
-use BabDev\Transifex\{
-    Formats, TransifexObject
-};
+use BabDev\Transifex\Formats;
+use BabDev\Transifex\TransifexObject;
 use GuzzleHttp\Client;
 
 /**
@@ -78,6 +77,7 @@ class TransifexObjectTest extends \PHPUnit_Framework_TestCase
      *
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\TransifexObject::getOption
+     *
      * @uses    \BabDev\Transifex\Formats
      *
      * @expectedException \InvalidArgumentException

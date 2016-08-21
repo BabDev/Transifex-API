@@ -23,6 +23,7 @@ class LanguageinfoTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Languageinfo::getLanguage
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetLanguage()
@@ -39,6 +40,7 @@ class LanguageinfoTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Languageinfo::getLanguage
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \GuzzleHttp\Exception\ServerException
@@ -55,6 +57,7 @@ class LanguageinfoTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Languageinfo::getLanguages
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetLanguages()
@@ -71,6 +74,7 @@ class LanguageinfoTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Languageinfo::getLanguages
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \GuzzleHttp\Exception\ServerException

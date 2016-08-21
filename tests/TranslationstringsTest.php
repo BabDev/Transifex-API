@@ -23,6 +23,7 @@ class TranslationstringsTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Translationstrings::getPseudolocalizationStrings
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetPseudolocalizationStrings()
@@ -48,6 +49,7 @@ class TranslationstringsTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Translationstrings::getPseudolocalizationStrings
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \GuzzleHttp\Exception\ServerException
@@ -64,6 +66,7 @@ class TranslationstringsTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Translationstrings::getStrings
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetStrings()
@@ -80,6 +83,7 @@ class TranslationstringsTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Translationstrings::getStrings
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetStringsDetails()
@@ -105,6 +109,7 @@ class TranslationstringsTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Translationstrings::getStrings
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetStringsDetailsKey()
@@ -131,6 +136,7 @@ class TranslationstringsTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Translationstrings::getStrings
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetStringsDetailsKeyContext()
@@ -157,6 +163,7 @@ class TranslationstringsTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Translationstrings::getStrings
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetStringsKeyContext()
@@ -183,6 +190,7 @@ class TranslationstringsTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Translationstrings::getStrings
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetStringsContext()
@@ -209,6 +217,7 @@ class TranslationstringsTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Translationstrings::getStrings
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \GuzzleHttp\Exception\ServerException

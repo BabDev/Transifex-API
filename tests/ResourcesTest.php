@@ -23,6 +23,7 @@ class ResourcesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Resources::createResource
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testCreateResourceContent()
@@ -48,6 +49,7 @@ class ResourcesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Resources::createResource
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testCreateResourceFile()
@@ -73,6 +75,7 @@ class ResourcesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Resources::createResource
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \InvalidArgumentException
@@ -96,6 +99,7 @@ class ResourcesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Resources::createResource
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \GuzzleHttp\Exception\ServerException
@@ -113,6 +117,7 @@ class ResourcesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Resources::deleteResource
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testDeleteResource()
@@ -129,6 +134,7 @@ class ResourcesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Resources::deleteResource
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \GuzzleHttp\Exception\ServerException
@@ -145,6 +151,7 @@ class ResourcesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Resources::getResource
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetResource()
@@ -170,6 +177,7 @@ class ResourcesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Resources::getResource
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \GuzzleHttp\Exception\ServerException
@@ -186,6 +194,7 @@ class ResourcesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Resources::getResourceContent
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetResourceContent()
@@ -202,6 +211,7 @@ class ResourcesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Resources::getResourceContent
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \GuzzleHttp\Exception\ServerException
@@ -218,6 +228,7 @@ class ResourcesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Resources::getResources
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetResources()
@@ -234,6 +245,7 @@ class ResourcesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Resources::getResources
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \GuzzleHttp\Exception\ServerException
@@ -250,6 +262,7 @@ class ResourcesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Resources::updateResourceContent
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testUpdateResourceContentFile()
@@ -268,6 +281,7 @@ class ResourcesTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\Resources::updateResourceContent
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\TransifexObject::updateResource
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testUpdateResourceContentString()
@@ -286,6 +300,7 @@ class ResourcesTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\Resources::updateResourceContent
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\TransifexObject::updateResource
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \GuzzleHttp\Exception\ServerException
@@ -302,6 +317,7 @@ class ResourcesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Resources::updateResourceContent
      * @covers  \BabDev\Transifex\TransifexObject::updateResource
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \InvalidArgumentException
@@ -317,6 +333,7 @@ class ResourcesTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Resources::updateResourceContent
      * @covers  \BabDev\Transifex\TransifexObject::updateResource
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \InvalidArgumentException

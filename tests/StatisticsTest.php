@@ -23,6 +23,7 @@ class StatisticsTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Statistics::getStatistics
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetStatistics()
@@ -39,6 +40,7 @@ class StatisticsTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Statistics::getStatistics
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \GuzzleHttp\Exception\ServerException

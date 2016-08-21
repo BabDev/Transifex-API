@@ -23,6 +23,7 @@ class TranslationsTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Translations::getTranslation
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testGetTranslation()
@@ -48,6 +49,7 @@ class TranslationsTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Translations::getTranslation
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \GuzzleHttp\Exception\ServerException
@@ -65,6 +67,7 @@ class TranslationsTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\TransifexObject::updateResource
      * @covers  \BabDev\Transifex\Translations::updateTranslation
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testUpdateTranslationFile()
@@ -83,6 +86,7 @@ class TranslationsTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\TransifexObject::updateResource
      * @covers  \BabDev\Transifex\Translations::updateTranslation
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      */
     public function testUpdateTranslationString()
@@ -101,6 +105,7 @@ class TranslationsTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\TransifexObject::updateResource
      * @covers  \BabDev\Transifex\Translations::updateTranslation
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \GuzzleHttp\Exception\ServerException
@@ -118,6 +123,7 @@ class TranslationsTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\TransifexObject::updateResource
      * @covers  \BabDev\Transifex\Translations::updateTranslation
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \InvalidArgumentException
@@ -133,6 +139,7 @@ class TranslationsTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\TransifexObject::updateResource
      * @covers  \BabDev\Transifex\Translations::updateTranslation
+     *
      * @uses    \BabDev\Transifex\TransifexObject
      *
      * @expectedException \InvalidArgumentException

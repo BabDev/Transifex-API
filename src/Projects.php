@@ -142,7 +142,7 @@ class Projects extends TransifexObject
     /**
      * Delete a project.
      *
-     * @param string $slug The slug for the resource.
+     * @param string $slug The slug for the resource
      *
      * @return ResponseInterface
      */

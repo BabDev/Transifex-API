@@ -24,8 +24,8 @@ class Translationstrings extends TransifexObject
     /**
      * Method to get pseudolocalization strings on a specified resource.
      *
-     * @param string $project  The slug for the project to pull from.
-     * @param string $resource The slug for the resource to pull from.
+     * @param string $project  The slug for the project to pull from
+     * @param string $resource The slug for the resource to pull from
      *
      * @return ResponseInterface
      */
@@ -41,9 +41,9 @@ class Translationstrings extends TransifexObject
     /**
      * Method to get the translation strings on a specified resource.
      *
-     * @param string $project  The slug for the project to pull from.
-     * @param string $resource The slug for the resource to pull from.
-     * @param string $lang     The language to return the translation for.
+     * @param string $project  The slug for the project to pull from
+     * @param string $resource The slug for the resource to pull from
+     * @param string $lang     The language to return the translation for
      * @param bool   $details  Flag to retrieve additional details on the strings
      * @param array  $options  An array of additional options for the request
      *
