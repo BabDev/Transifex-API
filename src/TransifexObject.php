@@ -95,8 +95,18 @@ abstract class TransifexObject
             throw new \InvalidArgumentException('The content type must be specified as file or string.');
         }
 
+        if ($type == 'file') {
+            if (!file_exists($content)) {
+                throw new \InvalidArgumentException(
+                    sprintf('The specified file, "%s", does not exist.', $content)
+                );
+            }
+
+            $content = file_get_contents($content);
+        }
+
         $data = [
-            'content' => ($type == 'string') ? $content : file_get_contents($content),
+            'content' => $content,
         ];
 
         return $this->client->request(

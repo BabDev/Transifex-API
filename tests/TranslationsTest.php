@@ -127,4 +127,19 @@ class TranslationsTest extends TransifexTestCase
         (new Translations($this->options, $this->client))->updateTranslation('babdev', 'babdev-transifex', 'en_US',
             'TEST="Test"', 'stuff');
     }
+
+    /**
+     * @testdox updateTranslation() throws an InvalidArgumentException when a non-existing file is specified
+     *
+     * @covers  \BabDev\Transifex\TransifexObject::updateResource
+     * @covers  \BabDev\Transifex\Translations::updateTranslation
+     * @uses    \BabDev\Transifex\TransifexObject
+     *
+     * @expectedException \InvalidArgumentException
+     */
+    public function testUpdateTranslationUnexistingFile()
+    {
+        (new Translations($this->options, $this->client))->updateTranslation('babdev', 'babdev-transifex', 'en_US',
+            __DIR__ . '/stubs/does-not-exist.ini', 'file');
+    }
 }

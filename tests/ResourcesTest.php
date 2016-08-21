@@ -69,6 +69,29 @@ class ResourcesTest extends TransifexTestCase
     }
 
     /**
+     * @testdox createResource() with an attached file in the options that does not exist throws an InvalidArgumentException
+     *
+     * @covers  \BabDev\Transifex\Resources::createResource
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     * @uses    \BabDev\Transifex\TransifexObject
+     *
+     * @expectedException \InvalidArgumentException
+     */
+    public function testCreateResourceFileDoesNotExist()
+    {
+        // Additional options
+        $options = [
+            'accept_translations' => true,
+            'category'            => 'whatever',
+            'priority'            => 3,
+            'file'                => __DIR__ . '/stubs/does-not-exist.ini',
+        ];
+
+        (new Resources($this->options, $this->client))->createResource('babdev-transifex', 'BabDev Transifex Data',
+            'babdev-transifex', 'INI', $options);
+    }
+
+    /**
      * @testdox createResource() throws a ServerException on a failed API connection
      *
      * @covers  \BabDev\Transifex\Resources::createResource
@@ -287,5 +310,20 @@ class ResourcesTest extends TransifexTestCase
     {
         (new Resources($this->options, $this->client))->updateResourceContent('babdev', 'babdev-transifex',
             'TEST="Test"', 'stuff');
+    }
+
+    /**
+     * @testdox updateResourceContent() throws an InvalidArgumentException when a non-existing file is specified
+     *
+     * @covers  \BabDev\Transifex\Resources::updateResourceContent
+     * @covers  \BabDev\Transifex\TransifexObject::updateResource
+     * @uses    \BabDev\Transifex\TransifexObject
+     *
+     * @expectedException \InvalidArgumentException
+     */
+    public function testUpdateResourceContentUnexistingFile()
+    {
+        (new Resources($this->options, $this->client))->updateResourceContent('babdev', 'babdev-transifex',
+            __DIR__ . '/stubs/does-not-exist.ini', 'file');
     }
 }

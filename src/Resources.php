@@ -48,25 +48,30 @@ class Resources extends TransifexObject
             'i18n_type' => $fileType,
         ];
 
-        // Set the accept translations flag if provided
-        if (isset($options['accept_translations'])) {
-            $data['accept_translations'] = $options['accept_translations'];
+        // Valid options to check
+        $validOptions = [
+            'accept_translations',
+            'category',
+            'priority',
+        ];
+
+        // Loop through the valid options and if we have them, add them to the request data
+        foreach ($validOptions as $option) {
+            if (isset($options[$option])) {
+                $data[$option] = $options[$option];
+            }
         }
 
-        // Set the resource category if provided
-        if (isset($options['category'])) {
-            $data['category'] = $options['category'];
-        }
-
-        // Set a resource priority if provided
-        if (isset($options['priority'])) {
-            $data['priority'] = $options['priority'];
-        }
-
-        // Attach the resource data if provided as a string
+        // Attach the resource data - it should be in the content key if this is a string or the file key if it's a file
         if (isset($options['content'])) {
             $data['content'] = $options['content'];
         } elseif (isset($options['file'])) {
+            if (!file_exists($options['file'])) {
+                throw new \InvalidArgumentException(
+                    sprintf('The specified file, "%s", does not exist.', $options['file'])
+                );
+            }
+
             $data['content'] = file_get_contents($options['file']);
         }
 
