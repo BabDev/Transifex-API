@@ -183,13 +183,13 @@ class Projects extends TransifexObject
      * Update a project.
      *
      * @param string $slug    The slug for the project
-     * @param array  $options Optional additional params to send with the request
+     * @param array  $options Additional params to send with the request
      *
      * @return ResponseInterface
      *
      * @throws \RuntimeException
      */
-    public function updateProject(string $slug, array $options = []) : ResponseInterface
+    public function updateProject(string $slug, array $options) : ResponseInterface
     {
         $data = $this->buildProjectRequest($options);
 

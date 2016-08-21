@@ -273,7 +273,7 @@ class ProjectsTest extends TransifexTestCase
      */
     public function testUpdateProjectRuntimeException()
     {
-        (new Projects($this->options, $this->client))->updateProject('babdev-transifex');
+        (new Projects($this->options, $this->client))->updateProject('babdev-transifex', []);
     }
 
     /**
