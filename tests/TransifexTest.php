@@ -129,7 +129,7 @@ class TransifexTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetFormatsInCustomNamespaceWhenNotFound()
     {
-        $this->object->setOption('object.namespace', 'BabDev\Transifex\Tests');
+        $this->object->setOption('object.namespace', 'BabDev\Transifex\Tests\\');
 
         $this->assertInstanceOf(
             Formats::class,

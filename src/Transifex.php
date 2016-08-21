@@ -60,7 +60,7 @@ class Transifex
      */
     public function get(string $name) : TransifexObject
     {
-        $namespace = $this->getOption('object.namespace', __NAMESPACE__);
+        $namespace = rtrim($this->getOption('object.namespace', __NAMESPACE__), '\\');
         $class     = $namespace . '\\' . ucfirst(strtolower($name));
 
         if (class_exists($class)) {
