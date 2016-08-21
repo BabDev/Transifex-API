@@ -11,6 +11,7 @@
 
 namespace BabDev\Transifex;
 
+use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -31,8 +32,10 @@ class Statistics extends TransifexObject
      */
     public function getStatistics(string $project, string $resource, string $lang = '') : ResponseInterface
     {
-        $path = "project/$project/resource/$resource/stats/$lang";
-
-        return $this->client->request('GET', "/api/2/$path", ['auth' => $this->getAuthData()]);
+        return $this->client->request(
+            'GET',
+            new Uri("/api/2/project/$project/resource/$resource/stats/$lang"),
+            ['auth' => $this->getAuthData()]
+        );
     }
 }

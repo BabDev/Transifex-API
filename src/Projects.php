@@ -11,6 +11,7 @@
 
 namespace BabDev\Transifex;
 
+use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -129,7 +130,7 @@ class Projects extends TransifexObject
 
         return $this->client->request(
             'POST',
-            '/api/2/projects/',
+            new Uri('/api/2/projects/'),
             [
                 'body'    => json_encode($data),
                 'auth'    => $this->getAuthData(),
@@ -147,7 +148,7 @@ class Projects extends TransifexObject
      */
     public function deleteProject(string $slug) : ResponseInterface
     {
-        return $this->client->request('DELETE', "/api/2/project/$slug", ['auth' => $this->getAuthData()]);
+        return $this->client->request('DELETE', new Uri("/api/2/project/$slug"), ['auth' => $this->getAuthData()]);
     }
 
     /**
@@ -160,13 +161,13 @@ class Projects extends TransifexObject
      */
     public function getProject(string $project, bool $details = false) : ResponseInterface
     {
-        $path = "project/$project/";
+        $uri = new Uri("/api/2/project/$project/");
 
         if ($details) {
-            $path .= '?details';
+            $uri = Uri::withQueryValue($uri, 'details', null);
         }
 
-        return $this->client->request('GET', "/api/2/$path", ['auth' => $this->getAuthData()]);
+        return $this->client->request('GET', $uri, ['auth' => $this->getAuthData()]);
     }
 
     /**
@@ -176,7 +177,7 @@ class Projects extends TransifexObject
      */
     public function getProjects() : ResponseInterface
     {
-        return $this->client->request('GET', '/api/2/projects/', ['auth' => $this->getAuthData()]);
+        return $this->client->request('GET', new Uri('/api/2/projects/'), ['auth' => $this->getAuthData()]);
     }
 
     /**
@@ -200,7 +201,7 @@ class Projects extends TransifexObject
 
         return $this->client->request(
             'PUT',
-            "/api/2/project/$slug/",
+            new Uri("/api/2/project/$slug/"),
             [
                 'body'    => json_encode($data),
                 'auth'    => $this->getAuthData(),

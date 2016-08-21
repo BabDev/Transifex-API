@@ -11,6 +11,7 @@
 
 namespace BabDev\Transifex;
 
+use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -30,9 +31,11 @@ class Translationstrings extends TransifexObject
      */
     public function getPseudolocalizationStrings(string $project, string $resource) : ResponseInterface
     {
-        $path = "project/$project/resource/$resource/pseudo/?pseudo_type=MIXED";
-
-        return $this->client->request('GET', "/api/2/$path", ['auth' => $this->getAuthData()]);
+        return $this->client->request(
+            'GET',
+            new Uri("/api/2/project/$project/resource/$resource/pseudo/?pseudo_type=MIXED"),
+            ['auth' => $this->getAuthData()]
+        );
     }
 
     /**
@@ -53,20 +56,20 @@ class Translationstrings extends TransifexObject
         bool $details = false,
         array $options = []
     ) : ResponseInterface {
-        $path = "project/$project/resource/$resource/translation/$lang/strings/";
+        $uri = new Uri("/api/2/project/$project/resource/$resource/translation/$lang/strings/");
 
         if ($details) {
-            $path .= '?details';
+            $uri = Uri::withQueryValue($uri, 'details', null);
         }
 
         if (isset($options['key'])) {
-            $path .= (strpos($path, '?') === false ? '?' : '&') . 'key=' . $options['key'];
+            $uri = Uri::withQueryValue($uri, 'key', $options['key']);
         }
 
         if (isset($options['context'])) {
-            $path .= (strpos($path, '?') === false ? '?' : '&') . 'context=' . $options['context'];
+            $uri = Uri::withQueryValue($uri, 'context', $options['context']);
         }
 
-        return $this->client->request('GET', "/api/2/$path", ['auth' => $this->getAuthData()]);
+        return $this->client->request('GET', $uri, ['auth' => $this->getAuthData()]);
     }
 }

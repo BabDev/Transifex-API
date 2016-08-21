@@ -11,6 +11,7 @@
 
 namespace BabDev\Transifex;
 
+use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -29,7 +30,7 @@ class Languageinfo extends TransifexObject
      */
     public function getLanguage(string $lang) : ResponseInterface
     {
-        return $this->client->request('GET', "/api/2/language/$lang/", ['auth' => $this->getAuthData()]);
+        return $this->client->request('GET', new Uri("/api/2/language/$lang/"), ['auth' => $this->getAuthData()]);
     }
 
     /**
@@ -39,6 +40,6 @@ class Languageinfo extends TransifexObject
      */
     public function getLanguages() : ResponseInterface
     {
-        return $this->client->request('GET', '/api/2/languages/', ['auth' => $this->getAuthData()]);
+        return $this->client->request('GET', new Uri('/api/2/languages/'), ['auth' => $this->getAuthData()]);
     }
 }

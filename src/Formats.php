@@ -11,6 +11,7 @@
 
 namespace BabDev\Transifex;
 
+use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -27,6 +28,6 @@ class Formats extends TransifexObject
      */
     public function getFormats() : ResponseInterface
     {
-        return $this->client->request('GET', '/api/2/formats', ['auth' => $this->getAuthData()]);
+        return $this->client->request('GET', new Uri('/api/2/formats'), ['auth' => $this->getAuthData()]);
     }
 }

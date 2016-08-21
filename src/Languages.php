@@ -11,6 +11,7 @@
 
 namespace BabDev\Transifex;
 
+use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -45,12 +46,10 @@ class Languages extends TransifexObject
             throw new \InvalidArgumentException('The coordinators array must contain at least one username.');
         }
 
-        // Build the request path.
-        $path = "project/$slug/languages/";
+        $uri = new Uri("/api/2/project/$slug/languages/");
 
-        // Check if invalid usernames should be skipped
         if ($skipInvalidUsername) {
-            $path .= '?skip_invalid_username';
+            $uri = Uri::withQueryValue($uri, 'skip_invalid_username', null);
         }
 
         // Build the required request data.
@@ -71,7 +70,7 @@ class Languages extends TransifexObject
 
         return $this->client->request(
             'POST',
-            "/api/2/$path",
+            $uri,
             [
                 'body'    => json_encode($data),
                 'auth'    => $this->getAuthData(),
@@ -90,9 +89,11 @@ class Languages extends TransifexObject
      */
     public function deleteLanguage(string $project, string $langCode) : ResponseInterface
     {
-        $path = "project/$project/language/$langCode/";
-
-        return $this->client->request('DELETE', "/api/2/$path", ['auth' => $this->getAuthData()]);
+        return $this->client->request(
+            'DELETE',
+            new Uri("/api/2/project/$project/language/$langCode/"),
+            ['auth' => $this->getAuthData()]
+        );
     }
 
     /**
@@ -105,9 +106,11 @@ class Languages extends TransifexObject
      */
     public function getCoordinators(string $project, string $langCode) : ResponseInterface
     {
-        $path = "project/$project/language/$langCode/coordinators/";
-
-        return $this->client->request('GET', "/api/2/$path", ['auth' => $this->getAuthData()]);
+        return $this->client->request(
+            'GET',
+            new Uri("/api/2/project/$project/language/$langCode/coordinators/"),
+            ['auth' => $this->getAuthData()]
+        );
     }
 
     /**
@@ -120,9 +123,11 @@ class Languages extends TransifexObject
      */
     public function getLanguage(string $project, string $langCode) : ResponseInterface
     {
-        $path = "project/$project/language/$langCode/";
-
-        return $this->client->request('GET', "/api/2/$path", ['auth' => $this->getAuthData()]);
+        return $this->client->request(
+            'GET',
+            new Uri("/api/2/project/$project/language/$langCode/"),
+            ['auth' => $this->getAuthData()]
+        );
     }
 
     /**
@@ -134,9 +139,11 @@ class Languages extends TransifexObject
      */
     public function getLanguages(string $project) : ResponseInterface
     {
-        $path = "project/$project/languages/";
-
-        return $this->client->request('GET', "/api/2/$path", ['auth' => $this->getAuthData()]);
+        return $this->client->request(
+            'GET',
+            new Uri("/api/2/project/$project/languages/"),
+            ['auth' => $this->getAuthData()]
+        );
     }
 
     /**
@@ -149,9 +156,11 @@ class Languages extends TransifexObject
      */
     public function getReviewers(string $project, string $langCode) : ResponseInterface
     {
-        $path = "project/$project/language/$langCode/reviewers/";
-
-        return $this->client->request('GET', "/api/2/$path", ['auth' => $this->getAuthData()]);
+        return $this->client->request(
+            'GET',
+            new Uri("/api/2/project/$project/language/$langCode/reviewers/"),
+            ['auth' => $this->getAuthData()]
+        );
     }
 
     /**
@@ -164,9 +173,11 @@ class Languages extends TransifexObject
      */
     public function getTranslators(string $project, string $langCode) : ResponseInterface
     {
-        $path = "project/$project/language/$langCode/translators/";
-
-        return $this->client->request('GET', "/api/2/$path", ['auth' => $this->getAuthData()]);
+        return $this->client->request(
+            'GET',
+            new Uri("/api/2/project/$project/language/$langCode/translators/"),
+            ['auth' => $this->getAuthData()]
+        );
     }
 
     /**
@@ -211,9 +222,6 @@ class Languages extends TransifexObject
             throw new \InvalidArgumentException('The coordinators array must contain at least one username.');
         }
 
-        // Build the request path.
-        $path = "project/$slug/language/$langCode/";
-
         // Build the required request data.
         $data = ['coordinators' => $coordinators];
 
@@ -229,7 +237,7 @@ class Languages extends TransifexObject
 
         return $this->client->request(
             'PUT',
-            "/api/2/$path",
+            new Uri("/api/2/project/$slug/language/$langCode/"),
             [
                 'body'    => json_encode($data),
                 'auth'    => $this->getAuthData(),
@@ -273,17 +281,15 @@ class Languages extends TransifexObject
             throw new \InvalidArgumentException("The $team array must contain at least one username.");
         }
 
-        // Build the request path.
-        $path = "project/$project/language/$langCode/$team/";
+        $uri = new Uri("/api/2/project/$project/language/$langCode/$team/");
 
-        // Check if invalid usernames should be skipped
         if ($skipInvalidUsername) {
-            $path .= '?skip_invalid_username';
+            $uri = Uri::withQueryValue($uri, 'skip_invalid_username', null);
         }
 
         return $this->client->request(
             'PUT',
-            "/api/2/$path",
+            $uri,
             [
                 'body'    => json_encode($members),
                 'auth'    => $this->getAuthData(),

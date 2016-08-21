@@ -14,6 +14,7 @@ namespace BabDev\Transifex;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\UriInterface;
 
 /**
  * Transifex API object class.
@@ -80,15 +81,15 @@ abstract class TransifexObject
     /**
      * Update an API endpoint with resource content.
      *
-     * @param string $path    API path
-     * @param string $content The content of the resource.  This can either be a string of data or a file path.
-     * @param string $type    The type of content in the $content variable.  This should be either string or file.
+     * @param UriInterface $uri     URI object representing the API path to request.
+     * @param string       $content The content of the resource.  This can either be a string of data or a file path.
+     * @param string       $type    The type of content in the $content variable.  This should be either string or file.
      *
      * @return ResponseInterface
      *
      * @throws \InvalidArgumentException
      */
-    protected function updateResource(string $path, string $content, string $type) : ResponseInterface
+    protected function updateResource(UriInterface $uri, string $content, string $type) : ResponseInterface
     {
         // Verify the content type is allowed
         if (!in_array($type, ['string', 'file'])) {
@@ -111,7 +112,7 @@ abstract class TransifexObject
 
         return $this->client->request(
             'PUT',
-            "/api/2/$path",
+            $uri,
             [
                 'body'    => json_encode($data),
                 'auth'    => $this->getAuthData(),
