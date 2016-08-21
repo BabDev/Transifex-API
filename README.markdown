@@ -6,7 +6,7 @@ Transifex API Package [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/
 [![Latest Unstable Version](https://poser.pugx.org/babdev/transifex/v/unstable.svg)](https://packagist.org/packages/babdev/transifex)
 [![License](https://poser.pugx.org/babdev/transifex/license.svg)](https://packagist.org/packages/babdev/transifex)
 
-The *Transifex API Package* wrapping the Transifex API for easy use.
+The *Transifex API Package* is a PHP client for accessing the [Transifex API](http://docs.transifex.com/api/).
 
 Requirements
 ------------
@@ -17,7 +17,7 @@ Requirements
 * Development
     * [PHPUnit](http://phpunit.de/)
     * [PHP Coding Standards Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer)
-    
+
 Documentation
 -------------
 
