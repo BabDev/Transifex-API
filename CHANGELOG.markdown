@@ -1,12 +1,12 @@
 CHANGELOG for the Transifex API Package
 ===============
 
-* 2.0.0
+* 2.0.0 (2016-12-21)
 
  * Dropped support for PHP 5.x, PHP 7.0 is the minimum requirement
- * Replace `joomla/http` package with `guzzlehttp/guzzle` for HTTP adapter 
+ * Replace `joomla/http` package with `guzzlehttp/guzzle` for HTTP adapter
  * Add support for custom namespaces to `Transifex::get()`
- * Refactor API connector methods to return a full `Joomla\Http\Response` object
+ * Refactor API connector methods to return a full `Psr\Http\Message\ResponseInterface` object
  * Removed magic getter in `Transifex` and associated class member vars
  * Support a default option in `Transifex::getOption()`
  * `Translationstrings::getStrings()` now typehints the `$options` parameter
