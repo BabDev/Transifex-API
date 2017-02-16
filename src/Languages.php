@@ -124,11 +124,15 @@ class Languages extends TransifexObject
      */
     public function getLanguage(string $project, string $langCode, bool $details = false) : ResponseInterface
     {
-        $flag = $details ? '?details' : '';
+        $uri = new Uri("/api/2/project/$project/language/$langCode/");
+
+        if ($details) {
+            $uri = Uri::withQueryValue($uri, 'details', null);
+        }
 
         return $this->client->request(
             'GET',
-            new Uri("/api/2/project/$project/language/$langCode/$flag"),
+            $uri,
             ['auth' => $this->getAuthData()]
         );
     }
