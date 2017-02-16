@@ -183,7 +183,16 @@ class LanguagesTest extends TransifexTestCase
 
         (new Languages($this->options, $this->client))->getLanguage('babdev-transifex', 'en_US', true);
 
-        $this->validateSuccessTest('/api/2/project/babdev-transifex/language/en_US/?details');
+        $this->validateSuccessTest('/api/2/project/babdev-transifex/language/en_US/');
+
+        /** @var \Psr\Http\Message\RequestInterface $request */
+        $request = $this->historyContainer[0]['request'];
+
+        $this->assertSame(
+            'details',
+            $request->getUri()->getQuery(),
+            'The API request did not include the expected query string.'
+        );
     }
 
     /**
