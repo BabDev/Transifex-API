@@ -118,14 +118,17 @@ class Languages extends TransifexObject
      *
      * @param string $project  The project to retrieve details for
      * @param string $langCode The language code to retrieve details for
+     * @param bool   $details  True to add the ?details fragment
      *
      * @return ResponseInterface
      */
-    public function getLanguage(string $project, string $langCode) : ResponseInterface
+    public function getLanguage(string $project, string $langCode, bool $details = false) : ResponseInterface
     {
+        $flag = $details ? '?details' : '';
+
         return $this->client->request(
             'GET',
-            new Uri("/api/2/project/$project/language/$langCode/"),
+            new Uri("/api/2/project/$project/language/$langCode/$flag"),
             ['auth' => $this->getAuthData()]
         );
     }
