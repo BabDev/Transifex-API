@@ -12,11 +12,10 @@ Requirements
 ------------
 
 * Production
-    * [Guzzle HTTP](https://github.com/guzzle/guzzle) client
     * PHP 7.0 or later
+    * [Guzzle HTTP](https://github.com/guzzle/guzzle) client
 * Development
     * [PHPUnit](http://phpunit.de/)
-    * [PHP Coding Standards Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer)
 
 Documentation
 -------------
