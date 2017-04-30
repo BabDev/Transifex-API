@@ -81,6 +81,16 @@ use BabDev\Transifex\Transifex;
 $apiResponse = (new Transifex())->get('languages')->getLanguage('my-project', 'en-US');
 ```
 
+This method also has one optional parameter to add the `?details` fragment:
+
+* True to add the `?details` fragment (bool)
+
+```php
+use BabDev\Transifex\Transifex;
+
+$apiResponse = (new Transifex())->get('languages')->getLanguage('my-project', 'en-US', true);
+```
+
 ### Get the project's languages
 
 To get the project's languages, call the `Languages::getLanguages()` method.

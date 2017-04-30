@@ -170,6 +170,32 @@ class LanguagesTest extends TransifexTestCase
     }
 
     /**
+     * @testdox getLanguage() returns a Response object on a successful API connection
+     *
+     * @covers  \BabDev\Transifex\Languages::getLanguage
+     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     *
+     * @uses    \BabDev\Transifex\TransifexObject
+     */
+    public function testGetLanguageWithDetails()
+    {
+        $this->prepareSuccessTest();
+
+        (new Languages($this->options, $this->client))->getLanguage('babdev-transifex', 'en_US', true);
+
+        $this->validateSuccessTest('/api/2/project/babdev-transifex/language/en_US/');
+
+        /** @var \Psr\Http\Message\RequestInterface $request */
+        $request = $this->historyContainer[0]['request'];
+
+        $this->assertSame(
+            'details',
+            $request->getUri()->getQuery(),
+            'The API request did not include the expected query string.'
+        );
+    }
+
+    /**
      * @testdox getLanguage() throws a ServerException on a failed API connection
      *
      * @covers  \BabDev\Transifex\Languages::getLanguage
