@@ -14,11 +14,12 @@ namespace BabDev\Transifex\Tests;
 use BabDev\Transifex\Formats;
 use BabDev\Transifex\TransifexObject;
 use GuzzleHttp\Client;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Test class for \BabDev\Transifex\TransifexObject.
  */
-class TransifexObjectTest extends \PHPUnit_Framework_TestCase
+class TransifexObjectTest extends TestCase
 {
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject|Client

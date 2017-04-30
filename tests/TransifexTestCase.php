@@ -16,11 +16,12 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
 use GuzzleHttp\Psr7\Response;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Abstract test case for TransifexObject instances.
  */
-abstract class TransifexTestCase extends \PHPUnit_Framework_TestCase
+abstract class TransifexTestCase extends TestCase
 {
     /**
      * @var array
