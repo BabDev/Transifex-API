@@ -55,7 +55,7 @@ abstract class TransifexObject
      */
     protected function createUri(string $path) : Uri
     {
-        $baseUrl = $this->getOption('base_url', 'https://www.transifex.com');
+        $baseUrl = $this->getOption('base_uri', 'https://www.transifex.com');
 
         return new Uri($baseUrl.$path);
     }

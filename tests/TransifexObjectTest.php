@@ -77,7 +77,7 @@ class TransifexObjectTest extends TransifexTestCase
     {
         $this->prepareSuccessTest();
 
-        $this->options['base_url'] = 'https://api.transifex.com';
+        $this->options['base_uri'] = 'https://api.transifex.com';
 
         (new Formats($this->options, $this->client))->getFormats();
 
