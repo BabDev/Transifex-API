@@ -1,6 +1,10 @@
 CHANGELOG for the Transifex API Package
 ===============
 
+* 2.1.1 (2018-03-10)
+
+ * Code incorrectly referenced `base_url` as the option name versus `base_uri`
+
 * 2.1.0 (2018-03-10)
 
  * [#7](https://github.com/BabDev/Transifex-API/pulls/7) Add the ?details fragment when retrieving language details
