@@ -1,6 +1,11 @@
 CHANGELOG for the Transifex API Package
 ===============
 
+* 2.1.0 (2018-03-10)
+
+ * [#7](https://github.com/BabDev/Transifex-API/pulls/7) Add the ?details fragment when retrieving language details
+ * [#9](https://github.com/BabDev/Transifex-API/issues/9) The base_url option is not taken into account when issuing requests
+
 * 2.0.0 (2016-12-21)
 
  * Dropped support for PHP 5.x, PHP 7.0 is the minimum requirement
