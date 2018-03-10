@@ -38,7 +38,7 @@ Below is a list of options that are supported in the `Transifex` object and API 
 
 - 'api.username' - The username of the user account you are using to authenticate to the Transifex API
 - 'api.password' - The password of the user account you are using to authenticate to the Transifex API
-- 'base_url' - The base API URL for connecting to the Transifex API, this typically should remain unchanged
+- 'base_uri' - The base API URL for connecting to the Transifex API, this typically should remain unchanged
 - 'object.namespace' - A custom base namespace to locate `TransifexObject` implementations in
 
 Please refer to the [Guzzle documentation](http://docs.guzzlephp.org/en/latest/) for information on how to configure the Guzzle HTTP client.
