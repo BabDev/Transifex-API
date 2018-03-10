@@ -77,7 +77,7 @@ class Resources extends TransifexObject
 
         return $this->client->request(
             'POST',
-            new Uri("/api/2/project/$project/resources/"),
+            $this->createUri("/api/2/project/$project/resources/"),
             [
                 'body'    => json_encode($data),
                 'auth'    => $this->getAuthData(),
@@ -98,7 +98,7 @@ class Resources extends TransifexObject
     {
         return $this->client->request(
             'DELETE',
-            new Uri("/api/2/project/$project/resource/$resource"),
+            $this->createUri("/api/2/project/$project/resource/$resource"),
             ['auth' => $this->getAuthData()]
         );
     }
@@ -114,7 +114,7 @@ class Resources extends TransifexObject
      */
     public function getResource(string $project, string $resource, bool $details = false) : ResponseInterface
     {
-        $uri = new Uri("/api/2/project/$project/resource/$resource/");
+        $uri = $this->createUri("/api/2/project/$project/resource/$resource/");
 
         if ($details) {
             $uri = Uri::withQueryValue($uri, 'details', null);
@@ -135,7 +135,7 @@ class Resources extends TransifexObject
     {
         return $this->client->request(
             'GET',
-            new Uri("/api/2/project/$project/resource/$resource/content/"),
+            $this->createUri("/api/2/project/$project/resource/$resource/content/"),
             ['auth' => $this->getAuthData()]
         );
     }
@@ -151,7 +151,7 @@ class Resources extends TransifexObject
     {
         return $this->client->request(
             'GET',
-            new Uri("/api/2/project/$project/resources"),
+            $this->createUri("/api/2/project/$project/resources"),
             ['auth' => $this->getAuthData()]
         );
     }
@@ -172,6 +172,6 @@ class Resources extends TransifexObject
         string $content,
         string $type = 'string'
     ) : ResponseInterface {
-        return $this->updateResource(new Uri("/api/2/project/$project/resource/$resource/content/"), $content, $type);
+        return $this->updateResource($this->createUri("/api/2/project/$project/resource/$resource/content/"), $content, $type);
     }
 }

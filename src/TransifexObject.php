@@ -13,6 +13,7 @@ namespace BabDev\Transifex;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriInterface;
 
@@ -46,6 +47,20 @@ abstract class TransifexObject
     }
 
     /**
+     * Create a Uri object for the path
+     *
+     * @param string $path
+     *
+     * @return Uri
+     */
+    protected function createUri(string $path) : Uri
+    {
+        $baseUrl = $this->getOption('base_url', 'https://www.transifex.com');
+
+        return new Uri($baseUrl.$path);
+    }
+
+    /**
      * Get the authentication credentials for the API request.
      *
      * @return array
@@ -75,7 +90,7 @@ abstract class TransifexObject
      */
     protected function getOption(string $key, $default = null)
     {
-        return isset($this->options[$key]) ? $this->options[$key] : $default;
+        return $this->options[$key] ?? $default;
     }
 
     /**

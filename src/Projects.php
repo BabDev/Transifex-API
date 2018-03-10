@@ -130,7 +130,7 @@ class Projects extends TransifexObject
 
         return $this->client->request(
             'POST',
-            new Uri('/api/2/projects/'),
+            $this->createUri('/api/2/projects/'),
             [
                 'body'    => json_encode($data),
                 'auth'    => $this->getAuthData(),
@@ -148,7 +148,7 @@ class Projects extends TransifexObject
      */
     public function deleteProject(string $slug) : ResponseInterface
     {
-        return $this->client->request('DELETE', new Uri("/api/2/project/$slug"), ['auth' => $this->getAuthData()]);
+        return $this->client->request('DELETE', $this->createUri("/api/2/project/$slug"), ['auth' => $this->getAuthData()]);
     }
 
     /**
@@ -161,7 +161,7 @@ class Projects extends TransifexObject
      */
     public function getProject(string $project, bool $details = false) : ResponseInterface
     {
-        $uri = new Uri("/api/2/project/$project/");
+        $uri = $this->createUri("/api/2/project/$project/");
 
         if ($details) {
             $uri = Uri::withQueryValue($uri, 'details', null);
@@ -177,7 +177,7 @@ class Projects extends TransifexObject
      */
     public function getProjects() : ResponseInterface
     {
-        return $this->client->request('GET', new Uri('/api/2/projects/'), ['auth' => $this->getAuthData()]);
+        return $this->client->request('GET', $this->createUri('/api/2/projects/'), ['auth' => $this->getAuthData()]);
     }
 
     /**
@@ -201,7 +201,7 @@ class Projects extends TransifexObject
 
         return $this->client->request(
             'PUT',
-            new Uri("/api/2/project/$slug/"),
+            $this->createUri("/api/2/project/$slug/"),
             [
                 'body'    => json_encode($data),
                 'auth'    => $this->getAuthData(),

@@ -33,7 +33,7 @@ class Translationstrings extends TransifexObject
     {
         return $this->client->request(
             'GET',
-            new Uri("/api/2/project/$project/resource/$resource/pseudo/?pseudo_type=MIXED"),
+            $this->createUri("/api/2/project/$project/resource/$resource/pseudo/?pseudo_type=MIXED"),
             ['auth' => $this->getAuthData()]
         );
     }
@@ -56,7 +56,7 @@ class Translationstrings extends TransifexObject
         bool $details = false,
         array $options = []
     ) : ResponseInterface {
-        $uri = new Uri("/api/2/project/$project/resource/$resource/translation/$lang/strings/");
+        $uri = $this->createUri("/api/2/project/$project/resource/$resource/translation/$lang/strings/");
 
         if ($details) {
             $uri = Uri::withQueryValue($uri, 'details', null);

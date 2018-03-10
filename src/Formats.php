@@ -28,6 +28,6 @@ class Formats extends TransifexObject
      */
     public function getFormats() : ResponseInterface
     {
-        return $this->client->request('GET', new Uri('/api/2/formats'), ['auth' => $this->getAuthData()]);
+        return $this->client->request('GET', $this->createUri('/api/2/formats'), ['auth' => $this->getAuthData()]);
     }
 }

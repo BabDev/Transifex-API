@@ -34,7 +34,7 @@ class Statistics extends TransifexObject
     {
         return $this->client->request(
             'GET',
-            new Uri("/api/2/project/$project/resource/$resource/stats/$lang"),
+            $this->createUri("/api/2/project/$project/resource/$resource/stats/$lang"),
             ['auth' => $this->getAuthData()]
         );
     }

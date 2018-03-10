@@ -37,7 +37,7 @@ class Translations extends TransifexObject
         string $lang,
         string $mode = ''
     ) : ResponseInterface {
-        $uri = new Uri("/api/2/project/$project/resource/$resource/translation/$lang");
+        $uri = $this->createUri("/api/2/project/$project/resource/$resource/translation/$lang");
 
         if (!empty($mode)) {
             $uri = Uri::withQueryValue($uri, 'mode', $mode);
@@ -66,7 +66,7 @@ class Translations extends TransifexObject
         string $type = 'string'
     ) : ResponseInterface {
         return $this->updateResource(
-            new Uri("/api/2/project/$project/resource/$resource/translation/$lang"),
+            $this->createUri("/api/2/project/$project/resource/$resource/translation/$lang"),
             $content,
             $type
         );
