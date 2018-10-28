@@ -1,6 +1,10 @@
 CHANGELOG for the Transifex API Package
 ===============
 
+* 3.0.0 (201x-xx-xx)
+
+ * Raised minimum PHP version to 7.2
+
 * 2.1.1 (2018-03-10)
 
  * Code incorrectly referenced `base_url` as the option name versus `base_uri`

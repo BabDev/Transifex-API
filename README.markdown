@@ -12,7 +12,7 @@ Requirements
 ------------
 
 * Production
-    * PHP 7.0 or later
+    * PHP 7.2 or later
     * [Guzzle HTTP](https://github.com/guzzle/guzzle) client
 * Development
     * [PHPUnit](http://phpunit.de/)
