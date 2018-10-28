@@ -1,13 +1,4 @@
-<?php
-
-/*
- * BabDev Transifex Package
- *
- * (c) Michael Babker <michael.babker@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+<?php declare(strict_types=1);
 
 namespace BabDev\Transifex;
 
@@ -29,7 +20,7 @@ class Translationstrings extends TransifexObject
      *
      * @return ResponseInterface
      */
-    public function getPseudolocalizationStrings(string $project, string $resource) : ResponseInterface
+    public function getPseudolocalizationStrings(string $project, string $resource): ResponseInterface
     {
         return $this->client->request(
             'GET',
@@ -55,7 +46,7 @@ class Translationstrings extends TransifexObject
         string $lang,
         bool $details = false,
         array $options = []
-    ) : ResponseInterface {
+    ): ResponseInterface {
         $uri = $this->createUri("/api/2/project/$project/resource/$resource/translation/$lang/strings/");
 
         if ($details) {

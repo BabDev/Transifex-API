@@ -1,13 +1,4 @@
-<?php
-
-/*
- * BabDev Transifex Package
- *
- * (c) Michael Babker <michael.babker@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+<?php declare(strict_types=1);
 
 namespace BabDev\Transifex\Tests;
 
@@ -74,8 +65,13 @@ class TranslationsTest extends TransifexTestCase
     {
         $this->prepareSuccessTest();
 
-        (new Translations($this->options, $this->client))->updateTranslation('babdev', 'babdev-transifex', 'en_US',
-            __DIR__ . '/stubs/source.ini', 'file');
+        (new Translations($this->options, $this->client))->updateTranslation(
+            'babdev',
+            'babdev-transifex',
+            'en_US',
+            __DIR__ . '/stubs/source.ini',
+            'file'
+        );
 
         $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US', 'PUT');
     }
@@ -93,8 +89,12 @@ class TranslationsTest extends TransifexTestCase
     {
         $this->prepareSuccessTest();
 
-        (new Translations($this->options, $this->client))->updateTranslation('babdev', 'babdev-transifex', 'en_US',
-            'TEST="Test"');
+        (new Translations($this->options, $this->client))->updateTranslation(
+            'babdev',
+            'babdev-transifex',
+            'en_US',
+            'TEST="Test"'
+        );
 
         $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US', 'PUT');
     }
@@ -114,8 +114,12 @@ class TranslationsTest extends TransifexTestCase
     {
         $this->prepareFailureTest();
 
-        (new Translations($this->options, $this->client))->updateTranslation('babdev', 'babdev-transifex', 'en_US',
-            'TEST="Test"');
+        (new Translations($this->options, $this->client))->updateTranslation(
+            'babdev',
+            'babdev-transifex',
+            'en_US',
+            'TEST="Test"'
+        );
     }
 
     /**
@@ -130,8 +134,13 @@ class TranslationsTest extends TransifexTestCase
      */
     public function testUpdateTranslationBadType()
     {
-        (new Translations($this->options, $this->client))->updateTranslation('babdev', 'babdev-transifex', 'en_US',
-            'TEST="Test"', 'stuff');
+        (new Translations($this->options, $this->client))->updateTranslation(
+            'babdev',
+            'babdev-transifex',
+            'en_US',
+            'TEST="Test"',
+            'stuff'
+        );
     }
 
     /**
@@ -146,7 +155,12 @@ class TranslationsTest extends TransifexTestCase
      */
     public function testUpdateTranslationUnexistingFile()
     {
-        (new Translations($this->options, $this->client))->updateTranslation('babdev', 'babdev-transifex', 'en_US',
-            __DIR__ . '/stubs/does-not-exist.ini', 'file');
+        (new Translations($this->options, $this->client))->updateTranslation(
+            'babdev',
+            'babdev-transifex',
+            'en_US',
+            __DIR__ . '/stubs/does-not-exist.ini',
+            'file'
+        );
     }
 }

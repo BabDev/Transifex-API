@@ -1,13 +1,4 @@
-<?php
-
-/*
- * BabDev Transifex Package
- *
- * (c) Michael Babker <michael.babker@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+<?php declare(strict_types=1);
 
 namespace BabDev\Transifex\Tests;
 
@@ -116,8 +107,13 @@ class TranslationstringsTest extends TransifexTestCase
     {
         $this->prepareSuccessTest();
 
-        (new Translationstrings($this->options, $this->client))->getStrings('babdev', 'babdev-transifex', 'en_US', true,
-            ['key' => 'Yes']);
+        (new Translationstrings($this->options, $this->client))->getStrings(
+            'babdev',
+            'babdev-transifex',
+            'en_US',
+            true,
+            ['key' => 'Yes']
+        );
 
         $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US/strings/');
 
@@ -143,8 +139,13 @@ class TranslationstringsTest extends TransifexTestCase
     {
         $this->prepareSuccessTest();
 
-        (new Translationstrings($this->options, $this->client))->getStrings('babdev', 'babdev-transifex', 'en_US', true,
-            ['key' => 'Yes', 'context' => 'Something']);
+        (new Translationstrings($this->options, $this->client))->getStrings(
+            'babdev',
+            'babdev-transifex',
+            'en_US',
+            true,
+            ['key' => 'Yes', 'context' => 'Something']
+        );
 
         $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US/strings/');
 
@@ -170,8 +171,13 @@ class TranslationstringsTest extends TransifexTestCase
     {
         $this->prepareSuccessTest();
 
-        (new Translationstrings($this->options, $this->client))->getStrings('babdev', 'babdev-transifex', 'en_US', false,
-            ['key' => 'Yes', 'context' => 'Something']);
+        (new Translationstrings($this->options, $this->client))->getStrings(
+            'babdev',
+            'babdev-transifex',
+            'en_US',
+            false,
+            ['key' => 'Yes', 'context' => 'Something']
+        );
 
         $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US/strings/');
 
@@ -197,8 +203,13 @@ class TranslationstringsTest extends TransifexTestCase
     {
         $this->prepareSuccessTest();
 
-        (new Translationstrings($this->options, $this->client))->getStrings('babdev', 'babdev-transifex', 'en_US', false,
-            ['context' => 'Something']);
+        (new Translationstrings($this->options, $this->client))->getStrings(
+            'babdev',
+            'babdev-transifex',
+            'en_US',
+            false,
+            ['context' => 'Something']
+        );
 
         $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US/strings/');
 

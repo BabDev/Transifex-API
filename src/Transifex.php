@@ -1,13 +1,4 @@
-<?php
-
-/*
- * BabDev Transifex Package
- *
- * (c) Michael Babker <michael.babker@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+<?php declare(strict_types=1);
 
 namespace BabDev\Transifex;
 
@@ -58,20 +49,20 @@ class Transifex
      *
      * @throws \InvalidArgumentException
      */
-    public function get(string $name) : TransifexObject
+    public function get(string $name): TransifexObject
     {
-        $namespace = rtrim($this->getOption('object.namespace', __NAMESPACE__), '\\');
-        $class     = $namespace . '\\' . ucfirst(strtolower($name));
+        $namespace = \rtrim($this->getOption('object.namespace', __NAMESPACE__), '\\');
+        $class     = $namespace . '\\' . \ucfirst(\strtolower($name));
 
-        if (class_exists($class)) {
+        if (\class_exists($class)) {
             return new $class($this->options, $this->client);
         }
 
         // If a custom namespace was specified, let's try to find an object in the local namespace
         if ($namespace !== __NAMESPACE__) {
-            $class = __NAMESPACE__ . '\\' . ucfirst(strtolower($name));
+            $class = __NAMESPACE__ . '\\' . \ucfirst(\strtolower($name));
 
-            if (class_exists($class)) {
+            if (\class_exists($class)) {
                 return new $class($this->options, $this->client);
             }
         }
@@ -101,7 +92,7 @@ class Transifex
      *
      * @return $this
      */
-    public function setOption(string $key, $value) : self
+    public function setOption(string $key, $value): self
     {
         $this->options[$key] = $value;
 

@@ -1,13 +1,4 @@
-<?php
-
-/*
- * BabDev Transifex Package
- *
- * (c) Michael Babker <michael.babker@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+<?php declare(strict_types=1);
 
 namespace BabDev\Transifex;
 
@@ -36,7 +27,7 @@ class Translations extends TransifexObject
         string $resource,
         string $lang,
         string $mode = ''
-    ) : ResponseInterface {
+    ): ResponseInterface {
         $uri = $this->createUri("/api/2/project/$project/resource/$resource/translation/$lang");
 
         if (!empty($mode)) {
@@ -64,7 +55,7 @@ class Translations extends TransifexObject
         string $lang,
         string $content,
         string $type = 'string'
-    ) : ResponseInterface {
+    ): ResponseInterface {
         return $this->updateResource(
             $this->createUri("/api/2/project/$project/resource/$resource/translation/$lang"),
             $content,

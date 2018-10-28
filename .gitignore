@@ -8,9 +8,10 @@
 .DS_Store
 
 # Local config files #
-phpunit.xml
+/phpunit.xml
+/.php_cs.cache
 
-# COMPOSER Files #
+# Composer Files #
 vendor/*
 composer.lock
 composer.phar

@@ -1,13 +1,4 @@
-<?php
-
-/*
- * BabDev Transifex Package
- *
- * (c) Michael Babker <michael.babker@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+<?php declare(strict_types=1);
 
 namespace BabDev\Transifex;
 
@@ -40,7 +31,7 @@ class Resources extends TransifexObject
         string $slug,
         string $fileType,
         array $options = []
-    ) : ResponseInterface {
+    ): ResponseInterface {
         // Build the required request data.
         $data = [
             'name'      => $name,
@@ -66,20 +57,20 @@ class Resources extends TransifexObject
         if (isset($options['content'])) {
             $data['content'] = $options['content'];
         } elseif (isset($options['file'])) {
-            if (!file_exists($options['file'])) {
+            if (!\file_exists($options['file'])) {
                 throw new \InvalidArgumentException(
-                    sprintf('The specified file, "%s", does not exist.', $options['file'])
+                    \sprintf('The specified file, "%s", does not exist.', $options['file'])
                 );
             }
 
-            $data['content'] = file_get_contents($options['file']);
+            $data['content'] = \file_get_contents($options['file']);
         }
 
         return $this->client->request(
             'POST',
             $this->createUri("/api/2/project/$project/resources/"),
             [
-                'body'    => json_encode($data),
+                'body'    => \json_encode($data),
                 'auth'    => $this->getAuthData(),
                 'headers' => ['Content-Type' => 'application/json'],
             ]
@@ -94,7 +85,7 @@ class Resources extends TransifexObject
      *
      * @return ResponseInterface
      */
-    public function deleteResource(string $project, string $resource) : ResponseInterface
+    public function deleteResource(string $project, string $resource): ResponseInterface
     {
         return $this->client->request(
             'DELETE',
@@ -112,7 +103,7 @@ class Resources extends TransifexObject
      *
      * @return ResponseInterface
      */
-    public function getResource(string $project, string $resource, bool $details = false) : ResponseInterface
+    public function getResource(string $project, string $resource, bool $details = false): ResponseInterface
     {
         $uri = $this->createUri("/api/2/project/$project/resource/$resource/");
 
@@ -131,7 +122,7 @@ class Resources extends TransifexObject
      *
      * @return ResponseInterface
      */
-    public function getResourceContent(string $project, string $resource) : ResponseInterface
+    public function getResourceContent(string $project, string $resource): ResponseInterface
     {
         return $this->client->request(
             'GET',
@@ -147,7 +138,7 @@ class Resources extends TransifexObject
      *
      * @return ResponseInterface
      */
-    public function getResources(string $project) : ResponseInterface
+    public function getResources(string $project): ResponseInterface
     {
         return $this->client->request(
             'GET',
@@ -171,7 +162,7 @@ class Resources extends TransifexObject
         string $resource,
         string $content,
         string $type = 'string'
-    ) : ResponseInterface {
+    ): ResponseInterface {
         return $this->updateResource($this->createUri("/api/2/project/$project/resource/$resource/content/"), $content, $type);
     }
 }

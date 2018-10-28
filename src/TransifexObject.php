@@ -1,13 +1,4 @@
-<?php
-
-/*
- * BabDev Transifex Package
- *
- * (c) Michael Babker <michael.babker@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+<?php declare(strict_types=1);
 
 namespace BabDev\Transifex;
 
@@ -53,11 +44,11 @@ abstract class TransifexObject
      *
      * @return Uri
      */
-    protected function createUri(string $path) : Uri
+    protected function createUri(string $path): Uri
     {
         $baseUrl = $this->getOption('base_uri', 'https://www.transifex.com');
 
-        return new Uri($baseUrl.$path);
+        return new Uri($baseUrl . $path);
     }
 
     /**
@@ -67,7 +58,7 @@ abstract class TransifexObject
      *
      * @throws \InvalidArgumentException if credentials are not set
      */
-    protected function getAuthData() : array
+    protected function getAuthData(): array
     {
         $username = $this->getOption('api.username');
         $password = $this->getOption('api.password');
@@ -104,21 +95,21 @@ abstract class TransifexObject
      *
      * @throws \InvalidArgumentException
      */
-    protected function updateResource(UriInterface $uri, string $content, string $type) : ResponseInterface
+    protected function updateResource(UriInterface $uri, string $content, string $type): ResponseInterface
     {
         // Verify the content type is allowed
-        if (!in_array($type, ['string', 'file'])) {
+        if (!\in_array($type, ['string', 'file'])) {
             throw new \InvalidArgumentException('The content type must be specified as file or string.');
         }
 
         if ($type == 'file') {
-            if (!file_exists($content)) {
+            if (!\file_exists($content)) {
                 throw new \InvalidArgumentException(
-                    sprintf('The specified file, "%s", does not exist.', $content)
+                    \sprintf('The specified file, "%s", does not exist.', $content)
                 );
             }
 
-            $content = file_get_contents($content);
+            $content = \file_get_contents($content);
         }
 
         $data = [
@@ -129,7 +120,7 @@ abstract class TransifexObject
             'PUT',
             $uri,
             [
-                'body'    => json_encode($data),
+                'body'    => \json_encode($data),
                 'auth'    => $this->getAuthData(),
                 'headers' => ['Content-Type' => 'application/json'],
             ]

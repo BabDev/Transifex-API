@@ -1,13 +1,4 @@
-<?php
-
-/*
- * BabDev Transifex Package
- *
- * (c) Michael Babker <michael.babker@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+<?php declare(strict_types=1);
 
 namespace BabDev\Transifex\Tests;
 
@@ -51,8 +42,13 @@ class ProjectsTest extends TransifexTestCase
             'repository_url'     => 'http://www.example.com',
         ];
 
-        (new Projects($this->options, $this->client))->createProject('BabDev Transifex', 'babdev-transifex',
-            'Test Project', 'en_US', $options);
+        (new Projects($this->options, $this->client))->createProject(
+            'BabDev Transifex',
+            'babdev-transifex',
+            'Test Project',
+            'en_US',
+            $options
+        );
 
         $this->validateSuccessTest('/api/2/projects/', 'POST', 201);
     }
@@ -73,8 +69,13 @@ class ProjectsTest extends TransifexTestCase
     {
         $this->prepareFailureTest();
 
-        (new Projects($this->options, $this->client))->createProject('BabDev Transifex', 'babdev-transifex',
-            'Test Project', 'en_US', ['repository_url' => 'https://www.babdev.com']);
+        (new Projects($this->options, $this->client))->createProject(
+            'BabDev Transifex',
+            'babdev-transifex',
+            'Test Project',
+            'en_US',
+            ['repository_url' => 'https://www.babdev.com']
+        );
     }
 
     /**
@@ -90,8 +91,13 @@ class ProjectsTest extends TransifexTestCase
      */
     public function testCreateProjectsBadLicense()
     {
-        (new Projects($this->options, $this->client))->createProject('BabDev Transifex', 'babdev-transifex',
-            'Test Project', 'en_US', ['license' => 'failure']);
+        (new Projects($this->options, $this->client))->createProject(
+            'BabDev Transifex',
+            'babdev-transifex',
+            'Test Project',
+            'en_US',
+            ['license' => 'failure']
+        );
     }
 
     /**
@@ -107,8 +113,12 @@ class ProjectsTest extends TransifexTestCase
      */
     public function testCreateProjectFailureForMissingFields()
     {
-        (new Projects($this->options, $this->client))->createProject('BabDev Transifex', 'babdev-transifex',
-            'Test Project', 'en_US');
+        (new Projects($this->options, $this->client))->createProject(
+            'BabDev Transifex',
+            'babdev-transifex',
+            'Test Project',
+            'en_US'
+        );
     }
 
     /**
@@ -269,8 +279,10 @@ class ProjectsTest extends TransifexTestCase
     {
         $this->prepareFailureTest();
 
-        (new Projects($this->options, $this->client))->updateProject('babdev-transifex',
-            ['long_description' => 'My test project']);
+        (new Projects($this->options, $this->client))->updateProject(
+            'babdev-transifex',
+            ['long_description' => 'My test project']
+        );
     }
 
     /**

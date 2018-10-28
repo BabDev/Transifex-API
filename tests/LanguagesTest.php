@@ -1,13 +1,4 @@
-<?php
-
-/*
- * BabDev Transifex Package
- *
- * (c) Michael Babker <michael.babker@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+<?php declare(strict_types=1);
 
 namespace BabDev\Transifex\Tests;
 
@@ -37,8 +28,13 @@ class LanguagesTest extends TransifexTestCase
             'list'        => 'test@example.com',
         ];
 
-        (new Languages($this->options, $this->client))->createLanguage('babdev-transifex', 'en_US', ['mbabker'],
-            $options, true);
+        (new Languages($this->options, $this->client))->createLanguage(
+            'babdev-transifex',
+            'en_US',
+            ['mbabker'],
+            $options,
+            true
+        );
 
         $this->validateSuccessTest('/api/2/project/babdev-transifex/languages/', 'POST', 201);
 

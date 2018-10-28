@@ -1,13 +1,4 @@
-<?php
-
-/*
- * BabDev Transifex Package
- *
- * (c) Michael Babker <michael.babker@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+<?php declare(strict_types=1);
 
 namespace BabDev\Transifex\Tests;
 
@@ -38,8 +29,13 @@ class ResourcesTest extends TransifexTestCase
             'content'             => 'Test="Test"',
         ];
 
-        (new Resources($this->options, $this->client))->createResource('babdev-transifex', 'BabDev Transifex Data',
-            'babdev-transifex', 'INI', $options);
+        (new Resources($this->options, $this->client))->createResource(
+            'babdev-transifex',
+            'BabDev Transifex Data',
+            'babdev-transifex',
+            'INI',
+            $options
+        );
 
         $this->validateSuccessTest('/api/2/project/babdev-transifex/resources/', 'POST', 201);
     }
@@ -64,8 +60,13 @@ class ResourcesTest extends TransifexTestCase
             'file'                => __DIR__ . '/stubs/source.ini',
         ];
 
-        (new Resources($this->options, $this->client))->createResource('babdev-transifex', 'BabDev Transifex Data',
-            'babdev-transifex', 'INI', $options);
+        (new Resources($this->options, $this->client))->createResource(
+            'babdev-transifex',
+            'BabDev Transifex Data',
+            'babdev-transifex',
+            'INI',
+            $options
+        );
 
         $this->validateSuccessTest('/api/2/project/babdev-transifex/resources/', 'POST', 201);
     }
@@ -90,8 +91,13 @@ class ResourcesTest extends TransifexTestCase
             'file'                => __DIR__ . '/stubs/does-not-exist.ini',
         ];
 
-        (new Resources($this->options, $this->client))->createResource('babdev-transifex', 'BabDev Transifex Data',
-            'babdev-transifex', 'INI', $options);
+        (new Resources($this->options, $this->client))->createResource(
+            'babdev-transifex',
+            'BabDev Transifex Data',
+            'babdev-transifex',
+            'INI',
+            $options
+        );
     }
 
     /**
@@ -108,8 +114,13 @@ class ResourcesTest extends TransifexTestCase
     {
         $this->prepareFailureTest();
 
-        (new Resources($this->options, $this->client))->createResource('babdev-transifex', 'BabDev Transifex Data',
-            'babdev-transifex', 'INI', ['content' => 'Test="Test"']);
+        (new Resources($this->options, $this->client))->createResource(
+            'babdev-transifex',
+            'BabDev Transifex Data',
+            'babdev-transifex',
+            'INI',
+            ['content' => 'Test="Test"']
+        );
     }
 
     /**
@@ -269,8 +280,12 @@ class ResourcesTest extends TransifexTestCase
     {
         $this->prepareSuccessTest();
 
-        (new Resources($this->options, $this->client))->updateResourceContent('babdev', 'babdev-transifex',
-            __DIR__ . '/stubs/source.ini', 'file');
+        (new Resources($this->options, $this->client))->updateResourceContent(
+            'babdev',
+            'babdev-transifex',
+            __DIR__ . '/stubs/source.ini',
+            'file'
+        );
 
         $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/content/', 'PUT');
     }
@@ -288,8 +303,11 @@ class ResourcesTest extends TransifexTestCase
     {
         $this->prepareSuccessTest();
 
-        (new Resources($this->options, $this->client))->updateResourceContent('babdev', 'babdev-transifex',
-            'TEST="Test"');
+        (new Resources($this->options, $this->client))->updateResourceContent(
+            'babdev',
+            'babdev-transifex',
+            'TEST="Test"'
+        );
 
         $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/content/', 'PUT');
     }
@@ -324,8 +342,12 @@ class ResourcesTest extends TransifexTestCase
      */
     public function testUpdateResourceContentBadType()
     {
-        (new Resources($this->options, $this->client))->updateResourceContent('babdev', 'babdev-transifex',
-            'TEST="Test"', 'stuff');
+        (new Resources($this->options, $this->client))->updateResourceContent(
+            'babdev',
+            'babdev-transifex',
+            'TEST="Test"',
+            'stuff'
+        );
     }
 
     /**
@@ -340,7 +362,11 @@ class ResourcesTest extends TransifexTestCase
      */
     public function testUpdateResourceContentUnexistingFile()
     {
-        (new Resources($this->options, $this->client))->updateResourceContent('babdev', 'babdev-transifex',
-            __DIR__ . '/stubs/does-not-exist.ini', 'file');
+        (new Resources($this->options, $this->client))->updateResourceContent(
+            'babdev',
+            'babdev-transifex',
+            __DIR__ . '/stubs/does-not-exist.ini',
+            'file'
+        );
     }
 }

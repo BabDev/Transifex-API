@@ -1,17 +1,7 @@
-<?php
-
-/*
- * BabDev Transifex Package
- *
- * (c) Michael Babker <michael.babker@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+<?php declare(strict_types=1);
 
 namespace BabDev\Transifex;
 
-use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -26,7 +16,7 @@ class Formats extends TransifexObject
      *
      * @return ResponseInterface
      */
-    public function getFormats() : ResponseInterface
+    public function getFormats(): ResponseInterface
     {
         return $this->client->request('GET', $this->createUri('/api/2/formats'), ['auth' => $this->getAuthData()]);
     }

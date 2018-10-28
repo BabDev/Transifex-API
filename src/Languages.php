@@ -1,13 +1,4 @@
-<?php
-
-/*
- * BabDev Transifex Package
- *
- * (c) Michael Babker <michael.babker@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+<?php declare(strict_types=1);
 
 namespace BabDev\Transifex;
 
@@ -40,9 +31,9 @@ class Languages extends TransifexObject
         array $coordinators,
         array $options = [],
         bool $skipInvalidUsername = false
-    ) : ResponseInterface {
+    ): ResponseInterface {
         // Make sure the $coordinators array is not empty
-        if (!count($coordinators)) {
+        if (!\count($coordinators)) {
             throw new \InvalidArgumentException('The coordinators array must contain at least one username.');
         }
 
@@ -72,7 +63,7 @@ class Languages extends TransifexObject
             'POST',
             $uri,
             [
-                'body'    => json_encode($data),
+                'body'    => \json_encode($data),
                 'auth'    => $this->getAuthData(),
                 'headers' => ['Content-Type' => 'application/json'],
             ]
@@ -87,7 +78,7 @@ class Languages extends TransifexObject
      *
      * @return ResponseInterface
      */
-    public function deleteLanguage(string $project, string $langCode) : ResponseInterface
+    public function deleteLanguage(string $project, string $langCode): ResponseInterface
     {
         return $this->client->request(
             'DELETE',
@@ -104,7 +95,7 @@ class Languages extends TransifexObject
      *
      * @return ResponseInterface
      */
-    public function getCoordinators(string $project, string $langCode) : ResponseInterface
+    public function getCoordinators(string $project, string $langCode): ResponseInterface
     {
         return $this->client->request(
             'GET',
@@ -122,7 +113,7 @@ class Languages extends TransifexObject
      *
      * @return ResponseInterface
      */
-    public function getLanguage(string $project, string $langCode, bool $details = false) : ResponseInterface
+    public function getLanguage(string $project, string $langCode, bool $details = false): ResponseInterface
     {
         $uri = $this->createUri("/api/2/project/$project/language/$langCode/");
 
@@ -144,7 +135,7 @@ class Languages extends TransifexObject
      *
      * @return ResponseInterface
      */
-    public function getLanguages(string $project) : ResponseInterface
+    public function getLanguages(string $project): ResponseInterface
     {
         return $this->client->request(
             'GET',
@@ -161,7 +152,7 @@ class Languages extends TransifexObject
      *
      * @return ResponseInterface
      */
-    public function getReviewers(string $project, string $langCode) : ResponseInterface
+    public function getReviewers(string $project, string $langCode): ResponseInterface
     {
         return $this->client->request(
             'GET',
@@ -178,7 +169,7 @@ class Languages extends TransifexObject
      *
      * @return ResponseInterface
      */
-    public function getTranslators(string $project, string $langCode) : ResponseInterface
+    public function getTranslators(string $project, string $langCode): ResponseInterface
     {
         return $this->client->request(
             'GET',
@@ -202,7 +193,7 @@ class Languages extends TransifexObject
         string $langCode,
         array $coordinators,
         bool $skipInvalidUsername = false
-    ) : ResponseInterface {
+    ): ResponseInterface {
         return $this->updateTeam($project, $langCode, $coordinators, $skipInvalidUsername, 'coordinators');
     }
 
@@ -223,9 +214,9 @@ class Languages extends TransifexObject
         string $langCode,
         array $coordinators,
         array $options = []
-    ) : ResponseInterface {
+    ): ResponseInterface {
         // Make sure the $coordinators array is not empty
-        if (!count($coordinators)) {
+        if (!\count($coordinators)) {
             throw new \InvalidArgumentException('The coordinators array must contain at least one username.');
         }
 
@@ -246,7 +237,7 @@ class Languages extends TransifexObject
             'PUT',
             $this->createUri("/api/2/project/$slug/language/$langCode/"),
             [
-                'body'    => json_encode($data),
+                'body'    => \json_encode($data),
                 'auth'    => $this->getAuthData(),
                 'headers' => ['Content-Type' => 'application/json'],
             ]
@@ -263,7 +254,7 @@ class Languages extends TransifexObject
      *
      * @return ResponseInterface
      */
-    public function updateReviewers(string $project, string $langCode, array $reviewers, bool $skipInvalidUsername = false) : ResponseInterface
+    public function updateReviewers(string $project, string $langCode, array $reviewers, bool $skipInvalidUsername = false): ResponseInterface
     {
         return $this->updateTeam($project, $langCode, $reviewers, $skipInvalidUsername, 'reviewers');
     }
@@ -281,10 +272,15 @@ class Languages extends TransifexObject
      *
      * @throws \InvalidArgumentException
      */
-    protected function updateTeam(string $project, string $langCode, array $members, bool $skipInvalidUsername, string $team) : ResponseInterface
-    {
+    protected function updateTeam(
+        string $project,
+        string $langCode,
+        array $members,
+        bool $skipInvalidUsername,
+        string $team
+    ): ResponseInterface {
         // Make sure the $members array is not empty
-        if (!count($members)) {
+        if (!\count($members)) {
             throw new \InvalidArgumentException("The $team array must contain at least one username.");
         }
 
@@ -298,7 +294,7 @@ class Languages extends TransifexObject
             'PUT',
             $uri,
             [
-                'body'    => json_encode($members),
+                'body'    => \json_encode($members),
                 'auth'    => $this->getAuthData(),
                 'headers' => ['Content-Type' => 'application/json'],
             ]
@@ -320,7 +316,7 @@ class Languages extends TransifexObject
         string $langCode,
         array $translators,
         bool $skipInvalidUsername = false
-    ) : ResponseInterface {
+    ): ResponseInterface {
         return $this->updateTeam($project, $langCode, $translators, $skipInvalidUsername, 'translators');
     }
 }

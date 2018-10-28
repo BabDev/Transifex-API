@@ -1,13 +1,4 @@
-<?php
-
-/*
- * BabDev Transifex Package
- *
- * (c) Michael Babker <michael.babker@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+<?php declare(strict_types=1);
 
 namespace BabDev\Transifex;
 
@@ -29,7 +20,7 @@ class Statistics extends TransifexObject
      *
      * @return ResponseInterface
      */
-    public function getStatistics(string $project, string $resource, string $lang = '') : ResponseInterface
+    public function getStatistics(string $project, string $resource, string $lang = ''): ResponseInterface
     {
         return $this->client->request(
             'GET',

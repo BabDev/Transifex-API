@@ -1,13 +1,4 @@
-<?php
-
-/*
- * BabDev Transifex Package
- *
- * (c) Michael Babker <michael.babker@gmail.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
+<?php declare(strict_types=1);
 
 namespace BabDev\Transifex;
 
@@ -28,7 +19,7 @@ class Projects extends TransifexObject
      *
      * @return array
      */
-    private function buildProjectRequest(array $options) : array
+    private function buildProjectRequest(array $options): array
     {
         $data = [];
 
@@ -72,17 +63,17 @@ class Projects extends TransifexObject
      *
      * @throws \InvalidArgumentException
      */
-    private function checkLicense(string $license) : void
+    private function checkLicense(string $license): void
     {
         $accepted = ['proprietary', 'permissive_open_source', 'other_open_source'];
 
         // Ensure the license option is an allowed value
-        if (!in_array($license, $accepted)) {
+        if (!\in_array($license, $accepted)) {
             throw new \InvalidArgumentException(
-                sprintf(
+                \sprintf(
                     'The license %s is not valid, accepted license values are %s',
                     $license,
-                    implode(', ', $accepted)
+                    \implode(', ', $accepted)
                 )
             );
         }
@@ -107,9 +98,9 @@ class Projects extends TransifexObject
         string $description,
         string $sourceLanguage,
         array $options = []
-    ) : ResponseInterface {
+    ): ResponseInterface {
         // Build the request data.
-        $data = array_merge(
+        $data = \array_merge(
             [
                 'name'                 => $name,
                 'slug'                 => $slug,
@@ -120,7 +111,7 @@ class Projects extends TransifexObject
         );
 
         // Check mandatory fields.
-        if (!isset($data['license']) || in_array($data['license'], ['permissive_open_source', 'other_open_source'])) {
+        if (!isset($data['license']) || \in_array($data['license'], ['permissive_open_source', 'other_open_source'])) {
             if (!isset($data['repository_url'])) {
                 throw new \InvalidArgumentException(
                     'If a project is denoted either as permissive_open_source or other_open_source, the field repository_url is mandatory and should contain a link to the public repository of the project to be created.'
@@ -132,7 +123,7 @@ class Projects extends TransifexObject
             'POST',
             $this->createUri('/api/2/projects/'),
             [
-                'body'    => json_encode($data),
+                'body'    => \json_encode($data),
                 'auth'    => $this->getAuthData(),
                 'headers' => ['Content-Type' => 'application/json'],
             ]
@@ -146,7 +137,7 @@ class Projects extends TransifexObject
      *
      * @return ResponseInterface
      */
-    public function deleteProject(string $slug) : ResponseInterface
+    public function deleteProject(string $slug): ResponseInterface
     {
         return $this->client->request('DELETE', $this->createUri("/api/2/project/$slug"), ['auth' => $this->getAuthData()]);
     }
@@ -159,7 +150,7 @@ class Projects extends TransifexObject
      *
      * @return ResponseInterface
      */
-    public function getProject(string $project, bool $details = false) : ResponseInterface
+    public function getProject(string $project, bool $details = false): ResponseInterface
     {
         $uri = $this->createUri("/api/2/project/$project/");
 
@@ -175,7 +166,7 @@ class Projects extends TransifexObject
      *
      * @return ResponseInterface
      */
-    public function getProjects() : ResponseInterface
+    public function getProjects(): ResponseInterface
     {
         return $this->client->request('GET', $this->createUri('/api/2/projects/'), ['auth' => $this->getAuthData()]);
     }
@@ -190,7 +181,7 @@ class Projects extends TransifexObject
      *
      * @throws \RuntimeException
      */
-    public function updateProject(string $slug, array $options) : ResponseInterface
+    public function updateProject(string $slug, array $options): ResponseInterface
     {
         $data = $this->buildProjectRequest($options);
 
@@ -203,7 +194,7 @@ class Projects extends TransifexObject
             'PUT',
             $this->createUri("/api/2/project/$slug/"),
             [
-                'body'    => json_encode($data),
+                'body'    => \json_encode($data),
                 'auth'    => $this->getAuthData(),
                 'headers' => ['Content-Type' => 'application/json'],
             ]
