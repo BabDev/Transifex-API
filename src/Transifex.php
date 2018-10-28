@@ -90,7 +90,7 @@ class Transifex
      */
     public function getOption(string $key, $default = null)
     {
-        return isset($this->options[$key]) ? $this->options[$key] : $default;
+        return $this->options[$key] ?? $default;
     }
 
     /**
@@ -101,7 +101,7 @@ class Transifex
      *
      * @return $this
      */
-    public function setOption(string $key, $value) : Transifex
+    public function setOption(string $key, $value) : self
     {
         $this->options[$key] = $value;
 

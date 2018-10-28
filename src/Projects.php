@@ -72,7 +72,7 @@ class Projects extends TransifexObject
      *
      * @throws \InvalidArgumentException
      */
-    private function checkLicense($license)
+    private function checkLicense(string $license) : void
     {
         $accepted = ['proprietary', 'permissive_open_source', 'other_open_source'];
 
