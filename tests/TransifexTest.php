@@ -6,6 +6,7 @@ use BabDev\Transifex\Formats;
 use BabDev\Transifex\Tests\Mock\Formats as MockFormats;
 use BabDev\Transifex\Transifex;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\UriFactoryInterface;
 
@@ -14,6 +15,11 @@ use Psr\Http\Message\UriFactoryInterface;
  */
 class TransifexTest extends TestCase
 {
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject|RequestFactoryInterface
+     */
+    private $client;
+
     /**
      * @var \PHPUnit_Framework_MockObject_MockObject|RequestFactoryInterface
      */
@@ -39,10 +45,11 @@ class TransifexTest extends TestCase
      */
     protected function setUp()
     {
+        $this->client         = $this->createMock(ClientInterface::class);
         $this->requestFactory = $this->createMock(RequestFactoryInterface::class);
         $this->uriFactory     = $this->createMock(UriFactoryInterface::class);
         $this->options        = ['api.username' => 'test', 'api.password' => 'test'];
-        $this->object         = new Transifex($this->requestFactory, $this->uriFactory, $this->options);
+        $this->object         = new Transifex($this->client, $this->requestFactory, $this->uriFactory, $this->options);
     }
 
     /**

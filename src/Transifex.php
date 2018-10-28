@@ -2,6 +2,7 @@
 
 namespace BabDev\Transifex;
 
+use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\UriFactoryInterface;
 
@@ -10,6 +11,13 @@ use Psr\Http\Message\UriFactoryInterface;
  */
 class Transifex
 {
+    /**
+     * The HTTP client.
+     *
+     * @var ClientInterface
+     */
+    protected $client;
+
     /**
      * The request factory.
      *
@@ -32,12 +40,18 @@ class Transifex
     protected $options;
 
     /**
+     * @param ClientInterface         $client         The HTTP client
      * @param RequestFactoryInterface $requestFactory The request factory
      * @param UriFactoryInterface     $uriFactory     The URI factory
      * @param array                   $options        Transifex options array
      */
-    public function __construct(RequestFactoryInterface $requestFactory, UriFactoryInterface $uriFactory, array $options = [])
-    {
+    public function __construct(
+        ClientInterface $client,
+        RequestFactoryInterface $requestFactory,
+        UriFactoryInterface $uriFactory,
+        array $options = []
+    ) {
+        $this->client         = $client;
         $this->requestFactory = $requestFactory;
         $this->uriFactory     = $uriFactory;
         $this->options        = $options;
@@ -63,7 +77,7 @@ class Transifex
         $class     = $namespace . '\\' . \ucfirst(\strtolower($name));
 
         if (\class_exists($class)) {
-            return new $class($this->requestFactory, $this->uriFactory, $this->options);
+            return new $class($this->client, $this->requestFactory, $this->uriFactory, $this->options);
         }
 
         // If a custom namespace was specified, let's try to find an object in the local namespace
@@ -71,7 +85,7 @@ class Transifex
             $class = __NAMESPACE__ . '\\' . \ucfirst(\strtolower($name));
 
             if (\class_exists($class)) {
-                return new $class($this->requestFactory, $this->uriFactory, $this->options);
+                return new $class($this->client, $this->requestFactory, $this->uriFactory, $this->options);
             }
         }
 

@@ -5,6 +5,7 @@ CHANGELOG for the Transifex API Package
 
  * Raised minimum PHP version to 7.2
  * The `Transifex` and `TransifexObject` classes now require a `RequestFactoryInterface` and `UriFactoryInterface` (PSR-17) implementations as constructor arguments
+ * The `$client` constructor argument of the `Transifex` and `TransifexObject` classes is now a PSR-18 `ClientInterface` and is required
 
 * 2.1.1 (2018-03-10)
 
