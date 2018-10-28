@@ -2,14 +2,28 @@
 
 namespace BabDev\Transifex;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\ClientInterface;
+use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\UriFactoryInterface;
 
 /**
  * Base class for interacting with the Transifex API.
  */
 class Transifex
 {
+    /**
+     * The request factory.
+     *
+     * @var RequestFactoryInterface
+     */
+    protected $requestFactory;
+
+    /**
+     * The URI factory.
+     *
+     * @var UriFactoryInterface
+     */
+    protected $uriFactory;
+
     /**
      * Options for the Transifex object.
      *
@@ -18,26 +32,20 @@ class Transifex
     protected $options;
 
     /**
-     * The HTTP client object to use in sending HTTP requests.
-     *
-     * @var ClientInterface
+     * @param RequestFactoryInterface $requestFactory The request factory
+     * @param UriFactoryInterface     $uriFactory     The URI factory
+     * @param array                   $options        Transifex options array
      */
-    protected $client;
-
-    /**
-     * @param array           $options Transifex options array
-     * @param ClientInterface $client  The HTTP client object
-     */
-    public function __construct(array $options = [], ClientInterface $client = null)
+    public function __construct(RequestFactoryInterface $requestFactory, UriFactoryInterface $uriFactory, array $options = [])
     {
-        $this->options = $options;
+        $this->requestFactory = $requestFactory;
+        $this->uriFactory     = $uriFactory;
+        $this->options        = $options;
 
         // Setup the default API url if not already set.
         if (!$this->getOption('base_uri')) {
             $this->setOption('base_uri', 'https://www.transifex.com');
         }
-
-        $this->client = $client ?: new Client($this->options);
     }
 
     /**
@@ -55,7 +63,7 @@ class Transifex
         $class     = $namespace . '\\' . \ucfirst(\strtolower($name));
 
         if (\class_exists($class)) {
-            return new $class($this->options, $this->client);
+            return new $class($this->requestFactory, $this->uriFactory, $this->options);
         }
 
         // If a custom namespace was specified, let's try to find an object in the local namespace
@@ -63,7 +71,7 @@ class Transifex
             $class = __NAMESPACE__ . '\\' . \ucfirst(\strtolower($name));
 
             if (\class_exists($class)) {
-                return new $class($this->options, $this->client);
+                return new $class($this->requestFactory, $this->uriFactory, $this->options);
             }
         }
 

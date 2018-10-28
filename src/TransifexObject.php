@@ -2,10 +2,10 @@
 
 namespace BabDev\Transifex;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Uri;
+use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\UriFactoryInterface;
 use Psr\Http\Message\UriInterface;
 
 /**
@@ -14,6 +14,20 @@ use Psr\Http\Message\UriInterface;
 abstract class TransifexObject
 {
     /**
+     * The request factory.
+     *
+     * @var RequestFactoryInterface
+     */
+    protected $requestFactory;
+
+    /**
+     * The URI factory.
+     *
+     * @var UriFactoryInterface
+     */
+    protected $uriFactory;
+
+    /**
      * Options for the Transifex object.
      *
      * @var array
@@ -21,20 +35,15 @@ abstract class TransifexObject
     protected $options;
 
     /**
-     * The HTTP client object to use in sending HTTP requests.
-     *
-     * @var ClientInterface
+     * @param RequestFactoryInterface $requestFactory The request factory
+     * @param UriFactoryInterface     $uriFactory     The URI factory
+     * @param array                   $options        Transifex options array
      */
-    protected $client;
-
-    /**
-     * @param array           $options Transifex options array
-     * @param ClientInterface $client  The HTTP client object
-     */
-    public function __construct(array $options = [], ClientInterface $client = null)
+    public function __construct(RequestFactoryInterface $requestFactory, UriFactoryInterface $uriFactory, array $options = [])
     {
-        $this->options = $options;
-        $this->client  = $client ?: new Client($this->options);
+        $this->requestFactory = $requestFactory;
+        $this->uriFactory     = $uriFactory;
+        $this->options        = $options;
     }
 
     /**
