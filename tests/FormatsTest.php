@@ -10,7 +10,7 @@ use BabDev\Transifex\Formats;
 class FormatsTest extends TransifexTestCase
 {
     /**
-     * @testdox getFormats() returns a Response object on a successful API connection
+     * @testdox getFormats() returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Formats::getFormats
@@ -21,25 +21,25 @@ class FormatsTest extends TransifexTestCase
     {
         $this->prepareSuccessTest();
 
-        (new Formats($this->options, $this->client))->getFormats();
+        (new Formats($this->client, $this->requestFactory, $this->uriFactory, $this->options))->getFormats();
 
         $this->validateSuccessTest('/api/2/formats');
     }
 
     /**
-     * @testdox getFormats() throws a ServerException on a failed API connection
+     * @testdox getFormats() returns a Response object indicating a failed API connection
      *
      * @covers  \BabDev\Transifex\Formats::getFormats
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      *
      * @uses    \BabDev\Transifex\TransifexObject
-     *
-     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testGetFormatsFailure()
     {
         $this->prepareFailureTest();
 
-        (new Formats($this->options, $this->client))->getFormats();
+        (new Formats($this->client, $this->requestFactory, $this->uriFactory, $this->options))->getFormats();
+
+        $this->validateFailureTest('/api/2/formats');
     }
 }

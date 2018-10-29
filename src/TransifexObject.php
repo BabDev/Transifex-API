@@ -2,9 +2,9 @@
 
 namespace BabDev\Transifex;
 
-use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\UriFactoryInterface;
 use Psr\Http\Message\UriInterface;
@@ -61,17 +61,54 @@ abstract class TransifexObject
     }
 
     /**
+     * Creates the Authorization header for the request
+     *
+     * @return string
+     *
+     * @throws \InvalidArgumentException if credentials are not set
+     */
+    protected function createAuthorizationHeader(): string
+    {
+        $username = $this->getOption('api.username');
+        $password = $this->getOption('api.password');
+
+        // The API requires HTTP Basic Authentication, we can't proceed without credentials
+        if ($username === null || $password === null) {
+            throw new \InvalidArgumentException('Missing credentials for API authentication.');
+        }
+
+        return 'Basic ' . \base64_encode("$username:$password");
+    }
+
+    /**
+     * Create a Request object for the given URI
+     *
+     * This method will also set the Authorization header for the request
+     *
+     * @param string       $method
+     * @param UriInterface $uri
+     *
+     * @return RequestInterface
+     */
+    protected function createRequest(string $method, UriInterface $uri): RequestInterface
+    {
+        $request = $this->requestFactory->createRequest($method, $uri);
+
+        return $request->withHeader('Authorization', $this->createAuthorizationHeader());
+    }
+
+    /**
      * Create a Uri object for the path
      *
      * @param string $path
      *
-     * @return Uri
+     * @return UriInterface
      */
-    protected function createUri(string $path): Uri
+    protected function createUri(string $path): UriInterface
     {
         $baseUrl = $this->getOption('base_uri', 'https://www.transifex.com');
 
-        return new Uri($baseUrl . $path);
+        return $this->uriFactory->createUri($baseUrl . $path);
     }
 
     /**

@@ -19,6 +19,7 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.13",
+        "http-interop/http-factory-guzzle": "~1.0",
         "phpunit/phpunit": "~7.0"
     },
     "autoload": {

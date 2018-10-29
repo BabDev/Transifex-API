@@ -2,12 +2,13 @@
 
 namespace BabDev\Transifex\Tests;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Handler\MockHandler;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Middleware;
+use BabDev\Transifex\Tests\Client\TransifexTestClient;
 use GuzzleHttp\Psr7\Response;
+use Http\Factory\Guzzle\RequestFactory;
+use Http\Factory\Guzzle\UriFactory;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\UriFactoryInterface;
 
 /**
  * Abstract test case for TransifexObject instances.
@@ -20,9 +21,19 @@ abstract class TransifexTestCase extends TestCase
     protected $options = ['api.username' => 'test', 'api.password' => 'pass', 'base_uri' => 'https://www.transifex.com'];
 
     /**
-     * @var Client
+     * @var TransifexTestClient
      */
     protected $client;
+
+    /**
+     * @var RequestFactoryInterface
+     */
+    protected $requestFactory;
+
+    /**
+     * @var UriFactoryInterface
+     */
+    protected $uriFactory;
 
     /**
      * @var array
@@ -40,17 +51,13 @@ abstract class TransifexTestCase extends TestCase
     protected $errorString = '{"message": "Generic Error"}';
 
     /**
-     * Create the Guzzle client for the test.
-     *
-     * @param HandlerStack $stack
+     * {@inheritdoc}
      */
-    protected function createClient(HandlerStack $stack)
+    protected function setUp()
     {
-        $history = Middleware::history($this->historyContainer);
-
-        $stack->push($history);
-
-        $this->client = new Client(['handler' => $stack]);
+        $this->client         = new TransifexTestClient();
+        $this->requestFactory = new RequestFactory();
+        $this->uriFactory     = new UriFactory();
     }
 
     /**
@@ -58,11 +65,7 @@ abstract class TransifexTestCase extends TestCase
      */
     protected function prepareFailureTest()
     {
-        $mock = new MockHandler([
-            new Response(500, [], $this->errorString),
-        ]);
-
-        $this->createClient(HandlerStack::create($mock));
+        $this->client->setResponse(new Response(500, [], $this->errorString));
     }
 
     /**
@@ -72,11 +75,31 @@ abstract class TransifexTestCase extends TestCase
      */
     protected function prepareSuccessTest(int $code = 200)
     {
-        $mock = new MockHandler([
-            new Response($code, [], $this->sampleString),
-        ]);
+        $this->client->setResponse(new Response($code, [], $this->sampleString));
+    }
 
-        $this->createClient(HandlerStack::create($mock));
+    /**
+     * Validate the request for a failure test is valid.
+     *
+     * @param string $path   The expected URI path
+     * @param string $method The expected HTTP method
+     * @param int    $code   The expected HTTP code
+     */
+    protected function validateFailureTest(string $path, string $method = 'GET', int $code = 500)
+    {
+        $this->assertSame(
+            $method,
+            $this->client->getRequest()->getMethod(),
+            'The API did not use the right HTTP method.'
+        );
+
+        $this->assertSame(
+            $path,
+            $this->client->getRequest()->getUri()->getPath(),
+            'The API did not request the right endpoint.'
+        );
+
+        $this->assertSame($code, $this->client->getResponse()->getStatusCode(), 'The API did not return the right HTTP code.');
     }
 
     /**
@@ -88,29 +111,18 @@ abstract class TransifexTestCase extends TestCase
      */
     protected function validateSuccessTest(string $path, string $method = 'GET', int $code = 200)
     {
-        // There should be one request in the stack now
-        if (!isset($this->historyContainer[0])) {
-            $this->fail('Request not completed.');
-        }
-
-        /** @var \Psr\Http\Message\RequestInterface $request */
-        $request = $this->historyContainer[0]['request'];
-
-        /** @var \Psr\Http\Message\ResponseInterface $response */
-        $response = $this->historyContainer[0]['response'];
-
         $this->assertSame(
             $method,
-            $request->getMethod(),
+            $this->client->getRequest()->getMethod(),
             'The API did not use the right HTTP method.'
         );
 
         $this->assertSame(
             $path,
-            $request->getUri()->getPath(),
+            $this->client->getRequest()->getUri()->getPath(),
             'The API did not request the right endpoint.'
         );
 
-        $this->assertSame($code, $response->getStatusCode(), 'The API did not return the right HTTP code.');
+        $this->assertSame($code, $this->client->getResponse()->getStatusCode(), 'The API did not return the right HTTP code.');
     }
 }

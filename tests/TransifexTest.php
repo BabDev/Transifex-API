@@ -16,7 +16,7 @@ use Psr\Http\Message\UriFactoryInterface;
 class TransifexTest extends TestCase
 {
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|RequestFactoryInterface
+     * @var \PHPUnit_Framework_MockObject_MockObject|ClientInterface
      */
     private $client;
 
