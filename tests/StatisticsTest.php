@@ -33,13 +33,13 @@ class StatisticsTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      *
      * @uses    \BabDev\Transifex\TransifexObject
-     *
-     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testGetStatisticsFailure()
     {
         $this->prepareFailureTest();
 
         (new Statistics($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getStatistics('babdev', 'babdev-transifex');
+
+        $this->validateFailureTest('/api/2/project/babdev/resource/babdev-transifex/stats/');
     }
 }
