@@ -10,7 +10,7 @@ use BabDev\Transifex\Statistics;
 class StatisticsTest extends TransifexTestCase
 {
     /**
-     * @testdox getStatistics() returns a Response object on a successful API connection
+     * @testdox getStatistics() returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\Statistics::getStatistics
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
@@ -21,13 +21,13 @@ class StatisticsTest extends TransifexTestCase
     {
         $this->prepareSuccessTest();
 
-        (new Statistics($this->options, $this->client))->getStatistics('babdev', 'babdev-transifex');
+        (new Statistics($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getStatistics('babdev', 'babdev-transifex');
 
         $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/stats/');
     }
 
     /**
-     * @testdox getStatistics() throws a ServerException on a failed API connection
+     * @testdox getStatistics() returns a Response object indicating a failed API connection
      *
      * @covers  \BabDev\Transifex\Statistics::getStatistics
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
@@ -40,6 +40,6 @@ class StatisticsTest extends TransifexTestCase
     {
         $this->prepareFailureTest();
 
-        (new Statistics($this->options, $this->client))->getStatistics('babdev', 'babdev-transifex');
+        (new Statistics($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getStatistics('babdev', 'babdev-transifex');
     }
 }

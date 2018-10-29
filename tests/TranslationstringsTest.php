@@ -10,7 +10,7 @@ use BabDev\Transifex\Translationstrings;
 class TranslationstringsTest extends TransifexTestCase
 {
     /**
-     * @testdox getPseudolocalizationStrings() returns a Response object on a successful API connection
+     * @testdox getPseudolocalizationStrings() returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Translationstrings::getPseudolocalizationStrings
@@ -21,7 +21,7 @@ class TranslationstringsTest extends TransifexTestCase
     {
         $this->prepareSuccessTest();
 
-        (new Translationstrings($this->options, $this->client))->getPseudolocalizationStrings('babdev', 'babdev-transifex');
+        (new Translationstrings($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getPseudolocalizationStrings('babdev', 'babdev-transifex');
 
         $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/pseudo/');
 
@@ -36,7 +36,7 @@ class TranslationstringsTest extends TransifexTestCase
     }
 
     /**
-     * @testdox getPseudolocalizationStrings() throws a ServerException on a failed API connection
+     * @testdox getPseudolocalizationStrings() returns a Response object indicating a failed API connection
      *
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Translationstrings::getPseudolocalizationStrings
@@ -49,11 +49,11 @@ class TranslationstringsTest extends TransifexTestCase
     {
         $this->prepareFailureTest();
 
-        (new Translationstrings($this->options, $this->client))->getPseudolocalizationStrings('babdev', 'babdev-transifex');
+        (new Translationstrings($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getPseudolocalizationStrings('babdev', 'babdev-transifex');
     }
 
     /**
-     * @testdox getStrings() returns a Response object on a successful API connection
+     * @testdox getStrings() returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Translationstrings::getStrings
@@ -64,13 +64,13 @@ class TranslationstringsTest extends TransifexTestCase
     {
         $this->prepareSuccessTest();
 
-        (new Translationstrings($this->options, $this->client))->getStrings('babdev', 'babdev-transifex', 'en_US');
+        (new Translationstrings($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getStrings('babdev', 'babdev-transifex', 'en_US');
 
         $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US/strings/');
     }
 
     /**
-     * @testdox getStrings() requesting full details returns a Response object on a successful API connection
+     * @testdox getStrings() requesting full details returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Translationstrings::getStrings
@@ -81,7 +81,7 @@ class TranslationstringsTest extends TransifexTestCase
     {
         $this->prepareSuccessTest();
 
-        (new Translationstrings($this->options, $this->client))->getStrings('babdev', 'babdev-transifex', 'en_US', true);
+        (new Translationstrings($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getStrings('babdev', 'babdev-transifex', 'en_US', true);
 
         $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US/strings/');
 
@@ -96,7 +96,7 @@ class TranslationstringsTest extends TransifexTestCase
     }
 
     /**
-     * @testdox getStrings() requesting full details and the key returns a Response object on a successful API connection
+     * @testdox getStrings() requesting full details and the key returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Translationstrings::getStrings
@@ -107,7 +107,7 @@ class TranslationstringsTest extends TransifexTestCase
     {
         $this->prepareSuccessTest();
 
-        (new Translationstrings($this->options, $this->client))->getStrings(
+        (new Translationstrings($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getStrings(
             'babdev',
             'babdev-transifex',
             'en_US',
@@ -128,7 +128,7 @@ class TranslationstringsTest extends TransifexTestCase
     }
 
     /**
-     * @testdox getStrings() requesting full details, key, and context returns a Response object on a successful API connection
+     * @testdox getStrings() requesting full details, key, and context returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Translationstrings::getStrings
@@ -139,7 +139,7 @@ class TranslationstringsTest extends TransifexTestCase
     {
         $this->prepareSuccessTest();
 
-        (new Translationstrings($this->options, $this->client))->getStrings(
+        (new Translationstrings($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getStrings(
             'babdev',
             'babdev-transifex',
             'en_US',
@@ -160,7 +160,7 @@ class TranslationstringsTest extends TransifexTestCase
     }
 
     /**
-     * @testdox getStrings() requesting the key and context returns a Response object on a successful API connection
+     * @testdox getStrings() requesting the key and context returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Translationstrings::getStrings
@@ -171,7 +171,7 @@ class TranslationstringsTest extends TransifexTestCase
     {
         $this->prepareSuccessTest();
 
-        (new Translationstrings($this->options, $this->client))->getStrings(
+        (new Translationstrings($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getStrings(
             'babdev',
             'babdev-transifex',
             'en_US',
@@ -192,7 +192,7 @@ class TranslationstringsTest extends TransifexTestCase
     }
 
     /**
-     * @testdox getStrings() requesting a given context returns a Response object on a successful API connection
+     * @testdox getStrings() requesting a given context returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Translationstrings::getStrings
@@ -203,7 +203,7 @@ class TranslationstringsTest extends TransifexTestCase
     {
         $this->prepareSuccessTest();
 
-        (new Translationstrings($this->options, $this->client))->getStrings(
+        (new Translationstrings($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getStrings(
             'babdev',
             'babdev-transifex',
             'en_US',
@@ -224,7 +224,7 @@ class TranslationstringsTest extends TransifexTestCase
     }
 
     /**
-     * @testdox getStrings() throws a ServerException on a failed API connection
+     * @testdox getStrings() returns a Response object indicating a failed API connection
      *
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Translationstrings::getStrings
@@ -237,6 +237,6 @@ class TranslationstringsTest extends TransifexTestCase
     {
         $this->prepareFailureTest();
 
-        (new Translationstrings($this->options, $this->client))->getStrings('babdev', 'babdev-transifex', 'en_US');
+        (new Translationstrings($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getStrings('babdev', 'babdev-transifex', 'en_US');
     }
 }

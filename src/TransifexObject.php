@@ -6,6 +6,7 @@ use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\UriFactoryInterface;
 use Psr\Http\Message\UriInterface;
 
@@ -29,6 +30,13 @@ abstract class TransifexObject
     protected $requestFactory;
 
     /**
+     * The stream factory.
+     *
+     * @var StreamFactoryInterface
+     */
+    protected $streamFactory;
+
+    /**
      * The URI factory.
      *
      * @var UriFactoryInterface
@@ -45,17 +53,20 @@ abstract class TransifexObject
     /**
      * @param ClientInterface         $client         The HTTP client
      * @param RequestFactoryInterface $requestFactory The request factory
+     * @param StreamFactoryInterface  $streamFactory  The stream factory
      * @param UriFactoryInterface     $uriFactory     The URI factory
      * @param array                   $options        Transifex options array
      */
     public function __construct(
         ClientInterface $client,
         RequestFactoryInterface $requestFactory,
+        StreamFactoryInterface $streamFactory,
         UriFactoryInterface $uriFactory,
         array $options = []
     ) {
         $this->client         = $client;
         $this->requestFactory = $requestFactory;
+        $this->streamFactory  = $streamFactory;
         $this->uriFactory     = $uriFactory;
         $this->options        = $options;
     }

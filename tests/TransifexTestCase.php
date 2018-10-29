@@ -5,9 +5,11 @@ namespace BabDev\Transifex\Tests;
 use BabDev\Transifex\Tests\Client\TransifexTestClient;
 use GuzzleHttp\Psr7\Response;
 use Http\Factory\Guzzle\RequestFactory;
+use Http\Factory\Guzzle\StreamFactory;
 use Http\Factory\Guzzle\UriFactory;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\UriFactoryInterface;
 
 /**
@@ -29,6 +31,11 @@ abstract class TransifexTestCase extends TestCase
      * @var RequestFactoryInterface
      */
     protected $requestFactory;
+
+    /**
+     * @var StreamFactoryInterface
+     */
+    protected $streamFactory;
 
     /**
      * @var UriFactoryInterface
@@ -57,6 +64,7 @@ abstract class TransifexTestCase extends TestCase
     {
         $this->client         = new TransifexTestClient();
         $this->requestFactory = new RequestFactory();
+        $this->streamFactory  = new StreamFactory();
         $this->uriFactory     = new UriFactory();
     }
 

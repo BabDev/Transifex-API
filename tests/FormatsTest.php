@@ -21,7 +21,7 @@ class FormatsTest extends TransifexTestCase
     {
         $this->prepareSuccessTest();
 
-        (new Formats($this->client, $this->requestFactory, $this->uriFactory, $this->options))->getFormats();
+        (new Formats($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getFormats();
 
         $this->validateSuccessTest('/api/2/formats');
     }
@@ -38,7 +38,7 @@ class FormatsTest extends TransifexTestCase
     {
         $this->prepareFailureTest();
 
-        (new Formats($this->client, $this->requestFactory, $this->uriFactory, $this->options))->getFormats();
+        (new Formats($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getFormats();
 
         $this->validateFailureTest('/api/2/formats');
     }

@@ -70,7 +70,7 @@ class TransifexObjectTest extends TransifexTestCase
 
         $this->options['base_uri'] = 'https://api.transifex.com';
 
-        (new Formats($this->options, $this->client))->getFormats();
+        (new Formats($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getFormats();
 
         $this->validateSuccessTest('/api/2/formats');
 

@@ -8,6 +8,7 @@ use BabDev\Transifex\Transifex;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\UriFactoryInterface;
 
 /**
@@ -24,6 +25,11 @@ class TransifexTest extends TestCase
      * @var \PHPUnit_Framework_MockObject_MockObject|RequestFactoryInterface
      */
     private $requestFactory;
+
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject|StreamFactoryInterface
+     */
+    private $streamFactory;
 
     /**
      * @var Transifex
@@ -47,9 +53,10 @@ class TransifexTest extends TestCase
     {
         $this->client         = $this->createMock(ClientInterface::class);
         $this->requestFactory = $this->createMock(RequestFactoryInterface::class);
+        $this->streamFactory  = $this->createMock(StreamFactoryInterface::class);
         $this->uriFactory     = $this->createMock(UriFactoryInterface::class);
         $this->options        = ['api.username' => 'test', 'api.password' => 'test'];
-        $this->object         = new Transifex($this->client, $this->requestFactory, $this->uriFactory, $this->options);
+        $this->object         = new Transifex($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options);
     }
 
     /**
