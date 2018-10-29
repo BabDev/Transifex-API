@@ -12,7 +12,7 @@ class TranslationsTest extends TransifexTestCase
     /**
      * @testdox getTranslation() returns a Response object indicating a successful API connection
      *
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     * @covers  \BabDev\Transifex\TransifexObject
      * @covers  \BabDev\Transifex\Translations::getTranslation
      *
      * @uses    \BabDev\Transifex\TransifexObject
@@ -35,7 +35,7 @@ class TranslationsTest extends TransifexTestCase
     /**
      * @testdox getTranslation() returns a Response object indicating a failed API connection
      *
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     * @covers  \BabDev\Transifex\TransifexObject
      * @covers  \BabDev\Transifex\Translations::getTranslation
      *
      * @uses    \BabDev\Transifex\TransifexObject
@@ -52,8 +52,7 @@ class TranslationsTest extends TransifexTestCase
     /**
      * @testdox updateTranslation() with an attached file returns a Response object indicating a successful API connection
      *
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
-     * @covers  \BabDev\Transifex\TransifexObject::updateResource
+     * @covers  \BabDev\Transifex\TransifexObject
      * @covers  \BabDev\Transifex\Translations::updateTranslation
      *
      * @uses    \BabDev\Transifex\TransifexObject
@@ -76,8 +75,7 @@ class TranslationsTest extends TransifexTestCase
     /**
      * @testdox updateTranslation() with inline content returns a Response object indicating a successful API connection
      *
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
-     * @covers  \BabDev\Transifex\TransifexObject::updateResource
+     * @covers  \BabDev\Transifex\TransifexObject
      * @covers  \BabDev\Transifex\Translations::updateTranslation
      *
      * @uses    \BabDev\Transifex\TransifexObject
@@ -99,8 +97,7 @@ class TranslationsTest extends TransifexTestCase
     /**
      * @testdox updateTranslation() returns a Response object indicating a failed API connection
      *
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
-     * @covers  \BabDev\Transifex\TransifexObject::updateResource
+     * @covers  \BabDev\Transifex\TransifexObject
      * @covers  \BabDev\Transifex\Translations::updateTranslation
      *
      * @uses    \BabDev\Transifex\TransifexObject
@@ -122,7 +119,6 @@ class TranslationsTest extends TransifexTestCase
     /**
      * @testdox updateTranslation() throws an InvalidArgumentException when an invalid content type is specified
      *
-     * @covers  \BabDev\Transifex\TransifexObject::updateResource
      * @covers  \BabDev\Transifex\Translations::updateTranslation
      *
      * @uses    \BabDev\Transifex\TransifexObject
@@ -143,7 +139,6 @@ class TranslationsTest extends TransifexTestCase
     /**
      * @testdox updateTranslation() throws an InvalidArgumentException when a non-existing file is specified
      *
-     * @covers  \BabDev\Transifex\TransifexObject::updateResource
      * @covers  \BabDev\Transifex\Translations::updateTranslation
      *
      * @uses    \BabDev\Transifex\TransifexObject

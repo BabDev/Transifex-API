@@ -12,7 +12,7 @@ class FormatsTest extends TransifexTestCase
     /**
      * @testdox getFormats() returns a Response object indicating a successful API connection
      *
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     * @covers  \BabDev\Transifex\TransifexObject
      * @covers  \BabDev\Transifex\Formats::getFormats
      *
      * @uses    \BabDev\Transifex\TransifexObject
@@ -30,7 +30,7 @@ class FormatsTest extends TransifexTestCase
      * @testdox getFormats() returns a Response object indicating a failed API connection
      *
      * @covers  \BabDev\Transifex\Formats::getFormats
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     * @covers  \BabDev\Transifex\TransifexObject
      *
      * @uses    \BabDev\Transifex\TransifexObject
      */

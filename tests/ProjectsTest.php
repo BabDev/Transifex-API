@@ -15,7 +15,7 @@ class ProjectsTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\Projects::buildProjectRequest
      * @covers  \BabDev\Transifex\Projects::checkLicense
      * @covers  \BabDev\Transifex\Projects::createProject
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     * @covers  \BabDev\Transifex\TransifexObject
      *
      * @uses    \BabDev\Transifex\TransifexObject
      */
@@ -59,7 +59,7 @@ class ProjectsTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\Projects::buildProjectRequest
      * @covers  \BabDev\Transifex\Projects::checkLicense
      * @covers  \BabDev\Transifex\Projects::createProject
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     * @covers  \BabDev\Transifex\TransifexObject
      *
      * @uses    \BabDev\Transifex\TransifexObject
      */
@@ -125,7 +125,7 @@ class ProjectsTest extends TransifexTestCase
      * @testdox deleteProject() returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\Projects::deleteProject
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     * @covers  \BabDev\Transifex\TransifexObject
      *
      * @uses    \BabDev\Transifex\TransifexObject
      */
@@ -142,7 +142,7 @@ class ProjectsTest extends TransifexTestCase
      * @testdox deleteProject() returns a Response object indicating a failed API connection
      *
      * @covers  \BabDev\Transifex\Projects::deleteProject
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     * @covers  \BabDev\Transifex\TransifexObject
      *
      * @uses    \BabDev\Transifex\TransifexObject
      */
@@ -159,7 +159,7 @@ class ProjectsTest extends TransifexTestCase
      * @testdox getProject() returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\Projects::getProject
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     * @covers  \BabDev\Transifex\TransifexObject
      *
      * @uses    \BabDev\Transifex\TransifexObject
      */
@@ -182,7 +182,7 @@ class ProjectsTest extends TransifexTestCase
      * @testdox getProject() returns a Response object indicating a failed API connection
      *
      * @covers  \BabDev\Transifex\Projects::getProject
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     * @covers  \BabDev\Transifex\TransifexObject
      *
      * @uses    \BabDev\Transifex\TransifexObject
      */
@@ -199,7 +199,7 @@ class ProjectsTest extends TransifexTestCase
      * @testdox getProjects() returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\Projects::getProjects
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     * @covers  \BabDev\Transifex\TransifexObject
      *
      * @uses    \BabDev\Transifex\TransifexObject
      */
@@ -216,7 +216,7 @@ class ProjectsTest extends TransifexTestCase
      * @testdox getProjects() returns a Response object indicating a failed API connection
      *
      * @covers  \BabDev\Transifex\Projects::getProjects
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     * @covers  \BabDev\Transifex\TransifexObject
      *
      * @uses    \BabDev\Transifex\TransifexObject
      */
@@ -234,7 +234,7 @@ class ProjectsTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Projects::checkLicense
      * @covers  \BabDev\Transifex\Projects::updateProject
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     * @covers  \BabDev\Transifex\TransifexObject
      *
      * @uses    \BabDev\Transifex\TransifexObject
      */
@@ -266,7 +266,7 @@ class ProjectsTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\Projects::buildProjectRequest
      * @covers  \BabDev\Transifex\Projects::checkLicense
      * @covers  \BabDev\Transifex\Projects::updateProject
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     * @covers  \BabDev\Transifex\TransifexObject
      *
      * @uses    \BabDev\Transifex\TransifexObject
      */

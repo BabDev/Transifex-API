@@ -13,7 +13,7 @@ class LanguageinfoTest extends TransifexTestCase
      * @testdox getLanguage() returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\Languageinfo::getLanguage
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     * @covers  \BabDev\Transifex\TransifexObject
      *
      * @uses    \BabDev\Transifex\TransifexObject
      */
@@ -30,7 +30,7 @@ class LanguageinfoTest extends TransifexTestCase
      * @testdox getLanguage() returns a Response object indicating a failed API connection
      *
      * @covers  \BabDev\Transifex\Languageinfo::getLanguage
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     * @covers  \BabDev\Transifex\TransifexObject
      *
      * @uses    \BabDev\Transifex\TransifexObject
      */
@@ -47,7 +47,7 @@ class LanguageinfoTest extends TransifexTestCase
      * @testdox getLanguages() returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\Languageinfo::getLanguages
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     * @covers  \BabDev\Transifex\TransifexObject
      *
      * @uses    \BabDev\Transifex\TransifexObject
      */
@@ -64,7 +64,7 @@ class LanguageinfoTest extends TransifexTestCase
      * @testdox getLanguages() returns a Response object indicating a failed API connection
      *
      * @covers  \BabDev\Transifex\Languageinfo::getLanguages
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     * @covers  \BabDev\Transifex\TransifexObject
      *
      * @uses    \BabDev\Transifex\TransifexObject
      */

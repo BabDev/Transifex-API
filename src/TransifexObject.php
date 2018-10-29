@@ -123,26 +123,6 @@ abstract class TransifexObject
     }
 
     /**
-     * Get the authentication credentials for the API request.
-     *
-     * @return array
-     *
-     * @throws \InvalidArgumentException if credentials are not set
-     */
-    protected function getAuthData(): array
-    {
-        $username = $this->getOption('api.username');
-        $password = $this->getOption('api.password');
-
-        // The API requires HTTP Basic Authentication, we can't proceed without credentials
-        if ($username === null || $password === null) {
-            throw new \InvalidArgumentException('Missing credentials for API authentication.');
-        }
-
-        return [$username, $password];
-    }
-
-    /**
      * Get an option from the options store.
      *
      * @param string $key     The name of the option to get

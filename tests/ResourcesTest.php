@@ -13,7 +13,7 @@ class ResourcesTest extends TransifexTestCase
      * @testdox createResource() with inline content provided in the options returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\Resources::createResource
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     * @covers  \BabDev\Transifex\TransifexObject
      *
      * @uses    \BabDev\Transifex\TransifexObject
      */
@@ -44,7 +44,7 @@ class ResourcesTest extends TransifexTestCase
      * @testdox createResource() with an attached file in the options returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\Resources::createResource
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     * @covers  \BabDev\Transifex\TransifexObject
      *
      * @uses    \BabDev\Transifex\TransifexObject
      */
@@ -75,7 +75,7 @@ class ResourcesTest extends TransifexTestCase
      * @testdox createResource() with an attached file in the options that does not exist throws an InvalidArgumentException
      *
      * @covers  \BabDev\Transifex\Resources::createResource
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     * @covers  \BabDev\Transifex\TransifexObject
      *
      * @uses    \BabDev\Transifex\TransifexObject
      *
@@ -104,7 +104,7 @@ class ResourcesTest extends TransifexTestCase
      * @testdox createResource() returns a Response object indicating a failed API connection
      *
      * @covers  \BabDev\Transifex\Resources::createResource
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     * @covers  \BabDev\Transifex\TransifexObject
      *
      * @uses    \BabDev\Transifex\TransifexObject
      */
@@ -127,7 +127,7 @@ class ResourcesTest extends TransifexTestCase
      * @testdox deleteResource() returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\Resources::deleteResource
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     * @covers  \BabDev\Transifex\TransifexObject
      *
      * @uses    \BabDev\Transifex\TransifexObject
      */
@@ -144,7 +144,7 @@ class ResourcesTest extends TransifexTestCase
      * @testdox deleteResource() returns a Response object indicating a failed API connection
      *
      * @covers  \BabDev\Transifex\Resources::deleteResource
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     * @covers  \BabDev\Transifex\TransifexObject
      *
      * @uses    \BabDev\Transifex\TransifexObject
      */
@@ -161,7 +161,7 @@ class ResourcesTest extends TransifexTestCase
      * @testdox getResource() returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\Resources::getResource
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     * @covers  \BabDev\Transifex\TransifexObject
      *
      * @uses    \BabDev\Transifex\TransifexObject
      */
@@ -184,7 +184,7 @@ class ResourcesTest extends TransifexTestCase
      * @testdox getResource() returns a Response object indicating a failed API connection
      *
      * @covers  \BabDev\Transifex\Resources::getResource
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     * @covers  \BabDev\Transifex\TransifexObject
      *
      * @uses    \BabDev\Transifex\TransifexObject
      */
@@ -201,7 +201,7 @@ class ResourcesTest extends TransifexTestCase
      * @testdox getResourceContent() returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\Resources::getResourceContent
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     * @covers  \BabDev\Transifex\TransifexObject
      *
      * @uses    \BabDev\Transifex\TransifexObject
      */
@@ -218,7 +218,7 @@ class ResourcesTest extends TransifexTestCase
      * @testdox getResourceContent() returns a Response object indicating a failed API connection
      *
      * @covers  \BabDev\Transifex\Resources::getResourceContent
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     * @covers  \BabDev\Transifex\TransifexObject
      *
      * @uses    \BabDev\Transifex\TransifexObject
      */
@@ -235,7 +235,7 @@ class ResourcesTest extends TransifexTestCase
      * @testdox getResources() returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\Resources::getResources
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     * @covers  \BabDev\Transifex\TransifexObject
      *
      * @uses    \BabDev\Transifex\TransifexObject
      */
@@ -252,7 +252,7 @@ class ResourcesTest extends TransifexTestCase
      * @testdox getResources() returns a Response object indicating a failed API connection
      *
      * @covers  \BabDev\Transifex\Resources::getResources
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     * @covers  \BabDev\Transifex\TransifexObject
      *
      * @uses    \BabDev\Transifex\TransifexObject
      */
@@ -269,7 +269,7 @@ class ResourcesTest extends TransifexTestCase
      * @testdox updateResourceContent() with an attached file returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\Resources::updateResourceContent
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
+     * @covers  \BabDev\Transifex\TransifexObject
      *
      * @uses    \BabDev\Transifex\TransifexObject
      */
@@ -291,8 +291,7 @@ class ResourcesTest extends TransifexTestCase
      * @testdox updateResourceContent() with inline content returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\Resources::updateResourceContent
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
-     * @covers  \BabDev\Transifex\TransifexObject::updateResource
+     * @covers  \BabDev\Transifex\TransifexObject
      *
      * @uses    \BabDev\Transifex\TransifexObject
      */
@@ -313,8 +312,7 @@ class ResourcesTest extends TransifexTestCase
      * @testdox updateResourceContent() returns a Response object indicating a failed API connection
      *
      * @covers  \BabDev\Transifex\Resources::updateResourceContent
-     * @covers  \BabDev\Transifex\TransifexObject::getAuthData
-     * @covers  \BabDev\Transifex\TransifexObject::updateResource
+     * @covers  \BabDev\Transifex\TransifexObject
      *
      * @uses    \BabDev\Transifex\TransifexObject
      */
@@ -331,7 +329,7 @@ class ResourcesTest extends TransifexTestCase
      * @testdox updateResourceContent() throws an InvalidArgumentException when an invalid content type is specified
      *
      * @covers  \BabDev\Transifex\Resources::updateResourceContent
-     * @covers  \BabDev\Transifex\TransifexObject::updateResource
+     * @covers  \BabDev\Transifex\TransifexObject
      *
      * @uses    \BabDev\Transifex\TransifexObject
      *
@@ -351,7 +349,7 @@ class ResourcesTest extends TransifexTestCase
      * @testdox updateResourceContent() throws an InvalidArgumentException when a non-existing file is specified
      *
      * @covers  \BabDev\Transifex\Resources::updateResourceContent
-     * @covers  \BabDev\Transifex\TransifexObject::updateResource
+     * @covers  \BabDev\Transifex\TransifexObject
      *
      * @uses    \BabDev\Transifex\TransifexObject
      *
