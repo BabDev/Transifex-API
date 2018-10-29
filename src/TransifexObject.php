@@ -173,6 +173,9 @@ abstract class TransifexObject
             throw new \InvalidArgumentException('The content type must be specified as file or string.');
         }
 
+        $request = $this->createRequest('PUT', $uri);
+        $request = $request->withHeader('Content-Type', 'application/json');
+
         if ($type == 'file') {
             if (!\file_exists($content)) {
                 throw new \InvalidArgumentException(
@@ -180,21 +183,15 @@ abstract class TransifexObject
                 );
             }
 
-            $content = \file_get_contents($content);
+            $request = $request->withBody($this->streamFactory->createStreamFromFile($content));
+        } else {
+            $data = [
+                'content' => $content,
+            ];
+
+            $request = $request->withBody($this->streamFactory->createStream(\json_encode($data)));
         }
 
-        $data = [
-            'content' => $content,
-        ];
-
-        return $this->client->request(
-            'PUT',
-            $uri,
-            [
-                'body'    => \json_encode($data),
-                'auth'    => $this->getAuthData(),
-                'headers' => ['Content-Type' => 'application/json'],
-            ]
-        );
+        return $this->client->sendRequest($request);
     }
 }
