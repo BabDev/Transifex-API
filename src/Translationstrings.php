@@ -22,11 +22,7 @@ class Translationstrings extends TransifexObject
      */
     public function getPseudolocalizationStrings(string $project, string $resource): ResponseInterface
     {
-        return $this->client->request(
-            'GET',
-            $this->createUri("/api/2/project/$project/resource/$resource/pseudo/?pseudo_type=MIXED"),
-            ['auth' => $this->getAuthData()]
-        );
+        return $this->client->sendRequest($this->createRequest('GET', $this->createUri("/api/2/project/$project/resource/$resource/pseudo/?pseudo_type=MIXED")));
     }
 
     /**
@@ -47,20 +43,30 @@ class Translationstrings extends TransifexObject
         bool $details = false,
         array $options = []
     ): ResponseInterface {
-        $uri = $this->createUri("/api/2/project/$project/resource/$resource/translation/$lang/strings/");
+        $uri   = $this->createUri("/api/2/project/$project/resource/$resource/translation/$lang/strings/");
+        $query = [];
 
         if ($details) {
-            $uri = Uri::withQueryValue($uri, 'details', null);
+            // Add details now because `http_build_query()` can't handle something that isn't a key/value pair
+            $uri = $uri->withQuery('details');
         }
 
         if (isset($options['key'])) {
-            $uri = Uri::withQueryValue($uri, 'key', $options['key']);
+            $query['key'] = $options['key'];
         }
 
         if (isset($options['context'])) {
-            $uri = Uri::withQueryValue($uri, 'context', $options['context']);
+            $query['context'] = $options['context'];
         }
 
-        return $this->client->request('GET', $uri, ['auth' => $this->getAuthData()]);
+        if (!empty($query)) {
+            if ($uri->getQuery() === '') {
+                $uri = $uri->withQuery(http_build_query($query));
+            } else {
+                $uri = $uri->withQuery($uri->getQuery() . '&' . http_build_query($query));
+            }
+        }
+
+        return $this->client->sendRequest($this->createRequest('GET', $uri));
     }
 }

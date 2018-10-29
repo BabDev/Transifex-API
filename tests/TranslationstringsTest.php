@@ -25,12 +25,9 @@ class TranslationstringsTest extends TransifexTestCase
 
         $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/pseudo/');
 
-        /** @var \Psr\Http\Message\RequestInterface $request */
-        $request = $this->historyContainer[0]['request'];
-
         $this->assertSame(
             'pseudo_type=MIXED',
-            $request->getUri()->getQuery(),
+            $this->client->getRequest()->getUri()->getQuery(),
             'The API request did not include the expected query string.'
         );
     }
@@ -42,14 +39,14 @@ class TranslationstringsTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\Translationstrings::getPseudolocalizationStrings
      *
      * @uses    \BabDev\Transifex\TransifexObject
-     *
-     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testGetPseudolocalizationStringsFailure()
     {
         $this->prepareFailureTest();
 
         (new Translationstrings($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getPseudolocalizationStrings('babdev', 'babdev-transifex');
+
+        $this->validateFailureTest('/api/2/project/babdev/resource/babdev-transifex/pseudo/');
     }
 
     /**
@@ -85,12 +82,9 @@ class TranslationstringsTest extends TransifexTestCase
 
         $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US/strings/');
 
-        /** @var \Psr\Http\Message\RequestInterface $request */
-        $request = $this->historyContainer[0]['request'];
-
         $this->assertSame(
             'details',
-            $request->getUri()->getQuery(),
+            $this->client->getRequest()->getUri()->getQuery(),
             'The API request did not include the expected query string.'
         );
     }
@@ -117,12 +111,9 @@ class TranslationstringsTest extends TransifexTestCase
 
         $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US/strings/');
 
-        /** @var \Psr\Http\Message\RequestInterface $request */
-        $request = $this->historyContainer[0]['request'];
-
         $this->assertSame(
             'details&key=Yes',
-            $request->getUri()->getQuery(),
+            $this->client->getRequest()->getUri()->getQuery(),
             'The API request did not include the expected query string.'
         );
     }
@@ -149,12 +140,9 @@ class TranslationstringsTest extends TransifexTestCase
 
         $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US/strings/');
 
-        /** @var \Psr\Http\Message\RequestInterface $request */
-        $request = $this->historyContainer[0]['request'];
-
         $this->assertSame(
             'details&key=Yes&context=Something',
-            $request->getUri()->getQuery(),
+            $this->client->getRequest()->getUri()->getQuery(),
             'The API request did not include the expected query string.'
         );
     }
@@ -181,12 +169,9 @@ class TranslationstringsTest extends TransifexTestCase
 
         $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US/strings/');
 
-        /** @var \Psr\Http\Message\RequestInterface $request */
-        $request = $this->historyContainer[0]['request'];
-
         $this->assertSame(
             'key=Yes&context=Something',
-            $request->getUri()->getQuery(),
+            $this->client->getRequest()->getUri()->getQuery(),
             'The API request did not include the expected query string.'
         );
     }
@@ -213,12 +198,9 @@ class TranslationstringsTest extends TransifexTestCase
 
         $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US/strings/');
 
-        /** @var \Psr\Http\Message\RequestInterface $request */
-        $request = $this->historyContainer[0]['request'];
-
         $this->assertSame(
             'context=Something',
-            $request->getUri()->getQuery(),
+            $this->client->getRequest()->getUri()->getQuery(),
             'The API request did not include the expected query string.'
         );
     }
@@ -230,13 +212,13 @@ class TranslationstringsTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\Translationstrings::getStrings
      *
      * @uses    \BabDev\Transifex\TransifexObject
-     *
-     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testGetStringsFailure()
     {
         $this->prepareFailureTest();
 
         (new Translationstrings($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getStrings('babdev', 'babdev-transifex', 'en_US');
+
+        $this->validateFailureTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US/strings/');
     }
 }
