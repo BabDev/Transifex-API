@@ -88,7 +88,7 @@ class Transifex
         $class     = $namespace . '\\' . \ucfirst(\strtolower($name));
 
         if (\class_exists($class)) {
-            return new $class($this->client, $this->requestFactory, $this->uriFactory, $this->options);
+            return new $class($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options);
         }
 
         // If a custom namespace was specified, let's try to find an object in the local namespace
@@ -96,7 +96,7 @@ class Transifex
             $class = __NAMESPACE__ . '\\' . \ucfirst(\strtolower($name));
 
             if (\class_exists($class)) {
-                return new $class($this->client, $this->requestFactory, $this->uriFactory, $this->options);
+                return new $class($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options);
             }
         }
 
