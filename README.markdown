@@ -11,11 +11,9 @@ The *Transifex API Package* is a PHP client for accessing the [Transifex API](ht
 Requirements
 ------------
 
-* Production
-    * PHP 7.2 or later
-    * [Guzzle HTTP](https://github.com/guzzle/guzzle) client
-* Development
-    * [PHPUnit](http://phpunit.de/)
+* PHP 7.2 or later
+* Any [PSR-17 compatible](https://www.php-fig.org/psr/psr-17/) factories
+* Any [PSR-18 compatible](https://www.php-fig.org/psr/psr-18/) HTTP client
 
 Documentation
 -------------

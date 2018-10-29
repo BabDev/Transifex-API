@@ -3,8 +3,6 @@
 namespace BabDev\Transifex\Tests;
 
 use BabDev\Transifex\Formats;
-use BabDev\Transifex\TransifexObject;
-use GuzzleHttp\Client;
 
 /**
  * Test class for \BabDev\Transifex\TransifexObject.

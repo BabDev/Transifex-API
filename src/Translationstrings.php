@@ -2,7 +2,6 @@
 
 namespace BabDev\Transifex;
 
-use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -61,9 +60,9 @@ class Translationstrings extends TransifexObject
 
         if (!empty($query)) {
             if ($uri->getQuery() === '') {
-                $uri = $uri->withQuery(http_build_query($query));
+                $uri = $uri->withQuery(\http_build_query($query));
             } else {
-                $uri = $uri->withQuery($uri->getQuery() . '&' . http_build_query($query));
+                $uri = $uri->withQuery($uri->getQuery() . '&' . \http_build_query($query));
             }
         }
 
