@@ -59,7 +59,7 @@ class Languages extends TransifexObject
         }
 
         $request = $this->createRequest('POST', $uri);
-        $request->withBody($this->streamFactory->createStream(\json_encode($data)));
+        $request = $request->withBody($this->streamFactory->createStream(\json_encode($data)));
 
         return $this->client->sendRequest($request);
     }
@@ -204,8 +204,8 @@ class Languages extends TransifexObject
         }
 
         $request = $this->createRequest('PUT', $this->createUri("/api/2/project/$slug/language/$langCode/"));
-        $request->withBody($this->streamFactory->createStream(\json_encode($data)));
-        $request->withHeader('Content-Type', 'application/json');
+        $request = $request->withBody($this->streamFactory->createStream(\json_encode($data)));
+        $request = $request->withHeader('Content-Type', 'application/json');
 
         return $this->client->sendRequest($request);
     }
@@ -257,8 +257,8 @@ class Languages extends TransifexObject
         }
 
         $request = $this->createRequest('PUT', $uri);
-        $request->withBody($this->streamFactory->createStream(\json_encode($members)));
-        $request->withHeader('Content-Type', 'application/json');
+        $request = $request->withBody($this->streamFactory->createStream(\json_encode($members)));
+        $request = $request->withHeader('Content-Type', 'application/json');
 
         return $this->client->sendRequest($request);
     }

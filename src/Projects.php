@@ -2,7 +2,6 @@
 
 namespace BabDev\Transifex;
 
-use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -119,15 +118,11 @@ class Projects extends TransifexObject
             }
         }
 
-        return $this->client->request(
-            'POST',
-            $this->createUri('/api/2/projects/'),
-            [
-                'body'    => \json_encode($data),
-                'auth'    => $this->getAuthData(),
-                'headers' => ['Content-Type' => 'application/json'],
-            ]
-        );
+        $request = $this->createRequest('POST', $this->createUri('/api/2/projects/'));
+        $request = $request->withBody($this->streamFactory->createStream(\json_encode($data)));
+        $request = $request->withHeader('Content-Type', 'application/json');
+
+        return $this->client->sendRequest($request);
     }
 
     /**
@@ -139,7 +134,7 @@ class Projects extends TransifexObject
      */
     public function deleteProject(string $slug): ResponseInterface
     {
-        return $this->client->request('DELETE', $this->createUri("/api/2/project/$slug"), ['auth' => $this->getAuthData()]);
+        return $this->client->sendRequest($this->createRequest('DELETE', $this->createUri("/api/2/project/$slug")));
     }
 
     /**
@@ -155,10 +150,10 @@ class Projects extends TransifexObject
         $uri = $this->createUri("/api/2/project/$project/");
 
         if ($details) {
-            $uri = Uri::withQueryValue($uri, 'details', null);
+            $uri = $uri->withQuery('details');
         }
 
-        return $this->client->request('GET', $uri, ['auth' => $this->getAuthData()]);
+        return $this->client->sendRequest($this->createRequest('GET', $uri));
     }
 
     /**
@@ -168,7 +163,7 @@ class Projects extends TransifexObject
      */
     public function getProjects(): ResponseInterface
     {
-        return $this->client->request('GET', $this->createUri('/api/2/projects/'), ['auth' => $this->getAuthData()]);
+        return $this->client->sendRequest($this->createRequest('GET', $this->createUri('/api/2/projects/')));
     }
 
     /**
@@ -190,14 +185,10 @@ class Projects extends TransifexObject
             throw new \RuntimeException('There is no data to send to Transifex.');
         }
 
-        return $this->client->request(
-            'PUT',
-            $this->createUri("/api/2/project/$slug/"),
-            [
-                'body'    => \json_encode($data),
-                'auth'    => $this->getAuthData(),
-                'headers' => ['Content-Type' => 'application/json'],
-            ]
-        );
+        $request = $this->createRequest('PUT', $this->createUri("/api/2/project/$slug/"));
+        $request = $request->withBody($this->streamFactory->createStream(\json_encode($data)));
+        $request = $request->withHeader('Content-Type', 'application/json');
+
+        return $this->client->sendRequest($request);
     }
 }
