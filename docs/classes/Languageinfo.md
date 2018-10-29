@@ -7,10 +7,8 @@ The `Languageinfo` class is the interface to Transifex' [language info API](http
 An instance of the `Languageinfo` class should be retrieved through the `Transifex` class' `get()` factory.
 
 ```php
-use BabDev\Transifex\Transifex;
-
 /** @var \BabDev\Transifex\Languageinfo $formats */
-$languageInfo = (new Transifex())->get('languageinfo');
+$languageInfo = $transifex->get('languageinfo');
 ```
 
 ### Get information on a supported language
@@ -22,9 +20,7 @@ This method has one required parameter:
 * The language code to retrieve (string)
 
 ```php
-use BabDev\Transifex\Transifex;
-
-$apiResponse = (new Transifex())->get('languageinfo')->getLanguage('en-US');
+$apiResponse = $transifex->get('languageinfo')->getLanguage('en-US');
 ```
 
 ### Get information on all supported languages
@@ -32,7 +28,5 @@ $apiResponse = (new Transifex())->get('languageinfo')->getLanguage('en-US');
 To retrieve information about all supported languages from the Transifex API, call the `Languageinfo::getLanguages()` method.
 
 ```php
-use BabDev\Transifex\Transifex;
-
-$apiResponse = (new Transifex())->get('languageinfo')->getLanguages();
+$apiResponse = $transifex->get('languageinfo')->getLanguages();
 ```

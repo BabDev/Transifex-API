@@ -22,10 +22,6 @@ class Statistics extends TransifexObject
      */
     public function getStatistics(string $project, string $resource, string $lang = ''): ResponseInterface
     {
-        return $this->client->request(
-            'GET',
-            $this->createUri("/api/2/project/$project/resource/$resource/stats/$lang"),
-            ['auth' => $this->getAuthData()]
-        );
+        return $this->client->sendRequest($this->createRequest('GET', $this->createUri("/api/2/project/$project/resource/$resource/stats/$lang")));
     }
 }

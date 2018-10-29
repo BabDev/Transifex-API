@@ -2,7 +2,6 @@
 
 namespace BabDev\Transifex;
 
-use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -40,7 +39,7 @@ class Languages extends TransifexObject
         $uri = $this->createUri("/api/2/project/$slug/languages/");
 
         if ($skipInvalidUsername) {
-            $uri = Uri::withQueryValue($uri, 'skip_invalid_username', null);
+            $uri = $uri->withQuery('skip_invalid_username');
         }
 
         // Build the required request data.
@@ -59,15 +58,10 @@ class Languages extends TransifexObject
             }
         }
 
-        return $this->client->request(
-            'POST',
-            $uri,
-            [
-                'body'    => \json_encode($data),
-                'auth'    => $this->getAuthData(),
-                'headers' => ['Content-Type' => 'application/json'],
-            ]
-        );
+        $request = $this->createRequest('POST', $uri);
+        $request = $request->withBody($this->streamFactory->createStream(\json_encode($data)));
+
+        return $this->client->sendRequest($request);
     }
 
     /**
@@ -80,11 +74,7 @@ class Languages extends TransifexObject
      */
     public function deleteLanguage(string $project, string $langCode): ResponseInterface
     {
-        return $this->client->request(
-            'DELETE',
-            $this->createUri("/api/2/project/$project/language/$langCode/"),
-            ['auth' => $this->getAuthData()]
-        );
+        return $this->client->sendRequest($this->createRequest('DELETE', $this->createUri("/api/2/project/$project/language/$langCode/")));
     }
 
     /**
@@ -97,11 +87,7 @@ class Languages extends TransifexObject
      */
     public function getCoordinators(string $project, string $langCode): ResponseInterface
     {
-        return $this->client->request(
-            'GET',
-            $this->createUri("/api/2/project/$project/language/$langCode/coordinators/"),
-            ['auth' => $this->getAuthData()]
-        );
+        return $this->client->sendRequest($this->createRequest('GET', $this->createUri("/api/2/project/$project/language/$langCode/coordinators/")));
     }
 
     /**
@@ -118,14 +104,10 @@ class Languages extends TransifexObject
         $uri = $this->createUri("/api/2/project/$project/language/$langCode/");
 
         if ($details) {
-            $uri = Uri::withQueryValue($uri, 'details', null);
+            $uri = $uri->withQuery('details');
         }
 
-        return $this->client->request(
-            'GET',
-            $uri,
-            ['auth' => $this->getAuthData()]
-        );
+        return $this->client->sendRequest($this->createRequest('GET', $uri));
     }
 
     /**
@@ -137,11 +119,7 @@ class Languages extends TransifexObject
      */
     public function getLanguages(string $project): ResponseInterface
     {
-        return $this->client->request(
-            'GET',
-            $this->createUri("/api/2/project/$project/languages/"),
-            ['auth' => $this->getAuthData()]
-        );
+        return $this->client->sendRequest($this->createRequest('GET', $this->createUri("/api/2/project/$project/languages/")));
     }
 
     /**
@@ -154,11 +132,7 @@ class Languages extends TransifexObject
      */
     public function getReviewers(string $project, string $langCode): ResponseInterface
     {
-        return $this->client->request(
-            'GET',
-            $this->createUri("/api/2/project/$project/language/$langCode/reviewers/"),
-            ['auth' => $this->getAuthData()]
-        );
+        return $this->client->sendRequest($this->createRequest('GET', $this->createUri("/api/2/project/$project/language/$langCode/reviewers/")));
     }
 
     /**
@@ -171,11 +145,7 @@ class Languages extends TransifexObject
      */
     public function getTranslators(string $project, string $langCode): ResponseInterface
     {
-        return $this->client->request(
-            'GET',
-            $this->createUri("/api/2/project/$project/language/$langCode/translators/"),
-            ['auth' => $this->getAuthData()]
-        );
+        return $this->client->sendRequest($this->createRequest('GET', $this->createUri("/api/2/project/$project/language/$langCode/translators/")));
     }
 
     /**
@@ -233,15 +203,11 @@ class Languages extends TransifexObject
             $data['reviewers'] = $options['reviewers'];
         }
 
-        return $this->client->request(
-            'PUT',
-            $this->createUri("/api/2/project/$slug/language/$langCode/"),
-            [
-                'body'    => \json_encode($data),
-                'auth'    => $this->getAuthData(),
-                'headers' => ['Content-Type' => 'application/json'],
-            ]
-        );
+        $request = $this->createRequest('PUT', $this->createUri("/api/2/project/$slug/language/$langCode/"));
+        $request = $request->withBody($this->streamFactory->createStream(\json_encode($data)));
+        $request = $request->withHeader('Content-Type', 'application/json');
+
+        return $this->client->sendRequest($request);
     }
 
     /**
@@ -287,18 +253,14 @@ class Languages extends TransifexObject
         $uri = $this->createUri("/api/2/project/$project/language/$langCode/$team/");
 
         if ($skipInvalidUsername) {
-            $uri = Uri::withQueryValue($uri, 'skip_invalid_username', null);
+            $uri = $uri->withQuery('skip_invalid_username');
         }
 
-        return $this->client->request(
-            'PUT',
-            $uri,
-            [
-                'body'    => \json_encode($members),
-                'auth'    => $this->getAuthData(),
-                'headers' => ['Content-Type' => 'application/json'],
-            ]
-        );
+        $request = $this->createRequest('PUT', $uri);
+        $request = $request->withBody($this->streamFactory->createStream(\json_encode($members)));
+        $request = $request->withHeader('Content-Type', 'application/json');
+
+        return $this->client->sendRequest($request);
     }
 
     /**

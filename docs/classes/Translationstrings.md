@@ -7,10 +7,8 @@ The `Translationstrings` class is the interface to Transifex' [translation strin
 An instance of the `Translationstrings` class should be retrieved through the `Transifex` class' `get()` factory.
 
 ```php
-use BabDev\Transifex\Transifex;
-
 /** @var \BabDev\Transifex\Translationstrings $translationStrings */
-$translationStrings = (new Transifex())->get('translationstrings');
+$translationStrings = $transifex->get('translationstrings');
 ```
 
 ### Get a resource's pseudolocalization strings
@@ -23,9 +21,7 @@ This method has two required parameters:
 * The slug for the resource (string)
 
 ```php
-use BabDev\Transifex\Transifex;
-
-$apiResponse = (new Transifex())->get('translationstrings')->getPseudolocalizationStrings('my-project', 'resource-1');
+$apiResponse = $transifex->get('translationstrings')->getPseudolocalizationStrings('my-project', 'resource-1');
 ```
 
 ### Get a resource's translation strings
@@ -44,7 +40,5 @@ This method also has two additional optional parameter:
 * An array containing optional additional params to send with the request, this array should contain all additional options not specified in the method's other parameters (associative array, defaults to an empty array)
 
 ```php
-use BabDev\Transifex\Transifex;
-
-$apiResponse = (new Transifex())->get('translationstrings')->getStrings('my-project', 'resource-1', 'fr-FR');
+$apiResponse = $transifex->get('translationstrings')->getStrings('my-project', 'resource-1', 'fr-FR');
 ```

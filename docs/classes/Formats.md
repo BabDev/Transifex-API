@@ -7,10 +7,8 @@ The `Formats` class is the interface to Transifex' [formats API](http://docs.tra
 An instance of the `Formats` class should be retrieved through the `Transifex` class' `get()` factory.
 
 ```php
-use BabDev\Transifex\Transifex;
-
 /** @var \BabDev\Transifex\Formats $formats */
-$formats = (new Transifex())->get('formats');
+$formats = $transifex->get('formats');
 ```
 
 ### Get supported file formats
@@ -18,7 +16,5 @@ $formats = (new Transifex())->get('formats');
 To retrieve the supported file formats from the Transifex API, call the `Formats::getFormats()` method.
 
 ```php
-use BabDev\Transifex\Transifex;
-
-$apiResponse = (new Transifex())->get('formats')->getFormats();
+$apiResponse = $transifex->get('formats')->getFormats();
 ```

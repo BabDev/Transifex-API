@@ -10,7 +10,7 @@ use BabDev\Transifex\Projects;
 class ProjectsTest extends TransifexTestCase
 {
     /**
-     * @testdox createProject() returns a Response object on a successful API connection
+     * @testdox createProject() returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\Projects::buildProjectRequest
      * @covers  \BabDev\Transifex\Projects::checkLicense
@@ -42,7 +42,7 @@ class ProjectsTest extends TransifexTestCase
             'repository_url'     => 'http://www.example.com',
         ];
 
-        (new Projects($this->options, $this->client))->createProject(
+        (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->createProject(
             'BabDev Transifex',
             'babdev-transifex',
             'Test Project',
@@ -54,7 +54,7 @@ class ProjectsTest extends TransifexTestCase
     }
 
     /**
-     * @testdox createProject() throws a ServerException on a failed API connection
+     * @testdox createProject() returns a Response object indicating a failed API connection
      *
      * @covers  \BabDev\Transifex\Projects::buildProjectRequest
      * @covers  \BabDev\Transifex\Projects::checkLicense
@@ -62,20 +62,20 @@ class ProjectsTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      *
      * @uses    \BabDev\Transifex\TransifexObject
-     *
-     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testCreateProjectFailureForABadRequest()
     {
         $this->prepareFailureTest();
 
-        (new Projects($this->options, $this->client))->createProject(
+        (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->createProject(
             'BabDev Transifex',
             'babdev-transifex',
             'Test Project',
             'en_US',
             ['repository_url' => 'https://www.babdev.com']
         );
+
+        $this->validateFailureTest('/api/2/projects/', 'POST');
     }
 
     /**
@@ -91,7 +91,7 @@ class ProjectsTest extends TransifexTestCase
      */
     public function testCreateProjectsBadLicense()
     {
-        (new Projects($this->options, $this->client))->createProject(
+        (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->createProject(
             'BabDev Transifex',
             'babdev-transifex',
             'Test Project',
@@ -113,7 +113,7 @@ class ProjectsTest extends TransifexTestCase
      */
     public function testCreateProjectFailureForMissingFields()
     {
-        (new Projects($this->options, $this->client))->createProject(
+        (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->createProject(
             'BabDev Transifex',
             'babdev-transifex',
             'Test Project',
@@ -122,7 +122,7 @@ class ProjectsTest extends TransifexTestCase
     }
 
     /**
-     * @testdox deleteProject() returns a Response object on a successful API connection
+     * @testdox deleteProject() returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\Projects::deleteProject
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
@@ -133,30 +133,30 @@ class ProjectsTest extends TransifexTestCase
     {
         $this->prepareSuccessTest(204);
 
-        (new Projects($this->options, $this->client))->deleteProject('babdev-transifex');
+        (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->deleteProject('babdev-transifex');
 
         $this->validateSuccessTest('/api/2/project/babdev-transifex', 'DELETE', 204);
     }
 
     /**
-     * @testdox deleteProject() throws a ServerException on a failed API connection
+     * @testdox deleteProject() returns a Response object indicating a failed API connection
      *
      * @covers  \BabDev\Transifex\Projects::deleteProject
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      *
      * @uses    \BabDev\Transifex\TransifexObject
-     *
-     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testDeleteProjectFailure()
     {
         $this->prepareFailureTest();
 
-        (new Projects($this->options, $this->client))->deleteProject('babdev-transifex');
+        (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->deleteProject('babdev-transifex');
+
+        $this->validateFailureTest('/api/2/project/babdev-transifex', 'DELETE');
     }
 
     /**
-     * @testdox getProject() returns a Response object on a successful API connection
+     * @testdox getProject() returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\Projects::getProject
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
@@ -167,39 +167,36 @@ class ProjectsTest extends TransifexTestCase
     {
         $this->prepareSuccessTest();
 
-        (new Projects($this->options, $this->client))->getProject('babdev-transifex', true);
+        (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getProject('babdev-transifex', true);
 
         $this->validateSuccessTest('/api/2/project/babdev-transifex/');
 
-        /** @var \Psr\Http\Message\RequestInterface $request */
-        $request = $this->historyContainer[0]['request'];
-
         $this->assertSame(
             'details',
-            $request->getUri()->getQuery(),
+            $this->client->getRequest()->getUri()->getQuery(),
             'The API request did not include the expected query string.'
         );
     }
 
     /**
-     * @testdox getProject() throws a ServerException on a failed API connection
+     * @testdox getProject() returns a Response object indicating a failed API connection
      *
      * @covers  \BabDev\Transifex\Projects::getProject
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      *
      * @uses    \BabDev\Transifex\TransifexObject
-     *
-     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testGetProjectFailure()
     {
         $this->prepareFailureTest();
 
-        (new Projects($this->options, $this->client))->getProject('babdev-transifex', true);
+        (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getProject('babdev-transifex', true);
+
+        $this->validateFailureTest('/api/2/project/babdev-transifex/');
     }
 
     /**
-     * @testdox getProjects() returns a Response object on a successful API connection
+     * @testdox getProjects() returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\Projects::getProjects
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
@@ -210,30 +207,30 @@ class ProjectsTest extends TransifexTestCase
     {
         $this->prepareSuccessTest();
 
-        (new Projects($this->options, $this->client))->getProjects();
+        (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getProjects();
 
         $this->validateSuccessTest('/api/2/projects/');
     }
 
     /**
-     * @testdox getProjects() throws a ServerException on a failed API connection
+     * @testdox getProjects() returns a Response object indicating a failed API connection
      *
      * @covers  \BabDev\Transifex\Projects::getProjects
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      *
      * @uses    \BabDev\Transifex\TransifexObject
-     *
-     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testGetProjectsFailure()
     {
         $this->prepareFailureTest();
 
-        (new Projects($this->options, $this->client))->getProjects();
+        (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getProjects();
+
+        $this->validateFailureTest('/api/2/projects/');
     }
 
     /**
-     * @testdox updateProject() returns a Response object on a successful API connection
+     * @testdox updateProject() returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\Projects::checkLicense
      * @covers  \BabDev\Transifex\Projects::updateProject
@@ -258,13 +255,13 @@ class ProjectsTest extends TransifexTestCase
             'fill_up_resources'  => false,
         ];
 
-        (new Projects($this->options, $this->client))->updateProject('babdev-transifex', $options);
+        (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateProject('babdev-transifex', $options);
 
         $this->validateSuccessTest('/api/2/project/babdev-transifex/', 'PUT');
     }
 
     /**
-     * @testdox updateProject() throws a ServerException on a failed API connection
+     * @testdox updateProject() returns a Response object indicating a failed API connection
      *
      * @covers  \BabDev\Transifex\Projects::buildProjectRequest
      * @covers  \BabDev\Transifex\Projects::checkLicense
@@ -272,17 +269,17 @@ class ProjectsTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      *
      * @uses    \BabDev\Transifex\TransifexObject
-     *
-     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testUpdateProjectFailure()
     {
         $this->prepareFailureTest();
 
-        (new Projects($this->options, $this->client))->updateProject(
+        (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateProject(
             'babdev-transifex',
             ['long_description' => 'My test project']
         );
+
+        $this->validateFailureTest('/api/2/project/babdev-transifex/', 'PUT');
     }
 
     /**
@@ -298,7 +295,7 @@ class ProjectsTest extends TransifexTestCase
      */
     public function testUpdateProjectRuntimeException()
     {
-        (new Projects($this->options, $this->client))->updateProject('babdev-transifex', []);
+        (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateProject('babdev-transifex', []);
     }
 
     /**
@@ -314,6 +311,6 @@ class ProjectsTest extends TransifexTestCase
      */
     public function testUpdateProjectBadLicense()
     {
-        (new Projects($this->options, $this->client))->updateProject('babdev-transifex', ['license' => 'failure']);
+        (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateProject('babdev-transifex', ['license' => 'failure']);
     }
 }

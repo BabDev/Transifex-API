@@ -20,7 +20,7 @@ class Languageinfo extends TransifexObject
      */
     public function getLanguage(string $lang): ResponseInterface
     {
-        return $this->client->request('GET', $this->createUri("/api/2/language/$lang/"), ['auth' => $this->getAuthData()]);
+        return $this->client->sendRequest($this->createRequest('GET', $this->createUri("/api/2/language/$lang/")));
     }
 
     /**
@@ -30,6 +30,6 @@ class Languageinfo extends TransifexObject
      */
     public function getLanguages(): ResponseInterface
     {
-        return $this->client->request('GET', $this->createUri('/api/2/languages/'), ['auth' => $this->getAuthData()]);
+        return $this->client->sendRequest($this->createRequest('GET', $this->createUri('/api/2/languages/')));
     }
 }

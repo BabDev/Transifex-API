@@ -2,10 +2,12 @@
 
 namespace BabDev\Transifex;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\ClientInterface;
-use GuzzleHttp\Psr7\Uri;
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamFactoryInterface;
+use Psr\Http\Message\UriFactoryInterface;
 use Psr\Http\Message\UriInterface;
 
 /**
@@ -14,6 +16,34 @@ use Psr\Http\Message\UriInterface;
 abstract class TransifexObject
 {
     /**
+     * The HTTP client.
+     *
+     * @var ClientInterface
+     */
+    protected $client;
+
+    /**
+     * The request factory.
+     *
+     * @var RequestFactoryInterface
+     */
+    protected $requestFactory;
+
+    /**
+     * The stream factory.
+     *
+     * @var StreamFactoryInterface
+     */
+    protected $streamFactory;
+
+    /**
+     * The URI factory.
+     *
+     * @var UriFactoryInterface
+     */
+    protected $uriFactory;
+
+    /**
      * Options for the Transifex object.
      *
      * @var array
@@ -21,20 +51,61 @@ abstract class TransifexObject
     protected $options;
 
     /**
-     * The HTTP client object to use in sending HTTP requests.
-     *
-     * @var ClientInterface
+     * @param ClientInterface         $client         The HTTP client
+     * @param RequestFactoryInterface $requestFactory The request factory
+     * @param StreamFactoryInterface  $streamFactory  The stream factory
+     * @param UriFactoryInterface     $uriFactory     The URI factory
+     * @param array                   $options        Transifex options array
      */
-    protected $client;
+    public function __construct(
+        ClientInterface $client,
+        RequestFactoryInterface $requestFactory,
+        StreamFactoryInterface $streamFactory,
+        UriFactoryInterface $uriFactory,
+        array $options = []
+    ) {
+        $this->client         = $client;
+        $this->requestFactory = $requestFactory;
+        $this->streamFactory  = $streamFactory;
+        $this->uriFactory     = $uriFactory;
+        $this->options        = $options;
+    }
 
     /**
-     * @param array           $options Transifex options array
-     * @param ClientInterface $client  The HTTP client object
+     * Creates the Authorization header for the request
+     *
+     * @return string
+     *
+     * @throws \InvalidArgumentException if credentials are not set
      */
-    public function __construct(array $options = [], ClientInterface $client = null)
+    protected function createAuthorizationHeader(): string
     {
-        $this->options = $options;
-        $this->client  = $client ?: new Client($this->options);
+        $username = $this->getOption('api.username');
+        $password = $this->getOption('api.password');
+
+        // The API requires HTTP Basic Authentication, we can't proceed without credentials
+        if ($username === null || $password === null) {
+            throw new \InvalidArgumentException('Missing credentials for API authentication.');
+        }
+
+        return 'Basic ' . \base64_encode("$username:$password");
+    }
+
+    /**
+     * Create a Request object for the given URI
+     *
+     * This method will also set the Authorization header for the request
+     *
+     * @param string       $method
+     * @param UriInterface $uri
+     *
+     * @return RequestInterface
+     */
+    protected function createRequest(string $method, UriInterface $uri): RequestInterface
+    {
+        $request = $this->requestFactory->createRequest($method, $uri);
+
+        return $request->withHeader('Authorization', $this->createAuthorizationHeader());
     }
 
     /**
@@ -42,13 +113,13 @@ abstract class TransifexObject
      *
      * @param string $path
      *
-     * @return Uri
+     * @return UriInterface
      */
-    protected function createUri(string $path): Uri
+    protected function createUri(string $path): UriInterface
     {
         $baseUrl = $this->getOption('base_uri', 'https://www.transifex.com');
 
-        return new Uri($baseUrl . $path);
+        return $this->uriFactory->createUri($baseUrl . $path);
     }
 
     /**
@@ -102,6 +173,9 @@ abstract class TransifexObject
             throw new \InvalidArgumentException('The content type must be specified as file or string.');
         }
 
+        $request = $this->createRequest('PUT', $uri);
+        $request = $request->withHeader('Content-Type', 'application/json');
+
         if ($type == 'file') {
             if (!\file_exists($content)) {
                 throw new \InvalidArgumentException(
@@ -109,21 +183,15 @@ abstract class TransifexObject
                 );
             }
 
-            $content = \file_get_contents($content);
+            $request = $request->withBody($this->streamFactory->createStreamFromFile($content));
+        } else {
+            $data = [
+                'content' => $content,
+            ];
+
+            $request = $request->withBody($this->streamFactory->createStream(\json_encode($data)));
         }
 
-        $data = [
-            'content' => $content,
-        ];
-
-        return $this->client->request(
-            'PUT',
-            $uri,
-            [
-                'body'    => \json_encode($data),
-                'auth'    => $this->getAuthData(),
-                'headers' => ['Content-Type' => 'application/json'],
-            ]
-        );
+        return $this->client->sendRequest($request);
     }
 }

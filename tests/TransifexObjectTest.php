@@ -3,43 +3,12 @@
 namespace BabDev\Transifex\Tests;
 
 use BabDev\Transifex\Formats;
-use BabDev\Transifex\TransifexObject;
-use GuzzleHttp\Client;
 
 /**
  * Test class for \BabDev\Transifex\TransifexObject.
  */
 class TransifexObjectTest extends TransifexTestCase
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected function setUp()
-    {
-        $this->client = $this->createMock(Client::class);
-    }
-
-    /**
-     * @testdox __construct() with no injected client creates a Transifex instance with a default Client object
-     *
-     * @covers  \BabDev\Transifex\TransifexObject::__construct
-     */
-    public function test__constructWithNoInjectedClient()
-    {
-        $object = $this->getMockForAbstractClass(TransifexObject::class, [$this->options]);
-
-        $this->assertInstanceOf(
-            TransifexObject::class,
-            $object
-        );
-
-        $this->assertAttributeInstanceOf(
-            Client::class,
-            'client',
-            $object
-        );
-    }
-
     /**
      * @testdox The API does not connect when API credentials are not available
      *
@@ -53,7 +22,7 @@ class TransifexObjectTest extends TransifexTestCase
      */
     public function testApiFailureWhenNoAuthenticationIsSet()
     {
-        (new Formats([], $this->client))->getFormats();
+        (new Formats($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, []))->getFormats();
     }
 
     /**
@@ -70,16 +39,13 @@ class TransifexObjectTest extends TransifexTestCase
 
         $this->options['base_uri'] = 'https://api.transifex.com';
 
-        (new Formats($this->options, $this->client))->getFormats();
+        (new Formats($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getFormats();
 
         $this->validateSuccessTest('/api/2/formats');
 
-        /** @var \Psr\Http\Message\RequestInterface $request */
-        $request = $this->historyContainer[0]['request'];
-
         $this->assertSame(
             'api.transifex.com',
-            $request->getUri()->getHost(),
+            $this->client->getRequest()->getUri()->getHost(),
             'The API did not use the right host.'
         );
     }

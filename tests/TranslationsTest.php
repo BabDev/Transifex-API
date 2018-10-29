@@ -10,7 +10,7 @@ use BabDev\Transifex\Translations;
 class TranslationsTest extends TransifexTestCase
 {
     /**
-     * @testdox getTranslation() returns a Response object on a successful API connection
+     * @testdox getTranslation() returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Translations::getTranslation
@@ -21,39 +21,36 @@ class TranslationsTest extends TransifexTestCase
     {
         $this->prepareSuccessTest();
 
-        (new Translations($this->options, $this->client))->getTranslation('babdev', 'babdev-transifex', 'en_US', 'default');
+        (new Translations($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getTranslation('babdev', 'babdev-transifex', 'en_US', 'default');
 
         $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US');
 
-        /** @var \Psr\Http\Message\RequestInterface $request */
-        $request = $this->historyContainer[0]['request'];
-
         $this->assertSame(
             'mode=default&file',
-            $request->getUri()->getQuery(),
+            $this->client->getRequest()->getUri()->getQuery(),
             'The API request did not include the expected query string.'
         );
     }
 
     /**
-     * @testdox getTranslation() throws a ServerException on a failed API connection
+     * @testdox getTranslation() returns a Response object indicating a failed API connection
      *
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\Translations::getTranslation
      *
      * @uses    \BabDev\Transifex\TransifexObject
-     *
-     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testGetTranslationFailure()
     {
         $this->prepareFailureTest();
 
-        (new Translations($this->options, $this->client))->getTranslation('babdev', 'babdev-transifex', 'en_US', 'default');
+        (new Translations($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getTranslation('babdev', 'babdev-transifex', 'en_US', 'default');
+
+        $this->validateFailureTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US');
     }
 
     /**
-     * @testdox updateTranslation() with an attached file returns a Response object on a successful API connection
+     * @testdox updateTranslation() with an attached file returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\TransifexObject::updateResource
@@ -65,7 +62,7 @@ class TranslationsTest extends TransifexTestCase
     {
         $this->prepareSuccessTest();
 
-        (new Translations($this->options, $this->client))->updateTranslation(
+        (new Translations($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateTranslation(
             'babdev',
             'babdev-transifex',
             'en_US',
@@ -77,7 +74,7 @@ class TranslationsTest extends TransifexTestCase
     }
 
     /**
-     * @testdox updateTranslation() with inline content returns a Response object on a successful API connection
+     * @testdox updateTranslation() with inline content returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\TransifexObject::updateResource
@@ -89,7 +86,7 @@ class TranslationsTest extends TransifexTestCase
     {
         $this->prepareSuccessTest();
 
-        (new Translations($this->options, $this->client))->updateTranslation(
+        (new Translations($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateTranslation(
             'babdev',
             'babdev-transifex',
             'en_US',
@@ -100,26 +97,26 @@ class TranslationsTest extends TransifexTestCase
     }
 
     /**
-     * @testdox updateTranslation() throws a ServerException on a failed API connection
+     * @testdox updateTranslation() returns a Response object indicating a failed API connection
      *
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\TransifexObject::updateResource
      * @covers  \BabDev\Transifex\Translations::updateTranslation
      *
      * @uses    \BabDev\Transifex\TransifexObject
-     *
-     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testUpdateTranslationFailure()
     {
         $this->prepareFailureTest();
 
-        (new Translations($this->options, $this->client))->updateTranslation(
+        (new Translations($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateTranslation(
             'babdev',
             'babdev-transifex',
             'en_US',
             'TEST="Test"'
         );
+
+        $this->validateFailureTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US', 'PUT');
     }
 
     /**
@@ -134,7 +131,7 @@ class TranslationsTest extends TransifexTestCase
      */
     public function testUpdateTranslationBadType()
     {
-        (new Translations($this->options, $this->client))->updateTranslation(
+        (new Translations($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateTranslation(
             'babdev',
             'babdev-transifex',
             'en_US',
@@ -155,7 +152,7 @@ class TranslationsTest extends TransifexTestCase
      */
     public function testUpdateTranslationUnexistingFile()
     {
-        (new Translations($this->options, $this->client))->updateTranslation(
+        (new Translations($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateTranslation(
             'babdev',
             'babdev-transifex',
             'en_US',

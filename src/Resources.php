@@ -2,7 +2,6 @@
 
 namespace BabDev\Transifex;
 
-use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -66,15 +65,11 @@ class Resources extends TransifexObject
             $data['content'] = \file_get_contents($options['file']);
         }
 
-        return $this->client->request(
-            'POST',
-            $this->createUri("/api/2/project/$project/resources/"),
-            [
-                'body'    => \json_encode($data),
-                'auth'    => $this->getAuthData(),
-                'headers' => ['Content-Type' => 'application/json'],
-            ]
-        );
+        $request = $this->createRequest('POST', $this->createUri("/api/2/project/$project/resources/"));
+        $request = $request->withBody($this->streamFactory->createStream(\json_encode($data)));
+        $request = $request->withHeader('Content-Type', 'application/json');
+
+        return $this->client->sendRequest($request);
     }
 
     /**
@@ -87,11 +82,7 @@ class Resources extends TransifexObject
      */
     public function deleteResource(string $project, string $resource): ResponseInterface
     {
-        return $this->client->request(
-            'DELETE',
-            $this->createUri("/api/2/project/$project/resource/$resource"),
-            ['auth' => $this->getAuthData()]
-        );
+        return $this->client->sendRequest($this->createRequest('DELETE', $this->createUri("/api/2/project/$project/resource/$resource")));
     }
 
     /**
@@ -108,10 +99,10 @@ class Resources extends TransifexObject
         $uri = $this->createUri("/api/2/project/$project/resource/$resource/");
 
         if ($details) {
-            $uri = Uri::withQueryValue($uri, 'details', null);
+            $uri = $uri->withQuery('details');
         }
 
-        return $this->client->request('GET', $uri, ['auth' => $this->getAuthData()]);
+        return $this->client->sendRequest($this->createRequest('GET', $uri));
     }
 
     /**
@@ -124,11 +115,7 @@ class Resources extends TransifexObject
      */
     public function getResourceContent(string $project, string $resource): ResponseInterface
     {
-        return $this->client->request(
-            'GET',
-            $this->createUri("/api/2/project/$project/resource/$resource/content/"),
-            ['auth' => $this->getAuthData()]
-        );
+        return $this->client->sendRequest($this->createRequest('GET', $this->createUri("/api/2/project/$project/resource/$resource/content/")));
     }
 
     /**
@@ -140,11 +127,7 @@ class Resources extends TransifexObject
      */
     public function getResources(string $project): ResponseInterface
     {
-        return $this->client->request(
-            'GET',
-            $this->createUri("/api/2/project/$project/resources"),
-            ['auth' => $this->getAuthData()]
-        );
+        return $this->client->sendRequest($this->createRequest('GET', $this->createUri("/api/2/project/$project/resources")));
     }
 
     /**

@@ -10,7 +10,7 @@ use BabDev\Transifex\Resources;
 class ResourcesTest extends TransifexTestCase
 {
     /**
-     * @testdox createResource() with inline content provided in the options returns a Response object on a successful API connection
+     * @testdox createResource() with inline content provided in the options returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\Resources::createResource
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
@@ -29,7 +29,7 @@ class ResourcesTest extends TransifexTestCase
             'content'             => 'Test="Test"',
         ];
 
-        (new Resources($this->options, $this->client))->createResource(
+        (new Resources($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->createResource(
             'babdev-transifex',
             'BabDev Transifex Data',
             'babdev-transifex',
@@ -41,7 +41,7 @@ class ResourcesTest extends TransifexTestCase
     }
 
     /**
-     * @testdox createResource() with an attached file in the options returns a Response object on a successful API connection
+     * @testdox createResource() with an attached file in the options returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\Resources::createResource
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
@@ -60,7 +60,7 @@ class ResourcesTest extends TransifexTestCase
             'file'                => __DIR__ . '/stubs/source.ini',
         ];
 
-        (new Resources($this->options, $this->client))->createResource(
+        (new Resources($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->createResource(
             'babdev-transifex',
             'BabDev Transifex Data',
             'babdev-transifex',
@@ -91,7 +91,7 @@ class ResourcesTest extends TransifexTestCase
             'file'                => __DIR__ . '/stubs/does-not-exist.ini',
         ];
 
-        (new Resources($this->options, $this->client))->createResource(
+        (new Resources($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->createResource(
             'babdev-transifex',
             'BabDev Transifex Data',
             'babdev-transifex',
@@ -101,30 +101,30 @@ class ResourcesTest extends TransifexTestCase
     }
 
     /**
-     * @testdox createResource() throws a ServerException on a failed API connection
+     * @testdox createResource() returns a Response object indicating a failed API connection
      *
      * @covers  \BabDev\Transifex\Resources::createResource
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      *
      * @uses    \BabDev\Transifex\TransifexObject
-     *
-     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testCreateResourceFailure()
     {
         $this->prepareFailureTest();
 
-        (new Resources($this->options, $this->client))->createResource(
+        (new Resources($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->createResource(
             'babdev-transifex',
             'BabDev Transifex Data',
             'babdev-transifex',
             'INI',
             ['content' => 'Test="Test"']
         );
+
+        $this->validateFailureTest('/api/2/project/babdev-transifex/resources/', 'POST');
     }
 
     /**
-     * @testdox deleteResource() returns a Response object on a successful API connection
+     * @testdox deleteResource() returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\Resources::deleteResource
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
@@ -135,30 +135,30 @@ class ResourcesTest extends TransifexTestCase
     {
         $this->prepareSuccessTest(204);
 
-        (new Resources($this->options, $this->client))->deleteResource('babdev', 'babdev-transifex');
+        (new Resources($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->deleteResource('babdev', 'babdev-transifex');
 
         $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex', 'DELETE', 204);
     }
 
     /**
-     * @testdox deleteResource() throws a ServerException on a failed API connection
+     * @testdox deleteResource() returns a Response object indicating a failed API connection
      *
      * @covers  \BabDev\Transifex\Resources::deleteResource
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      *
      * @uses    \BabDev\Transifex\TransifexObject
-     *
-     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testDeleteResourceFailure()
     {
         $this->prepareFailureTest();
 
-        (new Resources($this->options, $this->client))->deleteResource('babdev', 'babdev-transifex');
+        (new Resources($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->deleteResource('babdev', 'babdev-transifex');
+
+        $this->validateFailureTest('/api/2/project/babdev/resource/babdev-transifex', 'DELETE');
     }
 
     /**
-     * @testdox getResource() returns a Response object on a successful API connection
+     * @testdox getResource() returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\Resources::getResource
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
@@ -169,39 +169,36 @@ class ResourcesTest extends TransifexTestCase
     {
         $this->prepareSuccessTest();
 
-        (new Resources($this->options, $this->client))->getResource('babdev', 'babdev-transifex', true);
+        (new Resources($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getResource('babdev', 'babdev-transifex', true);
 
         $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/');
 
-        /** @var \Psr\Http\Message\RequestInterface $request */
-        $request = $this->historyContainer[0]['request'];
-
         $this->assertSame(
             'details',
-            $request->getUri()->getQuery(),
+            $this->client->getRequest()->getUri()->getQuery(),
             'The API request did not include the expected query string.'
         );
     }
 
     /**
-     * @testdox getResource() throws a ServerException on a failed API connection
+     * @testdox getResource() returns a Response object indicating a failed API connection
      *
      * @covers  \BabDev\Transifex\Resources::getResource
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      *
      * @uses    \BabDev\Transifex\TransifexObject
-     *
-     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testGetResourceFailure()
     {
         $this->prepareFailureTest();
 
-        (new Resources($this->options, $this->client))->getResource('babdev', 'babdev-transifex', true);
+        (new Resources($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getResource('babdev', 'babdev-transifex', true);
+
+        $this->validateFailureTest('/api/2/project/babdev/resource/babdev-transifex/');
     }
 
     /**
-     * @testdox getResourceContent() returns a Response object on a successful API connection
+     * @testdox getResourceContent() returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\Resources::getResourceContent
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
@@ -212,30 +209,30 @@ class ResourcesTest extends TransifexTestCase
     {
         $this->prepareSuccessTest();
 
-        (new Resources($this->options, $this->client))->getResourceContent('babdev', 'babdev-transifex');
+        (new Resources($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getResourceContent('babdev', 'babdev-transifex');
 
         $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/content/');
     }
 
     /**
-     * @testdox getResourceContent() throws a ServerException on a failed API connection
+     * @testdox getResourceContent() returns a Response object indicating a failed API connection
      *
      * @covers  \BabDev\Transifex\Resources::getResourceContent
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      *
      * @uses    \BabDev\Transifex\TransifexObject
-     *
-     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testGetResourceContentFailure()
     {
         $this->prepareFailureTest();
 
-        (new Resources($this->options, $this->client))->getResourceContent('babdev', 'babdev-transifex');
+        (new Resources($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getResourceContent('babdev', 'babdev-transifex');
+
+        $this->validateFailureTest('/api/2/project/babdev/resource/babdev-transifex/content/');
     }
 
     /**
-     * @testdox getResources() returns a Response object on a successful API connection
+     * @testdox getResources() returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\Resources::getResources
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
@@ -246,30 +243,30 @@ class ResourcesTest extends TransifexTestCase
     {
         $this->prepareSuccessTest();
 
-        (new Resources($this->options, $this->client))->getResources('babdev');
+        (new Resources($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getResources('babdev');
 
         $this->validateSuccessTest('/api/2/project/babdev/resources');
     }
 
     /**
-     * @testdox getResources() throws a ServerException on a failed API connection
+     * @testdox getResources() returns a Response object indicating a failed API connection
      *
      * @covers  \BabDev\Transifex\Resources::getResources
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      *
      * @uses    \BabDev\Transifex\TransifexObject
-     *
-     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testGetResourcesFailure()
     {
         $this->prepareFailureTest();
 
-        (new Resources($this->options, $this->client))->getResources('babdev');
+        (new Resources($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getResources('babdev');
+
+        $this->validateFailureTest('/api/2/project/babdev/resources');
     }
 
     /**
-     * @testdox updateResourceContent() with an attached file returns a Response object on a successful API connection
+     * @testdox updateResourceContent() with an attached file returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\Resources::updateResourceContent
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
@@ -280,7 +277,7 @@ class ResourcesTest extends TransifexTestCase
     {
         $this->prepareSuccessTest();
 
-        (new Resources($this->options, $this->client))->updateResourceContent(
+        (new Resources($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateResourceContent(
             'babdev',
             'babdev-transifex',
             __DIR__ . '/stubs/source.ini',
@@ -291,7 +288,7 @@ class ResourcesTest extends TransifexTestCase
     }
 
     /**
-     * @testdox updateResourceContent() with inline content returns a Response object on a successful API connection
+     * @testdox updateResourceContent() with inline content returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\Resources::updateResourceContent
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
@@ -303,7 +300,7 @@ class ResourcesTest extends TransifexTestCase
     {
         $this->prepareSuccessTest();
 
-        (new Resources($this->options, $this->client))->updateResourceContent(
+        (new Resources($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateResourceContent(
             'babdev',
             'babdev-transifex',
             'TEST="Test"'
@@ -313,21 +310,21 @@ class ResourcesTest extends TransifexTestCase
     }
 
     /**
-     * @testdox updateResourceContent() throws a ServerException on a failed API connection
+     * @testdox updateResourceContent() returns a Response object indicating a failed API connection
      *
      * @covers  \BabDev\Transifex\Resources::updateResourceContent
      * @covers  \BabDev\Transifex\TransifexObject::getAuthData
      * @covers  \BabDev\Transifex\TransifexObject::updateResource
      *
      * @uses    \BabDev\Transifex\TransifexObject
-     *
-     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testUpdateResourceContentFailure()
     {
         $this->prepareFailureTest();
 
-        (new Resources($this->options, $this->client))->updateResourceContent('babdev', 'babdev-transifex', 'TEST="Test"');
+        (new Resources($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateResourceContent('babdev', 'babdev-transifex', 'TEST="Test"');
+
+        $this->validateFailureTest('/api/2/project/babdev/resource/babdev-transifex/content/', 'PUT');
     }
 
     /**
@@ -342,7 +339,7 @@ class ResourcesTest extends TransifexTestCase
      */
     public function testUpdateResourceContentBadType()
     {
-        (new Resources($this->options, $this->client))->updateResourceContent(
+        (new Resources($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateResourceContent(
             'babdev',
             'babdev-transifex',
             'TEST="Test"',
@@ -362,7 +359,7 @@ class ResourcesTest extends TransifexTestCase
      */
     public function testUpdateResourceContentUnexistingFile()
     {
-        (new Resources($this->options, $this->client))->updateResourceContent(
+        (new Resources($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateResourceContent(
             'babdev',
             'babdev-transifex',
             __DIR__ . '/stubs/does-not-exist.ini',

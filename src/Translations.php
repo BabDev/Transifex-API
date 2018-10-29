@@ -2,7 +2,6 @@
 
 namespace BabDev\Transifex;
 
-use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -31,11 +30,10 @@ class Translations extends TransifexObject
         $uri = $this->createUri("/api/2/project/$project/resource/$resource/translation/$lang");
 
         if (!empty($mode)) {
-            $uri = Uri::withQueryValue($uri, 'mode', $mode);
-            $uri = Uri::withQueryValue($uri, 'file', null);
+            $uri = $uri->withQuery("mode=$mode&file");
         }
 
-        return $this->client->request('GET', $uri, ['auth' => $this->getAuthData()]);
+        return $this->client->sendRequest($this->createRequest('GET', $uri));
     }
 
     /**

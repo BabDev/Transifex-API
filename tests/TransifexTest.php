@@ -3,9 +3,13 @@
 namespace BabDev\Transifex\Tests;
 
 use BabDev\Transifex\Formats;
+use BabDev\Transifex\Tests\Mock\Formats as MockFormats;
 use BabDev\Transifex\Transifex;
-use GuzzleHttp\Client;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\StreamFactoryInterface;
+use Psr\Http\Message\UriFactoryInterface;
 
 /**
  * Test class for \BabDev\Transifex\Transifex.
@@ -13,9 +17,19 @@ use PHPUnit\Framework\TestCase;
 class TransifexTest extends TestCase
 {
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|Client
+     * @var \PHPUnit_Framework_MockObject_MockObject|ClientInterface
      */
     private $client;
+
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject|RequestFactoryInterface
+     */
+    private $requestFactory;
+
+    /**
+     * @var \PHPUnit_Framework_MockObject_MockObject|StreamFactoryInterface
+     */
+    private $streamFactory;
 
     /**
      * @var Transifex
@@ -28,37 +42,21 @@ class TransifexTest extends TestCase
     private $options;
 
     /**
+     * @var \PHPUnit_Framework_MockObject_MockObject|UriFactoryInterface
+     */
+    private $uriFactory;
+
+    /**
      * {@inheritdoc}
      */
     protected function setUp()
     {
-        $this->options = ['api.username' => 'test', 'api.password' => 'test'];
-        $this->client  = $this->createMock(Client::class);
-        $this->object  = new Transifex($this->options, $this->client);
-    }
-
-    /**
-     * @testdox __construct() with no injected client creates a Transifex instance with a default Client object
-     *
-     * @covers  \BabDev\Transifex\Transifex::__construct
-     *
-     * @uses    \BabDev\Transifex\Transifex::getOption
-     * @uses    \BabDev\Transifex\Transifex::setOption
-     */
-    public function test__constructWithNoInjectedClient()
-    {
-        $object = new Transifex($this->options);
-
-        $this->assertInstanceOf(
-            Transifex::class,
-            $object
-        );
-
-        $this->assertAttributeInstanceOf(
-            Client::class,
-            'client',
-            $object
-        );
+        $this->client         = $this->createMock(ClientInterface::class);
+        $this->requestFactory = $this->createMock(RequestFactoryInterface::class);
+        $this->streamFactory  = $this->createMock(StreamFactoryInterface::class);
+        $this->uriFactory     = $this->createMock(UriFactoryInterface::class);
+        $this->options        = ['api.username' => 'test', 'api.password' => 'test'];
+        $this->object         = new Transifex($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options);
     }
 
     /**
@@ -105,10 +103,10 @@ class TransifexTest extends TestCase
      */
     public function testGetFormatsInCustomNamespace()
     {
-        $this->object->setOption('object.namespace', 'BabDev\Transifex\Tests\Mock');
+        $this->object->setOption('object.namespace', __NAMESPACE__ . '\Mock');
 
         $this->assertInstanceOf(
-            '\BabDev\Transifex\Tests\Mock\Formats',
+            MockFormats::class,
             $this->object->get('formats')
         );
     }
@@ -125,7 +123,7 @@ class TransifexTest extends TestCase
      */
     public function testGetFormatsInCustomNamespaceWhenNotFound()
     {
-        $this->object->setOption('object.namespace', 'BabDev\Transifex\Tests\\');
+        $this->object->setOption('object.namespace', __NAMESPACE__);
 
         $this->assertInstanceOf(
             Formats::class,
@@ -144,7 +142,7 @@ class TransifexTest extends TestCase
      */
     public function testGetFakeInCustomNamespaceWhenNotFound()
     {
-        $this->object->setOption('object.namespace', 'BabDev\Transifex\Tests');
+        $this->object->setOption('object.namespace', __NAMESPACE__);
         $this->object->get('fake');
     }
 

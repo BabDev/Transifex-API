@@ -7,10 +7,8 @@ The `Translations` class is the interface to Transifex' [translations API](http:
 An instance of the `Translations` class should be retrieved through the `Transifex` class' `get()` factory.
 
 ```php
-use BabDev\Transifex\Transifex;
-
 /** @var \BabDev\Transifex\Translations $translations */
-$translations = (new Transifex())->get('translations');
+$translations = $transifex->get('translations');
 ```
 
 ### Get a resource's translation
@@ -28,9 +26,7 @@ This method also has one additional optional parameter:
 * A flag to retrieve additional project details (string, defaults as an empty string)
 
 ```php
-use BabDev\Transifex\Transifex;
-
-$apiResponse = (new Transifex())->get('translations')->getTranslation('my-project', 'resource-1', 'fr-FR');
+$apiResponse = $transifex->get('translations')->getTranslation('my-project', 'resource-1', 'fr-FR');
 ```
 
 ### Update a resource's translation
@@ -49,9 +45,7 @@ This method also has one additional optional parameter:
 * The resource type provided in the fourth parameter, must be either 'string' or 'file' (string)
 
 ```php
-use BabDev\Transifex\Transifex;
-
-$apiResponse = (new Transifex())->get('translations')->updateTranslation('my-project', 'resource-1', 'fr-FR', 'TEST="Mon test Chaîne"');
+$apiResponse = $transifex->get('translations')->updateTranslation('my-project', 'resource-1', 'fr-FR', 'TEST="Mon test Chaîne"');
 ```
 
 If a filename has been provided and the file does not exist, an `\InvalidArgumentException` is thrown.
