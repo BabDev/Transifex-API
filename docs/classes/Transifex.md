@@ -4,24 +4,45 @@ The `Transifex` class is the package's primary interface and serves as a factory
 
 ### Instantiating Transifex
 
-The `Transifex` object should be instantiated directly and optionally supports two arguments; an options array and a `GuzzleHttp\ClientInterface` instance.
+The `Transifex` object should be instantiated directly. The class has four required arguments and one optional argument.
+
+#### Required Arguments
+
+- Any [PSR-18 HTTP client](https://www.php-fig.org/psr/psr-18/) (`Psr\Http\Client\ClientInterface`)
+- Any [PSR-17 Request factory](https://www.php-fig.org/psr/psr-17/) (`Psr\Http\Message\RequestFactoryInterface`)
+- Any [PSR-17 Stream factory](https://www.php-fig.org/psr/psr-17/) (`Psr\Http\Message\StreamFactoryInterface`)
+- Any [PSR-17 URI factory](https://www.php-fig.org/psr/psr-17/) (`Psr\Http\Message\UriFactoryInterface`)
 
 #### Example 1: Basic Instantiation
 
 ```php
 use BabDev\Transifex\Transifex;
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\StreamFactoryInterface;
+use Psr\Http\Message\UriFactoryInterface;
 
-$transifex = new Transifex;
+$client = // new ClientInterface(); (any PSR-18 HTTP client)
+$requestFactory = // new RequestFactoryInterface(); (any PSR-17 Request factory)
+$streamFactory = // new StreamFactoryInterface(); (any PSR-17 Stream factory)
+$uriFactory = // new UriFactoryInterface(); (any PSR-17 URI factory)
+
+$transifex = new Transifex($client, $requestFactory, $streamFactory, $uriFactory);
 ```
 
-#### Example 2: Injection of an Options Array and HTTP object
+#### Example 2: Injection of an Options Array
 
 ```php
 use BabDev\Transifex\Transifex;
-use GuzzleHttp\Client;
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\StreamFactoryInterface;
+use Psr\Http\Message\UriFactoryInterface;
 
-// Build our HTTP connector using our already retrieved driver and passing an empty options array in
-$http = new Client();
+$client = // new ClientInterface(); (any PSR-18 HTTP client)
+$requestFactory = // new RequestFactoryInterface(); (any PSR-17 Request factory)
+$streamFactory = // new StreamFactoryInterface(); (any PSR-17 Stream factory)
+$uriFactory = // new UriFactoryInterface(); (any PSR-17 URI factory)
 
 // Build our options array setting our API credentials to authenticate
 $options = [
@@ -29,7 +50,7 @@ $options = [
 	'api.password' => 'MyPassword'
 ];
 
-$transifex = new Transifex($options, $http);
+$transifex = new Transifex($client, $requestFactory, $streamFactory, $uriFactory, $options);
 ```
 
 ### Supported Options
@@ -48,10 +69,8 @@ Please refer to the [Guzzle documentation](http://docs.guzzlephp.org/en/latest/)
 All API connectors extend the base `TransifexObject` class. API objects are named based on their grouping in the Transifex API documentation. To retrieve an object connecting to the "formats" API endpoints, simply execute this code:
 
 ```php
-use BabDev\Transifex\Transifex;
-
 /** @var \BabDev\Transifex\Formats $formats */
-$formats = (new Transifex)->get('formats');
+$formats = $transifex->get('formats');
 ```
 
 The `get()` method requires one parameter, the object name, and this should be a lower-cased string with no spaces. For API endpoints such as "Language info", you would retrieve this API object by calling `$transifex->get('languageinfo')`. A new object is instantiated with each call to the `get()` method.
@@ -62,13 +81,22 @@ The class name within its namespace should match the name supplied to the `get()
 
 ```php
 use BabDev\Transifex\Transifex;
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\StreamFactoryInterface;
+use Psr\Http\Message\UriFactoryInterface;
+
+$client = // new ClientInterface(); (any PSR-18 HTTP client)
+$requestFactory = // new RequestFactoryInterface(); (any PSR-17 Request factory)
+$streamFactory = // new StreamFactoryInterface(); (any PSR-17 Stream factory)
+$uriFactory = // new UriFactoryInterface(); (any PSR-17 URI factory)
 
 // Build our options array
 $options = [
 	'object.namespace' => 'My\Custom\Transifex'
 ];
 
-$transifex = new Transifex($options, $http);
+$transifex = new Transifex($client, $requestFactory, $streamFactory, $uriFactory, $options);
 
 /** @var \My\Custom\Transifex\Projects $projects */
 $projects = $transifex->get('projects');
@@ -96,6 +124,15 @@ The following example demonstrates use of the option API methods.
 
 ```php
 use BabDev\Transifex\Transifex;
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\StreamFactoryInterface;
+use Psr\Http\Message\UriFactoryInterface;
+
+$client = // new ClientInterface(); (any PSR-18 HTTP client)
+$requestFactory = // new RequestFactoryInterface(); (any PSR-17 Request factory)
+$streamFactory = // new StreamFactoryInterface(); (any PSR-17 Stream factory)
+$uriFactory = // new UriFactoryInterface(); (any PSR-17 URI factory)
 
 // Build our options array setting our API credentials to authenticate
 $options = [
@@ -103,7 +140,7 @@ $options = [
 	'api.password' => 'MyPassword'
 ];
 
-$transifex = new Transifex($options);
+$transifex = new Transifex($client, $requestFactory, $streamFactory, $uriFactory, $options);
 
 // The trailing slash should be omitted on this value
 $transifex->setOption('object.namespace', 'My\Custom\Transifex');

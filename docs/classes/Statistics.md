@@ -7,10 +7,8 @@ The `Statistics` class is the interface to Transifex' [statistics API](http://do
 An instance of the `Statistics` class should be retrieved through the `Transifex` class' `get()` factory.
 
 ```php
-use BabDev\Transifex\Transifex;
-
 /** @var \BabDev\Transifex\Statistics $statistics */
-$statistics = (new Transifex())->get('statistics');
+$statistics = $transifex->get('statistics');
 ```
 
 ### Get a resource's statistics
@@ -27,7 +25,5 @@ This method also has one additional optional parameter:
 * A language code to filter statistics on (string)
 
 ```php
-use BabDev\Transifex\Transifex;
-
-$apiResponse = (new Transifex())->get('statistics')->getStatistics('my-project', 'resource-1');
+$apiResponse = $transifex->get('statistics')->getStatistics('my-project', 'resource-1');
 ```

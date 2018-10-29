@@ -7,10 +7,8 @@ The `Languages` class is the interface to Transifex' [languages API](http://docs
 An instance of the `Languages` class should be retrieved through the `Transifex` class' `get()` factory.
 
 ```php
-use BabDev\Transifex\Transifex;
-
 /** @var \BabDev\Transifex\Languages $languages */
-$languages = (new Transifex())->get('languages');
+$languages = $transifex->get('languages');
 ```
 
 ### Create a language for a project
@@ -29,9 +27,7 @@ This method also has two optional parameters to pass additional information:
 * A boolean flag that if true, the API call does not fail and instead will return a list of invalid usernames (boolean, default false)
 
 ```php
-use BabDev\Transifex\Transifex;
-
-$apiResponse = (new Transifex())->get('languages')->createLanguage('my-project', 'en-US', ['mbabker']);
+$apiResponse = $transifex->get('languages')->createLanguage('my-project', 'en-US', ['mbabker']);
 ```
 
 The API requires at least one username to be provided. If the coordinators array is empty, an `\InvalidArgumentException` is thrown.
@@ -46,9 +42,7 @@ This method has two required parameters:
 * The language code for the language to delete (string)
 
 ```php
-use BabDev\Transifex\Transifex;
-
-$apiResponse = (new Transifex())->get('languages')->deleteLanguage('my-project', 'en-US');
+$apiResponse = $transifex->get('languages')->deleteLanguage('my-project', 'en-US');
 ```
 
 ### Get the coordinators for a project's language
@@ -61,9 +55,7 @@ This method has two required parameters:
 * The language code for the language to query (string)
 
 ```php
-use BabDev\Transifex\Transifex;
-
-$apiResponse = (new Transifex())->get('languages')->getCoordinators('my-project', 'en-US');
+$apiResponse = $transifex->get('languages')->getCoordinators('my-project', 'en-US');
 ```
 
 ### Get the details for a project's language
@@ -76,9 +68,7 @@ This method has two required parameters:
 * The language code for the language to query (string)
 
 ```php
-use BabDev\Transifex\Transifex;
-
-$apiResponse = (new Transifex())->get('languages')->getLanguage('my-project', 'en-US');
+$apiResponse = $transifex->get('languages')->getLanguage('my-project', 'en-US');
 ```
 
 This method also has one optional parameter to add the `?details` fragment:
@@ -86,9 +76,7 @@ This method also has one optional parameter to add the `?details` fragment:
 * True to add the `?details` fragment (bool)
 
 ```php
-use BabDev\Transifex\Transifex;
-
-$apiResponse = (new Transifex())->get('languages')->getLanguage('my-project', 'en-US', true);
+$apiResponse = $transifex->get('languages')->getLanguage('my-project', 'en-US', true);
 ```
 
 ### Get the project's languages
@@ -100,9 +88,7 @@ This method has one required parameter:
 * The slug for the project (string)
 
 ```php
-use BabDev\Transifex\Transifex;
-
-$apiResponse = (new Transifex())->get('languages')->getLanguages('my-project');
+$apiResponse = $transifex->get('languages')->getLanguages('my-project');
 ```
 
 ### Get the reviewers for a project's language
@@ -115,9 +101,7 @@ This method has two required parameters:
 * The language code for the language to query (string)
 
 ```php
-use BabDev\Transifex\Transifex;
-
-$apiResponse = (new Transifex())->get('languages')->getReviewers('my-project', 'en-US');
+$apiResponse = $transifex->get('languages')->getReviewers('my-project', 'en-US');
 ```
 
 ### Get the translators for a project's language
@@ -130,9 +114,7 @@ This method has two required parameters:
 * The language code for the language to query (string)
 
 ```php
-use BabDev\Transifex\Transifex;
-
-$apiResponse = (new Transifex())->get('languages')->getTranslators('my-project', 'en-US');
+$apiResponse = $transifex->get('languages')->getTranslators('my-project', 'en-US');
 ```
 
 ### Update the coordinators for a project's language
@@ -150,9 +132,7 @@ This method also has one optional parameter to pass additional information:
 * A boolean flag that if true, the API call does not fail and instead will return a list of invalid usernames (boolean, default false)
 
 ```php
-use BabDev\Transifex\Transifex;
-
-$apiResponse = (new Transifex())->get('languages')->updateCoordinators('my-project', 'en-US', ['mbabker']);
+$apiResponse = $transifex->get('languages')->updateCoordinators('my-project', 'en-US', ['mbabker']);
 ```
 
 The API requires at least one username to be provided. If the coordinators array is empty, an `\InvalidArgumentException` is thrown.
@@ -172,9 +152,7 @@ This method also has one optional parameter to pass additional information:
 * An array containing optional additional params to send with the request, this array should contain the 'translators' and 'reviewers' options with the option's name as a key in the array (associative array, defaults to an empty array)
 
 ```php
-use BabDev\Transifex\Transifex;
-
-$apiResponse = (new Transifex())->get('languages')->updateLanguage('my-project', 'en-US', ['mbabker']);
+$apiResponse = $transifex->get('languages')->updateLanguage('my-project', 'en-US', ['mbabker']);
 ```
 
 The API requires at least one username to be provided. If the coordinators array is empty, an `\InvalidArgumentException` is thrown.
@@ -194,9 +172,7 @@ This method also has one optional parameter to pass additional information:
 * A boolean flag that if true, the API call does not fail and instead will return a list of invalid usernames (boolean, default false)
 
 ```php
-use BabDev\Transifex\Transifex;
-
-$apiResponse = (new Transifex())->get('languages')->updateReviewers('my-project', 'en-US', ['mbabker']);
+$apiResponse = $transifex->get('languages')->updateReviewers('my-project', 'en-US', ['mbabker']);
 ```
 
 The API requires at least one username to be provided. If the reviewers array is empty, an `\InvalidArgumentException` is thrown.
@@ -216,9 +192,7 @@ This method also has one optional parameter to pass additional information:
 * A boolean flag that if true, the API call does not fail and instead will return a list of invalid usernames (boolean, default false)
 
 ```php
-use BabDev\Transifex\Transifex;
-
-$apiResponse = (new Transifex())->get('languages')->updateTranslators('my-project', 'en-US', ['mbabker']);
+$apiResponse = $transifex->get('languages')->updateTranslators('my-project', 'en-US', ['mbabker']);
 ```
 
 The API requires at least one username to be provided. If the translators array is empty, an `\InvalidArgumentException` is thrown.
