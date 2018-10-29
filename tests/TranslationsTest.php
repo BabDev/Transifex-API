@@ -25,12 +25,9 @@ class TranslationsTest extends TransifexTestCase
 
         $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US');
 
-        /** @var \Psr\Http\Message\RequestInterface $request */
-        $request = $this->historyContainer[0]['request'];
-
         $this->assertSame(
             'mode=default&file',
-            $request->getUri()->getQuery(),
+            $this->client->getRequest()->getUri()->getQuery(),
             'The API request did not include the expected query string.'
         );
     }
@@ -42,14 +39,14 @@ class TranslationsTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\Translations::getTranslation
      *
      * @uses    \BabDev\Transifex\TransifexObject
-     *
-     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testGetTranslationFailure()
     {
         $this->prepareFailureTest();
 
         (new Translations($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getTranslation('babdev', 'babdev-transifex', 'en_US', 'default');
+
+        $this->validateFailureTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US');
     }
 
     /**
@@ -107,8 +104,6 @@ class TranslationsTest extends TransifexTestCase
      * @covers  \BabDev\Transifex\Translations::updateTranslation
      *
      * @uses    \BabDev\Transifex\TransifexObject
-     *
-     * @expectedException \GuzzleHttp\Exception\ServerException
      */
     public function testUpdateTranslationFailure()
     {
@@ -120,6 +115,8 @@ class TranslationsTest extends TransifexTestCase
             'en_US',
             'TEST="Test"'
         );
+
+        $this->validateFailureTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US', 'PUT');
     }
 
     /**
