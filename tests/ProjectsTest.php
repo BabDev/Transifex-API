@@ -28,18 +28,17 @@ class ProjectsTest extends TransifexTestCase
             'long_description'   => 'My test project',
             'private'            => true,
             'homepage'           => 'http://www.example.com',
-            'feed'               => 'http://www.example.com/feed.xml',
-            'anyone_submit'      => true,
-            'hidden'             => false,
-            'bug_tracker'        => 'http://www.example.com/tracker',
             'trans_instructions' => 'http://www.example.com/instructions.html',
             'tags'               => 'joomla, babdev',
             'maintainers'        => 'joomla',
-            'outsource'          => 'thirdparty',
+            'team'               => 'translators',
             'auto_join'          => true,
             'license'            => 'other_open_source',
             'fill_up_resources'  => false,
             'repository_url'     => 'http://www.example.com',
+            'organization'       => 'babdev',
+            'archived'           => false,
+            'type'               => 1,
         ];
 
         (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->createProject(
@@ -296,9 +295,14 @@ class ProjectsTest extends TransifexTestCase
             'trans_instructions' => 'http://www.example.com/instructions.html',
             'tags'               => 'joomla, babdev',
             'maintainers'        => 'joomla',
+            'team'               => 'translators',
             'auto_join'          => true,
             'license'            => 'other_open_source',
             'fill_up_resources'  => false,
+            'repository_url'     => 'http://www.example.com',
+            'organization'       => 'babdev',
+            'archived'           => false,
+            'type'               => 1,
         ];
 
         (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateProject('babdev-transifex', $options);

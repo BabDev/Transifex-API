@@ -37,6 +37,7 @@ class Projects extends TransifexObject
             'repository_url',
             'organization',
             'archived',
+            'type',
         ];
 
         // Loop through the valid options and if we have them, add them to the request data
