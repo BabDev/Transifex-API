@@ -156,6 +156,52 @@ class ProjectsTest extends TransifexTestCase
     }
 
     /**
+     * @testdox getOrganizationProjects() returns a Response object indicating a successful API connection
+     *
+     * @covers  \BabDev\Transifex\Projects::getOrganizationProjects
+     * @covers  \BabDev\Transifex\TransifexObject
+     *
+     * @uses    \BabDev\Transifex\TransifexObject
+     */
+    public function testGetOrganizationProjects()
+    {
+        $this->prepareSuccessTest();
+
+        (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getOrganizationProjects('babdev');
+
+        $this->validateSuccessTest('/organizations/babdev/projects/');
+
+        $this->assertSame(
+            'api.transifex.com',
+            $this->client->getRequest()->getUri()->getHost(),
+            'The API request did not use the new api subdomain.'
+        );
+    }
+
+    /**
+     * @testdox getOrganizationProjects() returns a Response object indicating a failed API connection
+     *
+     * @covers  \BabDev\Transifex\Projects::getOrganizationProjects
+     * @covers  \BabDev\Transifex\TransifexObject
+     *
+     * @uses    \BabDev\Transifex\TransifexObject
+     */
+    public function testGetOrganizationProjectsFailure()
+    {
+        $this->prepareFailureTest();
+
+        (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getOrganizationProjects('babdev');
+
+        $this->validateFailureTest('/organizations/babdev/projects/');
+
+        $this->assertSame(
+            'api.transifex.com',
+            $this->client->getRequest()->getUri()->getHost(),
+            'The API request did not use the new api subdomain.'
+        );
+    }
+
+    /**
      * @testdox getProject() returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\Projects::getProject
