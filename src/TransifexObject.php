@@ -136,6 +136,21 @@ abstract class TransifexObject
     }
 
     /**
+     * Set an option for the Transifex instance.
+     *
+     * @param string $key   The name of the option to set
+     * @param mixed  $value The option value to set
+     *
+     * @return $this
+     */
+    protected function setOption(string $key, $value): self
+    {
+        $this->options[$key] = $value;
+
+        return $this;
+    }
+
+    /**
      * Update an API endpoint with resource content.
      *
      * @param UriInterface $uri     URI object representing the API path to request

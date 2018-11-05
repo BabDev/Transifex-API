@@ -4,6 +4,7 @@ CHANGELOG for the Transifex API Package
 * 3.0.0 (201x-xx-xx)
 
  * Raised minimum PHP version to 7.2
+ * Add support for the Organizations API
  * The `Transifex` and `TransifexObject` classes now require a `RequestFactoryInterface` and `UriFactoryInterface` (PSR-17) implementations as constructor arguments
  * The `$client` constructor argument of the `Transifex` and `TransifexObject` classes is now a PSR-18 `ClientInterface` and is required
  * Removed `TransifexObject::getAuthData()`, a request's Authorization header will be added with the new `TransifexObject::createRequest()` method

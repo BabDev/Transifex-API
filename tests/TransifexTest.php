@@ -62,6 +62,7 @@ class TransifexTest extends TestCase
     /**
      * @testdox get() throws an InvalidArgumentException for a non-existing object
      *
+     * @covers  \BabDev\Transifex\Transifex::__construct
      * @covers  \BabDev\Transifex\Transifex::get
      *
      * @uses    \BabDev\Transifex\Transifex::getOption
@@ -76,6 +77,7 @@ class TransifexTest extends TestCase
     /**
      * @testdox get() with the "formats" parameter returns an instance of the Formats object
      *
+     * @covers  \BabDev\Transifex\Transifex::__construct
      * @covers  \BabDev\Transifex\Transifex::get
      *
      * @uses    \BabDev\Transifex\Formats
@@ -94,6 +96,7 @@ class TransifexTest extends TestCase
     /**
      * @testdox get() with a custom namespace defined and the "formats" parameter returns an instance of the custom Formats object
      *
+     * @covers  \BabDev\Transifex\Transifex::__construct
      * @covers  \BabDev\Transifex\Transifex::get
      *
      * @uses    \BabDev\Transifex\Formats
@@ -114,6 +117,7 @@ class TransifexTest extends TestCase
     /**
      * @testdox get() with a custom namespace defined and the "formats" parameter and a class not found in the custom namespace returns an instance of the default Formats object
      *
+     * @covers  \BabDev\Transifex\Transifex::__construct
      * @covers  \BabDev\Transifex\Transifex::get
      *
      * @uses    \BabDev\Transifex\Formats
@@ -134,6 +138,7 @@ class TransifexTest extends TestCase
     /**
      * @testdox get() with a custom namespace defined throws an InvalidArgumentException when the class is not found in either the custom or default namespace
      *
+     * @covers  \BabDev\Transifex\Transifex::__construct
      * @covers  \BabDev\Transifex\Transifex::get
      *
      * @uses    \BabDev\Transifex\Transifex::getOption
@@ -149,6 +154,7 @@ class TransifexTest extends TestCase
     /**
      * @testdox getOption() and setOption() correctly manage the object's options
      *
+     * @covers  \BabDev\Transifex\Transifex::__construct
      * @covers  \BabDev\Transifex\Transifex::getOption
      * @covers  \BabDev\Transifex\Transifex::setOption
      *
