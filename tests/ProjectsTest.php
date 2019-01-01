@@ -269,7 +269,7 @@ class ProjectsTest extends TransifexTestCase
             $this->fail(\sprintf('A %s should be thrown.', ClientExceptionInterface::class));
         } catch (ClientExceptionInterface $exception) {
             $this->assertSame(
-                'www.transifex.com',
+                'https://www.transifex.com',
                 $projects->getBaseUri(),
                 'The API request did not switch back to the www subdomain.'
             );
