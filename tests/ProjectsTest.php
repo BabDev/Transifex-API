@@ -3,6 +3,10 @@
 namespace BabDev\Transifex\Tests;
 
 use BabDev\Transifex\Projects;
+use Psr\Http\Client\ClientExceptionInterface;
+use Psr\Http\Client\ClientInterface;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Test class for \BabDev\Transifex\Projects.
@@ -178,6 +182,40 @@ class ProjectsTest extends TransifexTestCase
     }
 
     /**
+     * @testdox Calling any method after getOrganizationProjects() calls the correct API endpoint
+     *
+     * @covers  \BabDev\Transifex\Projects::getOrganizationProjects
+     * @covers  \BabDev\Transifex\Projects::getProjects
+     * @covers  \BabDev\Transifex\TransifexObject
+     *
+     * @uses    \BabDev\Transifex\TransifexObject
+     */
+    public function testGetOrganizationProjectsThenGetProjects()
+    {
+        $this->prepareSuccessTest();
+
+        $projects = new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options);
+
+        $projects->getOrganizationProjects('babdev');
+
+        $this->assertSame(
+            'api.transifex.com',
+            $this->client->getRequest()->getUri()->getHost(),
+            'The API request did not use the new api subdomain.'
+        );
+
+        $this->prepareSuccessTest();
+
+        $projects->getProjects();
+
+        $this->assertSame(
+            'www.transifex.com',
+            $this->client->getRequest()->getUri()->getHost(),
+            'The API request did not switch back to the www subdomain.'
+        );
+    }
+
+    /**
      * @testdox getOrganizationProjects() returns a Response object indicating a failed API connection
      *
      * @covers  \BabDev\Transifex\Projects::getOrganizationProjects
@@ -198,6 +236,44 @@ class ProjectsTest extends TransifexTestCase
             $this->client->getRequest()->getUri()->getHost(),
             'The API request did not use the new api subdomain.'
         );
+    }
+
+    /**
+     * @testdox The API URI is reset when an Exception is thrown by getOrganizationProjects()
+     *
+     * @covers  \BabDev\Transifex\Projects::getOrganizationProjects
+     * @covers  \BabDev\Transifex\TransifexObject
+     *
+     * @uses    \BabDev\Transifex\TransifexObject
+     */
+    public function testGetOrganizationProjectsResetsApiUriOnException()
+    {
+        $this->client = new class() implements ClientInterface {
+            public function sendRequest(RequestInterface $request): ResponseInterface
+            {
+                throw new class('Testing') extends \RuntimeException implements ClientExceptionInterface {
+                };
+            }
+        };
+
+        $projects = new class($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options) extends Projects {
+            public function getBaseUri(): ?string
+            {
+                return $this->getOption('base_uri');
+            }
+        };
+
+        try {
+            $projects->getOrganizationProjects('babdev');
+
+            $this->fail(\sprintf('A %s should be thrown.', ClientExceptionInterface::class));
+        } catch (ClientExceptionInterface $exception) {
+            $this->assertSame(
+                'www.transifex.com',
+                $projects->getBaseUri(),
+                'The API request did not switch back to the www subdomain.'
+            );
+        }
     }
 
     /**

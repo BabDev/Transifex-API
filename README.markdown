@@ -33,7 +33,7 @@ git clone git://github.com/BabDev/Transifex-API.git
 
 ## Installation via Composer
 
-You can simply run the following from the command line:
+To include this package in your Composer project, run the following command from the command line:
 
 ```sh
 composer require babdev/transifex

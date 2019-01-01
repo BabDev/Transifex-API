@@ -146,11 +146,17 @@ class Projects extends TransifexObject
     public function getOrganizationProjects(string $organization): ResponseInterface
     {
         // This API endpoint uses the newer `api.transifex.com` subdomain, only change if the default www was given
-        if (!$this->getOption('base_uri') || $this->getOption('base_uri') === 'https://www.transifex.com') {
+        $currentBaseUri = $this->getOption('base_uri');
+
+        if (!$currentBaseUri || $currentBaseUri === 'https://www.transifex.com') {
             $this->setOption('base_uri', 'https://api.transifex.com');
         }
 
-        return $this->client->sendRequest($this->createRequest('GET', $this->createUri("/organizations/$organization/projects/")));
+        try {
+            return $this->client->sendRequest($this->createRequest('GET', $this->createUri("/organizations/$organization/projects/")));
+        } finally {
+            $this->setOption('base_uri', $currentBaseUri);
+        }
     }
 
     /**
