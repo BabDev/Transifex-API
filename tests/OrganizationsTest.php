@@ -18,7 +18,7 @@ class OrganizationsTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetOrganizations()
+    public function testGetOrganizations(): void
     {
         $this->prepareSuccessTest();
 
@@ -42,7 +42,7 @@ class OrganizationsTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetOrganizationsFailure()
+    public function testGetOrganizationsFailure(): void
     {
         $this->prepareFailureTest();
 

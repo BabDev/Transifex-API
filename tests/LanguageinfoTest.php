@@ -17,7 +17,7 @@ class LanguageinfoTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetLanguage()
+    public function testGetLanguage(): void
     {
         $this->prepareSuccessTest();
 
@@ -34,7 +34,7 @@ class LanguageinfoTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetLanguageFailure()
+    public function testGetLanguageFailure(): void
     {
         $this->prepareFailureTest();
 
@@ -51,7 +51,7 @@ class LanguageinfoTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetLanguages()
+    public function testGetLanguages(): void
     {
         $this->prepareSuccessTest();
 
@@ -68,7 +68,7 @@ class LanguageinfoTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetLanguagesFailure()
+    public function testGetLanguagesFailure(): void
     {
         $this->prepareFailureTest();
 

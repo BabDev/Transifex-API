@@ -17,7 +17,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testCreateLanguage()
+    public function testCreateLanguage(): void
     {
         $this->prepareSuccessTest(201);
 
@@ -53,7 +53,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testCreateLanguageFailure()
+    public function testCreateLanguageFailure(): void
     {
         $this->prepareFailureTest();
 
@@ -72,7 +72,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @expectedException \InvalidArgumentException
      */
-    public function testCreateLanguageNoUsers()
+    public function testCreateLanguageNoUsers(): void
     {
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->createLanguage('babdev-transifex', 'en_US', []);
     }
@@ -85,7 +85,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testDeleteLanguage()
+    public function testDeleteLanguage(): void
     {
         $this->prepareSuccessTest(204);
 
@@ -102,7 +102,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testDeleteLanguageFailure()
+    public function testDeleteLanguageFailure(): void
     {
         $this->prepareFailureTest();
 
@@ -119,7 +119,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetCoordinators()
+    public function testGetCoordinators(): void
     {
         $this->prepareSuccessTest();
 
@@ -136,7 +136,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetCoordinatorsFailure()
+    public function testGetCoordinatorsFailure(): void
     {
         $this->prepareFailureTest();
 
@@ -153,7 +153,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetLanguage()
+    public function testGetLanguage(): void
     {
         $this->prepareSuccessTest();
 
@@ -170,7 +170,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetLanguageWithDetails()
+    public function testGetLanguageWithDetails(): void
     {
         $this->prepareSuccessTest();
 
@@ -193,7 +193,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetLanguageFailure()
+    public function testGetLanguageFailure(): void
     {
         $this->prepareFailureTest();
 
@@ -210,7 +210,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetLanguages()
+    public function testGetLanguages(): void
     {
         $this->prepareSuccessTest();
 
@@ -227,7 +227,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetLanguagesFailure()
+    public function testGetLanguagesFailure(): void
     {
         $this->prepareFailureTest();
 
@@ -244,7 +244,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetReviewers()
+    public function testGetReviewers(): void
     {
         $this->prepareSuccessTest();
 
@@ -261,7 +261,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetReviewersFailure()
+    public function testGetReviewersFailure(): void
     {
         $this->prepareFailureTest();
 
@@ -278,7 +278,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetTranslators()
+    public function testGetTranslators(): void
     {
         $this->prepareSuccessTest();
 
@@ -295,7 +295,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetTranslatorsFailure()
+    public function testGetTranslatorsFailure(): void
     {
         $this->prepareFailureTest();
 
@@ -313,7 +313,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testUpdateCoordinators()
+    public function testUpdateCoordinators(): void
     {
         $this->prepareSuccessTest();
 
@@ -337,7 +337,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testUpdateCoordinatorsFailure()
+    public function testUpdateCoordinatorsFailure(): void
     {
         $this->prepareFailureTest();
 
@@ -357,7 +357,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @expectedException \InvalidArgumentException
      */
-    public function testUpdateCoordinatorsNoUsers()
+    public function testUpdateCoordinatorsNoUsers(): void
     {
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateCoordinators('babdev-transifex', 'en_US', []);
     }
@@ -370,7 +370,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testUpdateLanguage()
+    public function testUpdateLanguage(): void
     {
         $this->prepareSuccessTest();
 
@@ -394,7 +394,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testUpdateLanguageFailure()
+    public function testUpdateLanguageFailure(): void
     {
         $this->prepareFailureTest();
 
@@ -413,7 +413,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @expectedException \InvalidArgumentException
      */
-    public function testUpdateLanguageNoUsers()
+    public function testUpdateLanguageNoUsers(): void
     {
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateLanguage('babdev-transifex', 'en_US', []);
     }
@@ -427,7 +427,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testUpdateReviewers()
+    public function testUpdateReviewers(): void
     {
         $this->prepareSuccessTest();
 
@@ -451,7 +451,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testUpdateReviewersFailure()
+    public function testUpdateReviewersFailure(): void
     {
         $this->prepareFailureTest();
 
@@ -471,7 +471,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @expectedException \InvalidArgumentException
      */
-    public function testUpdateReviewersNoUsers()
+    public function testUpdateReviewersNoUsers(): void
     {
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateReviewers('babdev-transifex', 'en_US', []);
     }
@@ -485,7 +485,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testUpdateTranslators()
+    public function testUpdateTranslators(): void
     {
         $this->prepareSuccessTest();
 
@@ -509,7 +509,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testUpdateTranslatorsFailure()
+    public function testUpdateTranslatorsFailure(): void
     {
         $this->prepareFailureTest();
 
@@ -529,7 +529,7 @@ class LanguagesTest extends TransifexTestCase
      *
      * @expectedException \InvalidArgumentException
      */
-    public function testUpdateTranslatorsNoUsers()
+    public function testUpdateTranslatorsNoUsers(): void
     {
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateTranslators('babdev-transifex', 'en_US', []);
     }

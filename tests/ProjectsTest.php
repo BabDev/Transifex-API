@@ -23,7 +23,7 @@ class ProjectsTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testCreateProject()
+    public function testCreateProject(): void
     {
         $this->prepareSuccessTest(201);
 
@@ -66,7 +66,7 @@ class ProjectsTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testCreateProjectFailureForABadRequest()
+    public function testCreateProjectFailureForABadRequest(): void
     {
         $this->prepareFailureTest();
 
@@ -92,7 +92,7 @@ class ProjectsTest extends TransifexTestCase
      *
      * @expectedException \InvalidArgumentException
      */
-    public function testCreateProjectsBadLicense()
+    public function testCreateProjectsBadLicense(): void
     {
         (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->createProject(
             'BabDev Transifex',
@@ -114,7 +114,7 @@ class ProjectsTest extends TransifexTestCase
      *
      * @expectedException \InvalidArgumentException
      */
-    public function testCreateProjectFailureForMissingFields()
+    public function testCreateProjectFailureForMissingFields(): void
     {
         (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->createProject(
             'BabDev Transifex',
@@ -132,7 +132,7 @@ class ProjectsTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testDeleteProject()
+    public function testDeleteProject(): void
     {
         $this->prepareSuccessTest(204);
 
@@ -149,7 +149,7 @@ class ProjectsTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testDeleteProjectFailure()
+    public function testDeleteProjectFailure(): void
     {
         $this->prepareFailureTest();
 
@@ -166,7 +166,7 @@ class ProjectsTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetOrganizationProjects()
+    public function testGetOrganizationProjects(): void
     {
         $this->prepareSuccessTest();
 
@@ -190,7 +190,7 @@ class ProjectsTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetOrganizationProjectsThenGetProjects()
+    public function testGetOrganizationProjectsThenGetProjects(): void
     {
         $this->prepareSuccessTest();
 
@@ -223,7 +223,7 @@ class ProjectsTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetOrganizationProjectsFailure()
+    public function testGetOrganizationProjectsFailure(): void
     {
         $this->prepareFailureTest();
 
@@ -246,7 +246,7 @@ class ProjectsTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetOrganizationProjectsResetsApiUriOnException()
+    public function testGetOrganizationProjectsResetsApiUriOnException(): void
     {
         $this->client = new class() implements ClientInterface {
             public function sendRequest(RequestInterface $request): ResponseInterface
@@ -284,7 +284,7 @@ class ProjectsTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetProject()
+    public function testGetProject(): void
     {
         $this->prepareSuccessTest();
 
@@ -307,7 +307,7 @@ class ProjectsTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetProjectFailure()
+    public function testGetProjectFailure(): void
     {
         $this->prepareFailureTest();
 
@@ -324,7 +324,7 @@ class ProjectsTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetProjects()
+    public function testGetProjects(): void
     {
         $this->prepareSuccessTest();
 
@@ -341,7 +341,7 @@ class ProjectsTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetProjectsFailure()
+    public function testGetProjectsFailure(): void
     {
         $this->prepareFailureTest();
 
@@ -359,7 +359,7 @@ class ProjectsTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testUpdateProject()
+    public function testUpdateProject(): void
     {
         $this->prepareSuccessTest();
 
@@ -396,7 +396,7 @@ class ProjectsTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testUpdateProjectFailure()
+    public function testUpdateProjectFailure(): void
     {
         $this->prepareFailureTest();
 
@@ -419,7 +419,7 @@ class ProjectsTest extends TransifexTestCase
      *
      * @expectedException \RuntimeException
      */
-    public function testUpdateProjectRuntimeException()
+    public function testUpdateProjectRuntimeException(): void
     {
         (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateProject('babdev-transifex', []);
     }
@@ -435,7 +435,7 @@ class ProjectsTest extends TransifexTestCase
      *
      * @expectedException \InvalidArgumentException
      */
-    public function testUpdateProjectBadLicense()
+    public function testUpdateProjectBadLicense(): void
     {
         (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateProject('babdev-transifex', ['license' => 'failure']);
     }

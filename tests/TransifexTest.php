@@ -30,7 +30,7 @@ class TransifexTest extends TestCase
     /**
      * {@inheritdoc}
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->apiFactory = $this->createMock(FactoryInterface::class);
         $this->options    = ['api.username' => 'test', 'api.password' => 'test'];

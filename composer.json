@@ -20,7 +20,8 @@
     "require-dev": {
         "guzzlehttp/guzzle": "^6.3.3",
         "http-interop/http-factory-guzzle": "~1.0",
-        "phpunit/phpunit": "~7.0"
+        "phpunit/phpunit": "~8.0",
+        "friendsofphp/php-cs-fixer": "^2.14"
     },
     "autoload": {
         "psr-4": {

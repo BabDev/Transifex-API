@@ -60,7 +60,7 @@ abstract class TransifexTestCase extends TestCase
     /**
      * {@inheritdoc}
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->client         = new TransifexTestClient();
         $this->requestFactory = new RequestFactory();
@@ -71,7 +71,7 @@ abstract class TransifexTestCase extends TestCase
     /**
      * Prepares the mock response for a failed API connection.
      */
-    protected function prepareFailureTest()
+    protected function prepareFailureTest(): void
     {
         $this->client->setResponse(new Response(500, [], $this->errorString));
     }
@@ -81,7 +81,7 @@ abstract class TransifexTestCase extends TestCase
      *
      * @param int $code The expected HTTP code
      */
-    protected function prepareSuccessTest(int $code = 200)
+    protected function prepareSuccessTest(int $code = 200): void
     {
         $this->client->setResponse(new Response($code, [], $this->sampleString));
     }
@@ -93,7 +93,7 @@ abstract class TransifexTestCase extends TestCase
      * @param string $method The expected HTTP method
      * @param int    $code   The expected HTTP code
      */
-    protected function validateFailureTest(string $path, string $method = 'GET', int $code = 500)
+    protected function validateFailureTest(string $path, string $method = 'GET', int $code = 500): void
     {
         $this->assertSame(
             $method,
@@ -117,7 +117,7 @@ abstract class TransifexTestCase extends TestCase
      * @param string $method The expected HTTP method
      * @param int    $code   The expected HTTP code
      */
-    protected function validateSuccessTest(string $path, string $method = 'GET', int $code = 200)
+    protected function validateSuccessTest(string $path, string $method = 'GET', int $code = 200): void
     {
         $this->assertSame(
             $method,

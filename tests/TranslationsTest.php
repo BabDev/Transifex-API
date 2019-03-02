@@ -17,7 +17,7 @@ class TranslationsTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetTranslation()
+    public function testGetTranslation(): void
     {
         $this->prepareSuccessTest();
 
@@ -40,7 +40,7 @@ class TranslationsTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetTranslationFailure()
+    public function testGetTranslationFailure(): void
     {
         $this->prepareFailureTest();
 
@@ -57,7 +57,7 @@ class TranslationsTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testUpdateTranslationFile()
+    public function testUpdateTranslationFile(): void
     {
         $this->prepareSuccessTest();
 
@@ -80,7 +80,7 @@ class TranslationsTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testUpdateTranslationString()
+    public function testUpdateTranslationString(): void
     {
         $this->prepareSuccessTest();
 
@@ -102,7 +102,7 @@ class TranslationsTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testUpdateTranslationFailure()
+    public function testUpdateTranslationFailure(): void
     {
         $this->prepareFailureTest();
 
@@ -125,7 +125,7 @@ class TranslationsTest extends TransifexTestCase
      *
      * @expectedException \InvalidArgumentException
      */
-    public function testUpdateTranslationBadType()
+    public function testUpdateTranslationBadType(): void
     {
         (new Translations($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateTranslation(
             'babdev',
@@ -145,7 +145,7 @@ class TranslationsTest extends TransifexTestCase
      *
      * @expectedException \InvalidArgumentException
      */
-    public function testUpdateTranslationUnexistingFile()
+    public function testUpdateTranslationUnexistingFile(): void
     {
         (new Translations($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateTranslation(
             'babdev',

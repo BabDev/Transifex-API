@@ -17,7 +17,7 @@ class FormatsTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetFormats()
+    public function testGetFormats(): void
     {
         $this->prepareSuccessTest();
 
@@ -34,7 +34,7 @@ class FormatsTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetFormatsFailure()
+    public function testGetFormatsFailure(): void
     {
         $this->prepareFailureTest();
 

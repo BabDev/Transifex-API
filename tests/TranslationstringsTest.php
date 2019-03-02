@@ -17,7 +17,7 @@ class TranslationstringsTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetPseudolocalizationStrings()
+    public function testGetPseudolocalizationStrings(): void
     {
         $this->prepareSuccessTest();
 
@@ -40,7 +40,7 @@ class TranslationstringsTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetPseudolocalizationStringsFailure()
+    public function testGetPseudolocalizationStringsFailure(): void
     {
         $this->prepareFailureTest();
 
@@ -57,7 +57,7 @@ class TranslationstringsTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetStrings()
+    public function testGetStrings(): void
     {
         $this->prepareSuccessTest();
 
@@ -74,7 +74,7 @@ class TranslationstringsTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetStringsDetails()
+    public function testGetStringsDetails(): void
     {
         $this->prepareSuccessTest();
 
@@ -97,7 +97,7 @@ class TranslationstringsTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetStringsDetailsKey()
+    public function testGetStringsDetailsKey(): void
     {
         $this->prepareSuccessTest();
 
@@ -126,7 +126,7 @@ class TranslationstringsTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetStringsDetailsKeyContext()
+    public function testGetStringsDetailsKeyContext(): void
     {
         $this->prepareSuccessTest();
 
@@ -155,7 +155,7 @@ class TranslationstringsTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetStringsKeyContext()
+    public function testGetStringsKeyContext(): void
     {
         $this->prepareSuccessTest();
 
@@ -184,7 +184,7 @@ class TranslationstringsTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetStringsContext()
+    public function testGetStringsContext(): void
     {
         $this->prepareSuccessTest();
 
@@ -213,7 +213,7 @@ class TranslationstringsTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetStringsFailure()
+    public function testGetStringsFailure(): void
     {
         $this->prepareFailureTest();
 

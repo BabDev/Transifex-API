@@ -19,7 +19,7 @@ class ApiConnectorTest extends TransifexTestCase
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage Missing credentials for API authentication.
      */
-    public function testApiFailureWhenNoAuthenticationIsSet()
+    public function testApiFailureWhenNoAuthenticationIsSet(): void
     {
         (new Formats($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, []))->getFormats();
     }
@@ -32,7 +32,7 @@ class ApiConnectorTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testCustomBaseUrlIsUsed()
+    public function testCustomBaseUrlIsUsed(): void
     {
         $this->prepareSuccessTest();
 

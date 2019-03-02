@@ -17,7 +17,7 @@ class StatisticsTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetStatistics()
+    public function testGetStatistics(): void
     {
         $this->prepareSuccessTest();
 
@@ -34,7 +34,7 @@ class StatisticsTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetStatisticsFailure()
+    public function testGetStatisticsFailure(): void
     {
         $this->prepareFailureTest();
 

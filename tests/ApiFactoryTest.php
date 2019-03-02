@@ -48,7 +48,7 @@ class ApiFactoryTest extends TestCase
     /**
      * {@inheritdoc}
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->client         = $this->createMock(ClientInterface::class);
         $this->requestFactory = $this->createMock(RequestFactoryInterface::class);
@@ -63,7 +63,7 @@ class ApiFactoryTest extends TestCase
      *
      * @expectedException \BabDev\Transifex\Exception\UnknownApiConnectorException
      */
-    public function testGetFake()
+    public function testGetFake(): void
     {
         $this->object->createApiConnector('fake');
     }
@@ -71,7 +71,7 @@ class ApiFactoryTest extends TestCase
     /**
      * @testdox get() with the "formats" parameter returns an instance of the Formats object
      */
-    public function testGetFormats()
+    public function testGetFormats(): void
     {
         $this->assertInstanceOf(
             Formats::class,

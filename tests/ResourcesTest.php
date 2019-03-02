@@ -17,7 +17,7 @@ class ResourcesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testCreateResourceContent()
+    public function testCreateResourceContent(): void
     {
         $this->prepareSuccessTest(201);
 
@@ -48,7 +48,7 @@ class ResourcesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testCreateResourceFile()
+    public function testCreateResourceFile(): void
     {
         $this->prepareSuccessTest(201);
 
@@ -81,7 +81,7 @@ class ResourcesTest extends TransifexTestCase
      *
      * @expectedException \InvalidArgumentException
      */
-    public function testCreateResourceFileDoesNotExist()
+    public function testCreateResourceFileDoesNotExist(): void
     {
         // Additional options
         $options = [
@@ -108,7 +108,7 @@ class ResourcesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testCreateResourceFailure()
+    public function testCreateResourceFailure(): void
     {
         $this->prepareFailureTest();
 
@@ -131,7 +131,7 @@ class ResourcesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testDeleteResource()
+    public function testDeleteResource(): void
     {
         $this->prepareSuccessTest(204);
 
@@ -148,7 +148,7 @@ class ResourcesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testDeleteResourceFailure()
+    public function testDeleteResourceFailure(): void
     {
         $this->prepareFailureTest();
 
@@ -165,7 +165,7 @@ class ResourcesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetResource()
+    public function testGetResource(): void
     {
         $this->prepareSuccessTest();
 
@@ -188,7 +188,7 @@ class ResourcesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetResourceFailure()
+    public function testGetResourceFailure(): void
     {
         $this->prepareFailureTest();
 
@@ -205,7 +205,7 @@ class ResourcesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetResourceContent()
+    public function testGetResourceContent(): void
     {
         $this->prepareSuccessTest();
 
@@ -222,7 +222,7 @@ class ResourcesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetResourceContentFailure()
+    public function testGetResourceContentFailure(): void
     {
         $this->prepareFailureTest();
 
@@ -239,7 +239,7 @@ class ResourcesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetResources()
+    public function testGetResources(): void
     {
         $this->prepareSuccessTest();
 
@@ -256,7 +256,7 @@ class ResourcesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testGetResourcesFailure()
+    public function testGetResourcesFailure(): void
     {
         $this->prepareFailureTest();
 
@@ -273,7 +273,7 @@ class ResourcesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testUpdateResourceContentFile()
+    public function testUpdateResourceContentFile(): void
     {
         $this->prepareSuccessTest();
 
@@ -295,7 +295,7 @@ class ResourcesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testUpdateResourceContentString()
+    public function testUpdateResourceContentString(): void
     {
         $this->prepareSuccessTest();
 
@@ -316,7 +316,7 @@ class ResourcesTest extends TransifexTestCase
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
-    public function testUpdateResourceContentFailure()
+    public function testUpdateResourceContentFailure(): void
     {
         $this->prepareFailureTest();
 
@@ -335,7 +335,7 @@ class ResourcesTest extends TransifexTestCase
      *
      * @expectedException \InvalidArgumentException
      */
-    public function testUpdateResourceContentBadType()
+    public function testUpdateResourceContentBadType(): void
     {
         (new Resources($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateResourceContent(
             'babdev',
@@ -355,7 +355,7 @@ class ResourcesTest extends TransifexTestCase
      *
      * @expectedException \InvalidArgumentException
      */
-    public function testUpdateResourceContentUnexistingFile()
+    public function testUpdateResourceContentUnexistingFile(): void
     {
         (new Resources($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateResourceContent(
             'babdev',

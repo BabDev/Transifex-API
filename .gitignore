@@ -10,6 +10,7 @@
 # Local config files #
 /phpunit.xml
 /.php_cs.cache
+/.phpunit.result.cache
 
 # Composer Files #
 vendor/*
