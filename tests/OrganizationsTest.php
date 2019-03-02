@@ -12,11 +12,11 @@ class OrganizationsTest extends TransifexTestCase
     /**
      * @testdox getOrganizations() returns a Response object indicating a successful API connection
      *
-     * @covers  \BabDev\Transifex\TransifexObject
+     * @covers  \BabDev\Transifex\ApiConnector
      * @covers  \BabDev\Transifex\Organizations::__construct
      * @covers  \BabDev\Transifex\Organizations::getOrganizations
      *
-     * @uses    \BabDev\Transifex\TransifexObject
+     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetOrganizations()
     {
@@ -38,9 +38,9 @@ class OrganizationsTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Organizations::__construct
      * @covers  \BabDev\Transifex\Organizations::getOrganizations
-     * @covers  \BabDev\Transifex\TransifexObject
+     * @covers  \BabDev\Transifex\ApiConnector
      *
-     * @uses    \BabDev\Transifex\TransifexObject
+     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetOrganizationsFailure()
     {

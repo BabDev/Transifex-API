@@ -12,10 +12,10 @@ class TranslationsTest extends TransifexTestCase
     /**
      * @testdox getTranslation() returns a Response object indicating a successful API connection
      *
-     * @covers  \BabDev\Transifex\TransifexObject
+     * @covers  \BabDev\Transifex\ApiConnector
      * @covers  \BabDev\Transifex\Translations::getTranslation
      *
-     * @uses    \BabDev\Transifex\TransifexObject
+     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetTranslation()
     {
@@ -35,10 +35,10 @@ class TranslationsTest extends TransifexTestCase
     /**
      * @testdox getTranslation() returns a Response object indicating a failed API connection
      *
-     * @covers  \BabDev\Transifex\TransifexObject
+     * @covers  \BabDev\Transifex\ApiConnector
      * @covers  \BabDev\Transifex\Translations::getTranslation
      *
-     * @uses    \BabDev\Transifex\TransifexObject
+     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetTranslationFailure()
     {
@@ -52,10 +52,10 @@ class TranslationsTest extends TransifexTestCase
     /**
      * @testdox updateTranslation() with an attached file returns a Response object indicating a successful API connection
      *
-     * @covers  \BabDev\Transifex\TransifexObject
+     * @covers  \BabDev\Transifex\ApiConnector
      * @covers  \BabDev\Transifex\Translations::updateTranslation
      *
-     * @uses    \BabDev\Transifex\TransifexObject
+     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testUpdateTranslationFile()
     {
@@ -75,10 +75,10 @@ class TranslationsTest extends TransifexTestCase
     /**
      * @testdox updateTranslation() with inline content returns a Response object indicating a successful API connection
      *
-     * @covers  \BabDev\Transifex\TransifexObject
+     * @covers  \BabDev\Transifex\ApiConnector
      * @covers  \BabDev\Transifex\Translations::updateTranslation
      *
-     * @uses    \BabDev\Transifex\TransifexObject
+     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testUpdateTranslationString()
     {
@@ -97,10 +97,10 @@ class TranslationsTest extends TransifexTestCase
     /**
      * @testdox updateTranslation() returns a Response object indicating a failed API connection
      *
-     * @covers  \BabDev\Transifex\TransifexObject
+     * @covers  \BabDev\Transifex\ApiConnector
      * @covers  \BabDev\Transifex\Translations::updateTranslation
      *
-     * @uses    \BabDev\Transifex\TransifexObject
+     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testUpdateTranslationFailure()
     {
@@ -121,7 +121,7 @@ class TranslationsTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Translations::updateTranslation
      *
-     * @uses    \BabDev\Transifex\TransifexObject
+     * @uses    \BabDev\Transifex\ApiConnector
      *
      * @expectedException \InvalidArgumentException
      */
@@ -141,7 +141,7 @@ class TranslationsTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\Translations::updateTranslation
      *
-     * @uses    \BabDev\Transifex\TransifexObject
+     * @uses    \BabDev\Transifex\ApiConnector
      *
      * @expectedException \InvalidArgumentException
      */

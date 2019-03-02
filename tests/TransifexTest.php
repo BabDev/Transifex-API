@@ -4,7 +4,7 @@ namespace BabDev\Transifex\Tests;
 
 use BabDev\Transifex\FactoryInterface;
 use BabDev\Transifex\Transifex;
-use BabDev\Transifex\TransifexObject;
+use BabDev\Transifex\ApiConnector;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -44,10 +44,10 @@ class TransifexTest extends TestCase
     {
         $this->apiFactory->expects($this->once())
             ->method('createApiConnector')
-            ->willReturn($this->createMock(TransifexObject::class));
+            ->willReturn($this->createMock(ApiConnector::class));
 
         $this->assertInstanceOf(
-            TransifexObject::class,
+            ApiConnector::class,
             $this->object->get('formats')
         );
     }

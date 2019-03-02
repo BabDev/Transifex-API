@@ -9,7 +9,7 @@ use Psr\Http\Message\ResponseInterface;
  *
  * @link http://docs.transifex.com/api/resources/
  */
-class Resources extends TransifexObject
+class Resources extends ApiConnector
 {
     /**
      * Create a resource.

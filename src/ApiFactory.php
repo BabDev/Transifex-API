@@ -64,11 +64,11 @@ final class ApiFactory implements FactoryInterface
      * @param string $name    Name of the API connector to retrieve
      * @param array  $options API connector options
      *
-     * @return TransifexObject
+     * @return ApiConnector
      *
      * @throws Exception\UnknownApiConnectorException
      */
-    public function createApiConnector(string $name, array $options = []): TransifexObject
+    public function createApiConnector(string $name, array $options = []): ApiConnector
     {
         $namespace = __NAMESPACE__;
         $class     = $namespace . '\\' . \ucfirst(\strtolower($name));

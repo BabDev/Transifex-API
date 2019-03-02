@@ -9,7 +9,7 @@ use Psr\Http\Message\ResponseInterface;
  *
  * @link http://docs.transifex.com/api/projects/
  */
-class Projects extends TransifexObject
+class Projects extends ApiConnector
 {
     /**
      * Build the data array to send with create and update requests.

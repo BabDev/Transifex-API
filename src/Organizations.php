@@ -13,7 +13,7 @@ use Psr\Http\Message\UriFactoryInterface;
  *
  * @link https://docs.transifex.com/api/organizations
  */
-class Organizations extends TransifexObject
+class Organizations extends ApiConnector
 {
     /**
      * @param ClientInterface         $client         The HTTP client

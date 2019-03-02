@@ -9,7 +9,7 @@ use Psr\Http\Message\ResponseInterface;
  *
  * @link http://docs.transifex.com/api/languages/
  */
-class Languages extends TransifexObject
+class Languages extends ApiConnector
 {
     /**
      * Create a language for a project.

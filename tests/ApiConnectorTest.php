@@ -5,14 +5,14 @@ namespace BabDev\Transifex\Tests;
 use BabDev\Transifex\Formats;
 
 /**
- * Test class for \BabDev\Transifex\TransifexObject.
+ * Test class for \BabDev\Transifex\ApiConnector.
  */
-class TransifexObjectTest extends TransifexTestCase
+class ApiConnectorTest extends TransifexTestCase
 {
     /**
      * @testdox The API does not connect when API credentials are not available
      *
-     * @covers  \BabDev\Transifex\TransifexObject
+     * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\Formats
      *
@@ -28,9 +28,9 @@ class TransifexObjectTest extends TransifexTestCase
      * @testdox When a custom base URL is set in the options the API request goes to that URL
      *
      * @covers  \BabDev\Transifex\Statistics::getStatistics
-     * @covers  \BabDev\Transifex\TransifexObject
+     * @covers  \BabDev\Transifex\ApiConnector
      *
-     * @uses    \BabDev\Transifex\TransifexObject
+     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testCustomBaseUrlIsUsed()
     {

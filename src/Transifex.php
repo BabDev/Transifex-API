@@ -41,11 +41,11 @@ class Transifex
      *
      * @param string $name Name of the API object to retrieve
      *
-     * @return TransifexObject
+     * @return ApiConnector
      *
      * @throws Exception\UnknownApiConnectorException
      */
-    public function get(string $name): TransifexObject
+    public function get(string $name): ApiConnector
     {
         return $this->apiFactory->createApiConnector($name, $this->options);
     }

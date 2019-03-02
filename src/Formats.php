@@ -9,7 +9,7 @@ use Psr\Http\Message\ResponseInterface;
  *
  * @link http://docs.transifex.com/api/formats/
  */
-class Formats extends TransifexObject
+class Formats extends ApiConnector
 {
     /**
      * Get the supported file formats.

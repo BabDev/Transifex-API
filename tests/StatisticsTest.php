@@ -13,9 +13,9 @@ class StatisticsTest extends TransifexTestCase
      * @testdox getStatistics() returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\Statistics::getStatistics
-     * @covers  \BabDev\Transifex\TransifexObject
+     * @covers  \BabDev\Transifex\ApiConnector
      *
-     * @uses    \BabDev\Transifex\TransifexObject
+     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetStatistics()
     {
@@ -30,9 +30,9 @@ class StatisticsTest extends TransifexTestCase
      * @testdox getStatistics() returns a Response object indicating a failed API connection
      *
      * @covers  \BabDev\Transifex\Statistics::getStatistics
-     * @covers  \BabDev\Transifex\TransifexObject
+     * @covers  \BabDev\Transifex\ApiConnector
      *
-     * @uses    \BabDev\Transifex\TransifexObject
+     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetStatisticsFailure()
     {

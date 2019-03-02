@@ -11,9 +11,9 @@ use Psr\Http\Message\UriFactoryInterface;
 use Psr\Http\Message\UriInterface;
 
 /**
- * Transifex API object class.
+ * Base API connector class.
  */
-abstract class TransifexObject
+abstract class ApiConnector
 {
     /**
      * The HTTP client.
