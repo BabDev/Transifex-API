@@ -2,9 +2,9 @@
 
 namespace BabDev\Transifex\Tests;
 
+use BabDev\Transifex\ApiConnector;
 use BabDev\Transifex\FactoryInterface;
 use BabDev\Transifex\Transifex;
-use BabDev\Transifex\ApiConnector;
 use PHPUnit\Framework\TestCase;
 
 /**
