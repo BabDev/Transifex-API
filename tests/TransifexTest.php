@@ -5,6 +5,7 @@ namespace BabDev\Transifex\Tests;
 use BabDev\Transifex\ApiConnector;
 use BabDev\Transifex\FactoryInterface;
 use BabDev\Transifex\Transifex;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -13,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 class TransifexTest extends TestCase
 {
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|FactoryInterface
+     * @var MockObject|FactoryInterface
      */
     private $apiFactory;
 

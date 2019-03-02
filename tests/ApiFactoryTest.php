@@ -4,6 +4,7 @@ namespace BabDev\Transifex\Tests;
 
 use BabDev\Transifex\ApiFactory;
 use BabDev\Transifex\Formats;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
@@ -16,24 +17,24 @@ use Psr\Http\Message\UriFactoryInterface;
 class ApiFactoryTest extends TestCase
 {
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|ClientInterface
+     * @var MockObject|ClientInterface
      */
     private $client;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|RequestFactoryInterface
+     * @var MockObject|RequestFactoryInterface
      */
     private $requestFactory;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|StreamFactoryInterface
+     * @var MockObject|StreamFactoryInterface
      */
     private $streamFactory;
 
     /**
-     * @var ApiFactory
+     * @var MockObject|UriFactoryInterface
      */
-    private $object;
+    private $uriFactory;
 
     /**
      * @var array
@@ -41,9 +42,9 @@ class ApiFactoryTest extends TestCase
     private $options;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|UriFactoryInterface
+     * @var ApiFactory
      */
-    private $uriFactory;
+    private $object;
 
     /**
      * {@inheritdoc}
