@@ -2,43 +2,17 @@
 
 namespace BabDev\Transifex;
 
-use Psr\Http\Client\ClientInterface;
-use Psr\Http\Message\RequestFactoryInterface;
-use Psr\Http\Message\StreamFactoryInterface;
-use Psr\Http\Message\UriFactoryInterface;
-
 /**
  * Base class for interacting with the Transifex API.
  */
 class Transifex
 {
     /**
-     * The HTTP client.
+     * The API factory.
      *
-     * @var ClientInterface
+     * @var FactoryInterface
      */
-    protected $client;
-
-    /**
-     * The request factory.
-     *
-     * @var RequestFactoryInterface
-     */
-    protected $requestFactory;
-
-    /**
-     * The stream factory.
-     *
-     * @var StreamFactoryInterface
-     */
-    protected $streamFactory;
-
-    /**
-     * The URI factory.
-     *
-     * @var UriFactoryInterface
-     */
-    protected $uriFactory;
+    protected $apiFactory;
 
     /**
      * Options for the Transifex object.
@@ -48,24 +22,13 @@ class Transifex
     protected $options;
 
     /**
-     * @param ClientInterface         $client         The HTTP client
-     * @param RequestFactoryInterface $requestFactory The request factory
-     * @param StreamFactoryInterface  $streamFactory  The stream factory
-     * @param UriFactoryInterface     $uriFactory     The URI factory
-     * @param array                   $options        Transifex options array
+     * @param FactoryInterface $apiFactory The API factory
+     * @param array            $options    Transifex options array
      */
-    public function __construct(
-        ClientInterface $client,
-        RequestFactoryInterface $requestFactory,
-        StreamFactoryInterface $streamFactory,
-        UriFactoryInterface $uriFactory,
-        array $options = []
-    ) {
-        $this->client         = $client;
-        $this->requestFactory = $requestFactory;
-        $this->streamFactory  = $streamFactory;
-        $this->uriFactory     = $uriFactory;
-        $this->options        = $options;
+    public function __construct(FactoryInterface $apiFactory, array $options = [])
+    {
+        $this->apiFactory = $apiFactory;
+        $this->options    = $options;
 
         // Setup the default API url if not already set.
         if (!$this->getOption('base_uri')) {
@@ -80,28 +43,11 @@ class Transifex
      *
      * @return TransifexObject
      *
-     * @throws \InvalidArgumentException
+     * @throws Exception\UnknownApiConnectorException
      */
     public function get(string $name): TransifexObject
     {
-        $namespace = \rtrim($this->getOption('object.namespace', __NAMESPACE__), '\\');
-        $class     = $namespace . '\\' . \ucfirst(\strtolower($name));
-
-        if (\class_exists($class)) {
-            return new $class($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options);
-        }
-
-        // If a custom namespace was specified, let's try to find an object in the local namespace
-        if ($namespace !== __NAMESPACE__) {
-            $class = __NAMESPACE__ . '\\' . \ucfirst(\strtolower($name));
-
-            if (\class_exists($class)) {
-                return new $class($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options);
-            }
-        }
-
-        // No class found, sorry!
-        throw new \InvalidArgumentException("Could not find an API object for '$name'.");
+        return $this->apiFactory->createApiConnector($name, $this->options);
     }
 
     /**
