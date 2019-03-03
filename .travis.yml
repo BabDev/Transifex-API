@@ -12,8 +12,10 @@ matrix:
     - php: 7.2
       env: PHPUNIT_FLAGS="--coverage-clover=coverage.clover" USE_SCRUTINIZER="yes"
     - php: 7.3
+    - php: 7.4snapshot
     - php: nightly
   allow_failures:
+    - php: 7.4snapshot
     - php: nightly
 
 before_install:

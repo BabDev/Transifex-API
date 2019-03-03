@@ -1,48 +1,58 @@
 ## Transifex
 
-The `Transifex` class is the package's primary interface and serves as a factory object of sorts and allows developers to manage the options used by the API objects and HTTP connector as well as retrieve instances of the API objects.
+The `Transifex` class is the package's primary interface and serves as the API factory and allows developers to manage the options used by the API objects and HTTP connector as well as retrieve instances of the API objects.
 
 ### Instantiating Transifex
 
-The `Transifex` object should be instantiated directly. The class has four required arguments and one optional argument.
+The `Transifex` object should be instantiated directly. The class has one required argument and one optional argument.
 
 #### Required Arguments
 
-- Any [PSR-18 HTTP client](https://www.php-fig.org/psr/psr-18/) (`Psr\Http\Client\ClientInterface`)
-- Any [PSR-17 Request factory](https://www.php-fig.org/psr/psr-17/) (`Psr\Http\Message\RequestFactoryInterface`)
-- Any [PSR-17 Stream factory](https://www.php-fig.org/psr/psr-17/) (`Psr\Http\Message\StreamFactoryInterface`)
-- Any [PSR-17 URI factory](https://www.php-fig.org/psr/psr-17/) (`Psr\Http\Message\UriFactoryInterface`)
+- A `BabDev\Transifex\FactoryInterface` implementation
 
 #### Example 1: Basic Instantiation
 
 ```php
+use BabDev\Transifex\ApiFactory;
 use BabDev\Transifex\Transifex;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\UriFactoryInterface;
 
+/*
+ * PSR-17 and PSR-18 dependencies necessary to create the ApiFactory
+ */
+
 $client = // new ClientInterface(); (any PSR-18 HTTP client)
 $requestFactory = // new RequestFactoryInterface(); (any PSR-17 Request factory)
 $streamFactory = // new StreamFactoryInterface(); (any PSR-17 Stream factory)
 $uriFactory = // new UriFactoryInterface(); (any PSR-17 URI factory)
 
-$transifex = new Transifex($client, $requestFactory, $streamFactory, $uriFactory);
+$apiFactory = new ApiFactory($client, $requestFactory, $streamFactory, $uriFactory);
+$transifex = new Transifex($apiFactory);
 ```
 
 #### Example 2: Injection of an Options Array
 
 ```php
+use BabDev\Transifex\ApiFactory;
 use BabDev\Transifex\Transifex;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\UriFactoryInterface;
 
+/*
+ * PSR-17 and PSR-18 dependencies necessary to create the ApiFactory
+ */
+
 $client = // new ClientInterface(); (any PSR-18 HTTP client)
 $requestFactory = // new RequestFactoryInterface(); (any PSR-17 Request factory)
 $streamFactory = // new StreamFactoryInterface(); (any PSR-17 Stream factory)
 $uriFactory = // new UriFactoryInterface(); (any PSR-17 URI factory)
+
+$apiFactory = new ApiFactory($client, $requestFactory, $streamFactory, $uriFactory);
 
 // Build our options array setting our API credentials to authenticate
 $options = [
@@ -50,7 +60,7 @@ $options = [
 	'api.password' => 'MyPassword'
 ];
 
-$transifex = new Transifex($client, $requestFactory, $streamFactory, $uriFactory, $options);
+$transifex = new Transifex($apiFactory, $options);
 ```
 
 ### Supported Options
@@ -60,49 +70,39 @@ Below is a list of options that are supported in the `Transifex` object and API 
 - 'api.username' - The username of the user account you are using to authenticate to the Transifex API
 - 'api.password' - The password of the user account you are using to authenticate to the Transifex API
 - 'base_uri' - The base API URL for connecting to the Transifex API, this typically should remain unchanged
-- 'object.namespace' - A custom base namespace to locate `TransifexObject` implementations in
 
-Please refer to the [Guzzle documentation](http://docs.guzzlephp.org/en/latest/) for information on how to configure the Guzzle HTTP client.
+### Retrieving a ApiConnector instance
 
-### Retrieving a TransifexObject instance
-
-All API connectors extend the base `TransifexObject` class. API objects are named based on their grouping in the Transifex API documentation. To retrieve an object connecting to the "formats" API endpoints, simply execute this code:
+All API connectors extend the base `ApiConnector` class. API objects are named based on their grouping in the Transifex API documentation. To retrieve an object connecting to the "formats" API endpoints, simply execute this code:
 
 ```php
-/** @var \BabDev\Transifex\Formats $formats */
+/** @var \BabDev\Transifex\Connector\Formats $formats */
 $formats = $transifex->get('formats');
 ```
 
 The `get()` method requires one parameter, the object name, and this should be a lower-cased string with no spaces. For API endpoints such as "Language info", you would retrieve this API object by calling `$transifex->get('languageinfo')`. A new object is instantiated with each call to the `get()` method.
 
-The `get()` method supports retrieving objects in custom namespaces and includes fallback support for using the default object namespace. The custom namespace can be set with the `object.namespace` option. This is useful for extending the base object classes to add functionality or features as needed.
-
-The class name within its namespace should match the name supplied to the `get()` method. For example, supposing your custom code is in the `My\Custom\Transifex` namespace and you had extended the [Projects](Projects.md) class, the following code would instantiate the `Transifex` object and enable the `get()` method to find your custom class:
-
 ```php
+use BabDev\Transifex\ApiFactory;
 use BabDev\Transifex\Transifex;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\UriFactoryInterface;
 
+/*
+ * PSR-17 and PSR-18 dependencies necessary to create the ApiFactory
+ */
+
 $client = // new ClientInterface(); (any PSR-18 HTTP client)
 $requestFactory = // new RequestFactoryInterface(); (any PSR-17 Request factory)
 $streamFactory = // new StreamFactoryInterface(); (any PSR-17 Stream factory)
 $uriFactory = // new UriFactoryInterface(); (any PSR-17 URI factory)
 
-// Build our options array
-$options = [
-	'object.namespace' => 'My\Custom\Transifex'
-];
+$apiFactory = new ApiFactory($client, $requestFactory, $streamFactory, $uriFactory);
+$transifex = new Transifex($apiFactory);
 
-$transifex = new Transifex($client, $requestFactory, $streamFactory, $uriFactory, $options);
-
-/** @var \My\Custom\Transifex\Projects $projects */
-$projects = $transifex->get('projects');
-
-// This will return a default formats object since our custom namespace does not include an override for this class
-/** @var \BabDev\Transifex\Formats $formats */
+/** @var \BabDev\Transifex\Connector\Formats $formats */
 $formats = $transifex->get('formats');
 ```
 
@@ -123,16 +123,23 @@ The `setOption()` method sets an option value to the internal object store. It h
 The following example demonstrates use of the option API methods.
 
 ```php
+use BabDev\Transifex\ApiFactory;
 use BabDev\Transifex\Transifex;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\UriFactoryInterface;
 
+/*
+ * PSR-17 and PSR-18 dependencies necessary to create the ApiFactory
+ */
+
 $client = // new ClientInterface(); (any PSR-18 HTTP client)
 $requestFactory = // new RequestFactoryInterface(); (any PSR-17 Request factory)
 $streamFactory = // new StreamFactoryInterface(); (any PSR-17 Stream factory)
 $uriFactory = // new UriFactoryInterface(); (any PSR-17 URI factory)
+
+$apiFactory = new ApiFactory($client, $requestFactory, $streamFactory, $uriFactory);
 
 // Build our options array setting our API credentials to authenticate
 $options = [
@@ -140,13 +147,7 @@ $options = [
 	'api.password' => 'MyPassword'
 ];
 
-$transifex = new Transifex($client, $requestFactory, $streamFactory, $uriFactory, $options);
-
-// The trailing slash should be omitted on this value
-$transifex->setOption('object.namespace', 'My\Custom\Transifex');
-
-// $namespace = 'My\Custom\Transifex'
-$namespace = $transifex->getOption('object.namespace');
+$transifex = new Transifex($apiFactory, $options);
 
 // $bar = null since our option is not set
 $bar = $transifex->getOption('foo');

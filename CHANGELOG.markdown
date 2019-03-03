@@ -5,9 +5,13 @@ CHANGELOG for the Transifex API Package
 
  * Raised minimum PHP version to 7.2
  * Add support for the Organizations API
- * The `Transifex` and `TransifexObject` classes now require a `RequestFactoryInterface` and `UriFactoryInterface` (PSR-17) implementations as constructor arguments
- * The `$client` constructor argument of the `Transifex` and `TransifexObject` classes is now a PSR-18 `ClientInterface` and is required
- * Removed `TransifexObject::getAuthData()`, a request's Authorization header will be added with the new `TransifexObject::createRequest()` method
+ * Renamed `TransifexObject` to `ApiConnector`
+ * Moved all connector classes to the `BabDev\Transifex\Connector` namespace
+ * Made all classes final except the abstract `ApiConnector`
+ * The `Transifex` class now requires a `FactoryInterface` for building API connectors as a constructor argument
+ * The `ApiConnector` class now requires `RequestFactoryInterface` and `UriFactoryInterface` (PSR-17) implementations as constructor arguments
+ * The `$client` constructor argument of the `ApiConnector` class is now a PSR-18 `ClientInterface` and is required
+ * Removed `ApiConnector::getAuthData()`, a request's Authorization header will be added with the new `ApiConnector::createRequest()` method
 
 * 2.1.1 (2018-03-10)
 

@@ -2,39 +2,21 @@
 
 namespace BabDev\Transifex\Tests;
 
-use BabDev\Transifex\Formats;
-use BabDev\Transifex\Tests\Mock\Formats as MockFormats;
+use BabDev\Transifex\ApiConnector;
+use BabDev\Transifex\FactoryInterface;
 use BabDev\Transifex\Transifex;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Client\ClientInterface;
-use Psr\Http\Message\RequestFactoryInterface;
-use Psr\Http\Message\StreamFactoryInterface;
-use Psr\Http\Message\UriFactoryInterface;
 
 /**
  * Test class for \BabDev\Transifex\Transifex.
  */
-class TransifexTest extends TestCase
+final class TransifexTest extends TestCase
 {
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|ClientInterface
+     * @var MockObject|FactoryInterface
      */
-    private $client;
-
-    /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|RequestFactoryInterface
-     */
-    private $requestFactory;
-
-    /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|StreamFactoryInterface
-     */
-    private $streamFactory;
-
-    /**
-     * @var Transifex
-     */
-    private $object;
+    private $apiFactory;
 
     /**
      * @var array
@@ -42,129 +24,41 @@ class TransifexTest extends TestCase
     private $options;
 
     /**
-     * @var \PHPUnit_Framework_MockObject_MockObject|UriFactoryInterface
+     * @var Transifex
      */
-    private $uriFactory;
+    private $object;
 
     /**
      * {@inheritdoc}
      */
-    protected function setUp()
+    protected function setUp(): void
     {
-        $this->client         = $this->createMock(ClientInterface::class);
-        $this->requestFactory = $this->createMock(RequestFactoryInterface::class);
-        $this->streamFactory  = $this->createMock(StreamFactoryInterface::class);
-        $this->uriFactory     = $this->createMock(UriFactoryInterface::class);
-        $this->options        = ['api.username' => 'test', 'api.password' => 'test'];
-        $this->object         = new Transifex($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options);
+        $this->apiFactory = $this->createMock(FactoryInterface::class);
+        $this->options    = ['api.username' => 'test', 'api.password' => 'test'];
+        $this->object     = new Transifex($this->apiFactory, $this->options);
     }
 
     /**
-     * @testdox get() throws an InvalidArgumentException for a non-existing object
-     *
-     * @covers  \BabDev\Transifex\Transifex::__construct
-     * @covers  \BabDev\Transifex\Transifex::get
-     *
-     * @uses    \BabDev\Transifex\Transifex::getOption
-     *
-     * @expectedException \InvalidArgumentException
-     */
-    public function testGetFake()
-    {
-        $this->object->get('fake');
-    }
-
-    /**
-     * @testdox get() with the "formats" parameter returns an instance of the Formats object
-     *
-     * @covers  \BabDev\Transifex\Transifex::__construct
-     * @covers  \BabDev\Transifex\Transifex::get
-     *
-     * @uses    \BabDev\Transifex\Formats
-     * @uses    \BabDev\Transifex\Transifex::__construct
-     * @uses    \BabDev\Transifex\Transifex::getOption
-     * @uses    \BabDev\Transifex\TransifexObject
+     * @testdox get() returns an API connector
      */
     public function testGetFormats()
     {
-        $this->assertInstanceOf(
-            Formats::class,
-            $this->object->get('formats')
-        );
-    }
-
-    /**
-     * @testdox get() with a custom namespace defined and the "formats" parameter returns an instance of the custom Formats object
-     *
-     * @covers  \BabDev\Transifex\Transifex::__construct
-     * @covers  \BabDev\Transifex\Transifex::get
-     *
-     * @uses    \BabDev\Transifex\Formats
-     * @uses    \BabDev\Transifex\Transifex::__construct
-     * @uses    \BabDev\Transifex\Transifex::getOption
-     * @uses    \BabDev\Transifex\TransifexObject
-     */
-    public function testGetFormatsInCustomNamespace()
-    {
-        $this->object->setOption('object.namespace', __NAMESPACE__ . '\Mock');
+        $this->apiFactory->expects($this->once())
+            ->method('createApiConnector')
+            ->willReturn($this->createMock(ApiConnector::class));
 
         $this->assertInstanceOf(
-            MockFormats::class,
+            ApiConnector::class,
             $this->object->get('formats')
         );
-    }
-
-    /**
-     * @testdox get() with a custom namespace defined and the "formats" parameter and a class not found in the custom namespace returns an instance of the default Formats object
-     *
-     * @covers  \BabDev\Transifex\Transifex::__construct
-     * @covers  \BabDev\Transifex\Transifex::get
-     *
-     * @uses    \BabDev\Transifex\Formats
-     * @uses    \BabDev\Transifex\Transifex::__construct
-     * @uses    \BabDev\Transifex\Transifex::getOption
-     * @uses    \BabDev\Transifex\TransifexObject
-     */
-    public function testGetFormatsInCustomNamespaceWhenNotFound()
-    {
-        $this->object->setOption('object.namespace', __NAMESPACE__);
-
-        $this->assertInstanceOf(
-            Formats::class,
-            $this->object->get('formats')
-        );
-    }
-
-    /**
-     * @testdox get() with a custom namespace defined throws an InvalidArgumentException when the class is not found in either the custom or default namespace
-     *
-     * @covers  \BabDev\Transifex\Transifex::__construct
-     * @covers  \BabDev\Transifex\Transifex::get
-     *
-     * @uses    \BabDev\Transifex\Transifex::getOption
-     *
-     * @expectedException \InvalidArgumentException
-     */
-    public function testGetFakeInCustomNamespaceWhenNotFound()
-    {
-        $this->object->setOption('object.namespace', __NAMESPACE__);
-        $this->object->get('fake');
     }
 
     /**
      * @testdox getOption() and setOption() correctly manage the object's options
-     *
-     * @covers  \BabDev\Transifex\Transifex::__construct
-     * @covers  \BabDev\Transifex\Transifex::getOption
-     * @covers  \BabDev\Transifex\Transifex::setOption
-     *
-     * @uses    \BabDev\Transifex\Transifex::__construct
      */
     public function testSetAndGetOption()
     {
         $this->object->setOption('api.url', 'https://example.com/test');
-
-        $this->assertAttributeContains('https://example.com/test', 'options', $this->object);
 
         $this->assertSame(
             $this->object->getOption('api.url'),
