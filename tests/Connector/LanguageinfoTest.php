@@ -19,7 +19,7 @@ class LanguageinfoTest extends ApiConnectorTestCase
 
         (new Languageinfo($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getLanguage('en_GB');
 
-        $this->validateSuccessTest('/api/2/language/en_GB/');
+        $this->assertCorrectRequestAndResponse('/api/2/language/en_GB/');
     }
 
     /**
@@ -31,7 +31,7 @@ class LanguageinfoTest extends ApiConnectorTestCase
 
         (new Languageinfo($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getLanguage('en_GB');
 
-        $this->validateFailureTest('/api/2/language/en_GB/');
+        $this->assertCorrectRequestAndResponse('/api/2/language/en_GB/', 'GET', 500);
     }
 
     /**
@@ -43,7 +43,7 @@ class LanguageinfoTest extends ApiConnectorTestCase
 
         (new Languageinfo($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getLanguages();
 
-        $this->validateSuccessTest('/api/2/languages/');
+        $this->assertCorrectRequestAndResponse('/api/2/languages/');
     }
 
     /**
@@ -55,6 +55,6 @@ class LanguageinfoTest extends ApiConnectorTestCase
 
         (new Languageinfo($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getLanguages();
 
-        $this->validateFailureTest('/api/2/languages/');
+        $this->assertCorrectRequestAndResponse('/api/2/languages/', 'GET', 500);
     }
 }

@@ -47,7 +47,7 @@ class ProjectsTest extends ApiConnectorTestCase
             $options
         );
 
-        $this->validateSuccessTest('/api/2/projects/', 'POST', 201);
+        $this->assertCorrectRequestAndResponse('/api/2/projects/', 'POST', 201);
     }
 
     /**
@@ -65,7 +65,7 @@ class ProjectsTest extends ApiConnectorTestCase
             ['repository_url' => 'https://www.babdev.com']
         );
 
-        $this->validateFailureTest('/api/2/projects/', 'POST');
+        $this->assertCorrectRequestAndResponse('/api/2/projects/', 'POST', 500);
     }
 
     /**
@@ -108,7 +108,7 @@ class ProjectsTest extends ApiConnectorTestCase
 
         (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->deleteProject('babdev-transifex');
 
-        $this->validateSuccessTest('/api/2/project/babdev-transifex', 'DELETE', 204);
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev-transifex', 'DELETE', 204);
     }
 
     /**
@@ -120,7 +120,7 @@ class ProjectsTest extends ApiConnectorTestCase
 
         (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->deleteProject('babdev-transifex');
 
-        $this->validateFailureTest('/api/2/project/babdev-transifex', 'DELETE');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev-transifex', 'DELETE', 500);
     }
 
     /**
@@ -132,7 +132,7 @@ class ProjectsTest extends ApiConnectorTestCase
 
         (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getOrganizationProjects('babdev');
 
-        $this->validateSuccessTest('/organizations/babdev/projects/');
+        $this->assertCorrectRequestAndResponse('/organizations/babdev/projects/');
 
         $this->assertSame(
             'api.transifex.com',
@@ -178,7 +178,7 @@ class ProjectsTest extends ApiConnectorTestCase
 
         (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getOrganizationProjects('babdev');
 
-        $this->validateFailureTest('/organizations/babdev/projects/');
+        $this->assertCorrectRequestAndResponse('/organizations/babdev/projects/', 'GET', 500);
 
         $this->assertSame(
             'api.transifex.com',
@@ -229,7 +229,7 @@ class ProjectsTest extends ApiConnectorTestCase
 
         (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getProject('babdev-transifex', true);
 
-        $this->validateSuccessTest('/api/2/project/babdev-transifex/');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev-transifex/');
 
         $this->assertSame(
             'details',
@@ -247,7 +247,7 @@ class ProjectsTest extends ApiConnectorTestCase
 
         (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getProject('babdev-transifex', true);
 
-        $this->validateFailureTest('/api/2/project/babdev-transifex/');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev-transifex/', 'GET', 500);
     }
 
     /**
@@ -259,7 +259,7 @@ class ProjectsTest extends ApiConnectorTestCase
 
         (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getProjects();
 
-        $this->validateSuccessTest('/api/2/projects/');
+        $this->assertCorrectRequestAndResponse('/api/2/projects/');
     }
 
     /**
@@ -271,7 +271,7 @@ class ProjectsTest extends ApiConnectorTestCase
 
         (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getProjects();
 
-        $this->validateFailureTest('/api/2/projects/');
+        $this->assertCorrectRequestAndResponse('/api/2/projects/', 'GET', 500);
     }
 
     /**
@@ -301,7 +301,7 @@ class ProjectsTest extends ApiConnectorTestCase
 
         (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateProject('babdev-transifex', $options);
 
-        $this->validateSuccessTest('/api/2/project/babdev-transifex/', 'PUT');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev-transifex/', 'PUT');
     }
 
     /**
@@ -316,7 +316,7 @@ class ProjectsTest extends ApiConnectorTestCase
             ['long_description' => 'My test project']
         );
 
-        $this->validateFailureTest('/api/2/project/babdev-transifex/', 'PUT');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev-transifex/', 'PUT', 500);
     }
 
     /**

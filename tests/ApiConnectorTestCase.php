@@ -20,7 +20,11 @@ abstract class ApiConnectorTestCase extends TestCase
     /**
      * @var array
      */
-    protected $options = ['api.username' => 'test', 'api.password' => 'pass', 'base_uri' => 'https://www.transifex.com'];
+    protected $options = [
+        'api.username' => 'test',
+        'api.password' => 'pass',
+        'base_uri'     => 'https://www.transifex.com',
+    ];
 
     /**
      * @var TransifexTestClient
@@ -69,6 +73,65 @@ abstract class ApiConnectorTestCase extends TestCase
     }
 
     /**
+     * Asserts the request and response are in the intended state.
+     *
+     * @param string $path   The expected URI path
+     * @param string $method The expected HTTP method
+     * @param int    $code   The expected HTTP code
+     */
+    public function assertCorrectRequestAndResponse(string $path, string $method = 'GET', int $code = 200): void
+    {
+        static::assertCorrectRequestMethod($method, $this->client->getRequest()->getMethod());
+        static::assertCorrectRequestPath($path, $this->client->getRequest()->getUri()->getPath());
+        static::assertCorrectResponseCode($code, $this->client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * Asserts that a request used the intended method
+     *
+     * @param string $expected The expected request method
+     * @param string $actual   The actual request method
+     * @param string $message  Error message for the test
+     */
+    public static function assertCorrectRequestMethod(
+        string $expected,
+        string $actual,
+        string $message = 'The API did not use the right HTTP method.'
+    ): void {
+        static::assertSame($expected, $actual, $message);
+    }
+
+    /**
+     * Asserts that a request connected to the correct path
+     *
+     * @param string $expected The expected request path
+     * @param string $actual   The actual request path
+     * @param string $message  Error message for the test
+     */
+    public static function assertCorrectRequestPath(
+        string $expected,
+        string $actual,
+        string $message = 'The API did not request the right endpoint.'
+    ): void {
+        static::assertSame($expected, $actual, $message);
+    }
+
+    /**
+     * Asserts that a response has the correct HTTP status code
+     *
+     * @param int    $expected The expected response code
+     * @param int    $actual   The actual response code
+     * @param string $message  Error message for the test
+     */
+    public static function assertCorrectResponseCode(
+        int $expected,
+        int $actual,
+        string $message = 'The API did not return the right HTTP code.'
+    ): void {
+        static::assertSame($expected, $actual, $message);
+    }
+
+    /**
      * Prepares the mock response for a failed API connection.
      */
     protected function prepareFailureTest(): void
@@ -84,53 +147,5 @@ abstract class ApiConnectorTestCase extends TestCase
     protected function prepareSuccessTest(int $code = 200): void
     {
         $this->client->setResponse(new Response($code, [], $this->sampleString));
-    }
-
-    /**
-     * Validate the request for a failure test is valid.
-     *
-     * @param string $path   The expected URI path
-     * @param string $method The expected HTTP method
-     * @param int    $code   The expected HTTP code
-     */
-    protected function validateFailureTest(string $path, string $method = 'GET', int $code = 500): void
-    {
-        $this->assertSame(
-            $method,
-            $this->client->getRequest()->getMethod(),
-            'The API did not use the right HTTP method.'
-        );
-
-        $this->assertSame(
-            $path,
-            $this->client->getRequest()->getUri()->getPath(),
-            'The API did not request the right endpoint.'
-        );
-
-        $this->assertSame($code, $this->client->getResponse()->getStatusCode(), 'The API did not return the right HTTP code.');
-    }
-
-    /**
-     * Validate the request for a success test is valid.
-     *
-     * @param string $path   The expected URI path
-     * @param string $method The expected HTTP method
-     * @param int    $code   The expected HTTP code
-     */
-    protected function validateSuccessTest(string $path, string $method = 'GET', int $code = 200): void
-    {
-        $this->assertSame(
-            $method,
-            $this->client->getRequest()->getMethod(),
-            'The API did not use the right HTTP method.'
-        );
-
-        $this->assertSame(
-            $path,
-            $this->client->getRequest()->getUri()->getPath(),
-            'The API did not request the right endpoint.'
-        );
-
-        $this->assertSame($code, $this->client->getResponse()->getStatusCode(), 'The API did not return the right HTTP code.');
     }
 }

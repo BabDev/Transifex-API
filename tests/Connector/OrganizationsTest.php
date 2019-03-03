@@ -19,7 +19,7 @@ class OrganizationsTest extends ApiConnectorTestCase
 
         (new Organizations($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getOrganizations();
 
-        $this->validateSuccessTest('/organizations/');
+        $this->assertCorrectRequestAndResponse('/organizations/');
 
         $this->assertSame(
             'api.transifex.com',
@@ -37,7 +37,7 @@ class OrganizationsTest extends ApiConnectorTestCase
 
         (new Organizations($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getOrganizations();
 
-        $this->validateFailureTest('/organizations/');
+        $this->assertCorrectRequestAndResponse('/organizations/', 'GET', 500);
 
         $this->assertSame(
             'api.transifex.com',

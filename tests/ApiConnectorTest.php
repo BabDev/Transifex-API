@@ -31,7 +31,7 @@ class ApiConnectorTest extends ApiConnectorTestCase
 
         (new Formats($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getFormats();
 
-        $this->validateSuccessTest('/api/2/formats');
+        $this->assertCorrectRequestAndResponse('/api/2/formats');
 
         $this->assertSame(
             'api.transifex.com',

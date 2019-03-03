@@ -32,7 +32,7 @@ class LanguagesTest extends ApiConnectorTestCase
             true
         );
 
-        $this->validateSuccessTest('/api/2/project/babdev-transifex/languages/', 'POST', 201);
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev-transifex/languages/', 'POST', 201);
 
         $this->assertSame(
             'skip_invalid_username',
@@ -50,7 +50,7 @@ class LanguagesTest extends ApiConnectorTestCase
 
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->createLanguage('babdev-transifex', 'en_US', ['mbabker']);
 
-        $this->validateFailureTest('/api/2/project/babdev-transifex/languages/', 'POST');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev-transifex/languages/', 'POST', 500);
     }
 
     /**
@@ -72,7 +72,7 @@ class LanguagesTest extends ApiConnectorTestCase
 
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->deleteLanguage('babdev-transifex', 'en_US');
 
-        $this->validateSuccessTest('/api/2/project/babdev-transifex/language/en_US/', 'DELETE', 204);
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev-transifex/language/en_US/', 'DELETE', 204);
     }
 
     /**
@@ -84,7 +84,7 @@ class LanguagesTest extends ApiConnectorTestCase
 
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->deleteLanguage('babdev-transifex', 'en_US');
 
-        $this->validateFailureTest('/api/2/project/babdev-transifex/language/en_US/', 'DELETE');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev-transifex/language/en_US/', 'DELETE', 500);
     }
 
     /**
@@ -96,7 +96,7 @@ class LanguagesTest extends ApiConnectorTestCase
 
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getCoordinators('babdev-transifex', 'en_US');
 
-        $this->validateSuccessTest('/api/2/project/babdev-transifex/language/en_US/coordinators/');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev-transifex/language/en_US/coordinators/');
     }
 
     /**
@@ -108,7 +108,7 @@ class LanguagesTest extends ApiConnectorTestCase
 
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getCoordinators('babdev-transifex', 'en_US');
 
-        $this->validateFailureTest('/api/2/project/babdev-transifex/language/en_US/coordinators/');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev-transifex/language/en_US/coordinators/', 'GET', 500);
     }
 
     /**
@@ -120,7 +120,7 @@ class LanguagesTest extends ApiConnectorTestCase
 
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getLanguage('babdev-transifex', 'en_US');
 
-        $this->validateSuccessTest('/api/2/project/babdev-transifex/language/en_US/');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev-transifex/language/en_US/');
     }
 
     /**
@@ -132,7 +132,7 @@ class LanguagesTest extends ApiConnectorTestCase
 
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getLanguage('babdev-transifex', 'en_US', true);
 
-        $this->validateSuccessTest('/api/2/project/babdev-transifex/language/en_US/');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev-transifex/language/en_US/');
 
         $this->assertSame(
             'details',
@@ -150,7 +150,7 @@ class LanguagesTest extends ApiConnectorTestCase
 
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getLanguage('babdev-transifex', 'en_US');
 
-        $this->validateFailureTest('/api/2/project/babdev-transifex/language/en_US/');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev-transifex/language/en_US/', 'GET', 500);
     }
 
     /**
@@ -162,7 +162,7 @@ class LanguagesTest extends ApiConnectorTestCase
 
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getLanguages('babdev-transifex');
 
-        $this->validateSuccessTest('/api/2/project/babdev-transifex/languages/');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev-transifex/languages/');
     }
 
     /**
@@ -174,7 +174,7 @@ class LanguagesTest extends ApiConnectorTestCase
 
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getLanguages('babdev-transifex');
 
-        $this->validateFailureTest('/api/2/project/babdev-transifex/languages/');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev-transifex/languages/', 'GET', 500);
     }
 
     /**
@@ -186,7 +186,7 @@ class LanguagesTest extends ApiConnectorTestCase
 
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getReviewers('babdev-transifex', 'en_US');
 
-        $this->validateSuccessTest('/api/2/project/babdev-transifex/language/en_US/reviewers/');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev-transifex/language/en_US/reviewers/');
     }
 
     /**
@@ -198,7 +198,7 @@ class LanguagesTest extends ApiConnectorTestCase
 
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getReviewers('babdev-transifex', 'en_US');
 
-        $this->validateFailureTest('/api/2/project/babdev-transifex/language/en_US/reviewers/');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev-transifex/language/en_US/reviewers/', 'GET', 500);
     }
 
     /**
@@ -210,7 +210,7 @@ class LanguagesTest extends ApiConnectorTestCase
 
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getTranslators('babdev-transifex', 'en_US');
 
-        $this->validateSuccessTest('/api/2/project/babdev-transifex/language/en_US/translators/');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev-transifex/language/en_US/translators/');
     }
 
     /**
@@ -222,7 +222,7 @@ class LanguagesTest extends ApiConnectorTestCase
 
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getTranslators('babdev-transifex', 'en_US');
 
-        $this->validateFailureTest('/api/2/project/babdev-transifex/language/en_US/translators/');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev-transifex/language/en_US/translators/', 'GET', 500);
     }
 
     /**
@@ -234,7 +234,7 @@ class LanguagesTest extends ApiConnectorTestCase
 
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateCoordinators('babdev-transifex', 'en_US', ['mbabker'], true);
 
-        $this->validateSuccessTest('/api/2/project/babdev-transifex/language/en_US/coordinators/', 'PUT');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev-transifex/language/en_US/coordinators/', 'PUT');
 
         $this->assertSame(
             'skip_invalid_username',
@@ -252,7 +252,7 @@ class LanguagesTest extends ApiConnectorTestCase
 
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateCoordinators('babdev-transifex', 'en_US', ['mbabker']);
 
-        $this->validateFailureTest('/api/2/project/babdev-transifex/language/en_US/coordinators/', 'PUT');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev-transifex/language/en_US/coordinators/', 'PUT', 500);
     }
 
     /**
@@ -281,7 +281,7 @@ class LanguagesTest extends ApiConnectorTestCase
 
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateLanguage('babdev-transifex', 'en_US', ['mbabker'], $options);
 
-        $this->validateSuccessTest('/api/2/project/babdev-transifex/language/en_US/', 'PUT');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev-transifex/language/en_US/', 'PUT');
     }
 
     /**
@@ -293,7 +293,7 @@ class LanguagesTest extends ApiConnectorTestCase
 
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateLanguage('babdev-transifex', 'en_US', ['mbabker']);
 
-        $this->validateFailureTest('/api/2/project/babdev-transifex/language/en_US/', 'PUT');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev-transifex/language/en_US/', 'PUT', 500);
     }
 
     /**
@@ -315,7 +315,7 @@ class LanguagesTest extends ApiConnectorTestCase
 
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateReviewers('babdev-transifex', 'en_US', ['mbabker'], true);
 
-        $this->validateSuccessTest('/api/2/project/babdev-transifex/language/en_US/reviewers/', 'PUT');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev-transifex/language/en_US/reviewers/', 'PUT');
 
         $this->assertSame(
             'skip_invalid_username',
@@ -333,7 +333,7 @@ class LanguagesTest extends ApiConnectorTestCase
 
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateReviewers('babdev-transifex', 'en_US', ['mbabker']);
 
-        $this->validateFailureTest('/api/2/project/babdev-transifex/language/en_US/reviewers/', 'PUT');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev-transifex/language/en_US/reviewers/', 'PUT', 500);
     }
 
     /**
@@ -355,7 +355,7 @@ class LanguagesTest extends ApiConnectorTestCase
 
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateTranslators('babdev-transifex', 'en_US', ['mbabker'], true);
 
-        $this->validateSuccessTest('/api/2/project/babdev-transifex/language/en_US/translators/', 'PUT');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev-transifex/language/en_US/translators/', 'PUT');
 
         $this->assertSame(
             'skip_invalid_username',
@@ -373,7 +373,7 @@ class LanguagesTest extends ApiConnectorTestCase
 
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateTranslators('babdev-transifex', 'en_US', ['mbabker']);
 
-        $this->validateFailureTest('/api/2/project/babdev-transifex/language/en_US/translators/', 'PUT');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev-transifex/language/en_US/translators/', 'PUT', 500);
     }
 
     /**

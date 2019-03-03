@@ -19,7 +19,7 @@ class StatisticsTest extends ApiConnectorTestCase
 
         (new Statistics($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getStatistics('babdev', 'babdev-transifex');
 
-        $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/stats/');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev/resource/babdev-transifex/stats/');
     }
 
     /**
@@ -31,6 +31,6 @@ class StatisticsTest extends ApiConnectorTestCase
 
         (new Statistics($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getStatistics('babdev', 'babdev-transifex');
 
-        $this->validateFailureTest('/api/2/project/babdev/resource/babdev-transifex/stats/');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev/resource/babdev-transifex/stats/', 'GET', 500);
     }
 }

@@ -33,7 +33,7 @@ class ResourcesTest extends ApiConnectorTestCase
             $options
         );
 
-        $this->validateSuccessTest('/api/2/project/babdev-transifex/resources/', 'POST', 201);
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev-transifex/resources/', 'POST', 201);
     }
 
     /**
@@ -59,7 +59,7 @@ class ResourcesTest extends ApiConnectorTestCase
             $options
         );
 
-        $this->validateSuccessTest('/api/2/project/babdev-transifex/resources/', 'POST', 201);
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev-transifex/resources/', 'POST', 201);
     }
 
     /**
@@ -101,7 +101,7 @@ class ResourcesTest extends ApiConnectorTestCase
             ['content' => 'Test="Test"']
         );
 
-        $this->validateFailureTest('/api/2/project/babdev-transifex/resources/', 'POST');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev-transifex/resources/', 'POST', 500);
     }
 
     /**
@@ -113,7 +113,7 @@ class ResourcesTest extends ApiConnectorTestCase
 
         (new Resources($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->deleteResource('babdev', 'babdev-transifex');
 
-        $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex', 'DELETE', 204);
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev/resource/babdev-transifex', 'DELETE', 204);
     }
 
     /**
@@ -125,7 +125,7 @@ class ResourcesTest extends ApiConnectorTestCase
 
         (new Resources($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->deleteResource('babdev', 'babdev-transifex');
 
-        $this->validateFailureTest('/api/2/project/babdev/resource/babdev-transifex', 'DELETE');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev/resource/babdev-transifex', 'DELETE', 500);
     }
 
     /**
@@ -137,7 +137,7 @@ class ResourcesTest extends ApiConnectorTestCase
 
         (new Resources($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getResource('babdev', 'babdev-transifex', true);
 
-        $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev/resource/babdev-transifex/');
 
         $this->assertSame(
             'details',
@@ -155,7 +155,7 @@ class ResourcesTest extends ApiConnectorTestCase
 
         (new Resources($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getResource('babdev', 'babdev-transifex', true);
 
-        $this->validateFailureTest('/api/2/project/babdev/resource/babdev-transifex/');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev/resource/babdev-transifex/', 'GET', 500);
     }
 
     /**
@@ -167,7 +167,7 @@ class ResourcesTest extends ApiConnectorTestCase
 
         (new Resources($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getResourceContent('babdev', 'babdev-transifex');
 
-        $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/content/');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev/resource/babdev-transifex/content/');
     }
 
     /**
@@ -179,7 +179,7 @@ class ResourcesTest extends ApiConnectorTestCase
 
         (new Resources($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getResourceContent('babdev', 'babdev-transifex');
 
-        $this->validateFailureTest('/api/2/project/babdev/resource/babdev-transifex/content/');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev/resource/babdev-transifex/content/', 'GET', 500);
     }
 
     /**
@@ -191,7 +191,7 @@ class ResourcesTest extends ApiConnectorTestCase
 
         (new Resources($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getResources('babdev');
 
-        $this->validateSuccessTest('/api/2/project/babdev/resources');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev/resources');
     }
 
     /**
@@ -203,7 +203,7 @@ class ResourcesTest extends ApiConnectorTestCase
 
         (new Resources($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getResources('babdev');
 
-        $this->validateFailureTest('/api/2/project/babdev/resources');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev/resources', 'GET', 500);
     }
 
     /**
@@ -220,7 +220,7 @@ class ResourcesTest extends ApiConnectorTestCase
             'file'
         );
 
-        $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/content/', 'PUT');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev/resource/babdev-transifex/content/', 'PUT');
     }
 
     /**
@@ -236,7 +236,7 @@ class ResourcesTest extends ApiConnectorTestCase
             'TEST="Test"'
         );
 
-        $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/content/', 'PUT');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev/resource/babdev-transifex/content/', 'PUT');
     }
 
     /**
@@ -248,7 +248,7 @@ class ResourcesTest extends ApiConnectorTestCase
 
         (new Resources($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateResourceContent('babdev', 'babdev-transifex', 'TEST="Test"');
 
-        $this->validateFailureTest('/api/2/project/babdev/resource/babdev-transifex/content/', 'PUT');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev/resource/babdev-transifex/content/', 'PUT', 500);
     }
 
     /**

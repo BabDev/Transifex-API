@@ -19,7 +19,7 @@ class TranslationsTest extends ApiConnectorTestCase
 
         (new Translations($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getTranslation('babdev', 'babdev-transifex', 'en_US', 'default');
 
-        $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev/resource/babdev-transifex/translation/en_US');
 
         $this->assertSame(
             'mode=default&file',
@@ -37,7 +37,7 @@ class TranslationsTest extends ApiConnectorTestCase
 
         (new Translations($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getTranslation('babdev', 'babdev-transifex', 'en_US', 'default');
 
-        $this->validateFailureTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev/resource/babdev-transifex/translation/en_US', 'GET', 500);
     }
 
     /**
@@ -55,7 +55,7 @@ class TranslationsTest extends ApiConnectorTestCase
             'file'
         );
 
-        $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US', 'PUT');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev/resource/babdev-transifex/translation/en_US', 'PUT');
     }
 
     /**
@@ -72,7 +72,7 @@ class TranslationsTest extends ApiConnectorTestCase
             'TEST="Test"'
         );
 
-        $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US', 'PUT');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev/resource/babdev-transifex/translation/en_US', 'PUT');
     }
 
     /**
@@ -89,7 +89,7 @@ class TranslationsTest extends ApiConnectorTestCase
             'TEST="Test"'
         );
 
-        $this->validateFailureTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US', 'PUT');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev/resource/babdev-transifex/translation/en_US', 'PUT', 500);
     }
 
     /**

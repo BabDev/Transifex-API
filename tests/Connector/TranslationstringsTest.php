@@ -19,7 +19,7 @@ class TranslationstringsTest extends ApiConnectorTestCase
 
         (new Translationstrings($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getPseudolocalizationStrings('babdev', 'babdev-transifex');
 
-        $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/pseudo/');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev/resource/babdev-transifex/pseudo/');
 
         $this->assertSame(
             'pseudo_type=MIXED',
@@ -37,7 +37,7 @@ class TranslationstringsTest extends ApiConnectorTestCase
 
         (new Translationstrings($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getPseudolocalizationStrings('babdev', 'babdev-transifex');
 
-        $this->validateFailureTest('/api/2/project/babdev/resource/babdev-transifex/pseudo/');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev/resource/babdev-transifex/pseudo/', 'GET', 500);
     }
 
     /**
@@ -49,7 +49,7 @@ class TranslationstringsTest extends ApiConnectorTestCase
 
         (new Translationstrings($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getStrings('babdev', 'babdev-transifex', 'en_US');
 
-        $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US/strings/');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev/resource/babdev-transifex/translation/en_US/strings/');
     }
 
     /**
@@ -61,7 +61,7 @@ class TranslationstringsTest extends ApiConnectorTestCase
 
         (new Translationstrings($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getStrings('babdev', 'babdev-transifex', 'en_US', true);
 
-        $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US/strings/');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev/resource/babdev-transifex/translation/en_US/strings/');
 
         $this->assertSame(
             'details',
@@ -85,7 +85,7 @@ class TranslationstringsTest extends ApiConnectorTestCase
             ['key' => 'Yes']
         );
 
-        $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US/strings/');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev/resource/babdev-transifex/translation/en_US/strings/');
 
         $this->assertSame(
             'details&key=Yes',
@@ -109,7 +109,7 @@ class TranslationstringsTest extends ApiConnectorTestCase
             ['key' => 'Yes', 'context' => 'Something']
         );
 
-        $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US/strings/');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev/resource/babdev-transifex/translation/en_US/strings/');
 
         $this->assertSame(
             'details&key=Yes&context=Something',
@@ -133,7 +133,7 @@ class TranslationstringsTest extends ApiConnectorTestCase
             ['key' => 'Yes', 'context' => 'Something']
         );
 
-        $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US/strings/');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev/resource/babdev-transifex/translation/en_US/strings/');
 
         $this->assertSame(
             'key=Yes&context=Something',
@@ -157,7 +157,7 @@ class TranslationstringsTest extends ApiConnectorTestCase
             ['context' => 'Something']
         );
 
-        $this->validateSuccessTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US/strings/');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev/resource/babdev-transifex/translation/en_US/strings/');
 
         $this->assertSame(
             'context=Something',
@@ -175,6 +175,6 @@ class TranslationstringsTest extends ApiConnectorTestCase
 
         (new Translationstrings($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->getStrings('babdev', 'babdev-transifex', 'en_US');
 
-        $this->validateFailureTest('/api/2/project/babdev/resource/babdev-transifex/translation/en_US/strings/');
+        $this->assertCorrectRequestAndResponse('/api/2/project/babdev/resource/babdev-transifex/translation/en_US/strings/', 'GET', 500);
     }
 }
