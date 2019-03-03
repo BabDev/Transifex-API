@@ -12,11 +12,6 @@ class LanguagesTest extends TransifexTestCase
 {
     /**
      * @testdox createLanguage() returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Languages::createLanguage
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testCreateLanguage(): void
     {
@@ -48,11 +43,6 @@ class LanguagesTest extends TransifexTestCase
 
     /**
      * @testdox createLanguage() returns a Response object indicating a failed API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Languages::createLanguage
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testCreateLanguageFailure(): void
     {
@@ -65,26 +55,16 @@ class LanguagesTest extends TransifexTestCase
 
     /**
      * @testdox createLanguage() throws an InvalidArgumentException when no contributors are given
-     *
-     * @covers  \BabDev\Transifex\Connector\Languages::createLanguage
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
-     *
-     * @expectedException \InvalidArgumentException
      */
     public function testCreateLanguageNoUsers(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->createLanguage('babdev-transifex', 'en_US', []);
     }
 
     /**
      * @testdox deleteLanguage() returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Languages::deleteLanguage
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testDeleteLanguage(): void
     {
@@ -97,11 +77,6 @@ class LanguagesTest extends TransifexTestCase
 
     /**
      * @testdox deleteLanguage() returns a Response object indicating a failed API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Languages::deleteLanguage
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testDeleteLanguageFailure(): void
     {
@@ -114,11 +89,6 @@ class LanguagesTest extends TransifexTestCase
 
     /**
      * @testdox getCoordinators() returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Languages::getCoordinators
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetCoordinators(): void
     {
@@ -131,11 +101,6 @@ class LanguagesTest extends TransifexTestCase
 
     /**
      * @testdox getCoordinators() returns a Response object indicating a failed API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Languages::getCoordinators
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetCoordinatorsFailure(): void
     {
@@ -148,11 +113,6 @@ class LanguagesTest extends TransifexTestCase
 
     /**
      * @testdox getLanguage() returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Languages::getLanguage
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetLanguage(): void
     {
@@ -165,11 +125,6 @@ class LanguagesTest extends TransifexTestCase
 
     /**
      * @testdox getLanguage() returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Languages::getLanguage
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetLanguageWithDetails(): void
     {
@@ -188,11 +143,6 @@ class LanguagesTest extends TransifexTestCase
 
     /**
      * @testdox getLanguage() returns a Response object indicating a failed API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Languages::getLanguage
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetLanguageFailure(): void
     {
@@ -205,11 +155,6 @@ class LanguagesTest extends TransifexTestCase
 
     /**
      * @testdox getLanguages() returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Languages::getLanguages
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetLanguages(): void
     {
@@ -222,11 +167,6 @@ class LanguagesTest extends TransifexTestCase
 
     /**
      * @testdox getLanguages() returns a Response object indicating a failed API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Languages::getLanguages
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetLanguagesFailure(): void
     {
@@ -239,11 +179,6 @@ class LanguagesTest extends TransifexTestCase
 
     /**
      * @testdox getReviewers() returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Languages::getReviewers
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetReviewers(): void
     {
@@ -256,11 +191,6 @@ class LanguagesTest extends TransifexTestCase
 
     /**
      * @testdox getReviewers() returns a Response object indicating a failed API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Languages::getReviewers
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetReviewersFailure(): void
     {
@@ -273,11 +203,6 @@ class LanguagesTest extends TransifexTestCase
 
     /**
      * @testdox getTranslators() returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Languages::getTranslators
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetTranslators(): void
     {
@@ -290,11 +215,6 @@ class LanguagesTest extends TransifexTestCase
 
     /**
      * @testdox getTranslators() returns a Response object indicating a failed API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Languages::getTranslators
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetTranslatorsFailure(): void
     {
@@ -307,12 +227,6 @@ class LanguagesTest extends TransifexTestCase
 
     /**
      * @testdox updateCoordinators() returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Languages::updateCoordinators
-     * @covers  \BabDev\Transifex\Connector\Languages::updateTeam
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testUpdateCoordinators(): void
     {
@@ -331,12 +245,6 @@ class LanguagesTest extends TransifexTestCase
 
     /**
      * @testdox updateCoordinators() returns a Response object indicating a failed API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Languages::updateCoordinators
-     * @covers  \BabDev\Transifex\Connector\Languages::updateTeam
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testUpdateCoordinatorsFailure(): void
     {
@@ -349,27 +257,16 @@ class LanguagesTest extends TransifexTestCase
 
     /**
      * @testdox updateCoordinators() throws an InvalidArgumentException when no contributors are given
-     *
-     * @covers  \BabDev\Transifex\Connector\Languages::updateCoordinators
-     * @covers  \BabDev\Transifex\Connector\Languages::updateTeam
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
-     *
-     * @expectedException \InvalidArgumentException
      */
     public function testUpdateCoordinatorsNoUsers(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateCoordinators('babdev-transifex', 'en_US', []);
     }
 
     /**
      * @testdox updateLanguage() returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Languages::updateLanguage
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testUpdateLanguage(): void
     {
@@ -389,11 +286,6 @@ class LanguagesTest extends TransifexTestCase
 
     /**
      * @testdox updateLanguage() returns a Response object indicating a failed API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Languages::updateLanguage
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testUpdateLanguageFailure(): void
     {
@@ -406,27 +298,16 @@ class LanguagesTest extends TransifexTestCase
 
     /**
      * @testdox updateLanguage() throws an InvalidArgumentException when no contributors are given
-     *
-     * @covers  \BabDev\Transifex\Connector\Languages::updateLanguage
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
-     *
-     * @expectedException \InvalidArgumentException
      */
     public function testUpdateLanguageNoUsers(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateLanguage('babdev-transifex', 'en_US', []);
     }
 
     /**
      * @testdox updateReviewers() returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Languages::updateReviewers
-     * @covers  \BabDev\Transifex\Connector\Languages::updateTeam
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testUpdateReviewers(): void
     {
@@ -445,12 +326,6 @@ class LanguagesTest extends TransifexTestCase
 
     /**
      * @testdox updateReviewers() returns a Response object indicating a failed API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Languages::updateReviewers
-     * @covers  \BabDev\Transifex\Connector\Languages::updateTeam
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testUpdateReviewersFailure(): void
     {
@@ -463,28 +338,16 @@ class LanguagesTest extends TransifexTestCase
 
     /**
      * @testdox updateReviewers() throws an InvalidArgumentException when no contributors are given
-     *
-     * @covers  \BabDev\Transifex\Connector\Languages::updateReviewers
-     * @covers  \BabDev\Transifex\Connector\Languages::updateTeam
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
-     *
-     * @expectedException \InvalidArgumentException
      */
     public function testUpdateReviewersNoUsers(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateReviewers('babdev-transifex', 'en_US', []);
     }
 
     /**
      * @testdox updateTranslators() returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Languages::updateTranslators
-     * @covers  \BabDev\Transifex\Connector\Languages::updateTeam
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testUpdateTranslators(): void
     {
@@ -503,12 +366,6 @@ class LanguagesTest extends TransifexTestCase
 
     /**
      * @testdox updateTranslators() returns a Response object indicating a failed API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Languages::updateTranslators
-     * @covers  \BabDev\Transifex\Connector\Languages::updateTeam
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testUpdateTranslatorsFailure(): void
     {
@@ -521,17 +378,11 @@ class LanguagesTest extends TransifexTestCase
 
     /**
      * @testdox updateTranslators() throws an InvalidArgumentException when no contributors are given
-     *
-     * @covers  \BabDev\Transifex\Connector\Languages::updateTranslators
-     * @covers  \BabDev\Transifex\Connector\Languages::updateTeam
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
-     *
-     * @expectedException \InvalidArgumentException
      */
     public function testUpdateTranslatorsNoUsers(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateTranslators('babdev-transifex', 'en_US', []);
     }
 }

@@ -16,13 +16,6 @@ class ProjectsTest extends TransifexTestCase
 {
     /**
      * @testdox createProject() returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Projects::buildProjectRequest
-     * @covers  \BabDev\Transifex\Connector\Projects::checkLicense
-     * @covers  \BabDev\Transifex\Connector\Projects::createProject
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testCreateProject(): void
     {
@@ -59,13 +52,6 @@ class ProjectsTest extends TransifexTestCase
 
     /**
      * @testdox createProject() returns a Response object indicating a failed API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Projects::buildProjectRequest
-     * @covers  \BabDev\Transifex\Connector\Projects::checkLicense
-     * @covers  \BabDev\Transifex\Connector\Projects::createProject
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testCreateProjectFailureForABadRequest(): void
     {
@@ -84,17 +70,11 @@ class ProjectsTest extends TransifexTestCase
 
     /**
      * @testdox createProject() throws an InvalidArgumentException when an invalid license is specified
-     *
-     * @covers  \BabDev\Transifex\Connector\Projects::buildProjectRequest
-     * @covers  \BabDev\Transifex\Connector\Projects::checkLicense
-     * @covers  \BabDev\Transifex\Connector\Projects::createProject
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
-     *
-     * @expectedException \InvalidArgumentException
      */
     public function testCreateProjectsBadLicense(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->createProject(
             'BabDev Transifex',
             'babdev-transifex',
@@ -106,17 +86,11 @@ class ProjectsTest extends TransifexTestCase
 
     /**
      * @testdox createProject() throws an InvalidArgumentException when required fields are missing
-     *
-     * @covers  \BabDev\Transifex\Connector\Projects::buildProjectRequest
-     * @covers  \BabDev\Transifex\Connector\Projects::checkLicense
-     * @covers  \BabDev\Transifex\Connector\Projects::createProject
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
-     *
-     * @expectedException \InvalidArgumentException
      */
     public function testCreateProjectFailureForMissingFields(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->createProject(
             'BabDev Transifex',
             'babdev-transifex',
@@ -127,11 +101,6 @@ class ProjectsTest extends TransifexTestCase
 
     /**
      * @testdox deleteProject() returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Projects::deleteProject
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testDeleteProject(): void
     {
@@ -144,11 +113,6 @@ class ProjectsTest extends TransifexTestCase
 
     /**
      * @testdox deleteProject() returns a Response object indicating a failed API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Projects::deleteProject
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testDeleteProjectFailure(): void
     {
@@ -161,11 +125,6 @@ class ProjectsTest extends TransifexTestCase
 
     /**
      * @testdox getOrganizationProjects() returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Projects::getOrganizationProjects
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetOrganizationProjects(): void
     {
@@ -184,12 +143,6 @@ class ProjectsTest extends TransifexTestCase
 
     /**
      * @testdox Calling any method after getOrganizationProjects() calls the correct API endpoint
-     *
-     * @covers  \BabDev\Transifex\Connector\Projects::getOrganizationProjects
-     * @covers  \BabDev\Transifex\Connector\Projects::getProjects
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetOrganizationProjectsThenGetProjects(): void
     {
@@ -218,11 +171,6 @@ class ProjectsTest extends TransifexTestCase
 
     /**
      * @testdox getOrganizationProjects() returns a Response object indicating a failed API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Projects::getOrganizationProjects
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetOrganizationProjectsFailure(): void
     {
@@ -241,11 +189,6 @@ class ProjectsTest extends TransifexTestCase
 
     /**
      * @testdox The API URI is reset when an Exception is thrown by getOrganizationProjects()
-     *
-     * @covers  \BabDev\Transifex\Connector\Projects::getOrganizationProjects
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetOrganizationProjectsResetsApiUriOnException(): void
     {
@@ -279,11 +222,6 @@ class ProjectsTest extends TransifexTestCase
 
     /**
      * @testdox getProject() returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Projects::getProject
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetProject(): void
     {
@@ -302,11 +240,6 @@ class ProjectsTest extends TransifexTestCase
 
     /**
      * @testdox getProject() returns a Response object indicating a failed API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Projects::getProject
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetProjectFailure(): void
     {
@@ -319,11 +252,6 @@ class ProjectsTest extends TransifexTestCase
 
     /**
      * @testdox getProjects() returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Projects::getProjects
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetProjects(): void
     {
@@ -336,11 +264,6 @@ class ProjectsTest extends TransifexTestCase
 
     /**
      * @testdox getProjects() returns a Response object indicating a failed API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Projects::getProjects
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetProjectsFailure(): void
     {
@@ -353,12 +276,6 @@ class ProjectsTest extends TransifexTestCase
 
     /**
      * @testdox updateProject() returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Projects::checkLicense
-     * @covers  \BabDev\Transifex\Connector\Projects::updateProject
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testUpdateProject(): void
     {
@@ -389,13 +306,6 @@ class ProjectsTest extends TransifexTestCase
 
     /**
      * @testdox updateProject() returns a Response object indicating a failed API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Projects::buildProjectRequest
-     * @covers  \BabDev\Transifex\Connector\Projects::checkLicense
-     * @covers  \BabDev\Transifex\Connector\Projects::updateProject
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testUpdateProjectFailure(): void
     {
@@ -411,33 +321,21 @@ class ProjectsTest extends TransifexTestCase
 
     /**
      * @testdox updateProject() throws a RuntimeException when there is no data to send to the API
-     *
-     * @covers  \BabDev\Transifex\Connector\Projects::buildProjectRequest
-     * @covers  \BabDev\Transifex\Connector\Projects::checkLicense
-     * @covers  \BabDev\Transifex\Connector\Projects::updateProject
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
-     *
-     * @expectedException \RuntimeException
      */
     public function testUpdateProjectRuntimeException(): void
     {
+        $this->expectException(\RuntimeException::class);
+
         (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateProject('babdev-transifex', []);
     }
 
     /**
      * @testdox updateProject() throws an InvalidArgumentException when an invalid license is specified
-     *
-     * @covers  \BabDev\Transifex\Connector\Projects::buildProjectRequest
-     * @covers  \BabDev\Transifex\Connector\Projects::checkLicense
-     * @covers  \BabDev\Transifex\Connector\Projects::updateProject
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
-     *
-     * @expectedException \InvalidArgumentException
      */
     public function testUpdateProjectBadLicense(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateProject('babdev-transifex', ['license' => 'failure']);
     }
 }

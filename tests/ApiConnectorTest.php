@@ -11,26 +11,17 @@ class ApiConnectorTest extends TransifexTestCase
 {
     /**
      * @testdox The API does not connect when API credentials are not available
-     *
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\Connector\Formats
-     *
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Missing credentials for API authentication.
      */
     public function testApiFailureWhenNoAuthenticationIsSet(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
+        $this->expectExceptionMessage('Missing credentials for API authentication.');
+
         (new Formats($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, []))->getFormats();
     }
 
     /**
      * @testdox When a custom base URL is set in the options the API request goes to that URL
-     *
-     * @covers  \BabDev\Transifex\Connector\Statistics::getStatistics
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testCustomBaseUrlIsUsed(): void
     {

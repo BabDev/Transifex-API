@@ -12,11 +12,6 @@ class ResourcesTest extends TransifexTestCase
 {
     /**
      * @testdox createResource() with inline content provided in the options returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Resources::createResource
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testCreateResourceContent(): void
     {
@@ -43,11 +38,6 @@ class ResourcesTest extends TransifexTestCase
 
     /**
      * @testdox createResource() with an attached file in the options returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Resources::createResource
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testCreateResourceFile(): void
     {
@@ -74,16 +64,11 @@ class ResourcesTest extends TransifexTestCase
 
     /**
      * @testdox createResource() with an attached file in the options that does not exist throws an InvalidArgumentException
-     *
-     * @covers  \BabDev\Transifex\Connector\Resources::createResource
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
-     *
-     * @expectedException \InvalidArgumentException
      */
     public function testCreateResourceFileDoesNotExist(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         // Additional options
         $options = [
             'accept_translations' => true,
@@ -103,11 +88,6 @@ class ResourcesTest extends TransifexTestCase
 
     /**
      * @testdox createResource() returns a Response object indicating a failed API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Resources::createResource
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testCreateResourceFailure(): void
     {
@@ -126,11 +106,6 @@ class ResourcesTest extends TransifexTestCase
 
     /**
      * @testdox deleteResource() returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Resources::deleteResource
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testDeleteResource(): void
     {
@@ -143,11 +118,6 @@ class ResourcesTest extends TransifexTestCase
 
     /**
      * @testdox deleteResource() returns a Response object indicating a failed API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Resources::deleteResource
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testDeleteResourceFailure(): void
     {
@@ -160,11 +130,6 @@ class ResourcesTest extends TransifexTestCase
 
     /**
      * @testdox getResource() returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Resources::getResource
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetResource(): void
     {
@@ -183,11 +148,6 @@ class ResourcesTest extends TransifexTestCase
 
     /**
      * @testdox getResource() returns a Response object indicating a failed API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Resources::getResource
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetResourceFailure(): void
     {
@@ -200,11 +160,6 @@ class ResourcesTest extends TransifexTestCase
 
     /**
      * @testdox getResourceContent() returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Resources::getResourceContent
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetResourceContent(): void
     {
@@ -217,11 +172,6 @@ class ResourcesTest extends TransifexTestCase
 
     /**
      * @testdox getResourceContent() returns a Response object indicating a failed API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Resources::getResourceContent
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetResourceContentFailure(): void
     {
@@ -234,11 +184,6 @@ class ResourcesTest extends TransifexTestCase
 
     /**
      * @testdox getResources() returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Resources::getResources
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetResources(): void
     {
@@ -251,11 +196,6 @@ class ResourcesTest extends TransifexTestCase
 
     /**
      * @testdox getResources() returns a Response object indicating a failed API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Resources::getResources
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetResourcesFailure(): void
     {
@@ -268,11 +208,6 @@ class ResourcesTest extends TransifexTestCase
 
     /**
      * @testdox updateResourceContent() with an attached file returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Resources::updateResourceContent
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testUpdateResourceContentFile(): void
     {
@@ -290,11 +225,6 @@ class ResourcesTest extends TransifexTestCase
 
     /**
      * @testdox updateResourceContent() with inline content returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Resources::updateResourceContent
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testUpdateResourceContentString(): void
     {
@@ -311,11 +241,6 @@ class ResourcesTest extends TransifexTestCase
 
     /**
      * @testdox updateResourceContent() returns a Response object indicating a failed API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Resources::updateResourceContent
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testUpdateResourceContentFailure(): void
     {
@@ -328,16 +253,11 @@ class ResourcesTest extends TransifexTestCase
 
     /**
      * @testdox updateResourceContent() throws an InvalidArgumentException when an invalid content type is specified
-     *
-     * @covers  \BabDev\Transifex\Connector\Resources::updateResourceContent
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
-     *
-     * @expectedException \InvalidArgumentException
      */
     public function testUpdateResourceContentBadType(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         (new Resources($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateResourceContent(
             'babdev',
             'babdev-transifex',
@@ -348,16 +268,11 @@ class ResourcesTest extends TransifexTestCase
 
     /**
      * @testdox updateResourceContent() throws an InvalidArgumentException when a non-existing file is specified
-     *
-     * @covers  \BabDev\Transifex\Connector\Resources::updateResourceContent
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
-     *
-     * @expectedException \InvalidArgumentException
      */
     public function testUpdateResourceContentUnexistingFile(): void
     {
+        $this->expectException(\InvalidArgumentException::class);
+
         (new Resources($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateResourceContent(
             'babdev',
             'babdev-transifex',

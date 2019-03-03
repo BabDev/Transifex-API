@@ -4,6 +4,7 @@ namespace BabDev\Transifex\Tests;
 
 use BabDev\Transifex\ApiFactory;
 use BabDev\Transifex\Connector\Formats;
+use BabDev\Transifex\Exception\UnknownApiConnectorException;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;
@@ -61,11 +62,11 @@ class ApiFactoryTest extends TestCase
 
     /**
      * @testdox get() throws an UnknownApiConnectorException for a non-existing object
-     *
-     * @expectedException \BabDev\Transifex\Exception\UnknownApiConnectorException
      */
     public function testGetFake(): void
     {
+        $this->expectException(UnknownApiConnectorException::class);
+
         $this->object->createApiConnector('fake');
     }
 

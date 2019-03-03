@@ -12,11 +12,6 @@ class TranslationstringsTest extends TransifexTestCase
 {
     /**
      * @testdox getPseudolocalizationStrings() returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\ApiConnector
-     * @covers  \BabDev\Transifex\Connector\Translationstrings::getPseudolocalizationStrings
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetPseudolocalizationStrings(): void
     {
@@ -35,11 +30,6 @@ class TranslationstringsTest extends TransifexTestCase
 
     /**
      * @testdox getPseudolocalizationStrings() returns a Response object indicating a failed API connection
-     *
-     * @covers  \BabDev\Transifex\ApiConnector
-     * @covers  \BabDev\Transifex\Connector\Translationstrings::getPseudolocalizationStrings
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetPseudolocalizationStringsFailure(): void
     {
@@ -52,11 +42,6 @@ class TranslationstringsTest extends TransifexTestCase
 
     /**
      * @testdox getStrings() returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\ApiConnector
-     * @covers  \BabDev\Transifex\Connector\Translationstrings::getStrings
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetStrings(): void
     {
@@ -69,11 +54,6 @@ class TranslationstringsTest extends TransifexTestCase
 
     /**
      * @testdox getStrings() requesting full details returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\ApiConnector
-     * @covers  \BabDev\Transifex\Connector\Translationstrings::getStrings
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetStringsDetails(): void
     {
@@ -92,11 +72,6 @@ class TranslationstringsTest extends TransifexTestCase
 
     /**
      * @testdox getStrings() requesting full details and the key returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\ApiConnector
-     * @covers  \BabDev\Transifex\Connector\Translationstrings::getStrings
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetStringsDetailsKey(): void
     {
@@ -121,11 +96,6 @@ class TranslationstringsTest extends TransifexTestCase
 
     /**
      * @testdox getStrings() requesting full details, key, and context returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\ApiConnector
-     * @covers  \BabDev\Transifex\Connector\Translationstrings::getStrings
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetStringsDetailsKeyContext(): void
     {
@@ -150,11 +120,6 @@ class TranslationstringsTest extends TransifexTestCase
 
     /**
      * @testdox getStrings() requesting the key and context returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\ApiConnector
-     * @covers  \BabDev\Transifex\Connector\Translationstrings::getStrings
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetStringsKeyContext(): void
     {
@@ -179,11 +144,6 @@ class TranslationstringsTest extends TransifexTestCase
 
     /**
      * @testdox getStrings() requesting a given context returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\ApiConnector
-     * @covers  \BabDev\Transifex\Connector\Translationstrings::getStrings
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetStringsContext(): void
     {
@@ -208,11 +168,6 @@ class TranslationstringsTest extends TransifexTestCase
 
     /**
      * @testdox getStrings() returns a Response object indicating a failed API connection
-     *
-     * @covers  \BabDev\Transifex\ApiConnector
-     * @covers  \BabDev\Transifex\Connector\Translationstrings::getStrings
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetStringsFailure(): void
     {

@@ -12,11 +12,6 @@ class FormatsTest extends TransifexTestCase
 {
     /**
      * @testdox getFormats() returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\ApiConnector
-     * @covers  \BabDev\Transifex\Connector\Formats::getFormats
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetFormats(): void
     {
@@ -29,11 +24,6 @@ class FormatsTest extends TransifexTestCase
 
     /**
      * @testdox getFormats() returns a Response object indicating a failed API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Formats::getFormats
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetFormatsFailure(): void
     {

@@ -12,11 +12,6 @@ class LanguageinfoTest extends TransifexTestCase
 {
     /**
      * @testdox getLanguage() returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Languageinfo::getLanguage
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetLanguage(): void
     {
@@ -29,11 +24,6 @@ class LanguageinfoTest extends TransifexTestCase
 
     /**
      * @testdox getLanguage() returns a Response object indicating a failed API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Languageinfo::getLanguage
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetLanguageFailure(): void
     {
@@ -46,11 +36,6 @@ class LanguageinfoTest extends TransifexTestCase
 
     /**
      * @testdox getLanguages() returns a Response object indicating a successful API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Languageinfo::getLanguages
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetLanguages(): void
     {
@@ -63,11 +48,6 @@ class LanguageinfoTest extends TransifexTestCase
 
     /**
      * @testdox getLanguages() returns a Response object indicating a failed API connection
-     *
-     * @covers  \BabDev\Transifex\Connector\Languageinfo::getLanguages
-     * @covers  \BabDev\Transifex\ApiConnector
-     *
-     * @uses    \BabDev\Transifex\ApiConnector
      */
     public function testGetLanguagesFailure(): void
     {
