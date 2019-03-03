@@ -3,7 +3,7 @@
 namespace BabDev\Transifex\Tests;
 
 use BabDev\Transifex\ApiFactory;
-use BabDev\Transifex\Formats;
+use BabDev\Transifex\Connector\Formats;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Client\ClientInterface;

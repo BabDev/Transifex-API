@@ -2,7 +2,7 @@
 
 namespace BabDev\Transifex\Tests;
 
-use BabDev\Transifex\Formats;
+use BabDev\Transifex\Connector\Formats;
 
 /**
  * Test class for \BabDev\Transifex\ApiConnector.
@@ -14,7 +14,7 @@ class ApiConnectorTest extends TransifexTestCase
      *
      * @covers  \BabDev\Transifex\ApiConnector
      *
-     * @uses    \BabDev\Transifex\Formats
+     * @uses    \BabDev\Transifex\Connector\Formats
      *
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage Missing credentials for API authentication.
@@ -27,7 +27,7 @@ class ApiConnectorTest extends TransifexTestCase
     /**
      * @testdox When a custom base URL is set in the options the API request goes to that URL
      *
-     * @covers  \BabDev\Transifex\Statistics::getStatistics
+     * @covers  \BabDev\Transifex\Connector\Statistics::getStatistics
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector

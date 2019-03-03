@@ -4,7 +4,7 @@ The Transifex API package provides a PHP interface for interacting with the [Tra
 
 ### Basic Use
 
-The primary interface for interacting with the Transifex package is the [Transifex](classes/Transifex.md) class. This class serves as a factory object of sorts and allows developers to manage the options used by the API objects and HTTP connector as well as retrieve instances of the API objects. To create a `Transifex` object, you only need to instantiate it with the appropriate dependencies ([PSR-17 factories](https://www.php-fig.org/psr/psr-17/) and a [PSR-18 HTTP client](https://www.php-fig.org/psr/psr-18/)).
+The primary interface for interacting with the Transifex package is the [Transifex](classes/Transifex.md) class. This class serves as the API factory and allows developers to manage the options used by the API objects and HTTP connector as well as retrieve instances of the API objects. To create a `Transifex` object, you only need to instantiate it with the appropriate dependencies.
 
 ```php
 use BabDev\Transifex\Transifex;
@@ -35,7 +35,7 @@ $namespace = $transifex->getOption('object.namespace');
 To retrieve an instance of an API object, you would use the `get()` method. API objects are named based on the documented sections of the Transifex API. To retrieve an object that can interface with the "formats" API section, you would use the following code:
 
 ```php
-/** @var \BabDev\Transifex\Formats $formats */
+/** @var \BabDev\Transifex\Connector\Formats $formats */
 $formats = $transifex->get('formats');
 ```
 

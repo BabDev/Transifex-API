@@ -1,18 +1,19 @@
 <?php declare(strict_types=1);
 
-namespace BabDev\Transifex\Tests;
+namespace BabDev\Transifex\Tests\Connector;
 
-use BabDev\Transifex\Languageinfo;
+use BabDev\Transifex\Connector\Languageinfo;
+use BabDev\Transifex\Tests\TransifexTestCase;
 
 /**
- * Test class for \BabDev\Transifex\Languageinfo.
+ * Test class for \BabDev\Transifex\Connector\Languageinfo.
  */
 class LanguageinfoTest extends TransifexTestCase
 {
     /**
      * @testdox getLanguage() returns a Response object indicating a successful API connection
      *
-     * @covers  \BabDev\Transifex\Languageinfo::getLanguage
+     * @covers  \BabDev\Transifex\Connector\Languageinfo::getLanguage
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector
@@ -29,7 +30,7 @@ class LanguageinfoTest extends TransifexTestCase
     /**
      * @testdox getLanguage() returns a Response object indicating a failed API connection
      *
-     * @covers  \BabDev\Transifex\Languageinfo::getLanguage
+     * @covers  \BabDev\Transifex\Connector\Languageinfo::getLanguage
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector
@@ -46,7 +47,7 @@ class LanguageinfoTest extends TransifexTestCase
     /**
      * @testdox getLanguages() returns a Response object indicating a successful API connection
      *
-     * @covers  \BabDev\Transifex\Languageinfo::getLanguages
+     * @covers  \BabDev\Transifex\Connector\Languageinfo::getLanguages
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector
@@ -63,7 +64,7 @@ class LanguageinfoTest extends TransifexTestCase
     /**
      * @testdox getLanguages() returns a Response object indicating a failed API connection
      *
-     * @covers  \BabDev\Transifex\Languageinfo::getLanguages
+     * @covers  \BabDev\Transifex\Connector\Languageinfo::getLanguages
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector

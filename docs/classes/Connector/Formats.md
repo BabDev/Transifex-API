@@ -7,7 +7,7 @@ The `Formats` class is the interface to Transifex' [formats API](http://docs.tra
 An instance of the `Formats` class should be retrieved through the `Transifex` class' `get()` factory.
 
 ```php
-/** @var \BabDev\Transifex\Formats $formats */
+/** @var \BabDev\Transifex\Connector\Formats $formats */
 $formats = $transifex->get('formats');
 ```
 

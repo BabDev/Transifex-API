@@ -7,7 +7,7 @@ The `Resources` class is the interface to Transifex' [resources API](http://docs
 An instance of the `Resources` class should be retrieved through the `Transifex` class' `get()` factory.
 
 ```php
-/** @var \BabDev\Transifex\Resources $resources */
+/** @var \BabDev\Transifex\Connector\Resources $resources */
 $resources = $transifex->get('resources');
 ```
 

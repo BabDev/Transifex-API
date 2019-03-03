@@ -1,11 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace BabDev\Transifex\Tests;
+namespace BabDev\Transifex\Tests\Connector;
 
-use BabDev\Transifex\Translations;
+use BabDev\Transifex\Connector\Translations;
+use BabDev\Transifex\Tests\TransifexTestCase;
 
 /**
- * Test class for \BabDev\Transifex\Translations.
+ * Test class for \BabDev\Transifex\Connector\Translations.
  */
 class TranslationsTest extends TransifexTestCase
 {
@@ -13,7 +14,7 @@ class TranslationsTest extends TransifexTestCase
      * @testdox getTranslation() returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\ApiConnector
-     * @covers  \BabDev\Transifex\Translations::getTranslation
+     * @covers  \BabDev\Transifex\Connector\Translations::getTranslation
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
@@ -36,7 +37,7 @@ class TranslationsTest extends TransifexTestCase
      * @testdox getTranslation() returns a Response object indicating a failed API connection
      *
      * @covers  \BabDev\Transifex\ApiConnector
-     * @covers  \BabDev\Transifex\Translations::getTranslation
+     * @covers  \BabDev\Transifex\Connector\Translations::getTranslation
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
@@ -53,7 +54,7 @@ class TranslationsTest extends TransifexTestCase
      * @testdox updateTranslation() with an attached file returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\ApiConnector
-     * @covers  \BabDev\Transifex\Translations::updateTranslation
+     * @covers  \BabDev\Transifex\Connector\Translations::updateTranslation
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
@@ -65,7 +66,7 @@ class TranslationsTest extends TransifexTestCase
             'babdev',
             'babdev-transifex',
             'en_US',
-            __DIR__ . '/stubs/source.ini',
+            __DIR__ . '/../stubs/source.ini',
             'file'
         );
 
@@ -76,7 +77,7 @@ class TranslationsTest extends TransifexTestCase
      * @testdox updateTranslation() with inline content returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\ApiConnector
-     * @covers  \BabDev\Transifex\Translations::updateTranslation
+     * @covers  \BabDev\Transifex\Connector\Translations::updateTranslation
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
@@ -98,7 +99,7 @@ class TranslationsTest extends TransifexTestCase
      * @testdox updateTranslation() returns a Response object indicating a failed API connection
      *
      * @covers  \BabDev\Transifex\ApiConnector
-     * @covers  \BabDev\Transifex\Translations::updateTranslation
+     * @covers  \BabDev\Transifex\Connector\Translations::updateTranslation
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
@@ -119,7 +120,7 @@ class TranslationsTest extends TransifexTestCase
     /**
      * @testdox updateTranslation() throws an InvalidArgumentException when an invalid content type is specified
      *
-     * @covers  \BabDev\Transifex\Translations::updateTranslation
+     * @covers  \BabDev\Transifex\Connector\Translations::updateTranslation
      *
      * @uses    \BabDev\Transifex\ApiConnector
      *
@@ -139,7 +140,7 @@ class TranslationsTest extends TransifexTestCase
     /**
      * @testdox updateTranslation() throws an InvalidArgumentException when a non-existing file is specified
      *
-     * @covers  \BabDev\Transifex\Translations::updateTranslation
+     * @covers  \BabDev\Transifex\Connector\Translations::updateTranslation
      *
      * @uses    \BabDev\Transifex\ApiConnector
      *

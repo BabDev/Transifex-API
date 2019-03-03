@@ -7,7 +7,7 @@ The `Translationstrings` class is the interface to Transifex' [translation strin
 An instance of the `Translationstrings` class should be retrieved through the `Transifex` class' `get()` factory.
 
 ```php
-/** @var \BabDev\Transifex\Translationstrings $translationStrings */
+/** @var \BabDev\Transifex\Connector\Translationstrings $translationStrings */
 $translationStrings = $transifex->get('translationstrings');
 ```
 

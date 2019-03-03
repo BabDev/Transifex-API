@@ -68,7 +68,7 @@ Please refer to the [Guzzle documentation](http://docs.guzzlephp.org/en/latest/)
 All API connectors extend the base `ApiConnector` class. API objects are named based on their grouping in the Transifex API documentation. To retrieve an object connecting to the "formats" API endpoints, simply execute this code:
 
 ```php
-/** @var \BabDev\Transifex\Formats $formats */
+/** @var \BabDev\Transifex\Connector\Formats $formats */
 $formats = $transifex->get('formats');
 ```
 
@@ -76,7 +76,7 @@ The `get()` method requires one parameter, the object name, and this should be a
 
 The `get()` method supports retrieving objects in custom namespaces and includes fallback support for using the default object namespace. The custom namespace can be set with the `object.namespace` option. This is useful for extending the base object classes to add functionality or features as needed.
 
-The class name within its namespace should match the name supplied to the `get()` method. For example, supposing your custom code is in the `My\Custom\Transifex` namespace and you had extended the [Projects](Projects.md) class, the following code would instantiate the `Transifex` object and enable the `get()` method to find your custom class:
+The class name within its namespace should match the name supplied to the `get()` method. For example, supposing your custom code is in the `My\Custom\Transifex` namespace and you had extended the [Projects](Connector/Projects.md) class, the following code would instantiate the `Transifex` object and enable the `get()` method to find your custom class:
 
 ```php
 use BabDev\Transifex\Transifex;
@@ -101,7 +101,7 @@ $transifex = new Transifex($client, $requestFactory, $streamFactory, $uriFactory
 $projects = $transifex->get('projects');
 
 // This will return a default formats object since our custom namespace does not include an override for this class
-/** @var \BabDev\Transifex\Formats $formats */
+/** @var \BabDev\Transifex\Connector\Formats $formats */
 $formats = $transifex->get('formats');
 ```
 

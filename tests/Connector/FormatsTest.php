@@ -1,11 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace BabDev\Transifex\Tests;
+namespace BabDev\Transifex\Tests\Connector;
 
-use BabDev\Transifex\Formats;
+use BabDev\Transifex\Connector\Formats;
+use BabDev\Transifex\Tests\TransifexTestCase;
 
 /**
- * Test class for \BabDev\Transifex\Formats.
+ * Test class for \BabDev\Transifex\Connector\Formats.
  */
 class FormatsTest extends TransifexTestCase
 {
@@ -13,7 +14,7 @@ class FormatsTest extends TransifexTestCase
      * @testdox getFormats() returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\ApiConnector
-     * @covers  \BabDev\Transifex\Formats::getFormats
+     * @covers  \BabDev\Transifex\Connector\Formats::getFormats
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
@@ -29,7 +30,7 @@ class FormatsTest extends TransifexTestCase
     /**
      * @testdox getFormats() returns a Response object indicating a failed API connection
      *
-     * @covers  \BabDev\Transifex\Formats::getFormats
+     * @covers  \BabDev\Transifex\Connector\Formats::getFormats
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector

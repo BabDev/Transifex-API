@@ -7,7 +7,7 @@ The `Projects` class is the interface to Transifex' [projects API](http://docs.t
 An instance of the `Projects` class should be retrieved through the `Transifex` class' `get()` factory.
 
 ```php
-/** @var \BabDev\Transifex\Projects $projects */
+/** @var \BabDev\Transifex\Connector\Projects $projects */
 $projects = $transifex->get('projects');
 ```
 

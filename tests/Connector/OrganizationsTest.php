@@ -1,11 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace BabDev\Transifex\Tests;
+namespace BabDev\Transifex\Tests\Connector;
 
-use BabDev\Transifex\Organizations;
+use BabDev\Transifex\Connector\Organizations;
+use BabDev\Transifex\Tests\TransifexTestCase;
 
 /**
- * Test class for \BabDev\Transifex\Organizations.
+ * Test class for \BabDev\Transifex\Connector\Organizations.
  */
 class OrganizationsTest extends TransifexTestCase
 {
@@ -13,8 +14,8 @@ class OrganizationsTest extends TransifexTestCase
      * @testdox getOrganizations() returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\ApiConnector
-     * @covers  \BabDev\Transifex\Organizations::__construct
-     * @covers  \BabDev\Transifex\Organizations::getOrganizations
+     * @covers  \BabDev\Transifex\Connector\Organizations::__construct
+     * @covers  \BabDev\Transifex\Connector\Organizations::getOrganizations
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
@@ -36,8 +37,8 @@ class OrganizationsTest extends TransifexTestCase
     /**
      * @testdox getFormats() returns a Response object indicating a failed API connection
      *
-     * @covers  \BabDev\Transifex\Organizations::__construct
-     * @covers  \BabDev\Transifex\Organizations::getOrganizations
+     * @covers  \BabDev\Transifex\Connector\Organizations::__construct
+     * @covers  \BabDev\Transifex\Connector\Organizations::getOrganizations
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector

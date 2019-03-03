@@ -7,7 +7,7 @@ The `Languages` class is the interface to Transifex' [languages API](http://docs
 An instance of the `Languages` class should be retrieved through the `Transifex` class' `get()` factory.
 
 ```php
-/** @var \BabDev\Transifex\Languages $languages */
+/** @var \BabDev\Transifex\Connector\Languages $languages */
 $languages = $transifex->get('languages');
 ```
 

@@ -1,18 +1,19 @@
 <?php declare(strict_types=1);
 
-namespace BabDev\Transifex\Tests;
+namespace BabDev\Transifex\Tests\Connector;
 
-use BabDev\Transifex\Resources;
+use BabDev\Transifex\Connector\Resources;
+use BabDev\Transifex\Tests\TransifexTestCase;
 
 /**
- * Test class for \BabDev\Transifex\Resources.
+ * Test class for \BabDev\Transifex\Connector\Resources.
  */
 class ResourcesTest extends TransifexTestCase
 {
     /**
      * @testdox createResource() with inline content provided in the options returns a Response object indicating a successful API connection
      *
-     * @covers  \BabDev\Transifex\Resources::createResource
+     * @covers  \BabDev\Transifex\Connector\Resources::createResource
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector
@@ -43,7 +44,7 @@ class ResourcesTest extends TransifexTestCase
     /**
      * @testdox createResource() with an attached file in the options returns a Response object indicating a successful API connection
      *
-     * @covers  \BabDev\Transifex\Resources::createResource
+     * @covers  \BabDev\Transifex\Connector\Resources::createResource
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector
@@ -57,7 +58,7 @@ class ResourcesTest extends TransifexTestCase
             'accept_translations' => true,
             'category'            => 'whatever',
             'priority'            => 3,
-            'file'                => __DIR__ . '/stubs/source.ini',
+            'file'                => __DIR__ . '/../stubs/source.ini',
         ];
 
         (new Resources($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->createResource(
@@ -74,7 +75,7 @@ class ResourcesTest extends TransifexTestCase
     /**
      * @testdox createResource() with an attached file in the options that does not exist throws an InvalidArgumentException
      *
-     * @covers  \BabDev\Transifex\Resources::createResource
+     * @covers  \BabDev\Transifex\Connector\Resources::createResource
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector
@@ -103,7 +104,7 @@ class ResourcesTest extends TransifexTestCase
     /**
      * @testdox createResource() returns a Response object indicating a failed API connection
      *
-     * @covers  \BabDev\Transifex\Resources::createResource
+     * @covers  \BabDev\Transifex\Connector\Resources::createResource
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector
@@ -126,7 +127,7 @@ class ResourcesTest extends TransifexTestCase
     /**
      * @testdox deleteResource() returns a Response object indicating a successful API connection
      *
-     * @covers  \BabDev\Transifex\Resources::deleteResource
+     * @covers  \BabDev\Transifex\Connector\Resources::deleteResource
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector
@@ -143,7 +144,7 @@ class ResourcesTest extends TransifexTestCase
     /**
      * @testdox deleteResource() returns a Response object indicating a failed API connection
      *
-     * @covers  \BabDev\Transifex\Resources::deleteResource
+     * @covers  \BabDev\Transifex\Connector\Resources::deleteResource
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector
@@ -160,7 +161,7 @@ class ResourcesTest extends TransifexTestCase
     /**
      * @testdox getResource() returns a Response object indicating a successful API connection
      *
-     * @covers  \BabDev\Transifex\Resources::getResource
+     * @covers  \BabDev\Transifex\Connector\Resources::getResource
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector
@@ -183,7 +184,7 @@ class ResourcesTest extends TransifexTestCase
     /**
      * @testdox getResource() returns a Response object indicating a failed API connection
      *
-     * @covers  \BabDev\Transifex\Resources::getResource
+     * @covers  \BabDev\Transifex\Connector\Resources::getResource
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector
@@ -200,7 +201,7 @@ class ResourcesTest extends TransifexTestCase
     /**
      * @testdox getResourceContent() returns a Response object indicating a successful API connection
      *
-     * @covers  \BabDev\Transifex\Resources::getResourceContent
+     * @covers  \BabDev\Transifex\Connector\Resources::getResourceContent
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector
@@ -217,7 +218,7 @@ class ResourcesTest extends TransifexTestCase
     /**
      * @testdox getResourceContent() returns a Response object indicating a failed API connection
      *
-     * @covers  \BabDev\Transifex\Resources::getResourceContent
+     * @covers  \BabDev\Transifex\Connector\Resources::getResourceContent
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector
@@ -234,7 +235,7 @@ class ResourcesTest extends TransifexTestCase
     /**
      * @testdox getResources() returns a Response object indicating a successful API connection
      *
-     * @covers  \BabDev\Transifex\Resources::getResources
+     * @covers  \BabDev\Transifex\Connector\Resources::getResources
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector
@@ -251,7 +252,7 @@ class ResourcesTest extends TransifexTestCase
     /**
      * @testdox getResources() returns a Response object indicating a failed API connection
      *
-     * @covers  \BabDev\Transifex\Resources::getResources
+     * @covers  \BabDev\Transifex\Connector\Resources::getResources
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector
@@ -268,7 +269,7 @@ class ResourcesTest extends TransifexTestCase
     /**
      * @testdox updateResourceContent() with an attached file returns a Response object indicating a successful API connection
      *
-     * @covers  \BabDev\Transifex\Resources::updateResourceContent
+     * @covers  \BabDev\Transifex\Connector\Resources::updateResourceContent
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector
@@ -280,7 +281,7 @@ class ResourcesTest extends TransifexTestCase
         (new Resources($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateResourceContent(
             'babdev',
             'babdev-transifex',
-            __DIR__ . '/stubs/source.ini',
+            __DIR__ . '/../stubs/source.ini',
             'file'
         );
 
@@ -290,7 +291,7 @@ class ResourcesTest extends TransifexTestCase
     /**
      * @testdox updateResourceContent() with inline content returns a Response object indicating a successful API connection
      *
-     * @covers  \BabDev\Transifex\Resources::updateResourceContent
+     * @covers  \BabDev\Transifex\Connector\Resources::updateResourceContent
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector
@@ -311,7 +312,7 @@ class ResourcesTest extends TransifexTestCase
     /**
      * @testdox updateResourceContent() returns a Response object indicating a failed API connection
      *
-     * @covers  \BabDev\Transifex\Resources::updateResourceContent
+     * @covers  \BabDev\Transifex\Connector\Resources::updateResourceContent
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector
@@ -328,7 +329,7 @@ class ResourcesTest extends TransifexTestCase
     /**
      * @testdox updateResourceContent() throws an InvalidArgumentException when an invalid content type is specified
      *
-     * @covers  \BabDev\Transifex\Resources::updateResourceContent
+     * @covers  \BabDev\Transifex\Connector\Resources::updateResourceContent
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector
@@ -348,7 +349,7 @@ class ResourcesTest extends TransifexTestCase
     /**
      * @testdox updateResourceContent() throws an InvalidArgumentException when a non-existing file is specified
      *
-     * @covers  \BabDev\Transifex\Resources::updateResourceContent
+     * @covers  \BabDev\Transifex\Connector\Resources::updateResourceContent
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector

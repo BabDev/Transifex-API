@@ -7,7 +7,7 @@ The `Statistics` class is the interface to Transifex' [statistics API](http://do
 An instance of the `Statistics` class should be retrieved through the `Transifex` class' `get()` factory.
 
 ```php
-/** @var \BabDev\Transifex\Statistics $statistics */
+/** @var \BabDev\Transifex\Connector\Statistics $statistics */
 $statistics = $transifex->get('statistics');
 ```
 

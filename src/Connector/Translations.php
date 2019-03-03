@@ -1,7 +1,8 @@
 <?php declare(strict_types=1);
 
-namespace BabDev\Transifex;
+namespace BabDev\Transifex\Connector;
 
+use BabDev\Transifex\ApiConnector;
 use Psr\Http\Message\ResponseInterface;
 
 /**

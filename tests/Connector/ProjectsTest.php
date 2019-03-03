@@ -1,24 +1,25 @@
 <?php declare(strict_types=1);
 
-namespace BabDev\Transifex\Tests;
+namespace BabDev\Transifex\Tests\Connector;
 
-use BabDev\Transifex\Projects;
+use BabDev\Transifex\Connector\Projects;
+use BabDev\Transifex\Tests\TransifexTestCase;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 
 /**
- * Test class for \BabDev\Transifex\Projects.
+ * Test class for \BabDev\Transifex\Connector\Projects.
  */
 class ProjectsTest extends TransifexTestCase
 {
     /**
      * @testdox createProject() returns a Response object indicating a successful API connection
      *
-     * @covers  \BabDev\Transifex\Projects::buildProjectRequest
-     * @covers  \BabDev\Transifex\Projects::checkLicense
-     * @covers  \BabDev\Transifex\Projects::createProject
+     * @covers  \BabDev\Transifex\Connector\Projects::buildProjectRequest
+     * @covers  \BabDev\Transifex\Connector\Projects::checkLicense
+     * @covers  \BabDev\Transifex\Connector\Projects::createProject
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector
@@ -59,9 +60,9 @@ class ProjectsTest extends TransifexTestCase
     /**
      * @testdox createProject() returns a Response object indicating a failed API connection
      *
-     * @covers  \BabDev\Transifex\Projects::buildProjectRequest
-     * @covers  \BabDev\Transifex\Projects::checkLicense
-     * @covers  \BabDev\Transifex\Projects::createProject
+     * @covers  \BabDev\Transifex\Connector\Projects::buildProjectRequest
+     * @covers  \BabDev\Transifex\Connector\Projects::checkLicense
+     * @covers  \BabDev\Transifex\Connector\Projects::createProject
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector
@@ -84,9 +85,9 @@ class ProjectsTest extends TransifexTestCase
     /**
      * @testdox createProject() throws an InvalidArgumentException when an invalid license is specified
      *
-     * @covers  \BabDev\Transifex\Projects::buildProjectRequest
-     * @covers  \BabDev\Transifex\Projects::checkLicense
-     * @covers  \BabDev\Transifex\Projects::createProject
+     * @covers  \BabDev\Transifex\Connector\Projects::buildProjectRequest
+     * @covers  \BabDev\Transifex\Connector\Projects::checkLicense
+     * @covers  \BabDev\Transifex\Connector\Projects::createProject
      *
      * @uses    \BabDev\Transifex\ApiConnector
      *
@@ -106,9 +107,9 @@ class ProjectsTest extends TransifexTestCase
     /**
      * @testdox createProject() throws an InvalidArgumentException when required fields are missing
      *
-     * @covers  \BabDev\Transifex\Projects::buildProjectRequest
-     * @covers  \BabDev\Transifex\Projects::checkLicense
-     * @covers  \BabDev\Transifex\Projects::createProject
+     * @covers  \BabDev\Transifex\Connector\Projects::buildProjectRequest
+     * @covers  \BabDev\Transifex\Connector\Projects::checkLicense
+     * @covers  \BabDev\Transifex\Connector\Projects::createProject
      *
      * @uses    \BabDev\Transifex\ApiConnector
      *
@@ -127,7 +128,7 @@ class ProjectsTest extends TransifexTestCase
     /**
      * @testdox deleteProject() returns a Response object indicating a successful API connection
      *
-     * @covers  \BabDev\Transifex\Projects::deleteProject
+     * @covers  \BabDev\Transifex\Connector\Projects::deleteProject
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector
@@ -144,7 +145,7 @@ class ProjectsTest extends TransifexTestCase
     /**
      * @testdox deleteProject() returns a Response object indicating a failed API connection
      *
-     * @covers  \BabDev\Transifex\Projects::deleteProject
+     * @covers  \BabDev\Transifex\Connector\Projects::deleteProject
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector
@@ -161,7 +162,7 @@ class ProjectsTest extends TransifexTestCase
     /**
      * @testdox getOrganizationProjects() returns a Response object indicating a successful API connection
      *
-     * @covers  \BabDev\Transifex\Projects::getOrganizationProjects
+     * @covers  \BabDev\Transifex\Connector\Projects::getOrganizationProjects
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector
@@ -184,8 +185,8 @@ class ProjectsTest extends TransifexTestCase
     /**
      * @testdox Calling any method after getOrganizationProjects() calls the correct API endpoint
      *
-     * @covers  \BabDev\Transifex\Projects::getOrganizationProjects
-     * @covers  \BabDev\Transifex\Projects::getProjects
+     * @covers  \BabDev\Transifex\Connector\Projects::getOrganizationProjects
+     * @covers  \BabDev\Transifex\Connector\Projects::getProjects
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector
@@ -218,7 +219,7 @@ class ProjectsTest extends TransifexTestCase
     /**
      * @testdox getOrganizationProjects() returns a Response object indicating a failed API connection
      *
-     * @covers  \BabDev\Transifex\Projects::getOrganizationProjects
+     * @covers  \BabDev\Transifex\Connector\Projects::getOrganizationProjects
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector
@@ -241,7 +242,7 @@ class ProjectsTest extends TransifexTestCase
     /**
      * @testdox The API URI is reset when an Exception is thrown by getOrganizationProjects()
      *
-     * @covers  \BabDev\Transifex\Projects::getOrganizationProjects
+     * @covers  \BabDev\Transifex\Connector\Projects::getOrganizationProjects
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector
@@ -279,7 +280,7 @@ class ProjectsTest extends TransifexTestCase
     /**
      * @testdox getProject() returns a Response object indicating a successful API connection
      *
-     * @covers  \BabDev\Transifex\Projects::getProject
+     * @covers  \BabDev\Transifex\Connector\Projects::getProject
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector
@@ -302,7 +303,7 @@ class ProjectsTest extends TransifexTestCase
     /**
      * @testdox getProject() returns a Response object indicating a failed API connection
      *
-     * @covers  \BabDev\Transifex\Projects::getProject
+     * @covers  \BabDev\Transifex\Connector\Projects::getProject
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector
@@ -319,7 +320,7 @@ class ProjectsTest extends TransifexTestCase
     /**
      * @testdox getProjects() returns a Response object indicating a successful API connection
      *
-     * @covers  \BabDev\Transifex\Projects::getProjects
+     * @covers  \BabDev\Transifex\Connector\Projects::getProjects
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector
@@ -336,7 +337,7 @@ class ProjectsTest extends TransifexTestCase
     /**
      * @testdox getProjects() returns a Response object indicating a failed API connection
      *
-     * @covers  \BabDev\Transifex\Projects::getProjects
+     * @covers  \BabDev\Transifex\Connector\Projects::getProjects
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector
@@ -353,8 +354,8 @@ class ProjectsTest extends TransifexTestCase
     /**
      * @testdox updateProject() returns a Response object indicating a successful API connection
      *
-     * @covers  \BabDev\Transifex\Projects::checkLicense
-     * @covers  \BabDev\Transifex\Projects::updateProject
+     * @covers  \BabDev\Transifex\Connector\Projects::checkLicense
+     * @covers  \BabDev\Transifex\Connector\Projects::updateProject
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector
@@ -389,9 +390,9 @@ class ProjectsTest extends TransifexTestCase
     /**
      * @testdox updateProject() returns a Response object indicating a failed API connection
      *
-     * @covers  \BabDev\Transifex\Projects::buildProjectRequest
-     * @covers  \BabDev\Transifex\Projects::checkLicense
-     * @covers  \BabDev\Transifex\Projects::updateProject
+     * @covers  \BabDev\Transifex\Connector\Projects::buildProjectRequest
+     * @covers  \BabDev\Transifex\Connector\Projects::checkLicense
+     * @covers  \BabDev\Transifex\Connector\Projects::updateProject
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector
@@ -411,9 +412,9 @@ class ProjectsTest extends TransifexTestCase
     /**
      * @testdox updateProject() throws a RuntimeException when there is no data to send to the API
      *
-     * @covers  \BabDev\Transifex\Projects::buildProjectRequest
-     * @covers  \BabDev\Transifex\Projects::checkLicense
-     * @covers  \BabDev\Transifex\Projects::updateProject
+     * @covers  \BabDev\Transifex\Connector\Projects::buildProjectRequest
+     * @covers  \BabDev\Transifex\Connector\Projects::checkLicense
+     * @covers  \BabDev\Transifex\Connector\Projects::updateProject
      *
      * @uses    \BabDev\Transifex\ApiConnector
      *
@@ -427,9 +428,9 @@ class ProjectsTest extends TransifexTestCase
     /**
      * @testdox updateProject() throws an InvalidArgumentException when an invalid license is specified
      *
-     * @covers  \BabDev\Transifex\Projects::buildProjectRequest
-     * @covers  \BabDev\Transifex\Projects::checkLicense
-     * @covers  \BabDev\Transifex\Projects::updateProject
+     * @covers  \BabDev\Transifex\Connector\Projects::buildProjectRequest
+     * @covers  \BabDev\Transifex\Connector\Projects::checkLicense
+     * @covers  \BabDev\Transifex\Connector\Projects::updateProject
      *
      * @uses    \BabDev\Transifex\ApiConnector
      *

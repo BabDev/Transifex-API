@@ -7,7 +7,7 @@ The `Translations` class is the interface to Transifex' [translations API](http:
 An instance of the `Translations` class should be retrieved through the `Transifex` class' `get()` factory.
 
 ```php
-/** @var \BabDev\Transifex\Translations $translations */
+/** @var \BabDev\Transifex\Connector\Translations $translations */
 $translations = $transifex->get('translations');
 ```
 

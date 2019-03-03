@@ -7,7 +7,7 @@ The `Languageinfo` class is the interface to Transifex' [language info API](http
 An instance of the `Languageinfo` class should be retrieved through the `Transifex` class' `get()` factory.
 
 ```php
-/** @var \BabDev\Transifex\Languageinfo $formats */
+/** @var \BabDev\Transifex\Connector\Languageinfo $formats */
 $languageInfo = $transifex->get('languageinfo');
 ```
 

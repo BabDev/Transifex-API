@@ -1,18 +1,19 @@
 <?php declare(strict_types=1);
 
-namespace BabDev\Transifex\Tests;
+namespace BabDev\Transifex\Tests\Connector;
 
-use BabDev\Transifex\Statistics;
+use BabDev\Transifex\Connector\Statistics;
+use BabDev\Transifex\Tests\TransifexTestCase;
 
 /**
- * Test class for \BabDev\Transifex\Statistics.
+ * Test class for \BabDev\Transifex\Connector\Statistics.
  */
 class StatisticsTest extends TransifexTestCase
 {
     /**
      * @testdox getStatistics() returns a Response object indicating a successful API connection
      *
-     * @covers  \BabDev\Transifex\Statistics::getStatistics
+     * @covers  \BabDev\Transifex\Connector\Statistics::getStatistics
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector
@@ -29,7 +30,7 @@ class StatisticsTest extends TransifexTestCase
     /**
      * @testdox getStatistics() returns a Response object indicating a failed API connection
      *
-     * @covers  \BabDev\Transifex\Statistics::getStatistics
+     * @covers  \BabDev\Transifex\Connector\Statistics::getStatistics
      * @covers  \BabDev\Transifex\ApiConnector
      *
      * @uses    \BabDev\Transifex\ApiConnector

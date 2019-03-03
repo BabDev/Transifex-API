@@ -1,11 +1,12 @@
 <?php declare(strict_types=1);
 
-namespace BabDev\Transifex\Tests;
+namespace BabDev\Transifex\Tests\Connector;
 
-use BabDev\Transifex\Translationstrings;
+use BabDev\Transifex\Connector\Translationstrings;
+use BabDev\Transifex\Tests\TransifexTestCase;
 
 /**
- * Test class for \BabDev\Transifex\Translationstrings.
+ * Test class for \BabDev\Transifex\Connector\Translationstrings.
  */
 class TranslationstringsTest extends TransifexTestCase
 {
@@ -13,7 +14,7 @@ class TranslationstringsTest extends TransifexTestCase
      * @testdox getPseudolocalizationStrings() returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\ApiConnector
-     * @covers  \BabDev\Transifex\Translationstrings::getPseudolocalizationStrings
+     * @covers  \BabDev\Transifex\Connector\Translationstrings::getPseudolocalizationStrings
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
@@ -36,7 +37,7 @@ class TranslationstringsTest extends TransifexTestCase
      * @testdox getPseudolocalizationStrings() returns a Response object indicating a failed API connection
      *
      * @covers  \BabDev\Transifex\ApiConnector
-     * @covers  \BabDev\Transifex\Translationstrings::getPseudolocalizationStrings
+     * @covers  \BabDev\Transifex\Connector\Translationstrings::getPseudolocalizationStrings
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
@@ -53,7 +54,7 @@ class TranslationstringsTest extends TransifexTestCase
      * @testdox getStrings() returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\ApiConnector
-     * @covers  \BabDev\Transifex\Translationstrings::getStrings
+     * @covers  \BabDev\Transifex\Connector\Translationstrings::getStrings
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
@@ -70,7 +71,7 @@ class TranslationstringsTest extends TransifexTestCase
      * @testdox getStrings() requesting full details returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\ApiConnector
-     * @covers  \BabDev\Transifex\Translationstrings::getStrings
+     * @covers  \BabDev\Transifex\Connector\Translationstrings::getStrings
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
@@ -93,7 +94,7 @@ class TranslationstringsTest extends TransifexTestCase
      * @testdox getStrings() requesting full details and the key returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\ApiConnector
-     * @covers  \BabDev\Transifex\Translationstrings::getStrings
+     * @covers  \BabDev\Transifex\Connector\Translationstrings::getStrings
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
@@ -122,7 +123,7 @@ class TranslationstringsTest extends TransifexTestCase
      * @testdox getStrings() requesting full details, key, and context returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\ApiConnector
-     * @covers  \BabDev\Transifex\Translationstrings::getStrings
+     * @covers  \BabDev\Transifex\Connector\Translationstrings::getStrings
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
@@ -151,7 +152,7 @@ class TranslationstringsTest extends TransifexTestCase
      * @testdox getStrings() requesting the key and context returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\ApiConnector
-     * @covers  \BabDev\Transifex\Translationstrings::getStrings
+     * @covers  \BabDev\Transifex\Connector\Translationstrings::getStrings
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
@@ -180,7 +181,7 @@ class TranslationstringsTest extends TransifexTestCase
      * @testdox getStrings() requesting a given context returns a Response object indicating a successful API connection
      *
      * @covers  \BabDev\Transifex\ApiConnector
-     * @covers  \BabDev\Transifex\Translationstrings::getStrings
+     * @covers  \BabDev\Transifex\Connector\Translationstrings::getStrings
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */
@@ -209,7 +210,7 @@ class TranslationstringsTest extends TransifexTestCase
      * @testdox getStrings() returns a Response object indicating a failed API connection
      *
      * @covers  \BabDev\Transifex\ApiConnector
-     * @covers  \BabDev\Transifex\Translationstrings::getStrings
+     * @covers  \BabDev\Transifex\Connector\Translationstrings::getStrings
      *
      * @uses    \BabDev\Transifex\ApiConnector
      */

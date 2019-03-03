@@ -70,7 +70,7 @@ final class ApiFactory implements FactoryInterface
      */
     public function createApiConnector(string $name, array $options = []): ApiConnector
     {
-        $namespace = __NAMESPACE__;
+        $namespace = __NAMESPACE__ . '\\Connector';
         $class     = $namespace . '\\' . \ucfirst(\strtolower($name));
 
         if (\class_exists($class)) {
