@@ -13,9 +13,9 @@ use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Http\Message\UriFactoryInterface;
 
 /**
- * Abstract test case for TransifexObject instances.
+ * Base test case for ApiConnector instances.
  */
-abstract class TransifexTestCase extends TestCase
+abstract class ApiConnectorTestCase extends TestCase
 {
     /**
      * @var array

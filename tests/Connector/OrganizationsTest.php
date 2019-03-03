@@ -3,12 +3,12 @@
 namespace BabDev\Transifex\Tests\Connector;
 
 use BabDev\Transifex\Connector\Organizations;
-use BabDev\Transifex\Tests\TransifexTestCase;
+use BabDev\Transifex\Tests\ApiConnectorTestCase;
 
 /**
  * Test class for \BabDev\Transifex\Connector\Organizations.
  */
-class OrganizationsTest extends TransifexTestCase
+class OrganizationsTest extends ApiConnectorTestCase
 {
     /**
      * @testdox getOrganizations() returns a Response object indicating a successful API connection

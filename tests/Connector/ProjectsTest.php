@@ -3,7 +3,7 @@
 namespace BabDev\Transifex\Tests\Connector;
 
 use BabDev\Transifex\Connector\Projects;
-use BabDev\Transifex\Tests\TransifexTestCase;
+use BabDev\Transifex\Tests\ApiConnectorTestCase;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
@@ -12,7 +12,7 @@ use Psr\Http\Message\ResponseInterface;
 /**
  * Test class for \BabDev\Transifex\Connector\Projects.
  */
-class ProjectsTest extends TransifexTestCase
+class ProjectsTest extends ApiConnectorTestCase
 {
     /**
      * @testdox createProject() returns a Response object indicating a successful API connection

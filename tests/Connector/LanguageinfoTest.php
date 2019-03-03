@@ -3,12 +3,12 @@
 namespace BabDev\Transifex\Tests\Connector;
 
 use BabDev\Transifex\Connector\Languageinfo;
-use BabDev\Transifex\Tests\TransifexTestCase;
+use BabDev\Transifex\Tests\ApiConnectorTestCase;
 
 /**
  * Test class for \BabDev\Transifex\Connector\Languageinfo.
  */
-class LanguageinfoTest extends TransifexTestCase
+class LanguageinfoTest extends ApiConnectorTestCase
 {
     /**
      * @testdox getLanguage() returns a Response object indicating a successful API connection

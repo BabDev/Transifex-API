@@ -3,12 +3,12 @@
 namespace BabDev\Transifex\Tests\Connector;
 
 use BabDev\Transifex\Connector\Translationstrings;
-use BabDev\Transifex\Tests\TransifexTestCase;
+use BabDev\Transifex\Tests\ApiConnectorTestCase;
 
 /**
  * Test class for \BabDev\Transifex\Connector\Translationstrings.
  */
-class TranslationstringsTest extends TransifexTestCase
+class TranslationstringsTest extends ApiConnectorTestCase
 {
     /**
      * @testdox getPseudolocalizationStrings() returns a Response object indicating a successful API connection

@@ -3,12 +3,12 @@
 namespace BabDev\Transifex\Tests\Connector;
 
 use BabDev\Transifex\Connector\Statistics;
-use BabDev\Transifex\Tests\TransifexTestCase;
+use BabDev\Transifex\Tests\ApiConnectorTestCase;
 
 /**
  * Test class for \BabDev\Transifex\Connector\Statistics.
  */
-class StatisticsTest extends TransifexTestCase
+class StatisticsTest extends ApiConnectorTestCase
 {
     /**
      * @testdox getStatistics() returns a Response object indicating a successful API connection

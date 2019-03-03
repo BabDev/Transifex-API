@@ -3,12 +3,12 @@
 namespace BabDev\Transifex\Tests\Connector;
 
 use BabDev\Transifex\Connector\Formats;
-use BabDev\Transifex\Tests\TransifexTestCase;
+use BabDev\Transifex\Tests\ApiConnectorTestCase;
 
 /**
  * Test class for \BabDev\Transifex\Connector\Formats.
  */
-class FormatsTest extends TransifexTestCase
+class FormatsTest extends ApiConnectorTestCase
 {
     /**
      * @testdox getFormats() returns a Response object indicating a successful API connection

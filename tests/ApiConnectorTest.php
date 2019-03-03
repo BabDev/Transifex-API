@@ -7,7 +7,7 @@ use BabDev\Transifex\Connector\Formats;
 /**
  * Test class for \BabDev\Transifex\ApiConnector.
  */
-class ApiConnectorTest extends TransifexTestCase
+class ApiConnectorTest extends ApiConnectorTestCase
 {
     /**
      * @testdox The API does not connect when API credentials are not available
