@@ -15,7 +15,7 @@ use Psr\Http\Message\UriFactoryInterface;
 /**
  * Test class for \BabDev\Transifex\ApiFactory.
  */
-class ApiFactoryTest extends TestCase
+final class ApiFactoryTest extends TestCase
 {
     /**
      * @var MockObject|ClientInterface

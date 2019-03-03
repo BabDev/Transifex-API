@@ -10,7 +10,7 @@ use Psr\Http\Message\ResponseInterface;
  *
  * @link http://docs.transifex.com/api/translations/
  */
-class Translations extends ApiConnector
+final class Translations extends ApiConnector
 {
     /**
      * Get translations on a specified resource.

@@ -8,7 +8,7 @@ use BabDev\Transifex\Tests\ApiConnectorTestCase;
 /**
  * Test class for \BabDev\Transifex\Connector\Organizations.
  */
-class OrganizationsTest extends ApiConnectorTestCase
+final class OrganizationsTest extends ApiConnectorTestCase
 {
     /**
      * @testdox getOrganizations() returns a Response object indicating a successful API connection

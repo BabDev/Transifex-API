@@ -5,7 +5,7 @@ namespace BabDev\Transifex;
 /**
  * Base class for interacting with the Transifex API.
  */
-class Transifex
+final class Transifex
 {
     /**
      * The API factory.

@@ -12,7 +12,7 @@ use Psr\Http\Message\ResponseInterface;
 /**
  * Test class for \BabDev\Transifex\Connector\Projects.
  */
-class ProjectsTest extends ApiConnectorTestCase
+final class ProjectsTest extends ApiConnectorTestCase
 {
     /**
      * @testdox createProject() returns a Response object indicating a successful API connection
@@ -200,21 +200,24 @@ class ProjectsTest extends ApiConnectorTestCase
             }
         };
 
-        $projects = new class($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options) extends Projects {
-            public function getBaseUri(): ?string
-            {
-                return $this->getOption('base_uri');
-            }
-        };
+        $projects = new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options);
 
         try {
             $projects->getOrganizationProjects('babdev');
 
             $this->fail(\sprintf('A %s should be thrown.', ClientExceptionInterface::class));
         } catch (ClientExceptionInterface $exception) {
+            // I don't think the options should be a public thing on connectors so use Reflection to get into them for this assertion
+            $reflection = new \ReflectionClass($projects);
+
+            $optionsProperty = $reflection->getProperty('options');
+            $optionsProperty->setAccessible(true);
+
+            $options = $optionsProperty->getValue($projects);
+
             $this->assertSame(
                 'https://www.transifex.com',
-                $projects->getBaseUri(),
+                $options['base_uri'],
                 'The API request did not switch back to the www subdomain.'
             );
         }

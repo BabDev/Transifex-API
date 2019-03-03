@@ -10,7 +10,7 @@ use Psr\Http\Message\ResponseInterface;
  *
  * @link http://docs.transifex.com/api/statistics/
  */
-class Statistics extends ApiConnector
+final class Statistics extends ApiConnector
 {
     /**
      * Get statistics on a specified resource.

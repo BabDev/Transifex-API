@@ -8,7 +8,7 @@ use BabDev\Transifex\Tests\ApiConnectorTestCase;
 /**
  * Test class for \BabDev\Transifex\Connector\Languageinfo.
  */
-class LanguageinfoTest extends ApiConnectorTestCase
+final class LanguageinfoTest extends ApiConnectorTestCase
 {
     /**
      * @testdox getLanguage() returns a Response object indicating a successful API connection

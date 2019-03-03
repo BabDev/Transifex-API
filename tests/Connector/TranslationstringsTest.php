@@ -8,7 +8,7 @@ use BabDev\Transifex\Tests\ApiConnectorTestCase;
 /**
  * Test class for \BabDev\Transifex\Connector\Translationstrings.
  */
-class TranslationstringsTest extends ApiConnectorTestCase
+final class TranslationstringsTest extends ApiConnectorTestCase
 {
     /**
      * @testdox getPseudolocalizationStrings() returns a Response object indicating a successful API connection

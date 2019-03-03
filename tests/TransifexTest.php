@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Test class for \BabDev\Transifex\Transifex.
  */
-class TransifexTest extends TestCase
+final class TransifexTest extends TestCase
 {
     /**
      * @var MockObject|FactoryInterface

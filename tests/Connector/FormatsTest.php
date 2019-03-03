@@ -8,7 +8,7 @@ use BabDev\Transifex\Tests\ApiConnectorTestCase;
 /**
  * Test class for \BabDev\Transifex\Connector\Formats.
  */
-class FormatsTest extends ApiConnectorTestCase
+final class FormatsTest extends ApiConnectorTestCase
 {
     /**
      * @testdox getFormats() returns a Response object indicating a successful API connection

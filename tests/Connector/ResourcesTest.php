@@ -8,7 +8,7 @@ use BabDev\Transifex\Tests\ApiConnectorTestCase;
 /**
  * Test class for \BabDev\Transifex\Connector\Resources.
  */
-class ResourcesTest extends ApiConnectorTestCase
+final class ResourcesTest extends ApiConnectorTestCase
 {
     /**
      * @testdox createResource() with inline content provided in the options returns a Response object indicating a successful API connection

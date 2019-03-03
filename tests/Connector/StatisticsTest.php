@@ -8,7 +8,7 @@ use BabDev\Transifex\Tests\ApiConnectorTestCase;
 /**
  * Test class for \BabDev\Transifex\Connector\Statistics.
  */
-class StatisticsTest extends ApiConnectorTestCase
+final class StatisticsTest extends ApiConnectorTestCase
 {
     /**
      * @testdox getStatistics() returns a Response object indicating a successful API connection

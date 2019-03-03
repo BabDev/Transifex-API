@@ -10,7 +10,7 @@ use Psr\Http\Message\ResponseInterface;
  *
  * @link http://docs.transifex.com/api/translation_strings/
  */
-class Translationstrings extends ApiConnector
+final class Translationstrings extends ApiConnector
 {
     /**
      * Method to get pseudolocalization strings on a specified resource.

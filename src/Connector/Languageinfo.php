@@ -10,7 +10,7 @@ use Psr\Http\Message\ResponseInterface;
  *
  * @link http://docs.transifex.com/api/language_info/
  */
-class Languageinfo extends ApiConnector
+final class Languageinfo extends ApiConnector
 {
     /**
      * Get data on the specified language.
