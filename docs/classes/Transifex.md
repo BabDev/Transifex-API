@@ -29,7 +29,7 @@ $requestFactory = // new RequestFactoryInterface(); (any PSR-17 Request factory)
 $streamFactory = // new StreamFactoryInterface(); (any PSR-17 Stream factory)
 $uriFactory = // new UriFactoryInterface(); (any PSR-17 URI factory)
 
-$apiFactory = new ApiFactory($client, $requestFactory, $streamFactory, $uriFactory)
+$apiFactory = new ApiFactory($client, $requestFactory, $streamFactory, $uriFactory);
 $transifex = new Transifex($apiFactory);
 ```
 
@@ -52,7 +52,7 @@ $requestFactory = // new RequestFactoryInterface(); (any PSR-17 Request factory)
 $streamFactory = // new StreamFactoryInterface(); (any PSR-17 Stream factory)
 $uriFactory = // new UriFactoryInterface(); (any PSR-17 URI factory)
 
-$apiFactory = new ApiFactory($client, $requestFactory, $streamFactory, $uriFactory)
+$apiFactory = new ApiFactory($client, $requestFactory, $streamFactory, $uriFactory);
 
 // Build our options array setting our API credentials to authenticate
 $options = [
@@ -99,7 +99,7 @@ $requestFactory = // new RequestFactoryInterface(); (any PSR-17 Request factory)
 $streamFactory = // new StreamFactoryInterface(); (any PSR-17 Stream factory)
 $uriFactory = // new UriFactoryInterface(); (any PSR-17 URI factory)
 
-$apiFactory = new ApiFactory($client, $requestFactory, $streamFactory, $uriFactory)
+$apiFactory = new ApiFactory($client, $requestFactory, $streamFactory, $uriFactory);
 $transifex = new Transifex($apiFactory);
 
 /** @var \BabDev\Transifex\Connector\Formats $formats */
@@ -139,7 +139,7 @@ $requestFactory = // new RequestFactoryInterface(); (any PSR-17 Request factory)
 $streamFactory = // new StreamFactoryInterface(); (any PSR-17 Stream factory)
 $uriFactory = // new UriFactoryInterface(); (any PSR-17 URI factory)
 
-$apiFactory = new ApiFactory($client, $requestFactory, $streamFactory, $uriFactory)
+$apiFactory = new ApiFactory($client, $requestFactory, $streamFactory, $uriFactory);
 
 // Build our options array setting our API credentials to authenticate
 $options = [
