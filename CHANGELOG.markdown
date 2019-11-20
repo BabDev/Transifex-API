@@ -1,7 +1,7 @@
 CHANGELOG for the Transifex API Package
 ===============
 
-* 3.0.0 (201x-xx-xx)
+* 3.0.0 (2019-11-19)
 
  * Raised minimum PHP version to 7.2
  * Add support for the Organizations API
