@@ -3,6 +3,9 @@
 namespace BabDev\Transifex\Tests\Connector;
 
 use BabDev\Transifex\Connector\Resources;
+use BabDev\Transifex\Exception\InvalidConfigurationException;
+use BabDev\Transifex\Exception\InvalidFileTypeException;
+use BabDev\Transifex\Exception\MissingFileException;
 use BabDev\Transifex\Tests\ApiConnectorTestCase;
 
 /**
@@ -63,11 +66,11 @@ final class ResourcesTest extends ApiConnectorTestCase
     }
 
     /**
-     * @testdox createResource() with an attached file in the options that does not exist throws an InvalidArgumentException
+     * @testdox createResource() with an attached file in the options that does not exist throws an MissingFileException
      */
     public function testCreateResourceFileDoesNotExist(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(MissingFileException::class);
 
         // Additional options
         $options = [
@@ -252,11 +255,11 @@ final class ResourcesTest extends ApiConnectorTestCase
     }
 
     /**
-     * @testdox updateResourceContent() throws an InvalidArgumentException when an invalid content type is specified
+     * @testdox updateResourceContent() throws an InvalidConfigurationException when an invalid content type is specified
      */
     public function testUpdateResourceContentBadType(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidFileTypeException::class);
 
         (new Resources($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateResourceContent(
             'babdev',
@@ -267,11 +270,11 @@ final class ResourcesTest extends ApiConnectorTestCase
     }
 
     /**
-     * @testdox updateResourceContent() throws an InvalidArgumentException when a non-existing file is specified
+     * @testdox updateResourceContent() throws an MissingFileException when a non-existing file is specified
      */
     public function testUpdateResourceContentUnexistingFile(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(MissingFileException::class);
 
         (new Resources($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateResourceContent(
             'babdev',

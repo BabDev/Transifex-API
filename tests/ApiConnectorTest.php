@@ -3,6 +3,7 @@
 namespace BabDev\Transifex\Tests;
 
 use BabDev\Transifex\Connector\Formats;
+use BabDev\Transifex\Exception\MissingCredentialsException;
 
 /**
  * Test class for \BabDev\Transifex\ApiConnector.
@@ -14,7 +15,7 @@ final class ApiConnectorTest extends ApiConnectorTestCase
      */
     public function testApiFailureWhenNoAuthenticationIsSet(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(MissingCredentialsException::class);
         $this->expectExceptionMessage('Missing credentials for API authentication.');
 
         (new Formats($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, []))->getFormats();

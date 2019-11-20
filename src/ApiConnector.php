@@ -2,6 +2,9 @@
 
 namespace BabDev\Transifex;
 
+use BabDev\Transifex\Exception\InvalidFileTypeException;
+use BabDev\Transifex\Exception\MissingCredentialsException;
+use BabDev\Transifex\Exception\MissingFileException;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
 use Psr\Http\Message\RequestInterface;
@@ -76,7 +79,7 @@ abstract class ApiConnector
      *
      * @return string
      *
-     * @throws \InvalidArgumentException if credentials are not set
+     * @throws MissingCredentialsException if credentials are not set
      */
     protected function createAuthorizationHeader(): string
     {
@@ -85,7 +88,7 @@ abstract class ApiConnector
 
         // The API requires HTTP Basic Authentication, we can't proceed without credentials
         if ($username === null || $password === null) {
-            throw new \InvalidArgumentException('Missing credentials for API authentication.');
+            throw new MissingCredentialsException('Missing credentials for API authentication.');
         }
 
         return 'Basic ' . \base64_encode("$username:$password");
@@ -159,13 +162,14 @@ abstract class ApiConnector
      *
      * @return ResponseInterface
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidFileTypeException
+     * @throws MissingFileException
      */
     protected function updateResource(UriInterface $uri, string $content, string $type): ResponseInterface
     {
         // Verify the content type is allowed
         if (!\in_array($type, ['string', 'file'])) {
-            throw new \InvalidArgumentException('The content type must be specified as file or string.');
+            throw new InvalidFileTypeException('The content type must be specified as file or string.');
         }
 
         $request = $this->createRequest('PUT', $uri);
@@ -173,7 +177,7 @@ abstract class ApiConnector
 
         if ($type == 'file') {
             if (!\file_exists($content)) {
-                throw new \InvalidArgumentException(
+                throw new MissingFileException(
                     \sprintf('The specified file, "%s", does not exist.', $content)
                 );
             }

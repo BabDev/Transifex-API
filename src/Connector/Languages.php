@@ -3,6 +3,7 @@
 namespace BabDev\Transifex\Connector;
 
 use BabDev\Transifex\ApiConnector;
+use BabDev\Transifex\Exception\InvalidConfigurationException;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -23,7 +24,7 @@ final class Languages extends ApiConnector
      *
      * @return ResponseInterface
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidConfigurationException
      */
     public function createLanguage(
         string $slug,
@@ -34,7 +35,7 @@ final class Languages extends ApiConnector
     ): ResponseInterface {
         // Make sure the $coordinators array is not empty
         if (!\count($coordinators)) {
-            throw new \InvalidArgumentException('The coordinators array must contain at least one username.');
+            throw new InvalidConfigurationException('The coordinators array must contain at least one username.');
         }
 
         $uri = $this->createUri("/api/2/project/$slug/languages/");
@@ -178,7 +179,7 @@ final class Languages extends ApiConnector
      *
      * @return ResponseInterface
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidConfigurationException
      */
     public function updateLanguage(
         string $slug,
@@ -188,7 +189,7 @@ final class Languages extends ApiConnector
     ): ResponseInterface {
         // Make sure the $coordinators array is not empty
         if (!\count($coordinators)) {
-            throw new \InvalidArgumentException('The coordinators array must contain at least one username.');
+            throw new InvalidConfigurationException('The coordinators array must contain at least one username.');
         }
 
         // Build the required request data.
@@ -237,7 +238,7 @@ final class Languages extends ApiConnector
      *
      * @return ResponseInterface
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidConfigurationException
      */
     protected function updateTeam(
         string $project,
@@ -248,7 +249,7 @@ final class Languages extends ApiConnector
     ): ResponseInterface {
         // Make sure the $members array is not empty
         if (!\count($members)) {
-            throw new \InvalidArgumentException("The $team array must contain at least one username.");
+            throw new InvalidConfigurationException('The team array must contain at least one username.');
         }
 
         $uri = $this->createUri("/api/2/project/$project/language/$langCode/$team/");

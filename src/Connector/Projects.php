@@ -3,6 +3,7 @@
 namespace BabDev\Transifex\Connector;
 
 use BabDev\Transifex\ApiConnector;
+use BabDev\Transifex\Exception\InvalidConfigurationException;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -62,7 +63,7 @@ final class Projects extends ApiConnector
      *
      * @param string $license The license to check
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidConfigurationException
      */
     private function checkLicense(string $license): void
     {
@@ -70,7 +71,7 @@ final class Projects extends ApiConnector
 
         // Ensure the license option is an allowed value
         if (!\in_array($license, $accepted)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidConfigurationException(
                 \sprintf(
                     'The license %s is not valid, accepted license values are %s',
                     $license,
@@ -91,7 +92,7 @@ final class Projects extends ApiConnector
      *
      * @return ResponseInterface
      *
-     * @throws \InvalidArgumentException
+     * @throws InvalidConfigurationException
      */
     public function createProject(
         string $name,
@@ -114,7 +115,7 @@ final class Projects extends ApiConnector
         // Check mandatory fields.
         if (!isset($data['license']) || \in_array($data['license'], ['permissive_open_source', 'other_open_source'])) {
             if (!isset($data['repository_url'])) {
-                throw new \InvalidArgumentException(
+                throw new InvalidConfigurationException(
                     'If a project is denoted either as permissive_open_source or other_open_source, the field repository_url is mandatory and should contain a link to the public repository of the project to be created.'
                 );
             }

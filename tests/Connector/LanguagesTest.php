@@ -3,6 +3,7 @@
 namespace BabDev\Transifex\Tests\Connector;
 
 use BabDev\Transifex\Connector\Languages;
+use BabDev\Transifex\Exception\InvalidConfigurationException;
 use BabDev\Transifex\Tests\ApiConnectorTestCase;
 
 /**
@@ -54,11 +55,11 @@ final class LanguagesTest extends ApiConnectorTestCase
     }
 
     /**
-     * @testdox createLanguage() throws an InvalidArgumentException when no contributors are given
+     * @testdox createLanguage() throws an InvalidConfigurationException when no contributors are given
      */
     public function testCreateLanguageNoUsers(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidConfigurationException::class);
 
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->createLanguage('babdev-transifex', 'en_US', []);
     }
@@ -256,11 +257,11 @@ final class LanguagesTest extends ApiConnectorTestCase
     }
 
     /**
-     * @testdox updateCoordinators() throws an InvalidArgumentException when no contributors are given
+     * @testdox updateCoordinators() throws an InvalidConfigurationException when no contributors are given
      */
     public function testUpdateCoordinatorsNoUsers(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidConfigurationException::class);
 
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateCoordinators('babdev-transifex', 'en_US', []);
     }
@@ -297,11 +298,11 @@ final class LanguagesTest extends ApiConnectorTestCase
     }
 
     /**
-     * @testdox updateLanguage() throws an InvalidArgumentException when no contributors are given
+     * @testdox updateLanguage() throws an InvalidConfigurationException when no contributors are given
      */
     public function testUpdateLanguageNoUsers(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidConfigurationException::class);
 
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateLanguage('babdev-transifex', 'en_US', []);
     }
@@ -337,11 +338,11 @@ final class LanguagesTest extends ApiConnectorTestCase
     }
 
     /**
-     * @testdox updateReviewers() throws an InvalidArgumentException when no contributors are given
+     * @testdox updateReviewers() throws an InvalidConfigurationException when no contributors are given
      */
     public function testUpdateReviewersNoUsers(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidConfigurationException::class);
 
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateReviewers('babdev-transifex', 'en_US', []);
     }
@@ -377,11 +378,11 @@ final class LanguagesTest extends ApiConnectorTestCase
     }
 
     /**
-     * @testdox updateTranslators() throws an InvalidArgumentException when no contributors are given
+     * @testdox updateTranslators() throws an InvalidConfigurationException when no contributors are given
      */
     public function testUpdateTranslatorsNoUsers(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidConfigurationException::class);
 
         (new Languages($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateTranslators('babdev-transifex', 'en_US', []);
     }

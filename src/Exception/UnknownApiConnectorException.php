@@ -5,6 +5,6 @@ namespace BabDev\Transifex\Exception;
 /**
  * Exception defining an unknown API connector.
  */
-final class UnknownApiConnectorException extends \InvalidArgumentException
+final class UnknownApiConnectorException extends \InvalidArgumentException implements TransifexException
 {
 }

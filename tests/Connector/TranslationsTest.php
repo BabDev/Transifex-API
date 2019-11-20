@@ -3,6 +3,8 @@
 namespace BabDev\Transifex\Tests\Connector;
 
 use BabDev\Transifex\Connector\Translations;
+use BabDev\Transifex\Exception\InvalidFileTypeException;
+use BabDev\Transifex\Exception\MissingFileException;
 use BabDev\Transifex\Tests\ApiConnectorTestCase;
 
 /**
@@ -93,11 +95,11 @@ final class TranslationsTest extends ApiConnectorTestCase
     }
 
     /**
-     * @testdox updateTranslation() throws an InvalidArgumentException when an invalid content type is specified
+     * @testdox updateTranslation() throws an InvalidFileTypeException when an invalid content type is specified
      */
     public function testUpdateTranslationBadType(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidFileTypeException::class);
 
         (new Translations($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateTranslation(
             'babdev',
@@ -109,11 +111,11 @@ final class TranslationsTest extends ApiConnectorTestCase
     }
 
     /**
-     * @testdox updateTranslation() throws an InvalidArgumentException when a non-existing file is specified
+     * @testdox updateTranslation() throws an MissingFileException when a non-existing file is specified
      */
     public function testUpdateTranslationUnexistingFile(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(MissingFileException::class);
 
         (new Translations($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateTranslation(
             'babdev',

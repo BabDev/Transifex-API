@@ -3,6 +3,8 @@
 namespace BabDev\Transifex\Connector;
 
 use BabDev\Transifex\ApiConnector;
+use BabDev\Transifex\Exception\InvalidFileTypeException;
+use BabDev\Transifex\Exception\MissingFileException;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -23,7 +25,7 @@ final class Resources extends ApiConnector
      *
      * @return ResponseInterface
      *
-     * @throws \InvalidArgumentException
+     * @throws MissingFileException
      */
     public function createResource(
         string $project,
@@ -58,7 +60,7 @@ final class Resources extends ApiConnector
             $data['content'] = $options['content'];
         } elseif (isset($options['file'])) {
             if (!\file_exists($options['file'])) {
-                throw new \InvalidArgumentException(
+                throw new MissingFileException(
                     \sprintf('The specified file, "%s", does not exist.', $options['file'])
                 );
             }
@@ -140,6 +142,9 @@ final class Resources extends ApiConnector
      * @param string $type     The type of content in the $content variable, this should be either string or file
      *
      * @return ResponseInterface
+     *
+     * @throws InvalidFileTypeException
+     * @throws MissingFileException
      */
     public function updateResourceContent(
         string $project,

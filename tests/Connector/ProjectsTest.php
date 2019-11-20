@@ -3,6 +3,7 @@
 namespace BabDev\Transifex\Tests\Connector;
 
 use BabDev\Transifex\Connector\Projects;
+use BabDev\Transifex\Exception\InvalidConfigurationException;
 use BabDev\Transifex\Tests\ApiConnectorTestCase;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
@@ -69,11 +70,11 @@ final class ProjectsTest extends ApiConnectorTestCase
     }
 
     /**
-     * @testdox createProject() throws an InvalidArgumentException when an invalid license is specified
+     * @testdox createProject() throws an InvalidConfigurationException when an invalid license is specified
      */
     public function testCreateProjectsBadLicense(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidConfigurationException::class);
 
         (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->createProject(
             'BabDev Transifex',
@@ -85,11 +86,11 @@ final class ProjectsTest extends ApiConnectorTestCase
     }
 
     /**
-     * @testdox createProject() throws an InvalidArgumentException when required fields are missing
+     * @testdox createProject() throws an InvalidConfigurationException when required fields are missing
      */
     public function testCreateProjectFailureForMissingFields(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidConfigurationException::class);
 
         (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->createProject(
             'BabDev Transifex',
@@ -333,11 +334,11 @@ final class ProjectsTest extends ApiConnectorTestCase
     }
 
     /**
-     * @testdox updateProject() throws an InvalidArgumentException when an invalid license is specified
+     * @testdox updateProject() throws an InvalidConfigurationException when an invalid license is specified
      */
     public function testUpdateProjectBadLicense(): void
     {
-        $this->expectException(\InvalidArgumentException::class);
+        $this->expectException(InvalidConfigurationException::class);
 
         (new Projects($this->client, $this->requestFactory, $this->streamFactory, $this->uriFactory, $this->options))->updateProject('babdev-transifex', ['license' => 'failure']);
     }
