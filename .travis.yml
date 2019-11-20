@@ -25,7 +25,6 @@ install:
   - composer install
 
 script:
-  - ant clean
   - vendor/bin/phpunit --configuration phpunit.travis.xml $PHPUNIT_FLAGS
   - if [ "$USE_SCRUTINIZER" == "yes" ]; then wget https://scrutinizer-ci.com/ocular.phar; fi;
   - if [ "$USE_SCRUTINIZER" == "yes" ]; then php ocular.phar code-coverage:upload --format=php-clover coverage.clover; fi;
