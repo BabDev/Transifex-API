@@ -12,14 +12,14 @@ final class Transifex
      *
      * @var FactoryInterface
      */
-    protected $apiFactory;
+    private $apiFactory;
 
     /**
      * Options for the Transifex object.
      *
      * @var array
      */
-    protected $options;
+    private $options;
 
     /**
      * @param FactoryInterface $apiFactory The API factory
