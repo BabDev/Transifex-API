@@ -5,7 +5,7 @@ namespace BabDev\Transifex;
 /**
  * Base class for interacting with the Transifex API.
  */
-final class Transifex
+final class Transifex implements TransifexInterface
 {
     /**
      * The API factory.
@@ -15,7 +15,7 @@ final class Transifex
     private $apiFactory;
 
     /**
-     * Options for the Transifex object.
+     * Options for the API client.
      *
      * @var array
      */
@@ -51,7 +51,7 @@ final class Transifex
     }
 
     /**
-     * Get an option from the Transifex instance.
+     * Get an option from the API client.
      *
      * @param string $key     The name of the option to get
      * @param mixed  $default The default value if the option is not set
@@ -64,17 +64,15 @@ final class Transifex
     }
 
     /**
-     * Set an option for the Transifex instance.
+     * Set an option for the API client.
      *
      * @param string $key   The name of the option to set
      * @param mixed  $value The option value to set
      *
-     * @return $this
+     * @return void
      */
-    public function setOption(string $key, $value): self
+    public function setOption(string $key, $value): void
     {
         $this->options[$key] = $value;
-
-        return $this;
     }
 }

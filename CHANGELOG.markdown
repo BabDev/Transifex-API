@@ -12,6 +12,7 @@ CHANGELOG for the Transifex API Package
  * The `ApiConnector` class now requires `RequestFactoryInterface` and `UriFactoryInterface` (PSR-17) implementations as constructor arguments
  * The `$client` constructor argument of the `ApiConnector` class is now a PSR-18 `ClientInterface` and is required
  * Removed `ApiConnector::getAuthData()`, a request's Authorization header will be added with the new `ApiConnector::createRequest()` method
+ * `Transifex::setOption()` no longer has a return
 
 * 2.1.1 (2018-03-10)
 
