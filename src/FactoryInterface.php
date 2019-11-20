@@ -15,7 +15,7 @@ interface FactoryInterface
      *
      * @return ApiConnector
      *
-     * @throws \InvalidArgumentException
+     * @throws Exception\UnknownApiConnectorException
      */
     public function createApiConnector(string $name, array $options = []): ApiConnector;
 }
