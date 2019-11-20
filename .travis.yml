@@ -25,12 +25,12 @@ matrix:
     - php: nightly
 
 before_install:
-  - composer self-update
+  - travis_retry composer self-update
 
 install:
-  - composer install
+  - travis_retry composer update $COMPOSER_FLAGS
 
 script:
-  - vendor/bin/phpunit --configuration phpunit.travis.xml $PHPUNIT_FLAGS
+  - vendor/bin/phpunit $PHPUNIT_FLAGS
   - if [ "$USE_SCRUTINIZER" == "yes" ]; then wget https://scrutinizer-ci.com/ocular.phar; fi;
   - if [ "$USE_SCRUTINIZER" == "yes" ]; then php ocular.phar code-coverage:upload --format=php-clover coverage.clover; fi;
