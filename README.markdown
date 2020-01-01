@@ -1,3 +1,7 @@
+*Unmaintained Repository*
+
+This repository is no longer maintained
+
 Transifex API Package [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/BabDev/Transifex-API/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/BabDev/Transifex-API/?branch=master) [![Code Coverage](https://scrutinizer-ci.com/g/BabDev/Transifex-API/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/BabDev/Transifex-API/?branch=master) [![Build Status](https://scrutinizer-ci.com/g/BabDev/Transifex-API/badges/build.png?b=master)](https://scrutinizer-ci.com/g/BabDev/Transifex-API/build-status/master) [![Build Status](https://travis-ci.org/BabDev/Transifex-API.svg?branch=master)](https://travis-ci.org/BabDev/Transifex-API)
 ===============
 
